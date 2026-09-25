@@ -1,0 +1,33 @@
+name: Momentum mensual
+
+on:
+  schedule:
+    # Días 1 a 4 de cada mes a las 10:17 UTC (7:17 Argentina).
+    # El programa solo manda el mail si ese día es el primer día hábil del mes.
+    - cron: "17 10 1-4 * *"
+  workflow_dispatch:
+    inputs:
+      forzar:
+        description: "Mandar el mail aunque no sea el primer día hábil (sale como ANTICIPO)"
+        type: boolean
+        default: true
+
+jobs:
+  momentum:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+      - name: Calcular órdenes y enviar mail
+        env:
+          GMAIL_USER: ${{ secrets.GMAIL_USER }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          MAIL_TO: ${{ secrets.MAIL_TO }}
+          MOMENTUM_CAPITAL: ${{ vars.MOMENTUM_CAPITAL }}
+          MOMENTUM_INICIO: ${{ vars.MOMENTUM_INICIO }}
+          MOMENTUM_EXCLUIR: ${{ vars.MOMENTUM_EXCLUIR }}
+          FORZAR: ${{ (github.event_name == 'workflow_dispatch' && inputs.forzar) && '1' || '0' }}
+        run: python momentum.py
