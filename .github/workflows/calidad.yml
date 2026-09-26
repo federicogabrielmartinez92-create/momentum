@@ -1,0 +1,45 @@
+name: Cartera de calidad
+
+on:
+  schedule:
+    # Días 15 a 18 de cada mes a las 10:23 UTC (7:23 Argentina).
+    # El programa solo actúa el primer día hábil desde el 15.
+    - cron: "23 10 15-18 * *"
+  workflow_dispatch:
+    inputs:
+      operar:
+        description: "Guardar como revisión oficial (solo para arrancar la cartera hoy). Sin tildar = CONSULTA"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write     # para guardar cartera_calidad.json (la memoria de la cartera)
+
+jobs:
+  calidad:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+      - name: Revisar la cartera y enviar mail
+        env:
+          GMAIL_USER: ${{ secrets.GMAIL_USER }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          MAIL_TO: ${{ secrets.MAIL_TO }}
+          CALIDAD_CAPITAL: ${{ vars.CALIDAD_CAPITAL }}
+          CALIDAD_EXCLUIR: ${{ vars.CALIDAD_EXCLUIR }}
+          EVENTO: ${{ github.event_name }}
+          OPERAR: ${{ (github.event_name == 'workflow_dispatch' && inputs.operar) && '1' || '0' }}
+        run: python calidad.py
+      - name: Guardar la memoria de la cartera
+        run: |
+          if [ -f cartera_calidad.json ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
+            git add cartera_calidad.json
+            git diff --staged --quiet || (git commit -m "Cartera de calidad: revisión $(date +%F)" && git pull --rebase && git push)
+          fi
