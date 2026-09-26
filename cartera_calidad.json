@@ -1,0 +1,76 @@
+{
+ "version": 1,
+ "capital": 10000.0,
+ "inicio": "2026-09-26",
+ "ultima_fecha": "2026-09-25",
+ "ultima_oficial": null,
+ "caja": 1790.0,
+ "spy_ref": 10000.0,
+ "posiciones": {
+  "MSFT": {
+   "valor": 1330.0,
+   "costo": 1330.0,
+   "fecha_entrada": "2026-09-26",
+   "tesis": {},
+   "origen": "cartera del backtest 2011-2026"
+  },
+  "NVDA": {
+   "valor": 1250.0,
+   "costo": 1250.0,
+   "fecha_entrada": "2026-09-26",
+   "tesis": {},
+   "origen": "cartera del backtest 2011-2026"
+  },
+  "ADBE": {
+   "valor": 1120.0,
+   "costo": 1120.0,
+   "fecha_entrada": "2026-09-26",
+   "tesis": {},
+   "origen": "cartera del backtest 2011-2026"
+  },
+  "MA": {
+   "valor": 1000.0,
+   "costo": 1000.0,
+   "fecha_entrada": "2026-09-26",
+   "tesis": {},
+   "origen": "cartera del backtest 2011-2026"
+  },
+  "GOOGL": {
+   "valor": 980.0,
+   "costo": 980.0,
+   "fecha_entrada": "2026-09-26",
+   "tesis": {},
+   "origen": "cartera del backtest 2011-2026"
+  },
+  "AXP": {
+   "valor": 860.0,
+   "costo": 860.0,
+   "fecha_entrada": "2026-09-26",
+   "tesis": {},
+   "origen": "cartera del backtest 2011-2026"
+  },
+  "MELI": {
+   "valor": 840.0,
+   "costo": 840.0,
+   "fecha_entrada": "2026-09-26",
+   "tesis": {},
+   "origen": "cartera del backtest 2011-2026"
+  },
+  "META": {
+   "valor": 830.0,
+   "costo": 830.0,
+   "fecha_entrada": "2026-09-26",
+   "tesis": {},
+   "origen": "cartera del backtest 2011-2026"
+  }
+ },
+ "operaciones": [],
+ "cerradas": [],
+ "evolucion": [
+  {
+   "fecha": "2026-09-26",
+   "cartera": 10000.0,
+   "spy": 10000.0
+  }
+ ]
+}
