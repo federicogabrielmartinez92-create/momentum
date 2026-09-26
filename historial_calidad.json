@@ -1,0 +1,2801 @@
+{
+ "origen": "backtest 2011-01-18 a 2026-09-25",
+ "inicio": "2011-01-18",
+ "fin": "2026-09-25",
+ "datos": {
+  "Período simulado": "2011-01-18 a 2026-09-25 (15.7 años)",
+  "Empresas en el backtest": "120 de 134 (con balances en la SEC)",
+  "Operaciones por año (compras + ventas)": "8.2",
+  "Ventas con ganancia": "81% de 32",
+  "Tiempo promedio por posición vendida": "3.4 años"
+ },
+ "resumen": [
+  {
+   "Cartera": "Cartera de calidad",
+   "Período": "Todo",
+   "Anual %": 24.78,
+   "Volatilidad %": 22.61,
+   "Sharpe": 1.03,
+   "Peor caída %": -35.84,
+   "USD 10.000 →": 322006.69
+  },
+  {
+   "Cartera": "Cartera de calidad",
+   "Período": "2012-2014",
+   "Anual %": 34.6,
+   "Volatilidad %": 16.54,
+   "Sharpe": 2.1,
+   "Peor caída %": -12.36,
+   "USD 10.000 →": 24328.89
+  },
+  {
+   "Cartera": "Cartera de calidad",
+   "Período": "2015-2019",
+   "Anual %": 22.53,
+   "Volatilidad %": 18.67,
+   "Sharpe": 1.16,
+   "Peor caída %": -25.56,
+   "USD 10.000 →": 27582.14
+  },
+  {
+   "Cartera": "Cartera de calidad",
+   "Período": "2020-2022",
+   "Anual %": 14.87,
+   "Volatilidad %": 33.01,
+   "Sharpe": 0.43,
+   "Peor caída %": -35.84,
+   "USD 10.000 →": 15140.56
+  },
+  {
+   "Cartera": "Cartera de calidad",
+   "Período": "2023-hoy",
+   "Anual %": 32.1,
+   "Volatilidad %": 20.57,
+   "Sharpe": 1.34,
+   "Peor caída %": -19.38,
+   "USD 10.000 →": 28219.15
+  },
+  {
+   "Cartera": "S&P 500 (SPY)",
+   "Período": "Todo",
+   "Anual %": 14.03,
+   "Volatilidad %": 17.02,
+   "Sharpe": 0.74,
+   "Peor caída %": -33.72,
+   "USD 10.000 →": 78457.37
+  },
+  {
+   "Cartera": "S&P 500 (SPY)",
+   "Período": "2012-2014",
+   "Anual %": 19.73,
+   "Volatilidad %": 11.67,
+   "Sharpe": 1.7,
+   "Peor caída %": -9.69,
+   "USD 10.000 →": 17139.5
+  },
+  {
+   "Cartera": "S&P 500 (SPY)",
+   "Período": "2015-2019",
+   "Anual %": 11.59,
+   "Volatilidad %": 13.43,
+   "Sharpe": 0.8,
+   "Peor caída %": -19.35,
+   "USD 10.000 →": 17289.49
+  },
+  {
+   "Cartera": "S&P 500 (SPY)",
+   "Período": "2020-2022",
+   "Anual %": 7.3,
+   "Volatilidad %": 25.0,
+   "Sharpe": 0.27,
+   "Peor caída %": -33.72,
+   "USD 10.000 →": 12348.61
+  },
+  {
+   "Cartera": "S&P 500 (SPY)",
+   "Período": "2023-hoy",
+   "Anual %": 22.4,
+   "Volatilidad %": 14.95,
+   "Sharpe": 1.19,
+   "Peor caída %": -18.76,
+   "USD 10.000 →": 21235.74
+  },
+  {
+   "Cartera": "Promedio de la lista (igual peso)",
+   "Período": "Todo",
+   "Anual %": 18.86,
+   "Volatilidad %": 18.16,
+   "Sharpe": 0.96,
+   "Peor caída %": -32.93,
+   "USD 10.000 →": 150346.47
+  },
+  {
+   "Cartera": "Promedio de la lista (igual peso)",
+   "Período": "2012-2014",
+   "Anual %": 23.25,
+   "Volatilidad %": 12.81,
+   "Sharpe": 1.82,
+   "Peor caída %": -11.48,
+   "USD 10.000 →": 18694.16
+  },
+  {
+   "Cartera": "Promedio de la lista (igual peso)",
+   "Período": "2015-2019",
+   "Anual %": 19.02,
+   "Volatilidad %": 14.98,
+   "Sharpe": 1.21,
+   "Peor caída %": -18.86,
+   "USD 10.000 →": 23858.87
+  },
+  {
+   "Cartera": "Promedio de la lista (igual peso)",
+   "Período": "2020-2022",
+   "Anual %": 13.07,
+   "Volatilidad %": 26.63,
+   "Sharpe": 0.47,
+   "Peor caída %": -32.93,
+   "USD 10.000 →": 14444.32
+  },
+  {
+   "Cartera": "Promedio de la lista (igual peso)",
+   "Período": "2023-hoy",
+   "Anual %": 25.3,
+   "Volatilidad %": 15.28,
+   "Sharpe": 1.36,
+   "Peor caída %": -19.37,
+   "USD 10.000 →": 23171.62
+  }
+ ],
+ "anual": [
+  {
+   "Año": 2011,
+   "Cartera": 8.6,
+   "SPY": -1.1,
+   "Lista": -2.0
+  },
+  {
+   "Año": 2012,
+   "Cartera": 31.9,
+   "SPY": 16.0,
+   "Lista": 17.6
+  },
+  {
+   "Año": 2013,
+   "Cartera": 68.5,
+   "SPY": 32.3,
+   "Lista": 43.3
+  },
+  {
+   "Año": 2014,
+   "Cartera": 11.4,
+   "SPY": 13.5,
+   "Lista": 13.0
+  },
+  {
+   "Año": 2015,
+   "Cartera": 11.1,
+   "SPY": 1.2,
+   "Lista": 3.3
+  },
+  {
+   "Año": 2016,
+   "Cartera": 13.1,
+   "SPY": 12.0,
+   "Lista": 24.4
+  },
+  {
+   "Año": 2017,
+   "Cartera": 43.0,
+   "SPY": 21.7,
+   "Lista": 33.7
+  },
+  {
+   "Año": 2018,
+   "Cartera": -1.9,
+   "SPY": -4.6,
+   "Lista": 0.9
+  },
+  {
+   "Año": 2019,
+   "Cartera": 56.4,
+   "SPY": 31.2,
+   "Lista": 37.5
+  },
+  {
+   "Año": 2020,
+   "Cartera": 46.1,
+   "SPY": 18.3,
+   "Lista": 42.1
+  },
+  {
+   "Año": 2021,
+   "Cartera": 45.3,
+   "SPY": 28.7,
+   "Lista": 24.7
+  },
+  {
+   "Año": 2022,
+   "Cartera": -27.2,
+   "SPY": -18.2,
+   "Lista": -17.4
+  },
+  {
+   "Año": 2023,
+   "Cartera": 53.5,
+   "SPY": 26.2,
+   "Lista": 31.5
+  },
+  {
+   "Año": 2024,
+   "Cartera": 24.1,
+   "SPY": 24.9,
+   "Lista": 16.0
+  },
+  {
+   "Año": 2025,
+   "Cartera": 30.9,
+   "SPY": 17.7,
+   "Lista": 22.1
+  },
+  {
+   "Año": 2026,
+   "Cartera": 12.7,
+   "SPY": 14.0,
+   "Lista": 24.2
+  }
+ ],
+ "evolucion": [
+  {
+   "fecha": "2011-01-18",
+   "cartera": 10000.0,
+   "spy": 10000.0,
+   "lista": 10000.0
+  },
+  {
+   "fecha": "2011-01-31",
+   "cartera": 9980.0,
+   "spy": 9935.0,
+   "lista": 9930.0
+  },
+  {
+   "fecha": "2011-02-28",
+   "cartera": 10422.0,
+   "spy": 10280.0,
+   "lista": 10276.0
+  },
+  {
+   "fecha": "2011-03-31",
+   "cartera": 10638.0,
+   "spy": 10282.0,
+   "lista": 10331.0
+  },
+  {
+   "fecha": "2011-04-30",
+   "cartera": 11555.0,
+   "spy": 10579.0,
+   "lista": 10642.0
+  },
+  {
+   "fecha": "2011-05-31",
+   "cartera": 11563.0,
+   "spy": 10461.0,
+   "lista": 10576.0
+  },
+  {
+   "fecha": "2011-06-30",
+   "cartera": 11756.0,
+   "spy": 10284.0,
+   "lista": 10359.0
+  },
+  {
+   "fecha": "2011-07-31",
+   "cartera": 11840.0,
+   "spy": 10078.0,
+   "lista": 10177.0
+  },
+  {
+   "fecha": "2011-08-31",
+   "cartera": 11451.0,
+   "spy": 9524.0,
+   "lista": 9630.0
+  },
+  {
+   "fecha": "2011-09-30",
+   "cartera": 10473.0,
+   "spy": 8863.0,
+   "lista": 8901.0
+  },
+  {
+   "fecha": "2011-10-31",
+   "cartera": 11257.0,
+   "spy": 9831.0,
+   "lista": 9839.0
+  },
+  {
+   "fecha": "2011-11-30",
+   "cartera": 11082.0,
+   "spy": 9791.0,
+   "lista": 9779.0
+  },
+  {
+   "fecha": "2011-12-31",
+   "cartera": 10859.0,
+   "spy": 9893.0,
+   "lista": 9796.0
+  },
+  {
+   "fecha": "2012-01-31",
+   "cartera": 11721.0,
+   "spy": 10352.0,
+   "lista": 10506.0
+  },
+  {
+   "fecha": "2012-02-29",
+   "cartera": 12539.0,
+   "spy": 10801.0,
+   "lista": 10972.0
+  },
+  {
+   "fecha": "2012-03-31",
+   "cartera": 13481.0,
+   "spy": 11148.0,
+   "lista": 11291.0
+  },
+  {
+   "fecha": "2012-04-30",
+   "cartera": 13634.0,
+   "spy": 11074.0,
+   "lista": 11083.0
+  },
+  {
+   "fecha": "2012-05-31",
+   "cartera": 12622.0,
+   "spy": 10409.0,
+   "lista": 10338.0
+  },
+  {
+   "fecha": "2012-06-30",
+   "cartera": 13304.0,
+   "spy": 10831.0,
+   "lista": 10786.0
+  },
+  {
+   "fecha": "2012-07-31",
+   "cartera": 13381.0,
+   "spy": 10959.0,
+   "lista": 10770.0
+  },
+  {
+   "fecha": "2012-08-31",
+   "cartera": 13723.0,
+   "spy": 11234.0,
+   "lista": 11032.0
+  },
+  {
+   "fecha": "2012-09-30",
+   "cartera": 14190.0,
+   "spy": 11519.0,
+   "lista": 11379.0
+  },
+  {
+   "fecha": "2012-10-31",
+   "cartera": 13724.0,
+   "spy": 11309.0,
+   "lista": 11141.0
+  },
+  {
+   "fecha": "2012-11-30",
+   "cartera": 14574.0,
+   "spy": 11373.0,
+   "lista": 11300.0
+  },
+  {
+   "fecha": "2012-12-31",
+   "cartera": 14318.0,
+   "spy": 11475.0,
+   "lista": 11517.0
+  },
+  {
+   "fecha": "2013-01-31",
+   "cartera": 15251.0,
+   "spy": 12062.0,
+   "lista": 12353.0
+  },
+  {
+   "fecha": "2013-02-28",
+   "cartera": 15564.0,
+   "spy": 12216.0,
+   "lista": 12474.0
+  },
+  {
+   "fecha": "2013-03-31",
+   "cartera": 16456.0,
+   "spy": 12680.0,
+   "lista": 13011.0
+  },
+  {
+   "fecha": "2013-04-30",
+   "cartera": 17052.0,
+   "spy": 12924.0,
+   "lista": 13420.0
+  },
+  {
+   "fecha": "2013-05-31",
+   "cartera": 18127.0,
+   "spy": 13229.0,
+   "lista": 14021.0
+  },
+  {
+   "fecha": "2013-06-30",
+   "cartera": 17443.0,
+   "spy": 13052.0,
+   "lista": 13834.0
+  },
+  {
+   "fecha": "2013-07-31",
+   "cartera": 19035.0,
+   "spy": 13727.0,
+   "lista": 14612.0
+  },
+  {
+   "fecha": "2013-08-31",
+   "cartera": 19226.0,
+   "spy": 13315.0,
+   "lista": 14336.0
+  },
+  {
+   "fecha": "2013-09-30",
+   "cartera": 20520.0,
+   "spy": 13736.0,
+   "lista": 15082.0
+  },
+  {
+   "fecha": "2013-10-31",
+   "cartera": 21718.0,
+   "spy": 14372.0,
+   "lista": 15700.0
+  },
+  {
+   "fecha": "2013-11-30",
+   "cartera": 23861.0,
+   "spy": 14798.0,
+   "lista": 16047.0
+  },
+  {
+   "fecha": "2013-12-31",
+   "cartera": 24126.0,
+   "spy": 15182.0,
+   "lista": 16505.0
+  },
+  {
+   "fecha": "2014-01-31",
+   "cartera": 24070.0,
+   "spy": 14647.0,
+   "lista": 15994.0
+  },
+  {
+   "fecha": "2014-02-28",
+   "cartera": 25550.0,
+   "spy": 15314.0,
+   "lista": 16819.0
+  },
+  {
+   "fecha": "2014-03-31",
+   "cartera": 23965.0,
+   "spy": 15441.0,
+   "lista": 16886.0
+  },
+  {
+   "fecha": "2014-04-30",
+   "cartera": 23566.0,
+   "spy": 15548.0,
+   "lista": 16794.0
+  },
+  {
+   "fecha": "2014-05-31",
+   "cartera": 25247.0,
+   "spy": 15909.0,
+   "lista": 17222.0
+  },
+  {
+   "fecha": "2014-06-30",
+   "cartera": 25235.0,
+   "spy": 16237.0,
+   "lista": 17835.0
+  },
+  {
+   "fecha": "2014-07-31",
+   "cartera": 25523.0,
+   "spy": 16019.0,
+   "lista": 17651.0
+  },
+  {
+   "fecha": "2014-08-31",
+   "cartera": 27116.0,
+   "spy": 16651.0,
+   "lista": 18362.0
+  },
+  {
+   "fecha": "2014-09-30",
+   "cartera": 26170.0,
+   "spy": 16421.0,
+   "lista": 18110.0
+  },
+  {
+   "fecha": "2014-10-31",
+   "cartera": 26878.0,
+   "spy": 16808.0,
+   "lista": 18381.0
+  },
+  {
+   "fecha": "2014-11-30",
+   "cartera": 27011.0,
+   "spy": 17270.0,
+   "lista": 18844.0
+  },
+  {
+   "fecha": "2014-12-31",
+   "cartera": 26867.0,
+   "spy": 17226.0,
+   "lista": 18642.0
+  },
+  {
+   "fecha": "2015-01-31",
+   "cartera": 27724.0,
+   "spy": 16716.0,
+   "lista": 18219.0
+  },
+  {
+   "fecha": "2015-02-28",
+   "cartera": 29927.0,
+   "spy": 17655.0,
+   "lista": 19491.0
+  },
+  {
+   "fecha": "2015-03-31",
+   "cartera": 29228.0,
+   "spy": 17378.0,
+   "lista": 18909.0
+  },
+  {
+   "fecha": "2015-04-30",
+   "cartera": 29903.0,
+   "spy": 17549.0,
+   "lista": 19612.0
+  },
+  {
+   "fecha": "2015-05-31",
+   "cartera": 30824.0,
+   "spy": 17774.0,
+   "lista": 19896.0
+  },
+  {
+   "fecha": "2015-06-30",
+   "cartera": 30561.0,
+   "spy": 17413.0,
+   "lista": 19487.0
+  },
+  {
+   "fecha": "2015-07-31",
+   "cartera": 30654.0,
+   "spy": 17807.0,
+   "lista": 19686.0
+  },
+  {
+   "fecha": "2015-08-31",
+   "cartera": 28425.0,
+   "spy": 16721.0,
+   "lista": 18391.0
+  },
+  {
+   "fecha": "2015-09-30",
+   "cartera": 27468.0,
+   "spy": 16295.0,
+   "lista": 17795.0
+  },
+  {
+   "fecha": "2015-10-31",
+   "cartera": 30302.0,
+   "spy": 17681.0,
+   "lista": 19398.0
+  },
+  {
+   "fecha": "2015-11-30",
+   "cartera": 30151.0,
+   "spy": 17745.0,
+   "lista": 19499.0
+  },
+  {
+   "fecha": "2015-12-31",
+   "cartera": 29861.0,
+   "spy": 17439.0,
+   "lista": 19261.0
+  },
+  {
+   "fecha": "2016-01-31",
+   "cartera": 26377.0,
+   "spy": 16571.0,
+   "lista": 17940.0
+  },
+  {
+   "fecha": "2016-02-29",
+   "cartera": 26921.0,
+   "spy": 16557.0,
+   "lista": 18173.0
+  },
+  {
+   "fecha": "2016-03-31",
+   "cartera": 28928.0,
+   "spy": 17671.0,
+   "lista": 19867.0
+  },
+  {
+   "fecha": "2016-04-30",
+   "cartera": 29592.0,
+   "spy": 17740.0,
+   "lista": 20552.0
+  },
+  {
+   "fecha": "2016-05-31",
+   "cartera": 30279.0,
+   "spy": 18042.0,
+   "lista": 20817.0
+  },
+  {
+   "fecha": "2016-06-30",
+   "cartera": 29698.0,
+   "spy": 18105.0,
+   "lista": 21005.0
+  },
+  {
+   "fecha": "2016-07-31",
+   "cartera": 31773.0,
+   "spy": 18765.0,
+   "lista": 22405.0
+  },
+  {
+   "fecha": "2016-08-31",
+   "cartera": 32544.0,
+   "spy": 18788.0,
+   "lista": 22708.0
+  },
+  {
+   "fecha": "2016-09-30",
+   "cartera": 34132.0,
+   "spy": 18789.0,
+   "lista": 22917.0
+  },
+  {
+   "fecha": "2016-10-31",
+   "cartera": 33484.0,
+   "spy": 18463.0,
+   "lista": 22711.0
+  },
+  {
+   "fecha": "2016-11-30",
+   "cartera": 33705.0,
+   "spy": 19143.0,
+   "lista": 23614.0
+  },
+  {
+   "fecha": "2016-12-31",
+   "cartera": 33770.0,
+   "spy": 19531.0,
+   "lista": 23960.0
+  },
+  {
+   "fecha": "2017-01-31",
+   "cartera": 35656.0,
+   "spy": 19881.0,
+   "lista": 24941.0
+  },
+  {
+   "fecha": "2017-02-28",
+   "cartera": 37873.0,
+   "spy": 20662.0,
+   "lista": 26067.0
+  },
+  {
+   "fecha": "2017-03-31",
+   "cartera": 38225.0,
+   "spy": 20688.0,
+   "lista": 26304.0
+  },
+  {
+   "fecha": "2017-04-30",
+   "cartera": 39395.0,
+   "spy": 20893.0,
+   "lista": 26637.0
+  },
+  {
+   "fecha": "2017-05-31",
+   "cartera": 41722.0,
+   "spy": 21188.0,
+   "lista": 27254.0
+  },
+  {
+   "fecha": "2017-06-30",
+   "cartera": 41201.0,
+   "spy": 21323.0,
+   "lista": 27347.0
+  },
+  {
+   "fecha": "2017-07-31",
+   "cartera": 43953.0,
+   "spy": 21761.0,
+   "lista": 28336.0
+  },
+  {
+   "fecha": "2017-08-31",
+   "cartera": 44459.0,
+   "spy": 21825.0,
+   "lista": 28701.0
+  },
+  {
+   "fecha": "2017-09-30",
+   "cartera": 44416.0,
+   "spy": 22264.0,
+   "lista": 29591.0
+  },
+  {
+   "fecha": "2017-10-31",
+   "cartera": 46096.0,
+   "spy": 22789.0,
+   "lista": 30295.0
+  },
+  {
+   "fecha": "2017-11-30",
+   "cartera": 47574.0,
+   "spy": 23486.0,
+   "lista": 31301.0
+  },
+  {
+   "fecha": "2017-12-31",
+   "cartera": 48278.0,
+   "spy": 23770.0,
+   "lista": 32025.0
+  },
+  {
+   "fecha": "2018-01-31",
+   "cartera": 53941.0,
+   "spy": 25110.0,
+   "lista": 34348.0
+  },
+  {
+   "fecha": "2018-02-28",
+   "cartera": 53453.0,
+   "spy": 24197.0,
+   "lista": 33742.0
+  },
+  {
+   "fecha": "2018-03-31",
+   "cartera": 51678.0,
+   "spy": 23534.0,
+   "lista": 32833.0
+  },
+  {
+   "fecha": "2018-04-30",
+   "cartera": 52380.0,
+   "spy": 23655.0,
+   "lista": 32848.0
+  },
+  {
+   "fecha": "2018-05-31",
+   "cartera": 53460.0,
+   "spy": 24230.0,
+   "lista": 33825.0
+  },
+  {
+   "fecha": "2018-06-30",
+   "cartera": 53266.0,
+   "spy": 24370.0,
+   "lista": 34034.0
+  },
+  {
+   "fecha": "2018-07-31",
+   "cartera": 56202.0,
+   "spy": 25273.0,
+   "lista": 35353.0
+  },
+  {
+   "fecha": "2018-08-31",
+   "cartera": 58323.0,
+   "spy": 26079.0,
+   "lista": 36498.0
+  },
+  {
+   "fecha": "2018-09-30",
+   "cartera": 57728.0,
+   "spy": 26234.0,
+   "lista": 36930.0
+  },
+  {
+   "fecha": "2018-10-31",
+   "cartera": 51536.0,
+   "spy": 24421.0,
+   "lista": 34354.0
+  },
+  {
+   "fecha": "2018-11-30",
+   "cartera": 53308.0,
+   "spy": 24874.0,
+   "lista": 35361.0
+  },
+  {
+   "fecha": "2018-12-31",
+   "cartera": 47343.0,
+   "spy": 22684.0,
+   "lista": 32329.0
+  },
+  {
+   "fecha": "2019-01-31",
+   "cartera": 53835.0,
+   "spy": 24501.0,
+   "lista": 35525.0
+  },
+  {
+   "fecha": "2019-02-28",
+   "cartera": 55597.0,
+   "spy": 25295.0,
+   "lista": 37223.0
+  },
+  {
+   "fecha": "2019-03-31",
+   "cartera": 57554.0,
+   "spy": 25753.0,
+   "lista": 37657.0
+  },
+  {
+   "fecha": "2019-04-30",
+   "cartera": 61400.0,
+   "spy": 26805.0,
+   "lista": 39137.0
+  },
+  {
+   "fecha": "2019-05-31",
+   "cartera": 56680.0,
+   "spy": 25095.0,
+   "lista": 36638.0
+  },
+  {
+   "fecha": "2019-06-30",
+   "cartera": 61899.0,
+   "spy": 26842.0,
+   "lista": 39398.0
+  },
+  {
+   "fecha": "2019-07-31",
+   "cartera": 64576.0,
+   "spy": 27247.0,
+   "lista": 40301.0
+  },
+  {
+   "fecha": "2019-08-31",
+   "cartera": 65032.0,
+   "spy": 26791.0,
+   "lista": 39623.0
+  },
+  {
+   "fecha": "2019-09-30",
+   "cartera": 64336.0,
+   "spy": 27312.0,
+   "lista": 40017.0
+  },
+  {
+   "fecha": "2019-10-31",
+   "cartera": 68897.0,
+   "spy": 27916.0,
+   "lista": 41232.0
+  },
+  {
+   "fecha": "2019-11-30",
+   "cartera": 71087.0,
+   "spy": 28927.0,
+   "lista": 42971.0
+  },
+  {
+   "fecha": "2019-12-31",
+   "cartera": 74034.0,
+   "spy": 29767.0,
+   "lista": 44468.0
+  },
+  {
+   "fecha": "2020-01-31",
+   "cartera": 75352.0,
+   "spy": 29755.0,
+   "lista": 44724.0
+  },
+  {
+   "fecha": "2020-02-29",
+   "cartera": 73642.0,
+   "spy": 27400.0,
+   "lista": 41968.0
+  },
+  {
+   "fecha": "2020-03-31",
+   "cartera": 65070.0,
+   "spy": 23978.0,
+   "lista": 36610.0
+  },
+  {
+   "fecha": "2020-04-30",
+   "cartera": 74225.0,
+   "spy": 27023.0,
+   "lista": 42113.0
+  },
+  {
+   "fecha": "2020-05-31",
+   "cartera": 80962.0,
+   "spy": 28311.0,
+   "lista": 44924.0
+  },
+  {
+   "fecha": "2020-06-30",
+   "cartera": 84203.0,
+   "spy": 28813.0,
+   "lista": 47161.0
+  },
+  {
+   "fecha": "2020-07-31",
+   "cartera": 91843.0,
+   "spy": 30509.0,
+   "lista": 49789.0
+  },
+  {
+   "fecha": "2020-08-31",
+   "cartera": 100326.0,
+   "spy": 32639.0,
+   "lista": 53276.0
+  },
+  {
+   "fecha": "2020-09-30",
+   "cartera": 96272.0,
+   "spy": 31417.0,
+   "lista": 52152.0
+  },
+  {
+   "fecha": "2020-10-31",
+   "cartera": 91948.0,
+   "spy": 30633.0,
+   "lista": 51255.0
+  },
+  {
+   "fecha": "2020-11-30",
+   "cartera": 106247.0,
+   "spy": 33966.0,
+   "lista": 60962.0
+  },
+  {
+   "fecha": "2020-12-31",
+   "cartera": 108198.0,
+   "spy": 35224.0,
+   "lista": 63199.0
+  },
+  {
+   "fecha": "2021-01-31",
+   "cartera": 106404.0,
+   "spy": 34865.0,
+   "lista": 63759.0
+  },
+  {
+   "fecha": "2021-02-28",
+   "cartera": 117035.0,
+   "spy": 35835.0,
+   "lista": 66764.0
+  },
+  {
+   "fecha": "2021-03-31",
+   "cartera": 124430.0,
+   "spy": 37461.0,
+   "lista": 68899.0
+  },
+  {
+   "fecha": "2021-04-30",
+   "cartera": 132269.0,
+   "spy": 39443.0,
+   "lista": 71252.0
+  },
+  {
+   "fecha": "2021-05-31",
+   "cartera": 134665.0,
+   "spy": 39702.0,
+   "lista": 72510.0
+  },
+  {
+   "fecha": "2021-06-30",
+   "cartera": 140970.0,
+   "spy": 40593.0,
+   "lista": 75448.0
+  },
+  {
+   "fecha": "2021-07-31",
+   "cartera": 142506.0,
+   "spy": 41584.0,
+   "lista": 76114.0
+  },
+  {
+   "fecha": "2021-08-31",
+   "cartera": 143229.0,
+   "spy": 42821.0,
+   "lista": 77420.0
+  },
+  {
+   "fecha": "2021-09-30",
+   "cartera": 134219.0,
+   "spy": 40826.0,
+   "lista": 74342.0
+  },
+  {
+   "fecha": "2021-10-31",
+   "cartera": 143783.0,
+   "spy": 43690.0,
+   "lista": 77747.0
+  },
+  {
+   "fecha": "2021-11-30",
+   "cartera": 151856.0,
+   "spy": 43339.0,
+   "lista": 76186.0
+  },
+  {
+   "fecha": "2021-12-31",
+   "cartera": 157256.0,
+   "spy": 45343.0,
+   "lista": 78777.0
+  },
+  {
+   "fecha": "2022-01-31",
+   "cartera": 145301.0,
+   "spy": 42952.0,
+   "lista": 75135.0
+  },
+  {
+   "fecha": "2022-02-28",
+   "cartera": 135514.0,
+   "spy": 41684.0,
+   "lista": 73264.0
+  },
+  {
+   "fecha": "2022-03-31",
+   "cartera": 142438.0,
+   "spy": 43251.0,
+   "lista": 75100.0
+  },
+  {
+   "fecha": "2022-04-30",
+   "cartera": 130255.0,
+   "spy": 39455.0,
+   "lista": 67793.0
+  },
+  {
+   "fecha": "2022-05-31",
+   "cartera": 126195.0,
+   "spy": 39544.0,
+   "lista": 67923.0
+  },
+  {
+   "fecha": "2022-06-30",
+   "cartera": 113489.0,
+   "spy": 36283.0,
+   "lista": 61297.0
+  },
+  {
+   "fecha": "2022-07-31",
+   "cartera": 124645.0,
+   "spy": 39624.0,
+   "lista": 66237.0
+  },
+  {
+   "fecha": "2022-08-31",
+   "cartera": 117835.0,
+   "spy": 38008.0,
+   "lista": 63939.0
+  },
+  {
+   "fecha": "2022-09-30",
+   "cartera": 106162.0,
+   "spy": 34494.0,
+   "lista": 58442.0
+  },
+  {
+   "fecha": "2022-10-31",
+   "cartera": 114226.0,
+   "spy": 37298.0,
+   "lista": 64165.0
+  },
+  {
+   "fecha": "2022-11-30",
+   "cartera": 123591.0,
+   "spy": 39371.0,
+   "lista": 68788.0
+  },
+  {
+   "fecha": "2022-12-31",
+   "cartera": 114552.0,
+   "spy": 37102.0,
+   "lista": 65031.0
+  },
+  {
+   "fecha": "2023-01-31",
+   "cartera": 129296.0,
+   "spy": 39435.0,
+   "lista": 71342.0
+  },
+  {
+   "fecha": "2023-02-28",
+   "cartera": 127888.0,
+   "spy": 38444.0,
+   "lista": 69134.0
+  },
+  {
+   "fecha": "2023-03-31",
+   "cartera": 136323.0,
+   "spy": 39869.0,
+   "lista": 71109.0
+  },
+  {
+   "fecha": "2023-04-30",
+   "cartera": 138324.0,
+   "spy": 40506.0,
+   "lista": 70557.0
+  },
+  {
+   "fecha": "2023-05-31",
+   "cartera": 145212.0,
+   "spy": 40693.0,
+   "lista": 71247.0
+  },
+  {
+   "fecha": "2023-06-30",
+   "cartera": 155794.0,
+   "spy": 43330.0,
+   "lista": 75721.0
+  },
+  {
+   "fecha": "2023-07-31",
+   "cartera": 164490.0,
+   "spy": 44748.0,
+   "lista": 79899.0
+  },
+  {
+   "fecha": "2023-08-31",
+   "cartera": 162217.0,
+   "spy": 44021.0,
+   "lista": 77212.0
+  },
+  {
+   "fecha": "2023-09-30",
+   "cartera": 152973.0,
+   "spy": 41933.0,
+   "lista": 73789.0
+  },
+  {
+   "fecha": "2023-10-31",
+   "cartera": 151098.0,
+   "spy": 41023.0,
+   "lista": 71726.0
+  },
+  {
+   "fecha": "2023-11-30",
+   "cartera": 163896.0,
+   "spy": 44770.0,
+   "lista": 80392.0
+  },
+  {
+   "fecha": "2023-12-31",
+   "cartera": 175875.0,
+   "spy": 46814.0,
+   "lista": 85501.0
+  },
+  {
+   "fecha": "2024-01-31",
+   "cartera": 185431.0,
+   "spy": 47559.0,
+   "lista": 85837.0
+  },
+  {
+   "fecha": "2024-02-29",
+   "cartera": 203514.0,
+   "spy": 50041.0,
+   "lista": 88775.0
+  },
+  {
+   "fecha": "2024-03-31",
+   "cartera": 209081.0,
+   "spy": 51678.0,
+   "lista": 92563.0
+  },
+  {
+   "fecha": "2024-04-30",
+   "cartera": 199072.0,
+   "spy": 49594.0,
+   "lista": 89344.0
+  },
+  {
+   "fecha": "2024-05-31",
+   "cartera": 213339.0,
+   "spy": 52103.0,
+   "lista": 91963.0
+  },
+  {
+   "fecha": "2024-06-30",
+   "cartera": 225555.0,
+   "spy": 53941.0,
+   "lista": 93509.0
+  },
+  {
+   "fecha": "2024-07-31",
+   "cartera": 223233.0,
+   "spy": 54594.0,
+   "lista": 95033.0
+  },
+  {
+   "fecha": "2024-08-31",
+   "cartera": 231735.0,
+   "spy": 55870.0,
+   "lista": 96916.0
+  },
+  {
+   "fecha": "2024-09-30",
+   "cartera": 234001.0,
+   "spy": 57043.0,
+   "lista": 98735.0
+  },
+  {
+   "fecha": "2024-10-31",
+   "cartera": 231363.0,
+   "spy": 56534.0,
+   "lista": 97328.0
+  },
+  {
+   "fecha": "2024-11-30",
+   "cartera": 236110.0,
+   "spy": 59906.0,
+   "lista": 103421.0
+  },
+  {
+   "fecha": "2024-12-31",
+   "cartera": 218225.0,
+   "spy": 58464.0,
+   "lista": 99144.0
+  },
+  {
+   "fecha": "2025-01-31",
+   "cartera": 239218.0,
+   "spy": 60034.0,
+   "lista": 104485.0
+  },
+  {
+   "fecha": "2025-02-28",
+   "cartera": 235642.0,
+   "spy": 59272.0,
+   "lista": 104255.0
+  },
+  {
+   "fecha": "2025-03-31",
+   "cartera": 220018.0,
+   "spy": 55970.0,
+   "lista": 99276.0
+  },
+  {
+   "fecha": "2025-04-30",
+   "cartera": 216912.0,
+   "spy": 55484.0,
+   "lista": 97588.0
+  },
+  {
+   "fecha": "2025-05-31",
+   "cartera": 227178.0,
+   "spy": 58971.0,
+   "lista": 103078.0
+  },
+  {
+   "fecha": "2025-06-30",
+   "cartera": 246268.0,
+   "spy": 62002.0,
+   "lista": 108440.0
+  },
+  {
+   "fecha": "2025-07-31",
+   "cartera": 248349.0,
+   "spy": 63430.0,
+   "lista": 108985.0
+  },
+  {
+   "fecha": "2025-08-31",
+   "cartera": 247416.0,
+   "spy": 64731.0,
+   "lista": 112442.0
+  },
+  {
+   "fecha": "2025-09-30",
+   "cartera": 264664.0,
+   "spy": 67037.0,
+   "lista": 115761.0
+  },
+  {
+   "fecha": "2025-10-31",
+   "cartera": 277928.0,
+   "spy": 68635.0,
+   "lista": 119290.0
+  },
+  {
+   "fecha": "2025-11-30",
+   "cartera": 277444.0,
+   "spy": 68769.0,
+   "lista": 119516.0
+  },
+  {
+   "fecha": "2025-12-31",
+   "cartera": 285671.0,
+   "spy": 68824.0,
+   "lista": 121053.0
+  },
+  {
+   "fecha": "2026-01-31",
+   "cartera": 307136.0,
+   "spy": 69838.0,
+   "lista": 125348.0
+  },
+  {
+   "fecha": "2026-02-28",
+   "cartera": 284728.0,
+   "spy": 69234.0,
+   "lista": 126735.0
+  },
+  {
+   "fecha": "2026-03-31",
+   "cartera": 270943.0,
+   "spy": 65816.0,
+   "lista": 121561.0
+  },
+  {
+   "fecha": "2026-04-30",
+   "cartera": 299691.0,
+   "spy": 72730.0,
+   "lista": 130733.0
+  },
+  {
+   "fecha": "2026-05-31",
+   "cartera": 307786.0,
+   "spy": 76557.0,
+   "lista": 138700.0
+  },
+  {
+   "fecha": "2026-06-30",
+   "cartera": 312486.0,
+   "spy": 75769.0,
+   "lista": 138576.0
+  },
+  {
+   "fecha": "2026-07-31",
+   "cartera": 315655.0,
+   "spy": 75795.0,
+   "lista": 142218.0
+  },
+  {
+   "fecha": "2026-08-31",
+   "cartera": 334265.0,
+   "spy": 77827.0,
+   "lista": 152096.0
+  },
+  {
+   "fecha": "2026-09-25",
+   "cartera": 322007.0,
+   "spy": 78457.0,
+   "lista": 150346.0
+  }
+ ],
+ "operaciones": [
+  {
+   "Fecha": "2011-01-18",
+   "Orden": "COMPRAR",
+   "Acción": "AAPL",
+   "Peso": 0.1,
+   "Resultado": null,
+   "Motivo": "Compra inicial: orden 1 del ranking combinado (puesto 1 de calidad, rendimiento esperado 26,5%)",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2011-01-18",
+   "Orden": "COMPRAR",
+   "Acción": "AMZN",
+   "Peso": 0.1,
+   "Resultado": null,
+   "Motivo": "Compra inicial: orden 2 del ranking combinado (puesto 2 de calidad, rendimiento esperado 14,4%)",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2011-01-18",
+   "Orden": "COMPRAR",
+   "Acción": "BIIB",
+   "Peso": 0.1,
+   "Resultado": null,
+   "Motivo": "Compra inicial: orden 3 del ranking combinado (puesto 7 de calidad, rendimiento esperado 19,9%)",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2011-01-18",
+   "Orden": "COMPRAR",
+   "Acción": "NFLX",
+   "Peso": 0.1,
+   "Resultado": null,
+   "Motivo": "Compra inicial: orden 4 del ranking combinado (puesto 5 de calidad, rendimiento esperado 7,1%)",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2011-01-18",
+   "Orden": "COMPRAR",
+   "Acción": "VZ",
+   "Peso": 0.1,
+   "Resultado": null,
+   "Motivo": "Compra inicial: orden 5 del ranking combinado (puesto 14 de calidad, rendimiento esperado 24,1%)",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2011-01-18",
+   "Orden": "COMPRAR",
+   "Acción": "ORCL",
+   "Peso": 0.1,
+   "Resultado": null,
+   "Motivo": "Compra inicial: orden 6 del ranking combinado (puesto 8 de calidad, rendimiento esperado 13,9%)",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2011-01-18",
+   "Orden": "COMPRAR",
+   "Acción": "UNH",
+   "Peso": 0.1,
+   "Resultado": null,
+   "Motivo": "Compra inicial: orden 7 del ranking combinado (puesto 11 de calidad, rendimiento esperado 20,3%)",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2011-01-18",
+   "Orden": "COMPRAR",
+   "Acción": "QCOM",
+   "Peso": 0.1,
+   "Resultado": null,
+   "Motivo": "Compra inicial: orden 8 del ranking combinado (puesto 10 de calidad, rendimiento esperado 12,7%)",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2011-01-18",
+   "Orden": "COMPRAR",
+   "Acción": "ABT",
+   "Peso": 0.1,
+   "Resultado": null,
+   "Motivo": "Compra inicial: orden 9 del ranking combinado (puesto 13 de calidad, rendimiento esperado 23,4%)",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2011-01-18",
+   "Orden": "COMPRAR",
+   "Acción": "EBAY",
+   "Peso": 0.1,
+   "Resultado": null,
+   "Motivo": "Compra inicial: orden 11 del ranking combinado (puesto 17 de calidad, rendimiento esperado 12,0%)",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2011-03-15",
+   "Orden": "VENDER",
+   "Acción": "VZ",
+   "Peso": 0.09593122382952511,
+   "Resultado": 0.004719661007053233,
+   "Motivo": "Tesis rota: ROIC promedio 8,8% (mínimo 12%); ventas 4,5% anual (mínimo 5%)",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2011-03-15",
+   "Orden": "COMPRAR",
+   "Acción": "BKNG",
+   "Peso": 0.09545156771037741,
+   "Resultado": null,
+   "Motivo": "Lugar libre: orden 1 del ranking combinado (puesto 1 de calidad, rendimiento esperado 19,7%)",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2011-05-16",
+   "Orden": "ROTAR (vender)",
+   "Acción": "EBAY",
+   "Peso": 0.09461399445978068,
+   "Resultado": 0.08818702827935422,
+   "Motivo": "Rotación: cayó al puesto 21 de calidad (fuera del top 20); entra MA",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2011-05-16",
+   "Orden": "ROTAR (comprar)",
+   "Acción": "MA",
+   "Peso": 0.09414092448748176,
+   "Resultado": null,
+   "Motivo": "Reemplaza a EBAY: orden 7 del ranking combinado (puesto 6 de calidad, rendimiento esperado 16,2%)",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2012-05-15",
+   "Orden": "ROTAR (vender)",
+   "Acción": "ABT",
+   "Peso": 0.10387788991080672,
+   "Resultado": 0.3575698254943973,
+   "Motivo": "Rotación: cayó al puesto 21 de calidad (fuera del top 20); entra GILD",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2012-05-15",
+   "Orden": "ROTAR (comprar)",
+   "Acción": "GILD",
+   "Peso": 0.10335850046125264,
+   "Resultado": null,
+   "Motivo": "Reemplaza a ABT: orden 2 del ranking combinado (puesto 4 de calidad, rendimiento esperado 30,7%)",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2014-01-15",
+   "Orden": "RECORTAR",
+   "Acción": "BIIB",
+   "Peso": 0.08261798699276922,
+   "Resultado": null,
+   "Motivo": "Precio extremo (rendimiento esperado a 10 años de 4,2%) y pesa 18%: baja a 10%",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2014-01-15",
+   "Orden": "SUMAR",
+   "Acción": "ORCL",
+   "Peso": 0.04833360370877507,
+   "Resultado": null,
+   "Motivo": "Posición chica: se completa hacia el 10%",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2014-02-18",
+   "Orden": "SUMAR",
+   "Acción": "AMZN",
+   "Peso": 0.027390412474990904,
+   "Resultado": null,
+   "Motivo": "Posición chica: se completa hacia el 10%",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2014-03-17",
+   "Orden": "RECORTAR",
+   "Acción": "GILD",
+   "Peso": 0.05780998388208459,
+   "Resultado": null,
+   "Motivo": "Precio extremo (rendimiento esperado a 10 años de 4,5%) y pesa 16%: baja a 10%",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2014-08-15",
+   "Orden": "RECORTAR",
+   "Acción": "GILD",
+   "Peso": 0.02520405180493812,
+   "Resultado": null,
+   "Motivo": "Precio extremo (rendimiento esperado a 10 años de 1,3%) y pesa 13%: baja a 10%",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2015-01-15",
+   "Orden": "SUMAR",
+   "Acción": "BKNG",
+   "Peso": 0.015914151847128674,
+   "Resultado": null,
+   "Motivo": "Posición chica: se completa hacia el 10%",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2015-02-17",
+   "Orden": "VENDER",
+   "Acción": "NFLX",
+   "Peso": 0.08313459098483572,
+   "Resultado": 1.402272702741455,
+   "Motivo": "Tesis rota: emite 3,2% más de acciones por año (máximo 3%)",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2015-02-17",
+   "Orden": "COMPRAR",
+   "Acción": "MELI",
+   "Peso": 0.10083543415323475,
+   "Resultado": null,
+   "Motivo": "Lugar libre: orden 5 del ranking combinado (puesto 6 de calidad, rendimiento esperado 11,3%)",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2015-07-15",
+   "Orden": "VENDER",
+   "Acción": "ORCL",
+   "Peso": 0.08514859277069424,
+   "Resultado": 0.19782024106898352,
+   "Motivo": "Tesis rota: ventas 1,8% anual (mínimo 5%)",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2015-07-15",
+   "Orden": "COMPRAR",
+   "Acción": "KLAC",
+   "Peso": 0.10107951826044598,
+   "Resultado": null,
+   "Motivo": "Lugar libre: orden 5 del ranking combinado (puesto 5 de calidad, rendimiento esperado 22,4%)",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2015-08-17",
+   "Orden": "VENDER",
+   "Acción": "KLAC",
+   "Peso": 0.10003730850065924,
+   "Resultado": -0.05371228147310081,
+   "Motivo": "Tesis rota: deuda neta EBITDA negativo el EBITDA (máximo 3x); ventas -3,0% anual (mínimo 5%)",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2015-08-17",
+   "Orden": "RECORTAR",
+   "Acción": "AMZN",
+   "Peso": 0.02625447889160384,
+   "Resultado": null,
+   "Motivo": "Precio extremo (rendimiento esperado a 10 años de -14,5%) y pesa 13%: baja a 10%",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2015-08-17",
+   "Orden": "COMPRAR",
+   "Acción": "BA",
+   "Peso": 0.10348573326993955,
+   "Resultado": null,
+   "Motivo": "Lugar libre: orden 6 del ranking combinado (puesto 5 de calidad, rendimiento esperado 18,1%)",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2015-09-15",
+   "Orden": "SUMAR",
+   "Acción": "MELI",
+   "Peso": 0.01899796186389932,
+   "Resultado": null,
+   "Motivo": "Posición chica: se completa hacia el 10%",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2015-11-16",
+   "Orden": "SUMAR",
+   "Acción": "AAPL",
+   "Peso": 0.015955504335197233,
+   "Resultado": null,
+   "Motivo": "Posición chica: se completa hacia el 10%",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2016-05-16",
+   "Orden": "RECORTAR",
+   "Acción": "AMZN",
+   "Peso": 0.03601960993957061,
+   "Resultado": null,
+   "Motivo": "Precio extremo (rendimiento esperado a 10 años de -2,9%) y pesa 14%: baja a 10%",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2016-07-15",
+   "Orden": "SUMAR",
+   "Acción": "BIIB",
+   "Peso": 0.03128971186325065,
+   "Resultado": null,
+   "Motivo": "Posición chica: se completa hacia el 10%",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2016-09-15",
+   "Orden": "SUMAR",
+   "Acción": "BA",
+   "Peso": 0.016129258763260376,
+   "Resultado": null,
+   "Motivo": "Posición chica: se completa hacia el 10%",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2016-11-15",
+   "Orden": "ROTAR (vender)",
+   "Acción": "QCOM",
+   "Peso": 0.04246933366780114,
+   "Resultado": 0.41959467037479664,
+   "Motivo": "Rotación: cayó al puesto 21 de calidad (fuera del top 20); entra PYPL",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2016-11-15",
+   "Orden": "ROTAR (comprar)",
+   "Acción": "PYPL",
+   "Peso": 0.04225698699946214,
+   "Resultado": null,
+   "Motivo": "Reemplaza a QCOM: orden 9 del ranking combinado (puesto 10 de calidad, rendimiento esperado 9,1%)",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2017-02-15",
+   "Orden": "VENDER",
+   "Acción": "BA",
+   "Peso": 0.12068141066123499,
+   "Resultado": 0.2348258475536715,
+   "Motivo": "Tesis rota: ventas 3,7% anual (mínimo 5%)",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2017-02-15",
+   "Orden": "COMPRAR",
+   "Acción": "ADI",
+   "Peso": 0.10121010455313195,
+   "Resultado": null,
+   "Motivo": "Lugar libre: orden 9 del ranking combinado (puesto 11 de calidad, rendimiento esperado 9,2%)",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2017-02-15",
+   "Orden": "SUMAR",
+   "Acción": "GILD",
+   "Peso": 0.02732795127720786,
+   "Resultado": null,
+   "Motivo": "Posición chica: se completa hacia el 10%",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2018-01-16",
+   "Orden": "RECORTAR",
+   "Acción": "MELI",
+   "Peso": 0.079374546116761,
+   "Resultado": null,
+   "Motivo": "Precio extremo (rendimiento esperado a 10 años de 4,5%) y pesa 18%: baja a 10%",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2018-01-16",
+   "Orden": "SUMAR",
+   "Acción": "GILD",
+   "Peso": 0.03418020549146313,
+   "Resultado": null,
+   "Motivo": "Posición chica: se completa hacia el 10%",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2018-02-15",
+   "Orden": "SUMAR",
+   "Acción": "PYPL",
+   "Peso": 0.04205694464289211,
+   "Resultado": null,
+   "Motivo": "Posición chica: se completa hacia el 10%",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2018-05-15",
+   "Orden": "ROTAR (vender)",
+   "Acción": "AAPL",
+   "Peso": 0.0965296527154942,
+   "Resultado": 2.427931130680683,
+   "Motivo": "Rotación: cayó al puesto 22 de calidad (fuera del top 20); entra LRCX",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2018-05-15",
+   "Orden": "ROTAR (vender)",
+   "Acción": "PYPL",
+   "Peso": 0.0955301476597272,
+   "Resultado": 0.3674267085619618,
+   "Motivo": "Rotación: cayó al puesto 21 de calidad (fuera del top 20); entra NVDA",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2018-05-15",
+   "Orden": "ROTAR (comprar)",
+   "Acción": "LRCX",
+   "Peso": 0.09604700445191673,
+   "Resultado": null,
+   "Motivo": "Reemplaza a AAPL: orden 5 del ranking combinado (puesto 8 de calidad, rendimiento esperado 22,7%)",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2018-05-15",
+   "Orden": "ROTAR (comprar)",
+   "Acción": "NVDA",
+   "Peso": 0.09505249692142857,
+   "Resultado": null,
+   "Motivo": "Reemplaza a PYPL: orden 6 del ranking combinado (puesto 3 de calidad, rendimiento esperado 11,8%)",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2018-06-15",
+   "Orden": "RECORTAR",
+   "Acción": "AMZN",
+   "Peso": 0.030499741564488602,
+   "Resultado": null,
+   "Motivo": "Precio extremo (rendimiento esperado a 10 años de 4,8%) y pesa 13%: baja a 10%",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2018-06-15",
+   "Orden": "SUMAR",
+   "Acción": "LRCX",
+   "Peso": 0.01951890195572144,
+   "Resultado": null,
+   "Motivo": "Posición chica: se completa hacia el 10%",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2018-09-17",
+   "Orden": "RECORTAR",
+   "Acción": "MA",
+   "Peso": 0.05414783198578346,
+   "Resultado": null,
+   "Motivo": "Precio extremo (rendimiento esperado a 10 años de 4,8%) y pesa 16%: baja a 10%",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2018-11-15",
+   "Orden": "SUMAR",
+   "Acción": "NVDA",
+   "Peso": 0.02172813283008672,
+   "Resultado": null,
+   "Motivo": "Posición chica: se completa hacia el 10%",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2018-12-17",
+   "Orden": "VENDER",
+   "Acción": "ADI",
+   "Peso": 0.08284228901032183,
+   "Resultado": 0.10462507511476529,
+   "Motivo": "Tesis rota: emite 4,2% más de acciones por año (máximo 3%)",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2018-12-17",
+   "Orden": "COMPRAR",
+   "Acción": "KLAC",
+   "Peso": 0.09727969922635422,
+   "Resultado": null,
+   "Motivo": "Lugar libre: orden 6 del ranking combinado (puesto 9 de calidad, rendimiento esperado 21,5%)",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2019-02-15",
+   "Orden": "ROTAR (vender)",
+   "Acción": "UNH",
+   "Peso": 0.1360678918277175,
+   "Resultado": 6.415429277376555,
+   "Motivo": "Rotación: cayó al puesto 21 de calidad (fuera del top 20); entra META",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2019-02-15",
+   "Orden": "ROTAR (comprar)",
+   "Acción": "META",
+   "Peso": 0.13538755236857894,
+   "Resultado": null,
+   "Motivo": "Reemplaza a UNH: orden 3 del ranking combinado (puesto 5 de calidad, rendimiento esperado 25,0%)",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2019-03-15",
+   "Orden": "VENDER",
+   "Acción": "GILD",
+   "Peso": 0.0782293308481258,
+   "Resultado": 0.2773376017399587,
+   "Motivo": "Tesis rota: ventas -2,9% anual (mínimo 5%)",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2019-03-15",
+   "Orden": "RECORTAR",
+   "Acción": "MELI",
+   "Peso": 0.030200687498130915,
+   "Resultado": null,
+   "Motivo": "Precio extremo (rendimiento esperado a 10 años de -7,4%) y pesa 13%: baja a 10%",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2019-03-15",
+   "Orden": "COMPRAR",
+   "Acción": "SPGI",
+   "Peso": 0.10211321645848034,
+   "Resultado": null,
+   "Motivo": "Lugar libre: orden 9 del ranking combinado (puesto 10 de calidad, rendimiento esperado 9,7%)",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2019-07-15",
+   "Orden": "SUMAR",
+   "Acción": "BKNG",
+   "Peso": 0.02475731967231813,
+   "Resultado": null,
+   "Motivo": "Posición chica: se completa hacia el 10%",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2019-09-16",
+   "Orden": "VENDER",
+   "Acción": "KLAC",
+   "Peso": 0.1296031133826668,
+   "Resultado": 0.7160136419231857,
+   "Motivo": "Tesis rota: ROIC promedio — (mínimo 12%); deuda neta EBITDA negativo el EBITDA (máximo 3x)",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2019-09-16",
+   "Orden": "COMPRAR",
+   "Acción": "AMAT",
+   "Peso": 0.1020831827321105,
+   "Resultado": null,
+   "Motivo": "Lugar libre: orden 2 del ranking combinado (puesto 5 de calidad, rendimiento esperado 27,3%)",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2019-10-15",
+   "Orden": "SUMAR",
+   "Acción": "AMZN",
+   "Peso": 0.015113408472343137,
+   "Resultado": null,
+   "Motivo": "Posición chica: se completa hacia el 10%",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2019-12-16",
+   "Orden": "SUMAR",
+   "Acción": "NVDA",
+   "Peso": 0.018985115119922267,
+   "Resultado": null,
+   "Motivo": "Posición chica: se completa hacia el 10%",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2020-02-18",
+   "Orden": "ROTAR (vender)",
+   "Acción": "MELI",
+   "Peso": 0.11584866464742666,
+   "Resultado": 4.709123495915422,
+   "Motivo": "Rotación: cayó al puesto 21 de calidad (fuera del top 20); entra SBUX",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2020-02-18",
+   "Orden": "ROTAR (comprar)",
+   "Acción": "SBUX",
+   "Peso": 0.11526942132418952,
+   "Resultado": null,
+   "Motivo": "Reemplaza a MELI: orden 4 del ranking combinado (puesto 5 de calidad, rendimiento esperado 16,1%)",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2020-07-15",
+   "Orden": "RECORTAR",
+   "Acción": "AMZN",
+   "Peso": 0.02769169245689075,
+   "Resultado": null,
+   "Motivo": "Precio extremo (rendimiento esperado a 10 años de 3,8%) y pesa 13%: baja a 10%",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2020-07-15",
+   "Orden": "SUMAR",
+   "Acción": "BKNG",
+   "Peso": 0.027800009939539672,
+   "Resultado": null,
+   "Motivo": "Posición chica: se completa hacia el 10%",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2020-11-16",
+   "Orden": "VENDER",
+   "Acción": "SBUX",
+   "Peso": 0.09550102850307968,
+   "Resultado": 0.1021278553555729,
+   "Motivo": "Tesis rota: deuda neta 3,8x el EBITDA (máximo 3x); ventas 2,5% anual (mínimo 5%)",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2020-11-16",
+   "Orden": "COMPRAR",
+   "Acción": "ABBV",
+   "Peso": 0.09502352336056427,
+   "Resultado": null,
+   "Motivo": "Lugar libre: orden 9 del ranking combinado (puesto 14 de calidad, rendimiento esperado 22,1%)",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2021-02-16",
+   "Orden": "VENDER",
+   "Acción": "BIIB",
+   "Peso": 0.029356675009647382,
+   "Resultado": 1.175998950364243,
+   "Motivo": "Tesis rota: ventas 4,1% anual (mínimo 5%)",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2021-02-16",
+   "Orden": "RECORTAR",
+   "Acción": "NVDA",
+   "Peso": 0.07002272259315284,
+   "Resultado": null,
+   "Motivo": "Precio extremo (rendimiento esperado a 10 años de 4,7%) y pesa 17%: baja a 10%",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2021-02-16",
+   "Orden": "COMPRAR",
+   "Acción": "VRTX",
+   "Peso": 0.09888250061478622,
+   "Resultado": null,
+   "Motivo": "Lugar libre: orden 1 del ranking combinado (puesto 1 de calidad, rendimiento esperado 25,5%)",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2021-03-15",
+   "Orden": "VENDER",
+   "Acción": "BKNG",
+   "Peso": 0.09665676968733028,
+   "Resultado": 1.129625957513321,
+   "Motivo": "Tesis rota: ventas -10,8% anual (mínimo 5%)",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2021-03-15",
+   "Orden": "VENDER",
+   "Acción": "ABBV",
+   "Peso": 0.08833533832342388,
+   "Resultado": 0.12278270443709101,
+   "Motivo": "Tesis rota: deuda neta 6,4x el EBITDA (máximo 3x)",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2021-03-15",
+   "Orden": "COMPRAR",
+   "Acción": "TGT",
+   "Peso": 0.09203357373535015,
+   "Resultado": null,
+   "Motivo": "Lugar libre: orden 8 del ranking combinado (puesto 14 de calidad, rendimiento esperado 16,9%)",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2021-03-15",
+   "Orden": "COMPRAR",
+   "Acción": "UNH",
+   "Peso": 0.09203357373535015,
+   "Resultado": null,
+   "Motivo": "Lugar libre: orden 11 del ranking combinado (puesto 16 de calidad, rendimiento esperado 16,3%)",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2021-11-15",
+   "Orden": "RECORTAR",
+   "Acción": "NVDA",
+   "Peso": 0.05391327005675004,
+   "Resultado": null,
+   "Motivo": "Precio extremo (rendimiento esperado a 10 años de -2,4%) y pesa 15%: baja a 10%",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2021-11-15",
+   "Orden": "RECORTAR",
+   "Acción": "AMAT",
+   "Peso": 0.03531228984836588,
+   "Resultado": null,
+   "Motivo": "Precio extremo (rendimiento esperado a 10 años de 4,0%) y pesa 13%: baja a 10%",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2021-11-15",
+   "Orden": "SUMAR",
+   "Acción": "AMZN",
+   "Peso": 0.03267644378553306,
+   "Resultado": null,
+   "Motivo": "Posición chica: se completa hacia el 10%",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2021-12-15",
+   "Orden": "SUMAR",
+   "Acción": "VRTX",
+   "Peso": 0.029662690721568803,
+   "Resultado": null,
+   "Motivo": "Posición chica: se completa hacia el 10%",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2022-01-18",
+   "Orden": "SUMAR",
+   "Acción": "MA",
+   "Peso": 0.024400365647515892,
+   "Resultado": null,
+   "Motivo": "Posición chica: se completa hacia el 10%",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2022-05-16",
+   "Orden": "ROTAR (vender)",
+   "Acción": "UNH",
+   "Peso": 0.12070330250498479,
+   "Resultado": 0.38707889831541287,
+   "Motivo": "Rotación: cayó al puesto 23 de calidad (fuera del top 20); entra LMT",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2022-05-16",
+   "Orden": "ROTAR (comprar)",
+   "Acción": "LMT",
+   "Peso": 0.12009978599245989,
+   "Resultado": null,
+   "Motivo": "Reemplaza a UNH: orden 11 del ranking combinado (puesto 15 de calidad, rendimiento esperado 17,8%)",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2023-02-15",
+   "Orden": "VENDER",
+   "Acción": "AMZN",
+   "Peso": 0.06821275762541577,
+   "Resultado": 0.40310151284598705,
+   "Motivo": "Tesis rota: no genera caja (flujo de caja y ganancia promedio negativos)",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2023-02-15",
+   "Orden": "VENDER",
+   "Acción": "SPGI",
+   "Peso": 0.08348522935984962,
+   "Resultado": 0.8495550822374507,
+   "Motivo": "Tesis rota: emite 5,9% más de acciones por año (máximo 3%)",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2023-02-15",
+   "Orden": "COMPRAR",
+   "Acción": "HD",
+   "Peso": 0.0754697485251695,
+   "Resultado": null,
+   "Motivo": "Lugar libre: orden 8 del ranking combinado (puesto 13 de calidad, rendimiento esperado 16,7%)",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2023-02-15",
+   "Orden": "COMPRAR",
+   "Acción": "PYPL",
+   "Peso": 0.0754697485251695,
+   "Resultado": null,
+   "Motivo": "Lugar libre: orden 14 del ranking combinado (puesto 17 de calidad, rendimiento esperado 14,2%)",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2023-05-15",
+   "Orden": "ROTAR (vender)",
+   "Acción": "TGT",
+   "Peso": 0.07174355645196835,
+   "Resultado": -0.08887477806573309,
+   "Motivo": "Rotación: cayó al puesto 27 de calidad (fuera del top 20); entra UNH",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2023-05-15",
+   "Orden": "ROTAR (comprar)",
+   "Acción": "UNH",
+   "Peso": 0.07138483866970852,
+   "Resultado": null,
+   "Motivo": "Reemplaza a TGT: orden 16 del ranking combinado (puesto 18 de calidad, rendimiento esperado 15,5%)",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2023-06-15",
+   "Orden": "RECORTAR",
+   "Acción": "NVDA",
+   "Peso": 0.04400535875626883,
+   "Resultado": null,
+   "Motivo": "Precio extremo (rendimiento esperado a 10 años de -3,3%) y pesa 14%: baja a 10%",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2023-06-15",
+   "Orden": "SUMAR",
+   "Acción": "HD",
+   "Peso": 0.04027185789812928,
+   "Resultado": null,
+   "Motivo": "Posición chica: se completa hacia el 10%",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2024-02-15",
+   "Orden": "VENDER",
+   "Acción": "LMT",
+   "Peso": 0.0796724402766679,
+   "Resultado": 0.002253484000993344,
+   "Motivo": "Tesis rota: ventas 3,1% anual (mínimo 5%)",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2024-02-15",
+   "Orden": "ROTAR (vender)",
+   "Acción": "HD",
+   "Peso": 0.09492919198499755,
+   "Resultado": 0.1662793061256831,
+   "Motivo": "Rotación: cayó al puesto 21 de calidad (fuera del top 20); entra SBUX",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2024-02-15",
+   "Orden": "RECORTAR",
+   "Acción": "NVDA",
+   "Peso": 0.03142411922413519,
+   "Resultado": null,
+   "Motivo": "Precio extremo (rendimiento esperado a 10 años de -8,6%) y pesa 13%: baja a 10%",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2024-02-15",
+   "Orden": "ROTAR (comprar)",
+   "Acción": "SBUX",
+   "Peso": 0.09445454602507256,
+   "Resultado": null,
+   "Motivo": "Reemplaza a HD: orden 12 del ranking combinado (puesto 9 de calidad, rendimiento esperado 9,8%)",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2024-02-15",
+   "Orden": "COMPRAR",
+   "Acción": "AXP",
+   "Peso": 0.1023813200007232,
+   "Resultado": null,
+   "Motivo": "Lugar libre: orden 15 del ranking combinado (puesto 18 de calidad, rendimiento esperado 11,8%)",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2024-02-15",
+   "Orden": "SUMAR",
+   "Acción": "UNH",
+   "Peso": 0.011275243723142427,
+   "Resultado": null,
+   "Motivo": "Posición chica: se completa hacia el 10%",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2024-05-15",
+   "Orden": "ROTAR (vender)",
+   "Acción": "AXP",
+   "Peso": 0.10984324340316634,
+   "Resultado": 0.1293953844496234,
+   "Motivo": "Rotación: cayó al puesto 21 de calidad (fuera del top 20); entra MELI",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2024-05-15",
+   "Orden": "ROTAR (comprar)",
+   "Acción": "MELI",
+   "Peso": 0.10929402718615051,
+   "Resultado": null,
+   "Motivo": "Reemplaza a AXP: orden 2 del ranking combinado (puesto 3 de calidad, rendimiento esperado 20,6%)",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2024-06-17",
+   "Orden": "RECORTAR",
+   "Acción": "NVDA",
+   "Peso": 0.05980473901413637,
+   "Resultado": null,
+   "Motivo": "Precio extremo (rendimiento esperado a 10 años de -0,0%) y pesa 16%: baja a 10%",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2024-06-17",
+   "Orden": "SUMAR",
+   "Acción": "UNH",
+   "Peso": 0.0471100970571815,
+   "Resultado": null,
+   "Motivo": "Posición chica: se completa hacia el 10%",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2024-06-17",
+   "Orden": "SUMAR",
+   "Acción": "MA",
+   "Peso": 0.012395618261884159,
+   "Resultado": null,
+   "Motivo": "Posición chica: se completa hacia el 10%",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2025-02-18",
+   "Orden": "ROTAR (vender)",
+   "Acción": "PYPL",
+   "Peso": 0.04111351946211088,
+   "Resultado": -0.0009527016957983081,
+   "Motivo": "Rotación: cayó al puesto 21 de calidad (fuera del top 20); entra GOOGL",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2025-02-18",
+   "Orden": "RECORTAR",
+   "Acción": "VRTX",
+   "Peso": 0.04096324861407963,
+   "Resultado": null,
+   "Motivo": "Precio extremo (rendimiento esperado a 10 años de -3,0%) y pesa 14%: baja a 10%",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2025-02-18",
+   "Orden": "ROTAR (comprar)",
+   "Acción": "GOOGL",
+   "Peso": 0.040907951864800327,
+   "Resultado": null,
+   "Motivo": "Reemplaza a PYPL: orden 2 del ranking combinado (puesto 7 de calidad, rendimiento esperado 12,2%)",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2025-02-18",
+   "Orden": "SUMAR",
+   "Acción": "GOOGL",
+   "Peso": 0.04075843237100923,
+   "Resultado": null,
+   "Motivo": "Posición chica: se completa hacia el 10%",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2025-05-15",
+   "Orden": "ROTAR (vender)",
+   "Acción": "UNH",
+   "Peso": 0.0580461056453858,
+   "Resultado": -0.43501407755450017,
+   "Motivo": "Rotación: cayó al puesto 21 de calidad (fuera del top 20); entra BKNG",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2025-05-15",
+   "Orden": "ROTAR (comprar)",
+   "Acción": "BKNG",
+   "Peso": 0.057755875117158885,
+   "Resultado": null,
+   "Motivo": "Reemplaza a UNH: orden 1 del ranking combinado (puesto 2 de calidad, rendimiento esperado 25,1%)",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2025-11-17",
+   "Orden": "ROTAR (vender)",
+   "Acción": "SBUX",
+   "Peso": 0.0619083649811475,
+   "Resultado": -0.06938974861618064,
+   "Motivo": "Rotación: cayó al puesto 22 de calidad (fuera del top 20); entra AXP",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2025-11-17",
+   "Orden": "ROTAR (comprar)",
+   "Acción": "AXP",
+   "Peso": 0.06159882315624175,
+   "Resultado": null,
+   "Motivo": "Reemplaza a SBUX: orden 7 del ranking combinado (puesto 11 de calidad, rendimiento esperado 13,8%)",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2025-12-15",
+   "Orden": "RECORTAR",
+   "Acción": "LRCX",
+   "Peso": 0.10039361068029629,
+   "Resultado": null,
+   "Motivo": "Precio extremo (rendimiento esperado a 10 años de 4,2%) y pesa 20%: baja a 10%",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2025-12-15",
+   "Orden": "SUMAR",
+   "Acción": "AXP",
+   "Peso": 0.03264427453611535,
+   "Resultado": null,
+   "Motivo": "Posición chica: se completa hacia el 10%",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2026-01-15",
+   "Orden": "RECORTAR",
+   "Acción": "LRCX",
+   "Peso": 0.025604726872542043,
+   "Resultado": null,
+   "Motivo": "Precio extremo (rendimiento esperado a 10 años de 1,0%) y pesa 13%: baja a 10%",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2026-01-15",
+   "Orden": "SUMAR",
+   "Acción": "BKNG",
+   "Peso": 0.05794479826746797,
+   "Resultado": null,
+   "Motivo": "Posición chica: se completa hacia el 10%",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2026-01-15",
+   "Orden": "SUMAR",
+   "Acción": "MA",
+   "Peso": 0.021525479502695285,
+   "Resultado": null,
+   "Motivo": "Posición chica: se completa hacia el 10%",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2026-02-17",
+   "Orden": "ROTAR (vender)",
+   "Acción": "VRTX",
+   "Peso": 0.08650720177140844,
+   "Resultado": 1.2447174246440769,
+   "Motivo": "Rotación: cayó al puesto 22 de calidad (fuera del top 20); entra ABNB",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2026-02-17",
+   "Orden": "ROTAR (vender)",
+   "Acción": "AMAT",
+   "Peso": 0.12524476085763955,
+   "Resultado": 6.415213817536167,
+   "Motivo": "Rotación: cayó al puesto 21 de calidad (fuera del top 20); entra ZM",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2026-02-17",
+   "Orden": "ROTAR (comprar)",
+   "Acción": "ABNB",
+   "Peso": 0.0860746657625514,
+   "Resultado": null,
+   "Motivo": "Reemplaza a VRTX: orden 3 del ranking combinado (puesto 3 de calidad, rendimiento esperado 17,7%)",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2026-02-17",
+   "Orden": "ROTAR (comprar)",
+   "Acción": "ZM",
+   "Peso": 0.12461853705335137,
+   "Resultado": null,
+   "Motivo": "Reemplaza a AMAT: orden 5 del ranking combinado (puesto 7 de calidad, rendimiento esperado 8,9%)",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2026-03-16",
+   "Orden": "VENDER",
+   "Acción": "ZM",
+   "Peso": 0.11081677500099463,
+   "Resultado": -0.16286213405263372,
+   "Motivo": "Tesis rota: ventas 4,4% anual (mínimo 5%)",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2026-03-16",
+   "Orden": "COMPRAR",
+   "Acción": "ADBE",
+   "Peso": 0.10083561910389553,
+   "Resultado": null,
+   "Motivo": "Lugar libre: orden 5 del ranking combinado (puesto 7 de calidad, rendimiento esperado 18,1%)",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2026-03-16",
+   "Orden": "SUMAR",
+   "Acción": "AXP",
+   "Peso": 0.021006732894310473,
+   "Resultado": null,
+   "Motivo": "Posición chica: se completa hacia el 10%",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2026-05-15",
+   "Orden": "RECORTAR",
+   "Acción": "LRCX",
+   "Peso": 0.029671984409577773,
+   "Resultado": null,
+   "Motivo": "Precio extremo (rendimiento esperado a 10 años de -2,0%) y pesa 13%: baja a 10%",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2026-05-15",
+   "Orden": "RECORTAR",
+   "Acción": "GOOGL",
+   "Peso": 0.03833217377526984,
+   "Resultado": null,
+   "Motivo": "Precio extremo (rendimiento esperado a 10 años de 1,4%) y pesa 14%: baja a 10%",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2026-06-15",
+   "Orden": "RECORTAR",
+   "Acción": "LRCX",
+   "Peso": 0.032644437545541395,
+   "Resultado": null,
+   "Motivo": "Precio extremo (rendimiento esperado a 10 años de -5,2%) y pesa 13%: baja a 10%",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2026-07-15",
+   "Orden": "SUMAR",
+   "Acción": "ADBE",
+   "Peso": 0.023672834480271583,
+   "Resultado": null,
+   "Motivo": "Posición chica: se completa hacia el 10%",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2026-07-15",
+   "Orden": "SUMAR",
+   "Acción": "LRCX",
+   "Peso": 0.01745927751604582,
+   "Resultado": null,
+   "Motivo": "Posición chica: se completa hacia el 10%",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2026-08-17",
+   "Orden": "SUMAR",
+   "Acción": "GOOGL",
+   "Peso": 0.021425842218412997,
+   "Resultado": null,
+   "Motivo": "Posición chica: se completa hacia el 10%",
+   "Origen": "Backtest"
+  },
+  {
+   "Fecha": "2026-09-15",
+   "Orden": "SUMAR",
+   "Acción": "LRCX",
+   "Peso": 0.01825832930141542,
+   "Resultado": null,
+   "Motivo": "Posición chica: se completa hacia el 10%",
+   "Origen": "Backtest"
+  }
+ ],
+ "ventas": [
+  {
+   "Acción": "VZ",
+   "Compra": "2011-01-18",
+   "Venta": "2011-03-15",
+   "Resultado": 0.004719661007053233,
+   "Motivo": "Tesis rota: ROIC promedio 8,8% (mínimo 12%); ventas 4,5% anual (mínimo 5%)",
+   "Origen": "Backtest"
+  },
+  {
+   "Acción": "EBAY",
+   "Compra": "2011-01-18",
+   "Venta": "2011-05-16",
+   "Resultado": 0.08818702827935422,
+   "Motivo": "Rotación: cayó al puesto 21 de calidad (fuera del top 20); entra MA",
+   "Origen": "Backtest"
+  },
+  {
+   "Acción": "ABT",
+   "Compra": "2011-01-18",
+   "Venta": "2012-05-15",
+   "Resultado": 0.3575698254943973,
+   "Motivo": "Rotación: cayó al puesto 21 de calidad (fuera del top 20); entra GILD",
+   "Origen": "Backtest"
+  },
+  {
+   "Acción": "NFLX",
+   "Compra": "2011-01-18",
+   "Venta": "2015-02-17",
+   "Resultado": 1.402272702741455,
+   "Motivo": "Tesis rota: emite 3,2% más de acciones por año (máximo 3%)",
+   "Origen": "Backtest"
+  },
+  {
+   "Acción": "ORCL",
+   "Compra": "2011-01-18",
+   "Venta": "2015-07-15",
+   "Resultado": 0.19782024106898352,
+   "Motivo": "Tesis rota: ventas 1,8% anual (mínimo 5%)",
+   "Origen": "Backtest"
+  },
+  {
+   "Acción": "KLAC",
+   "Compra": "2015-07-15",
+   "Venta": "2015-08-17",
+   "Resultado": -0.05371228147310081,
+   "Motivo": "Tesis rota: deuda neta EBITDA negativo el EBITDA (máximo 3x); ventas -3,0% anual (mínimo 5%)",
+   "Origen": "Backtest"
+  },
+  {
+   "Acción": "QCOM",
+   "Compra": "2011-01-18",
+   "Venta": "2016-11-15",
+   "Resultado": 0.41959467037479664,
+   "Motivo": "Rotación: cayó al puesto 21 de calidad (fuera del top 20); entra PYPL",
+   "Origen": "Backtest"
+  },
+  {
+   "Acción": "BA",
+   "Compra": "2015-08-17",
+   "Venta": "2017-02-15",
+   "Resultado": 0.2348258475536715,
+   "Motivo": "Tesis rota: ventas 3,7% anual (mínimo 5%)",
+   "Origen": "Backtest"
+  },
+  {
+   "Acción": "AAPL",
+   "Compra": "2011-01-18",
+   "Venta": "2018-05-15",
+   "Resultado": 2.427931130680683,
+   "Motivo": "Rotación: cayó al puesto 22 de calidad (fuera del top 20); entra LRCX",
+   "Origen": "Backtest"
+  },
+  {
+   "Acción": "PYPL",
+   "Compra": "2016-11-15",
+   "Venta": "2018-05-15",
+   "Resultado": 0.3674267085619618,
+   "Motivo": "Rotación: cayó al puesto 21 de calidad (fuera del top 20); entra NVDA",
+   "Origen": "Backtest"
+  },
+  {
+   "Acción": "ADI",
+   "Compra": "2017-02-15",
+   "Venta": "2018-12-17",
+   "Resultado": 0.10462507511476529,
+   "Motivo": "Tesis rota: emite 4,2% más de acciones por año (máximo 3%)",
+   "Origen": "Backtest"
+  },
+  {
+   "Acción": "UNH",
+   "Compra": "2011-01-18",
+   "Venta": "2019-02-15",
+   "Resultado": 6.415429277376555,
+   "Motivo": "Rotación: cayó al puesto 21 de calidad (fuera del top 20); entra META",
+   "Origen": "Backtest"
+  },
+  {
+   "Acción": "GILD",
+   "Compra": "2012-05-15",
+   "Venta": "2019-03-15",
+   "Resultado": 0.2773376017399587,
+   "Motivo": "Tesis rota: ventas -2,9% anual (mínimo 5%)",
+   "Origen": "Backtest"
+  },
+  {
+   "Acción": "KLAC",
+   "Compra": "2018-12-17",
+   "Venta": "2019-09-16",
+   "Resultado": 0.7160136419231857,
+   "Motivo": "Tesis rota: ROIC promedio — (mínimo 12%); deuda neta EBITDA negativo el EBITDA (máximo 3x)",
+   "Origen": "Backtest"
+  },
+  {
+   "Acción": "MELI",
+   "Compra": "2015-02-17",
+   "Venta": "2020-02-18",
+   "Resultado": 4.709123495915422,
+   "Motivo": "Rotación: cayó al puesto 21 de calidad (fuera del top 20); entra SBUX",
+   "Origen": "Backtest"
+  },
+  {
+   "Acción": "SBUX",
+   "Compra": "2020-02-18",
+   "Venta": "2020-11-16",
+   "Resultado": 0.1021278553555729,
+   "Motivo": "Tesis rota: deuda neta 3,8x el EBITDA (máximo 3x); ventas 2,5% anual (mínimo 5%)",
+   "Origen": "Backtest"
+  },
+  {
+   "Acción": "BIIB",
+   "Compra": "2011-01-18",
+   "Venta": "2021-02-16",
+   "Resultado": 1.175998950364243,
+   "Motivo": "Tesis rota: ventas 4,1% anual (mínimo 5%)",
+   "Origen": "Backtest"
+  },
+  {
+   "Acción": "BKNG",
+   "Compra": "2011-03-15",
+   "Venta": "2021-03-15",
+   "Resultado": 1.129625957513321,
+   "Motivo": "Tesis rota: ventas -10,8% anual (mínimo 5%)",
+   "Origen": "Backtest"
+  },
+  {
+   "Acción": "ABBV",
+   "Compra": "2020-11-16",
+   "Venta": "2021-03-15",
+   "Resultado": 0.12278270443709101,
+   "Motivo": "Tesis rota: deuda neta 6,4x el EBITDA (máximo 3x)",
+   "Origen": "Backtest"
+  },
+  {
+   "Acción": "UNH",
+   "Compra": "2021-03-15",
+   "Venta": "2022-05-16",
+   "Resultado": 0.38707889831541287,
+   "Motivo": "Rotación: cayó al puesto 23 de calidad (fuera del top 20); entra LMT",
+   "Origen": "Backtest"
+  },
+  {
+   "Acción": "AMZN",
+   "Compra": "2011-01-18",
+   "Venta": "2023-02-15",
+   "Resultado": 0.40310151284598705,
+   "Motivo": "Tesis rota: no genera caja (flujo de caja y ganancia promedio negativos)",
+   "Origen": "Backtest"
+  },
+  {
+   "Acción": "SPGI",
+   "Compra": "2019-03-15",
+   "Venta": "2023-02-15",
+   "Resultado": 0.8495550822374507,
+   "Motivo": "Tesis rota: emite 5,9% más de acciones por año (máximo 3%)",
+   "Origen": "Backtest"
+  },
+  {
+   "Acción": "TGT",
+   "Compra": "2021-03-15",
+   "Venta": "2023-05-15",
+   "Resultado": -0.08887477806573309,
+   "Motivo": "Rotación: cayó al puesto 27 de calidad (fuera del top 20); entra UNH",
+   "Origen": "Backtest"
+  },
+  {
+   "Acción": "LMT",
+   "Compra": "2022-05-16",
+   "Venta": "2024-02-15",
+   "Resultado": 0.002253484000993344,
+   "Motivo": "Tesis rota: ventas 3,1% anual (mínimo 5%)",
+   "Origen": "Backtest"
+  },
+  {
+   "Acción": "HD",
+   "Compra": "2023-02-15",
+   "Venta": "2024-02-15",
+   "Resultado": 0.1662793061256831,
+   "Motivo": "Rotación: cayó al puesto 21 de calidad (fuera del top 20); entra SBUX",
+   "Origen": "Backtest"
+  },
+  {
+   "Acción": "AXP",
+   "Compra": "2024-02-15",
+   "Venta": "2024-05-15",
+   "Resultado": 0.1293953844496234,
+   "Motivo": "Rotación: cayó al puesto 21 de calidad (fuera del top 20); entra MELI",
+   "Origen": "Backtest"
+  },
+  {
+   "Acción": "PYPL",
+   "Compra": "2023-02-15",
+   "Venta": "2025-02-18",
+   "Resultado": -0.0009527016957983081,
+   "Motivo": "Rotación: cayó al puesto 21 de calidad (fuera del top 20); entra GOOGL",
+   "Origen": "Backtest"
+  },
+  {
+   "Acción": "UNH",
+   "Compra": "2023-05-15",
+   "Venta": "2025-05-15",
+   "Resultado": -0.43501407755450017,
+   "Motivo": "Rotación: cayó al puesto 21 de calidad (fuera del top 20); entra BKNG",
+   "Origen": "Backtest"
+  },
+  {
+   "Acción": "SBUX",
+   "Compra": "2024-02-15",
+   "Venta": "2025-11-17",
+   "Resultado": -0.06938974861618064,
+   "Motivo": "Rotación: cayó al puesto 22 de calidad (fuera del top 20); entra AXP",
+   "Origen": "Backtest"
+  },
+  {
+   "Acción": "VRTX",
+   "Compra": "2021-02-16",
+   "Venta": "2026-02-17",
+   "Resultado": 1.2447174246440769,
+   "Motivo": "Rotación: cayó al puesto 22 de calidad (fuera del top 20); entra ABNB",
+   "Origen": "Backtest"
+  },
+  {
+   "Acción": "AMAT",
+   "Compra": "2019-09-16",
+   "Venta": "2026-02-17",
+   "Resultado": 6.415213817536167,
+   "Motivo": "Rotación: cayó al puesto 21 de calidad (fuera del top 20); entra ZM",
+   "Origen": "Backtest"
+  },
+  {
+   "Acción": "ZM",
+   "Compra": "2026-02-17",
+   "Venta": "2026-03-16",
+   "Resultado": -0.16286213405263372,
+   "Motivo": "Tesis rota: ventas 4,4% anual (mínimo 5%)",
+   "Origen": "Backtest"
+  }
+ ]
+}
