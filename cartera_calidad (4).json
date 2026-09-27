@@ -1,0 +1,211 @@
+{
+ "version": 1,
+ "capital": 10000.0,
+ "inicio": "2026-09-25",
+ "ultima_fecha": "2026-09-25",
+ "ultima_oficial": "2026-09-15",
+ "caja": 81.43008658580523,
+ "spy_ref": 10000.0,
+ "posiciones": {
+  "MA": {
+   "valor": 800.0499975122505,
+   "costo": 172.23885297974977,
+   "fecha_entrada": "2011-05-16",
+   "tesis": {
+    "rent_prom": 0.5692445347800399,
+    "rent_ult": 1.0,
+    "mb_ult": null,
+    "ventas_cagr": 0.10837711135619155,
+    "crec_accion": 0.7804931468866516,
+    "deuda_ebitda": -1.0575862068965518,
+    "dilucion": -0.010347105792118061,
+    "rend_esperado": 0.1624809485129085,
+    "Puntaje": 64.8,
+    "Puesto": 5.0,
+    "fecha": "2011-05-16",
+    "tipo": "empresa"
+   }
+  },
+  "NVDA": {
+   "valor": 1313.2237953435838,
+   "costo": 18.630071327807613,
+   "fecha_entrada": "2015-07-15",
+   "tesis": {
+    "rent_prom": 0.4920065498498822,
+    "rent_ult": 0.5466125962523628,
+    "mb_ult": 0.5552650033418726,
+    "ventas_cagr": 0.07237831385031557,
+    "crec_accion": 0.10851315427338704,
+    "deuda_ebitda": -3.3080897627855386,
+    "dilucion": -0.011098431247239415,
+    "rend_esperado": 0.17812557962304287,
+    "Puntaje": 61.4,
+    "Puesto": 8.0,
+    "fecha": "2015-07-15",
+    "tipo": "empresa"
+   }
+  },
+  "META": {
+   "valor": 1019.722912159706,
+   "costo": 242.3167927233345,
+   "fecha_entrada": "2019-03-15",
+   "tesis": {
+    "rent_prom": 0.3586544243828662,
+    "rent_ult": 0.5742678243057453,
+    "mb_ult": 0.8324617643898421,
+    "ventas_cagr": 0.4547912589638703,
+    "crec_accion": 0.4009411004584744,
+    "deuda_ebitda": -1.4066648419323935,
+    "dilucion": 0.02329142331994616,
+    "rend_esperado": 0.24665578566504076,
+    "Puntaje": 68.4,
+    "Puesto": 4.0,
+    "fecha": "2019-03-15",
+    "tipo": "empresa"
+   }
+  },
+  "QCOM": {
+   "valor": 918.8974569372434,
+   "costo": 499.9857931581786,
+   "fecha_entrada": "2022-12-15",
+   "tesis": {
+    "rent_prom": 0.6771085034117573,
+    "rent_ult": 0.7544217359274694,
+    "mb_ult": 0.5783936651583711,
+    "ventas_cagr": 0.18311113319415528,
+    "crec_accion": 0.20317212151674813,
+    "deuda_ebitda": 0.40602655771195095,
+    "dilucion": -0.06128222617618451,
+    "rend_esperado": 0.2777915130638532,
+    "Puntaje": 67.0,
+    "Puesto": 6.0,
+    "fecha": "2022-12-15",
+    "tipo": "empresa"
+   }
+  },
+  "ASML": {
+   "valor": 1062.8228890334549,
+   "costo": 418.1771140946708,
+   "fecha_entrada": "2023-02-15",
+   "tesis": {
+    "rent_prom": 0.4574610212093965,
+    "rent_ult": 0.8611491771107291,
+    "mb_ult": 0.5053557765876052,
+    "ventas_cagr": 0.17937964893956848,
+    "crec_accion": 0.5370988330991995,
+    "deuda_ebitda": -0.43978939344748247,
+    "dilucion": -0.017083854243090557,
+    "rend_esperado": 0.16181942256191595,
+    "Puntaje": 73.4,
+    "Puesto": 2.0,
+    "fecha": "2023-02-15",
+    "tipo": "empresa"
+   }
+  },
+  "MELI": {
+   "valor": 854.7151579462314,
+   "costo": 811.6918052905012,
+   "fecha_entrada": "2024-05-15",
+   "tesis": {
+    "rent_prom": 0.31710431690176777,
+    "rent_ult": 0.7450439730988101,
+    "mb_ult": 0.497892627651489,
+    "ventas_cagr": 0.5844619785452816,
+    "crec_accion": 0.7672643289252046,
+    "deuda_ebitda": -0.6565828717511717,
+    "dilucion": 0.011674314385266005,
+    "rend_esperado": 0.20574057599422269,
+    "Puntaje": 73.7,
+    "Puesto": 4.0,
+    "fecha": "2024-05-15",
+    "tipo": "empresa"
+   }
+  },
+  "BKNG": {
+   "valor": 858.566195719186,
+   "costo": 805.1438674284417,
+   "fecha_entrada": "2024-05-15",
+   "tesis": {
+    "rent_prom": 0.5705130268855656,
+    "rent_ult": 1.0,
+    "mb_ult": null,
+    "ventas_cagr": 0.09125496711007042,
+    "crec_accion": 0.5539956365623748,
+    "deuda_ebitda": 0.23678813693011516,
+    "dilucion": -0.04276704319156688,
+    "rend_esperado": 0.12693828565533927,
+    "Puntaje": 70.6,
+    "Puesto": 5.0,
+    "fecha": "2024-05-15",
+    "tipo": "empresa"
+   }
+  },
+  "GOOGL": {
+   "valor": 991.0589885496944,
+   "costo": 472.62342663712656,
+   "fecha_entrada": "2025-05-15",
+   "tesis": {
+    "rent_prom": 0.444068982001942,
+    "rent_ult": 0.4376319750472508,
+    "mb_ult": 0.5820043540617911,
+    "ventas_cagr": 0.17676790710897228,
+    "crec_accion": 0.14002488957553205,
+    "deuda_ebitda": -0.6370897643714615,
+    "dilucion": -0.027411425568857894,
+    "rend_esperado": 0.13739340975863545,
+    "Puntaje": 61.7,
+    "Puesto": 9.0,
+    "fecha": "2025-05-15",
+    "tipo": "empresa"
+   }
+  },
+  "PYPL": {
+   "valor": 1011.451678324498,
+   "costo": 1013.0222279809623,
+   "fecha_entrada": "2025-11-17",
+   "tesis": {
+    "rent_prom": 0.1892401417684693,
+    "rent_ult": 0.23280298837852795,
+    "mb_ult": null,
+    "ventas_cagr": 0.10336567103276306,
+    "crec_accion": 0.07353353361194626,
+    "deuda_ebitda": -0.14849771904986628,
+    "dilucion": -0.03274450162862552,
+    "rend_esperado": 0.17487992566399624,
+    "Puntaje": 49.1,
+    "Puesto": 20.0,
+    "fecha": "2025-11-17",
+    "tipo": "empresa"
+   }
+  },
+  "ABNB": {
+   "valor": 1088.0608418883469,
+   "costo": 862.6979502357452,
+   "fecha_entrada": "2026-02-17",
+   "tesis": {
+    "rent_prom": 1.0,
+    "rent_ult": 1.0,
+    "mb_ult": 0.8295890858589985,
+    "ventas_cagr": 0.19553218784023874,
+    "crec_accion": 0.1815920952578589,
+    "deuda_ebitda": -3.5201093322920736,
+    "dilucion": 0.0028288825716431543,
+    "rend_esperado": 0.17661074326386694,
+    "Puntaje": 79.6,
+    "Puesto": 3.0,
+    "fecha": "2026-02-17",
+    "tipo": "empresa"
+   }
+  }
+ },
+ "operaciones": [],
+ "cerradas": [],
+ "evolucion": [
+  {
+   "fecha": "2026-09-25",
+   "cartera": 10000.0,
+   "spy": 10000.0
+  }
+ ],
+ "origen": "backtest 2011-01-18 a 2026-09-25"
+}
