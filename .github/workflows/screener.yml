@@ -2,8 +2,10 @@ name: Screener diario
 
 on:
   schedule:
-    # Lunes a viernes 10:17 UTC = 7:17 hora de Argentina (evita la demora de las horas en punto)
-    - cron: "17 10 * * 1-5"
+    # Lunes a viernes 05:17 UTC = 2:17 de la madrugada en Argentina. Usa el cierre del día anterior en Nueva York.
+    # Se programa de madrugada para tener margen: GitHub a veces atrasa las tareas programadas varias horas,
+    # y así el mail igual llega antes de que abra BYMA (11:00).
+    - cron: "17 5 * * 1-5"
   workflow_dispatch:   # permite correrlo a mano con el botón "Run workflow"
 
 jobs:
