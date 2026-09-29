@@ -396,8 +396,22 @@ def ventas_con_stats(v, nombre_fn, nota_motivo=None):
 
 
 # ============================================================================ datos
+def ultimo_cierre():
+    """Fecha del último cierre de Nueva York que ya debería estar publicado (16:45 hora de NY en adelante, días
+    hábiles). Se usa como parte de la memoria de los datos: cuando hay un cierre nuevo, se vuelven a calcular solos."""
+    from datetime import datetime
+    from zoneinfo import ZoneInfo
+    ahora = datetime.now(ZoneInfo("America/New_York"))
+    d = ahora.date()
+    if ahora.weekday() >= 5 or (ahora.hour, ahora.minute) < (16, 45):
+        d -= timedelta(days=1)
+    while d.weekday() >= 5:
+        d -= timedelta(days=1)
+    return d.isoformat()
+
+
 @st.cache_data(ttl=3600, show_spinner=False)
-def precios_ajustados(tickers, desde):
+def precios_ajustados(tickers, desde, cierre=None):
     datos = yf.download(list(tickers) + ["SPY"], start=desde, auto_adjust=True, group_by="ticker", progress=False, threads=True)
     out = {}
     for t in list(tickers) + ["SPY"]:
@@ -417,8 +431,8 @@ def leer_json(nombre):
     return json.loads(p.read_text(encoding="utf-8")) if p.exists() else None
 
 
-@st.cache_data(ttl=12 * 3600, show_spinner=False)
-def datos_momentum(inicio_real):
+@st.cache_data(ttl=24 * 3600, show_spinner=False)
+def datos_momentum(inicio_real, cierre=None):
     M.INICIO = INICIO_BACKTEST_MOM
     try:
         px, vo = M.descargar()
@@ -605,7 +619,7 @@ def pagina_calidad():
     entradas = [p["fecha_entrada"] for p in P.values()] + [E0["ultima_fecha"]]
     desde = (min(pd.Timestamp(d) for d in entradas) - pd.Timedelta(days=10)).strftime("%Y-%m-%d")
     with st.spinner("Actualizando precios..."):
-        px = precios_ajustados(tuple(sorted(P)), desde)
+        px = precios_ajustados(tuple(sorted(P)), desde, ultimo_cierre())
     E = C.actualizar_valores(E0, px)
     valor = E["caja"] + sum(p["valor"] for p in E["posiciones"].values())
     cap = E.get("capital", 10000)
@@ -914,7 +928,7 @@ def pagina_momentum():
     st.caption("10 acciones con la mejor suba propia de los últimos 12 meses · se opera el primer día hábil de cada mes · se vende solo "
                "si sale del top 30")
     with st.spinner("Calculando con los precios de hoy (la primera vez tarda hasta un minuto)..."):
-        d = datos_momentum(INICIO_MOM_REAL)
+        d = datos_momentum(INICIO_MOM_REAL, ultimo_cierre())
     R, B = d["real"], d["bt"]
     inicio = pd.Timestamp(INICIO_MOM_REAL)
     arranco = len(R["cart"]) > 0
@@ -1154,8 +1168,8 @@ def simular_cartera_rev(ops, reg, px, spy, liquidez_spy):
 VERSION_REV = "4"     # subir este número cuando cambie el cálculo, para que no se use la memoria vieja
 
 
-@st.cache_data(ttl=12 * 3600, show_spinner=False)
-def datos_reversion(version, reglas):
+@st.cache_data(ttl=24 * 3600, show_spinner=False)
+def datos_reversion(version, reglas, cierre=None):
     cfg, act = SCR.CONFIG, SCR.FILTROS_ACTIVOS
     tick = list(SCR.LISTA_TICKERS)
     datos = yf.download(tick + ["SPY"], period="max", interval="1d", auto_adjust=True, group_by="ticker", threads=True, progress=False)
@@ -1263,10 +1277,10 @@ def pagina_reversion():
     st.caption("Empresas con CEDEAR que corrigieron 25-60%, con beta alto, consolidando y con el mercado a favor · mismo código que el "
                "mail diario del screener · dos reglas de salida para comparar")
     with st.spinner("Calculando señales desde 2010 con los precios de hoy (la primera vez tarda hasta un par de minutos)..."):
-        d = datos_reversion(VERSION_REV, tuple(REGLAS_REV))
+        d = datos_reversion(VERSION_REV, tuple(REGLAS_REV), ultimo_cierre())
         if len(d["ops"]) and any(f"abierta_{r}" not in d["ops"] for r in REGLAS_REV):   # memoria de una versión anterior
             datos_reversion.clear()
-            d = datos_reversion(VERSION_REV, tuple(REGLAS_REV))
+            d = datos_reversion(VERSION_REV, tuple(REGLAS_REV), ultimo_cierre())
     ops, hoy = d["ops"], d["hoy"]
     reg = st.radio("Regla de salida", list(REGLAS_REV), format_func=REGLAS_REV.get, horizontal=True, key="rev_regla")
     nom = REGLAS_REV[reg]
