@@ -40,6 +40,19 @@ try:
 except ImportError:
     SCR = None
 
+# Streamlit deja los programas cargados en memoria entre visitas: si GitHub actualizó universo.csv, se vuelven a cargar
+# para que las tres estrategias y el explorador usen la lista nueva sin tener que reiniciar la app.
+_ARCH_UNIVERSO = RAIZ / "universo.csv"
+MARCA_UNIVERSO = _ARCH_UNIVERSO.stat().st_mtime if _ARCH_UNIVERSO.exists() else 0.0
+if getattr(C, "_marca_universo", None) != MARCA_UNIVERSO:
+    import importlib
+    import universo as _U
+    importlib.reload(_U)
+    C, M = importlib.reload(C), importlib.reload(M)
+    if SCR is not None:
+        SCR = importlib.reload(SCR)
+    C._marca_universo = MARCA_UNIVERSO
+
 # Fecha de arranque de la cartera real del momentum: se lee de la configuración, NUNCA de M.INICIO, porque
 # datos_momentum cambia M.INICIO un momento para calcular el backtest (si otra visita leía justo en ese momento,
 # tomaba 2011 como inicio y mostraba el backtest como si fuera la cartera real).
@@ -717,7 +730,7 @@ _CANDADO_MOM = threading.Lock()      # momentum.py usa una variable global para 
 
 
 @st.cache_data(ttl=24 * 3600, show_spinner=False)
-def datos_momentum(inicio_real, cierre=None):
+def datos_momentum(inicio_real, cierre=None, universo=None):
     with _CANDADO_MOM:
         try:
             M.INICIO = INICIO_BACKTEST_MOM
@@ -1261,7 +1274,7 @@ def pagina_momentum():
     st.caption("10 acciones con la mejor suba propia de los últimos 12 meses · se opera el primer día hábil de cada mes · se vende solo "
                "si sale del top 30")
     with st.spinner("Calculando con los precios de hoy (la primera vez tarda hasta un minuto)..."):
-        d = datos_momentum(INICIO_MOM_REAL, ultimo_cierre())
+        d = datos_momentum(INICIO_MOM_REAL, ultimo_cierre(), MARCA_UNIVERSO)
     R, B = d["real"], d["bt"]
     inicio = pd.Timestamp(INICIO_MOM_REAL)
     arranco = len(R["cart"]) > 0
@@ -1506,7 +1519,7 @@ FILTROS_CORTO = {"volumen": "Vol.", "emas": "EMAs", "correccion": "Correc.", "co
 
 
 @st.cache_data(ttl=7 * 24 * 3600, show_spinner=False)
-def niveles_calidad(semana):
+def niveles_calidad(semana, universo=None):
     """Nivel de calidad (Premium / Sólida / Especulativa) y P/E de cada acción, igual que el mail del screener.
     Se pide a Yahoo una vez por semana (el nivel casi no cambia). Si Yahoo falla con muchas acciones, no se guarda."""
     from concurrent.futures import ThreadPoolExecutor
@@ -1539,7 +1552,7 @@ def niveles_seguro():
     if st.session_state.get("_niveles_fallo"):
         return {"niveles": {}, "fund": {}}
     try:
-        return niveles_calidad(pd.Timestamp.today().strftime("%G-%V"))
+        return niveles_calidad(pd.Timestamp.today().strftime("%G-%V"), MARCA_UNIVERSO)
     except Exception:           # noqa: BLE001
         st.session_state["_niveles_fallo"] = True
         return {"niveles": {}, "fund": {}}
@@ -1556,7 +1569,7 @@ def pe_ok(fu, cfg):
 
 
 @st.cache_data(ttl=24 * 3600, show_spinner=False)
-def datos_reversion(version, reglas, cierre=None):
+def datos_reversion(version, reglas, cierre=None, universo=None):
     cfg, act = SCR.CONFIG, SCR.FILTROS_ACTIVOS
     tick = list(SCR.LISTA_TICKERS)
     datos = yf.download(tick + ["SPY"], period="max", interval="1d", auto_adjust=True, group_by="ticker", threads=True, progress=False)
@@ -1665,10 +1678,10 @@ def pagina_reversion():
     st.caption("Empresas con CEDEAR que corrigieron 25-60%, con beta alto, consolidando y con el mercado a favor · mismo código que el "
                "mail diario del screener · dos reglas de salida para comparar")
     with st.spinner("Calculando señales desde 2010 con los precios de hoy (la primera vez tarda hasta un par de minutos)..."):
-        d = datos_reversion(VERSION_REV, tuple(REGLAS_REV), ultimo_cierre())
+        d = datos_reversion(VERSION_REV, tuple(REGLAS_REV), ultimo_cierre(), MARCA_UNIVERSO)
         if len(d["ops"]) and any(f"abierta_{r}" not in d["ops"] for r in REGLAS_REV):   # memoria de una versión anterior
             datos_reversion.clear()
-            d = datos_reversion(VERSION_REV, tuple(REGLAS_REV), ultimo_cierre())
+            d = datos_reversion(VERSION_REV, tuple(REGLAS_REV), ultimo_cierre(), MARCA_UNIVERSO)
     ops, hoy = d["ops"], d["hoy"]
     with st.spinner("Buscando el nivel de calidad de cada acción (una vez por semana)..."):
         nv = niveles_seguro()
@@ -1893,7 +1906,7 @@ def _marca_archivos(*nombres):
 
 
 @st.cache_data(ttl=3600, show_spinner=False)
-def datos_explorador(_marca):
+def datos_explorador(marca):
     """Une el universo, las métricas de calidad, el momentum, el screener y las carteras en una tabla por empresa."""
     uni = [r for r in (U.todas() if U else []) if r.get("incluida") == "1"]
     if not uni:          # todavía no se generó universo.csv: la lista fija de siempre
