@@ -96,20 +96,25 @@ st.markdown("""
   table.tbl {width: 100%; border-collapse: separate; border-spacing: 0; font-size: .88rem; color: var(--texto); border: 0 !important; margin: 0 !important;}
   table.tbl th, table.tbl td {border-left: 0 !important; border-right: 0 !important; border-top: 0 !important;}
   table.tbl th {position: sticky; top: 0; z-index: 1; background: #FAFBFC; text-align: left; font-size: .7rem; font-weight: 600;
-      color: var(--texto2); text-transform: uppercase; letter-spacing: .04em; padding: .65rem .8rem; border-bottom: 1px solid var(--borde);
-      white-space: nowrap;}
-  table.tbl td {padding: .6rem .8rem; border-bottom: 1px solid var(--linea) !important; vertical-align: middle; white-space: nowrap;}
+      color: var(--texto2); text-transform: uppercase; letter-spacing: .04em; padding: .6rem .7rem; border-bottom: 1px solid var(--borde);}
+  table.tbl td {padding: .55rem .7rem; border-bottom: 1px solid var(--linea) !important; vertical-align: middle;}
   table.tbl tr:last-child td {border-bottom: 0;}
   table.tbl tr:hover td {background: #FAFBFC;}
   table.tbl th.n, table.tbl td.n {text-align: right; white-space: nowrap;}
-  table.tbl td.largo {min-width: 280px; white-space: normal; color: var(--texto3); font-size: .84rem;}
+  table.tbl td.largo {min-width: 220px; color: var(--texto3); font-size: .84rem;}
   .tk {display: inline-flex; align-items: center; gap: .55rem; font-weight: 600; white-space: nowrap;}
   .logo {display: inline-flex; align-items: center; justify-content: center; flex: none; border-radius: 8px; overflow: hidden;
       background: #FFFFFF; border: 1px solid var(--borde); color: #FFFFFF; font-weight: 700;}
   .logo {position: relative;}
   .logo img {position: absolute; inset: 0; margin: auto; width: 78%; height: 78%; object-fit: contain; background: #FFFFFF;}
   .logo.con-img {color: transparent;}
-  .barra {display: flex; align-items: center; gap: .5rem; min-width: 110px;}
+  .barra {display: flex; align-items: center; gap: .5rem; min-width: 90px;}
+  table.exp a.emp {display: flex; align-items: center; gap: .65rem; color: var(--texto); text-decoration: none;}
+  table.exp a.emp:hover b {color: var(--acento); text-decoration: underline;}
+  table.exp a.emp span {display: flex; flex-direction: column; line-height: 1.25;}
+  table.exp a.emp small {color: var(--texto2); font-size: .74rem;}
+  table.exp td.sec {color: var(--texto3); font-size: .84rem;}
+  table.exp td .chip {margin: .1rem .25rem .1rem 0;}
   .barra > span:first-child {flex: 1; height: 6px; background: #EEF0F3; border-radius: 99px; overflow: hidden; display: block;}
   .barra i {display: block; height: 100%; background: var(--acento); border-radius: 99px;}
 
@@ -2072,7 +2077,7 @@ def pagina_explorador():
         partes.append(f"{info['n_pasan']} pasan los filtros de calidad")
     st.caption(" · ".join(partes) + (f" · calidad al {pd.Timestamp(info['fecha_cal']).strftime('%d/%m/%Y')}" if info["fecha_cal"] else
                                       " · las métricas de calidad aparecen después de la primera corrida del explorador"))
-    c1, c2, c3 = st.columns([2.2, 2, 2.6])
+    c1, c2, c3 = st.columns([1.8, 1.8, 3.4])
     buscar = c1.text_input("Buscar", placeholder="Empresa o ticker", label_visibility="collapsed")
     sectores = c2.multiselect("Sector", sorted(x for x in df["Sector"].dropna().unique() if x), placeholder="Todos los sectores",
                               label_visibility="collapsed")
@@ -2086,32 +2091,71 @@ def pagina_explorador():
     if sectores:
         f = f[f["Sector"].isin(sectores)]
     f = {"Pasan calidad": f[f["_pasa"]], "En cartera": f[f["_en"]], "Reversión": f[f["_scr"]]}.get(filtro, f)
-    f = f.sort_values(["Calidad", "Volumen (USD M)"], ascending=[False, False], na_position="last")
-    ver = f.drop(columns=["_pasa", "_en", "_scr"])
-    ev = st.dataframe(
-        ver, hide_index=True, width="stretch", height=min(38 * (len(ver) + 1) + 3, 640), on_select="rerun",
-        selection_mode="single-row", key="tabla_explorador",
-        column_config={
-            "Logo": st.column_config.ImageColumn("", width="small"),
-            "Ticker": st.column_config.TextColumn(width="small"),
-            "Empresa": st.column_config.TextColumn(width="medium"),
-            "CEDEAR": st.column_config.TextColumn(width="small"),
-            "Calidad": st.column_config.ProgressColumn("Calidad", format="%.0f", min_value=0, max_value=100,
-                                                       help="Puntaje de calidad (0 a 100) entre las que pasan los filtros"),
-            "Puesto calidad": st.column_config.NumberColumn(format="%d"),
-            "ROIC/ROE": st.column_config.NumberColumn(format="%.0f%%", help="Promedio de los últimos 5 años"),
-            "Ventas/año": st.column_config.NumberColumn(format="%.0f%%", help="Crecimiento anual de las ventas, 5 años"),
-            "Deuda/EBITDA": st.column_config.NumberColumn(format="%.1fx", help="Negativo = más caja que deuda"),
-            "Rend. 10 años": st.column_config.NumberColumn(format="%.1f%%", help="Rendimiento anual esperado comprando hoy"),
-            "Puesto momentum": st.column_config.NumberColumn("Momentum", format="%d", help="Puesto en el ranking de momentum"),
-            "Caída desde máx.": st.column_config.NumberColumn(format="%.0f%%", help="Caída desde el máximo de 2 años (screener)"),
-            "Volumen (USD M)": st.column_config.NumberColumn("Volumen", format="%.0f M", help="Promedio diario en EE.UU., USD millones"),
-            "Estado": st.column_config.TextColumn(width="medium")})
-    st.caption("Tocá una fila para abrir la ficha de la empresa. Hacé clic en el título de una columna para ordenar.")
-    filas = ev.selection.rows if ev is not None and hasattr(ev, "selection") else []
-    if filas:
-        st.query_params["empresa"] = ver.iloc[filas[0]]["Ticker"]
-        st.rerun()
+    numericas = ["Calidad", "Puesto calidad", "ROIC/ROE", "Ventas/año", "Deuda/EBITDA", "Rend. 10 años", "Puesto momentum",
+                 "Caída desde máx.", "Volumen (USD M)"]
+    f = f.copy()
+    for c in numericas:
+        f[c] = pd.to_numeric(f[c], errors="coerce")
+    # orden elegido por el usuario (las que no tienen el dato van al final)
+    criterios = {"Calidad": ("Calidad", False), "ROIC": ("ROIC/ROE", False), "Ventas": ("Ventas/año", False),
+                 "Rend. 10 años": ("Rend. 10 años", False), "Momentum": ("Puesto momentum", True),
+                 "Caída desde máximo": ("Caída desde máx.", False), "Volumen": ("Volumen (USD M)", False), "Nombre": ("Empresa", True)}
+    o1, o2 = st.columns([3, 4])
+    criterio = o1.selectbox("Ordenar por", list(criterios), key="exp_orden")
+    extras = {"CEDEAR": "CEDEAR", "Deuda/EBITDA": "Deuda", "Caída desde máx.": "Caída", "Volumen (USD M)": "Volumen"}
+    mas = o2.multiselect("Más columnas", list(extras), format_func=lambda c: extras[c], placeholder="Más columnas: CEDEAR, deuda, caída, volumen",
+                         key="exp_mas")
+    col, asc = criterios[criterio]
+    f = f.sort_values([col, "Volumen (USD M)"], ascending=[asc, False], na_position="last")
+    st.markdown(tabla_explorador(f, mas), unsafe_allow_html=True)
+    st.caption("Tocá el nombre de una empresa para abrir su ficha. Las celdas vacías son datos que esa empresa no tiene "
+               "(por ejemplo, las que no presentan balances en la SEC no tienen métricas de calidad).")
+
+
+ESTADO_CHIP = {"Cartera calidad": "azul", "Cartera momentum": "violeta", "Señal reversión": "verde", "Comprable (calidad)": "verde",
+               "Pasa filtros de calidad": "gris"}
+
+
+def tabla_explorador(f, extras):
+    """Lista del explorador en HTML: sin desplazamiento lateral, con logo y enlace a la ficha de cada empresa."""
+    def n(v, fmt):
+        return "" if pd.isna(v) else (fmt % v).replace(".", ",")
+    cols = [("Empresa", ""), ("Sector", "")]
+    if "CEDEAR" in extras:
+        cols.append(("CEDEAR", ""))
+    cols += [("Calidad", ""), ("ROIC", "n"), ("Ventas", "n"), ("Rend. 10a", "n"), ("Momentum", "n")]
+    cols += [(lab, "n") for c, lab in (("Deuda/EBITDA", "Deuda"), ("Caída desde máx.", "Caída"), ("Volumen (USD M)", "Volumen"))
+             if c in extras]
+    cols.append(("Estado", ""))
+    cab = "".join(f"<th class='{k}'>{c}</th>" for c, k in cols)
+    filas = []
+    for _, r in f.iterrows():
+        t = r["Ticker"]
+        ced = f" · CEDEAR {html.escape(str(r['CEDEAR']))}" if str(r["CEDEAR"]) != t else ""
+        celdas = [f"<td><a class='emp' href='?empresa={html.escape(t)}' target='_self'>{logo_html(t, 30)}"
+                  f"<span><b>{html.escape(str(r['Empresa']))}</b><small>{html.escape(t)}{ced}</small></span></a></td>",
+                  f"<td class='sec'>{html.escape(str(r['Sector'] or ''))}</td>"]
+        if "CEDEAR" in extras:
+            celdas.append(f"<td>{html.escape(str(r['CEDEAR']))}</td>")
+        cal = r["Calidad"]
+        celdas.append("<td></td>" if pd.isna(cal) else
+                      f"<td><span class='barra'><span><i style='width:{max(0, min(100, cal)):.0f}%'></i></span><b class='num'>{cal:.0f}</b></span></td>")
+        rend = r["Rend. 10 años"]
+        color_r = "" if pd.isna(rend) else f" style='color:{ROJO if rend < 5 else VERDE if rend >= 10 else AMARILLO};font-weight:600'"
+        celdas += [f"<td class='n'>{n(r['ROIC/ROE'], '%.0f%%')}</td>", f"<td class='n'>{n(r['Ventas/año'], '%.0f%%')}</td>",
+                   f"<td class='n'{color_r}>{n(rend, '%.1f%%')}</td>", f"<td class='n'>{n(r['Puesto momentum'], '%d')}</td>"]
+        if "Deuda/EBITDA" in extras:
+            d = r["Deuda/EBITDA"]
+            celdas.append(f"<td class='n'>{'' if pd.isna(d) else 'caja neta' if d <= 0 else n(d, '%.1fx')}</td>")
+        if "Caída desde máx." in extras:
+            celdas.append(f"<td class='n'>{n(r['Caída desde máx.'], '%.0f%%')}</td>")
+        if "Volumen (USD M)" in extras:
+            celdas.append(f"<td class='n'>{n(r['Volumen (USD M)'], 'USD %.0f M')}</td>")
+        est = [e for e in str(r["Estado"]).split(" · ") if e and e != "—"]
+        celdas.append("<td>" + "".join(chip(html.escape(e), ESTADO_CHIP.get(e, "gris")) for e in est) + "</td>")
+        filas.append("<tr>" + "".join(celdas) + "</tr>")
+    return (f"<div class='tbl-wrap' style='max-height:720px'><table class='tbl exp'><thead><tr>{cab}</tr></thead>"
+            f"<tbody>{''.join(filas)}</tbody></table></div>").replace("$", "&#36;")
 
 
 pg = st.navigation([st.Page(pagina_calidad, title="Cartera de calidad", icon=":material/account_balance:", default=True),
