@@ -90,7 +90,8 @@ st.markdown("""
   .num, .tbl td.n {font-variant-numeric: tabular-nums;}
 
   /* tarjetas de números */
-  div[data-testid="stMetric"] {background: var(--panel); border: 1px solid var(--borde); border-radius: 14px; padding: .9rem 1rem .8rem 1rem;}
+  div[data-testid="stMetric"] {background: var(--panel); border: 1px solid var(--borde); border-radius: 14px; padding: .9rem 1rem .8rem 1rem;
+      min-height: 8.4rem; box-sizing: border-box;}
   div[data-testid="stMetricLabel"] p {color: var(--texto2) !important; font-size: .82rem; font-weight: 500;}
   div[data-testid="stMetricValue"] {font-size: 1.45rem; font-weight: 700; color: var(--texto); letter-spacing: -.02em; font-variant-numeric: tabular-nums;}
   div[data-testid="stMetricLabel"] p, div[data-testid="stMetricLabel"] div, div[data-testid="stMetricDelta"] div {white-space: normal !important; overflow: visible !important; text-overflow: clip !important;}
@@ -117,16 +118,18 @@ st.markdown("""
 
   /* tablas propias (sin cuadrícula de planilla) */
   .tbl-wrap {background: var(--panel); border: 1px solid var(--borde); border-radius: 14px; overflow: auto; margin: .2rem 0 .9rem 0;}
-  table.tbl {width: 100%; border-collapse: separate; border-spacing: 0; font-size: .88rem; color: var(--texto); border: 0 !important; margin: 0 !important;}
+  table.tbl {width: 100%; border-collapse: separate; border-spacing: 0; font-size: .86rem; color: var(--texto); border: 0 !important; margin: 0 !important;}
   table.tbl th, table.tbl td {border-left: 0 !important; border-right: 0 !important; border-top: 0 !important;}
   table.tbl th {position: sticky; top: 0; z-index: 1; background: var(--cabecera); text-align: left; font-size: .7rem; font-weight: 600;
-      color: var(--texto2); text-transform: uppercase; letter-spacing: .04em; padding: .6rem .7rem; border-bottom: 1px solid var(--borde);}
-  table.tbl td {padding: .55rem .7rem; border-bottom: 1px solid var(--linea) !important; vertical-align: middle;}
+      color: var(--texto2); text-transform: uppercase; letter-spacing: .04em; padding: .6rem .6rem; border-bottom: 1px solid var(--borde);}
+  table.tbl td {padding: .55rem .6rem; border-bottom: 1px solid var(--linea) !important; vertical-align: middle;}
   table.tbl tr:last-child td {border-bottom: 0;}
   table.tbl tr:hover td {background: var(--cabecera);}
   table.tbl th.n, table.tbl td.n {text-align: right; white-space: nowrap;}
-  table.tbl td.largo {min-width: 220px; color: var(--texto3); font-size: .84rem;}
+  table.tbl td.largo {min-width: 170px; color: var(--texto3); font-size: .84rem;}
   .tk {display: inline-flex; align-items: center; gap: .55rem; font-weight: 600; white-space: nowrap;}
+  .nomtk {display: flex; flex-direction: column; line-height: 1.25; white-space: normal; min-width: 120px;}
+  .nomtk small {font-weight: 500; color: var(--texto2); font-size: .74rem;}
   .logo {display: inline-flex; align-items: center; justify-content: center; flex: none; border-radius: 8px; overflow: hidden;
       background: #FFFFFF; border: 1px solid var(--borde); color: #FFFFFF; font-weight: 700;}
   .logo {position: relative;}
@@ -375,6 +378,15 @@ def tabla(df, fmt=None, signo=(), estilos=None, fechas=(), orden=None, config=No
     barra de progreso)."""
     df = df.reset_index(drop=True).copy()
     config = dict(config or {})
+    unir = "Acción" in df and "Empresa" in df       # una sola columna: logo, nombre y ticker (menos ancho)
+    sectores = {}
+    if unir:
+        nombres = dict(zip(df["Acción"], df["Empresa"]))
+        df = df.drop(columns=["Empresa"])
+        if "Sector" in df:            # el sector va en la línea chica debajo del nombre
+            sectores = dict(zip(df["Acción"], df["Sector"]))
+            df = df.drop(columns=["Sector"])
+        config.setdefault("Acción", {"label": "Empresa"})
     fm = {c: (f if callable(f) else _fmt_num(f)) for c, f in (fmt or {}).items() if c in df}
     for c in fechas:
         if c in df:
@@ -426,7 +438,12 @@ def tabla(df, fmt=None, signo=(), estilos=None, fechas=(), orden=None, config=No
             if orden and c == orden and not vacio:
                 txt = chip(html.escape(str(v).capitalize()), _orden(v)[1] or "gris")
             if c == "Acción" and not vacio and not str(v).startswith("SPY"):
-                txt = ticker_html(v)
+                if unir and isinstance(nombres.get(v), str) and nombres.get(v):
+                    sec = sectores.get(v)
+                    txt = (f"<span class='tk'>{logo_html(v, 28)}<span class='nomtk'><b>{html.escape(nombres[v])}</b>"
+                           f"<small>{html.escape(str(v))}{' · ' + html.escape(str(sec)) if isinstance(sec, str) and sec else ''}</small></span></span>")
+                else:
+                    txt = ticker_html(v)
             clase = "n" if num else ("largo" if largo else "")
             celdas.append(f"<td class='{clase}'" + (f" style='{estilo}'" if estilo else "") + f">{txt}</td>")
         cuerpo.append("<tr>" + "".join(celdas) + "</tr>")
@@ -1123,9 +1140,11 @@ def pagina_calidad():
         tabla(pd.DataFrame(tt), fmt={"Rentabilidad %": "%.0f%%", "Ventas crec. %": "%.0f%%", "Rend. esperado %": "%.1f%%",
                                      "Puesto al comprar": "%d"},
               estilos={"Puesto hoy": color_puesto_hoy, "Motivos para revisar": lambda v: css_color("naranja") if v else ""},
-              config={"Rentabilidad %": st.column_config.Column("ROIC/ROE al comprar"),
-                      "Ventas crec. %": st.column_config.Column("Ventas/año al comprar"),
-                      "Rend. esperado %": st.column_config.Column("Rend. 10 años al comprar")})
+              config={"Rentabilidad %": st.column_config.Column("ROIC", help="ROIC (ROE en bancos) al comprar"),
+                      "Ventas crec. %": st.column_config.Column("Ventas", help="Crecimiento anual de las ventas al comprar"),
+                      "Rend. esperado %": st.column_config.Column("Rend. 10a", help="Rendimiento esperado a 10 años al comprar"),
+                      "Puesto al comprar": st.column_config.Column("Puesto inicial"),
+                      "Motivos para revisar": st.column_config.Column("Para revisar", width="large")})
         st.caption("Se vende si la tesis se rompe (ROIC debajo de 10%, ventas debajo de 3% u otro filtro mínimo). Se revisa a mano si el ROIC baja 2 años seguidos, si el margen bruto cae "
                    "más de 3 puntos desde la compra o si la acción cae más de 25% contra el S&P. Puesto hoy: solo figura si está en el top 30 "
                    "(verde = top 10 · amarillo = 11 a 20 · rojo = pasó del 20, en riesgo de rotación en la próxima revisión trimestral).")
@@ -1223,9 +1242,10 @@ def pagina_calidad():
             tabla(r[["Puesto", "Acción", "Empresa", "Situación", "Sector", "Puntaje", "Rentabilidad", "Ventas", "Deuda", "Rend10", "Tendencia"]],
                   fmt={"Puesto": "%d", "Puntaje": "%.0f", "Rentabilidad": "%.0f%%", "Ventas": "%.0f%%", "Deuda": "%.1fx", "Rend10": "%.1f%%"},
                   estilos={"Rend10": color_rend, "Situación": SITUACION_CALIDAD}, height=560, config={
-                      "Rentabilidad": st.column_config.Column("ROIC/ROE"), "Ventas": st.column_config.Column("Ventas/año"),
-                      "Deuda": st.column_config.Column("Deuda/EBITDA"),
-                      "Rend10": st.column_config.Column("Rend. 10 años", help="Verde: 10% o más · amarillo: 5 a 10% · rojo: menos de 5% (precio extremo)"),
+                      "Rentabilidad": st.column_config.Column("ROIC", help="ROIC promedio de 5 años (ROE en bancos)"),
+                      "Ventas": st.column_config.Column("Ventas", help="Crecimiento anual de las ventas, 5 años"),
+                      "Deuda": st.column_config.Column("Deuda", help="Deuda neta / EBITDA"),
+                      "Rend10": st.column_config.Column("Rend. 10a", help="Rendimiento anual esperado a 10 años. Verde: 10% o más · amarillo: 5 a 10% · rojo: menos de 5% (precio extremo)"),
                       "Puntaje": st.column_config.ProgressColumn("Puntaje", format="%.0f", min_value=0, max_value=100),
                       "Tendencia": st.column_config.ProgressColumn("Tendencia", format="%.0f", min_value=0, max_value=100)})
             esp = r[(r["Puesto"] <= 20) & (~r["comprable"]) & (~r["Acción"].isin(en_cart))].copy()
