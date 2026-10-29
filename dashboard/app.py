@@ -2275,14 +2275,21 @@ import streamlit.components.v1 as _componentes   # noqa: E402
 
 
 def widget_tradingview(script, config, alto):
-    """Widget gratuito de TradingView (lleva su logo y enlace, como piden sus condiciones)."""
-    conf = json.dumps({**config, "colorTheme": "light", "isTransparent": True, "locale": "es"})
+    """Widget gratuito de TradingView (lleva su logo y enlace, como piden sus condiciones). Alto fijo en píxeles: dentro
+    del cuadro de Streamlit los altos en % no funcionan y el widget quedaba chico."""
+    h = alto - 26
+    cfg = {**config, "colorTheme": "light", "isTransparent": True, "locale": "es"}
+    if "height" in cfg or script != "embed-widget-ticker-tape.js":
+        cfg.update(width="100%", height=h)
+        cfg.pop("autosize", None)
+    conf = json.dumps(cfg)
     _componentes.html(
-        "<div class='tradingview-widget-container' style='height:100%;width:100%'>"
-        "<div class='tradingview-widget-container__widget' style='height:calc(100% - 24px);width:100%'></div>"
-        "<div class='tradingview-widget-copyright' style='font:11px Inter,sans-serif;color:#5B6474'>"
-        "<a href='https://es.tradingview.com/' rel='noopener nofollow' target='_blank' style='color:#5B6474'>Datos de TradingView</a></div>"
-        f"<script type='text/javascript' src='https://s3.tradingview.com/external-embedding/{script}' async>{conf}</script></div>",
+        "<style>html,body{margin:0;padding:0;background:transparent}</style>"
+        f"<div class='tradingview-widget-container' style='height:{h}px;width:100%'>"
+        f"<div class='tradingview-widget-container__widget' style='height:{h}px;width:100%'></div>"
+        f"<script type='text/javascript' src='https://s3.tradingview.com/external-embedding/{script}' async>{conf}</script></div>"
+        "<div style='font:11px Inter,sans-serif;color:#98A2B3;text-align:right;padding-top:6px'>"
+        "<a href='https://es.tradingview.com/' rel='noopener nofollow' target='_blank' style='color:#98A2B3'>Datos de TradingView</a></div>",
         height=alto)
 
 
@@ -2362,22 +2369,41 @@ def ars(v, dec=0):
     return "—" if v is None else "$ " + f"{v:,.{dec}f}".replace(",", "X").replace(".", ",").replace("X", ".")
 
 
-@st.cache_data(ttl=12 * 3600, show_spinner=False)
-def proximos_balances(tickers):
-    """Fecha del próximo balance de cada empresa (Yahoo)."""
-    out = {}
-    hoy = pd.Timestamp(date.today())
-    for t in tickers:
+@st.cache_data(ttl=6 * 3600, show_spinner=False)
+def fecha_balance(t, dia):
+    """Próximo balance de una empresa según Yahoo (calendario y, si no, la lista de fechas de resultados). None si no hay."""
+    hoy = pd.Timestamp(dia)
+
+    def sin_zona(f):
+        f = pd.Timestamp(f)
+        return f.tz_localize(None) if f.tzinfo is not None else f
+    fechas = []
+    try:
+        cal = yf.Ticker(t).calendar
+        if isinstance(cal, dict):
+            fechas += [sin_zona(f) for f in (cal.get("Earnings Date") or []) if f is not None]
+        elif isinstance(cal, pd.DataFrame) and "Earnings Date" in cal.index:
+            fechas += [sin_zona(f) for f in cal.loc["Earnings Date"].dropna()]
+    except Exception:       # noqa: BLE001
+        pass
+    if not any(f >= hoy for f in fechas):
         try:
-            cal = yf.Ticker(t).calendar or {}
-            fechas = cal.get("Earnings Date") if isinstance(cal, dict) else None
-            fechas = [pd.Timestamp(f) for f in (fechas or []) if f is not None]
-            fut = [f for f in fechas if f >= hoy - pd.Timedelta(days=1)]
-            if fut:
-                out[t] = min(fut).strftime("%Y-%m-%d")
+            ed = yf.Ticker(t).get_earnings_dates(limit=8)
+            if ed is not None and len(ed):
+                fechas += [sin_zona(f) for f in ed.index]
         except Exception:   # noqa: BLE001
             pass
-    return out
+    fut = sorted(f for f in fechas if f >= hoy)
+    return fut[0].strftime("%Y-%m-%d") if fut else None
+
+
+def proximos_balances(tickers):
+    """{ticker: fecha del próximo balance} de las empresas en cartera."""
+    from concurrent.futures import ThreadPoolExecutor
+    dia = date.today().isoformat()
+    with ThreadPoolExecutor(max_workers=4) as ex:
+        res = dict(zip(tickers, ex.map(lambda t: fecha_balance(t, dia), tickers)))
+    return {t: f for t, f in res.items() if f}
 
 
 # ============================================================================ página: inicio
@@ -2508,7 +2534,7 @@ def pagina_inicio():
             "symbols": [["S&P 500", "FOREXCOM:SPXUSD|12M"], ["Nasdaq 100", "FOREXCOM:NSXUSD|12M"]], "chartOnly": False,
             "width": "100%", "height": "100%", "showVolume": False, "hideDateRanges": False, "scalePosition": "right",
             "lineColor": "#2459D6", "topColor": "rgba(36,89,214,0.18)", "bottomColor": "rgba(36,89,214,0)", "chartType": "area",
-            "dateRanges": ["1d|1", "1m|30", "12m|1D", "60m|1W"]}, 330)
+            "dateRanges": ["1d|1", "1m|30", "12m|1D", "60m|1W"]}, 400)
     with c2:
         st.markdown("<div class='tit-sec'>Dólar</div>", unsafe_allow_html=True)
         d = dolares()
@@ -2523,7 +2549,8 @@ def pagina_inicio():
         st.markdown("<div class='tit-sec'>Mapa del S&amp;P 500</div>", unsafe_allow_html=True)
         widget_tradingview("embed-widget-stock-heatmap.js", {
             "dataSource": "SPX500", "blockSize": "market_cap_basic", "blockColor": "change", "grouping": "sector",
-            "hasTopBar": False, "isZoomEnabled": True, "hasSymbolTooltip": True, "width": "100%", "height": "100%"}, 430)
+            "hasTopBar": False, "isZoomEnabled": True, "hasSymbolTooltip": True, "isDataSetEnabled": False,
+            "isMonoSize": False, "width": "100%", "height": "100%"}, 560)
     with c4:
         st.markdown("<div class='tit-sec'>Próximos balances</div>", unsafe_allow_html=True)
         todos = tuple(sorted(set(tick_cal) | set(tick_mom)))
@@ -2538,7 +2565,7 @@ def pagina_inicio():
             st.caption("Sin fechas de balances disponibles por ahora.")
     st.markdown("<div class='tit-sec'>Calendario económico</div>", unsafe_allow_html=True)
     widget_tradingview("embed-widget-events.js", {"importanceFilter": "0,1", "countryFilter": "us,ar", "width": "100%",
-                                                  "height": "100%"}, 420)
+                                                  "height": "100%"}, 620)
     st.caption("Datos de mercado de TradingView y dolarapi.com, con demora. Análisis con fines educativos; no es recomendación de inversión.")
 
 
