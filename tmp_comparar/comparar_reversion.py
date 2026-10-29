@@ -22,7 +22,8 @@ def correr(etiqueta, lista):
     import importlib, screener
     screener = importlib.reload(screener)
     screener.LISTA_TICKERS = lista
-    ns = {"pd": pd, "np": np, "yf": yf, "SCR": screener, "st": types.SimpleNamespace()}
+    import calidad as C
+    ns = {"pd": pd, "np": np, "yf": yf, "SCR": screener, "C": C, "st": types.SimpleNamespace()}
     exec("\n\n".join(partes), ns)
     d = ns["datos_reversion"](ns["VERSION_REV"], tuple(ns["REGLAS_REV"]))
     ops = d["ops"]
