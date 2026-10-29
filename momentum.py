@@ -24,6 +24,7 @@ Variables de entorno (GitHub → Settings → Secrets and variables → Actions)
   MOMENTUM_INICIO  (variable opcional): desde cuándo se lleva la cartera del sistema (AAAA-MM-DD)
   FORZAR=1: manda el mail aunque no sea el primer día hábil (queda marcado como ANTICIPO)
 """
+import json
 import os
 import sys
 import time
@@ -139,6 +140,15 @@ for _s, _ts in {
 }.items():
     for _t in _ts.split():
         SECTOR[_t] = _s
+
+# Universo ampliado: todas las acciones con CEDEAR que cotizan en EE.UU. (universo.csv, ver universo.py).
+# Si el archivo no está, se usa la lista fija de arriba.
+try:
+    import universo as _U
+    CEDEARS, SECTOR, _, _ = _U.aplicar(CEDEARS, SECTOR)
+    TICKERS = sorted(t for t in CEDEARS if t not in _EXCLUIR)
+except ImportError:
+    pass
 
 MESES = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre",
          "noviembre", "diciembre"]
@@ -622,9 +632,28 @@ def enviar_mail(asunto, cuerpo, adjuntos):
     print("Mail enviado a:", ", ".join(destinos))
 
 
+def guardar_panel(ctx, ruta="panel_momentum.json"):
+    """Cartera del sistema y ranking completo, para el explorador del dashboard (no cambia ninguna decisión)."""
+    num = lambda v: None if v is None or pd.isna(v) else float(v)
+    rk, cart = ctx["rk"], ctx["cartera"]
+    panel = {"fecha": ctx["hoy"].isoformat(), "modo": ctx["modo"], "cierre": pd.Timestamp(ctx["cierre"]).strftime("%Y-%m-%d"),
+             "inicio": INICIO, "valor": num(ctx["valor"]),
+             "cartera": [{"Acción": r["Acción"], "Desde": pd.Timestamp(r["Desde"]).strftime("%Y-%m-%d"), "Peso": num(r["Peso %"]),
+                          "Resultado": num(r["Resultado %"]), "Puesto": num(r["Puesto"]), "Estado": r["Estado"]}
+                         for _, r in cart.iterrows()],
+             "ordenes": [{k: (num(v) if isinstance(v, (int, float, np.floating)) else v) for k, v in o.items()} for o in ctx["ordenes"]],
+             "ranking": [{"Acción": t, "Puesto": int(r["Puesto"]), "Puntaje": num(r["Puntaje"]), "Suba": num(r["Suba 12-1 %"]),
+                          "Volatilidad": num(r["Volatilidad %"])} for t, r in rk.iterrows()],
+             "top": TOP, "buffer": BUFFER}
+    with open(ruta, "w", encoding="utf-8") as fh:
+        json.dump(panel, fh, ensure_ascii=False, default=str)
+    print(f"Panel del momentum guardado en {ruta}")
+
+
 def main():
     hoy = hoy_ar()
-    forzar = os.environ.get("FORZAR", "0") == "1" or "--forzar" in sys.argv
+    solo_panel = "--solo-panel" in sys.argv          # actualiza panel_momentum.json sin mandar mail
+    forzar = os.environ.get("FORZAR", "0") == "1" or "--forzar" in sys.argv or solo_panel
     primer = es_primer_dia_habil(hoy)
     if not primer and not forzar:
         print(f"{hoy}: no es el primer día hábil del mes. No se envía nada.")
@@ -659,6 +688,12 @@ def main():
     mes_ref = hoy if modo == "ORDEN" else (pd.Timestamp(hoy) + pd.offsets.MonthBegin(1)).date()
     ctx = dict(hoy=hoy, mes_ref=mes_ref, modo=modo, cierre=ult, serie=serie, spy=spy, cartera=cart, rk=rk, ordenes=ords, valor=valor,
                historial=historial, cerradas=cerradas)
+    try:
+        guardar_panel(ctx)
+    except Exception as e:      # noqa: BLE001
+        print("No se pudo guardar el panel (no afecta al mail):", e)
+    if solo_panel:
+        return
     ruta_x = f"momentum_{hoy.isoformat()}.xlsx"
     ruta_p = f"momentum_{hoy.isoformat()}.pdf"
     exportar_excel(ruta_x, ctx)

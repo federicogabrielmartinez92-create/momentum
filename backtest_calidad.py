@@ -34,7 +34,10 @@ import pandas as pd
 import requests
 import yfinance as yf
 
-SEC_USER_AGENT = "Nombre Apellido tu_mail@dominio.com"   # <-- poné tu nombre y tu mail
+SEC_USER_AGENT = os.environ.get("CALIDAD_SEC_AGENTE") or "Nombre Apellido tu_mail@dominio.com"   # <-- poné tu nombre y tu mail
+# En GitHub Actions (workflow "Backtest de calidad") la cartera final se guarda en cartera_calidad_backtest.json,
+# para no tocar la cartera real; en Colab, como siempre, en cartera_calidad.json.
+ESTADO_SALIDA = os.environ.get("BT_ESTADO_SALIDA") or "cartera_calidad.json"
 CAPITAL = 10_000
 CACHE = "edgar_cache"
 INICIO_MIN = "2011-01-01"
@@ -206,7 +209,7 @@ def main():
               ultima_oficial=registro[-1]["Fecha"].strftime("%Y-%m-%d"), operaciones=[], cerradas=[],
               evolucion=[{"fecha": Ef["ultima_fecha"], "cartera": float(CAPITAL), "spy": float(CAPITAL)}],
               origen=f"backtest {serie.index[0].date()} a {serie.index[-1].date()}")
-    C.ESTADO = "cartera_calidad.json"
+    C.ESTADO = ESTADO_SALIDA
     C.guardar_estado(Ef)
     # historial para el dashboard (mismos datos que el Excel)
     nan0 = lambda v: None if v is None or (isinstance(v, float) and np.isnan(v)) else v
@@ -228,7 +231,7 @@ def main():
                         "Motivo": c_["Motivo"], "Origen": "Backtest"} for c_ in cerradas]}
     with open("historial_calidad.json", "w", encoding="utf-8") as fh:
         json.dump(hist, fh, ensure_ascii=False, indent=1)
-    print("\nCartera final guardada en cartera_calidad.json (para subir a GitHub):")
+    print(f"\nCartera final guardada en {ESTADO_SALIDA}:")
     for t, p in sorted(Ef["posiciones"].items(), key=lambda x: -x[1]["valor"]):
         print(f"  {t:6} {p['valor'] / CAPITAL * 100:5.1f}%  (en cartera desde {p['fecha_entrada']})")
     if Ef["caja"] > 1:
