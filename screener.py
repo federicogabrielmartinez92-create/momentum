@@ -923,7 +923,7 @@ def enviar_mail(df, ruta, ruta_pdf=None, abiertas=None):
     print(f"Mail enviado a: {', '.join(destinos)}")
 
 
-def guardar_panel(df, mercado, ruta="panel_screener.json"):
+def guardar_panel(df, mercado, abiertas=None, ruta="panel_screener.json"):
     """Resultado del día por acción, para el explorador del dashboard (no cambia ninguna señal)."""
     import json
 
@@ -945,7 +945,13 @@ def guardar_panel(df, mercado, ruta="panel_screener.json"):
             "volumen_m": num(r.get("Volumen prom. USD (M)")), "aviso": r.get("Aviso") if isinstance(r.get("Aviso"), str) else ""}
     ok, px_spy, media = mercado
     with open(ruta, "w", encoding="utf-8") as fh:
-        json.dump({"fecha": date.today().isoformat(), "mercado_ok": bool(ok), "filas": filas}, fh, ensure_ascii=False)
+        ab = []
+        if abiertas is not None and len(abiertas):
+            for _, r in abiertas.iterrows():
+                ab.append({"Ticker": r.get("Ticker"), "Entrada": str(r.get("Entrada")), "Resultado": num(r.get("Resultado %")),
+                           "Vender el": str(r.get("Vender el")), "Ruedas restantes": num(r.get("Ruedas restantes"))})
+        json.dump({"fecha": date.today().isoformat(), "mercado_ok": bool(ok), "spy": num(px_spy), "media": num(media),
+                   "filas": filas, "abiertas": ab}, fh, ensure_ascii=False)
     print(f"Panel del screener guardado en {ruta}")
 
 
@@ -967,10 +973,6 @@ def main():
 
     ruta = f"screener_{date.today().isoformat()}.xlsx"
     exportar_excel(df, ruta)
-    try:
-        guardar_panel(df, MERCADO)
-    except Exception as e:  # noqa: BLE001
-        print("No se pudo guardar el panel (no afecta al mail):", e)
 
     print("\n" + "=" * 50)
     ok, px_spy, media = MERCADO
@@ -988,6 +990,10 @@ def main():
 
     print("Revisando operaciones abiertas...")
     abiertas, cerradas, origen = seguimiento(precios, fundamentales)
+    try:
+        guardar_panel(df, MERCADO, abiertas)
+    except Exception as e:  # noqa: BLE001
+        print("No se pudo guardar el panel (no afecta al mail):", e)
     if len(abiertas) or len(cerradas):
         with pd.ExcelWriter(ruta, engine="openpyxl", mode="a") as xw:
             if len(abiertas):

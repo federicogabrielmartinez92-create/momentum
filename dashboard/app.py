@@ -167,6 +167,41 @@ st.markdown("""
   [data-testid="stSidebarNav"] a {border-radius: 10px; min-height: 44px;}
   [data-testid="stSidebarNav"] a[aria-current="page"] {background: var(--acento-suave);}
   .marca {display: flex; align-items: center; gap: .6rem; font-weight: 700; font-size: 1.1rem; letter-spacing: -.01em; color: var(--texto);}
+  .pesos {display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: .75rem; margin: .5rem 0 .8rem 0;}
+  .pesos div {background: var(--panel); border: 1px solid var(--borde); border-radius: 12px; padding: .8rem .9rem; display: flex; flex-direction: column; gap: .15rem;}
+  .pesos span {font-size: .75rem; color: var(--texto2);}
+  .pesos b {font-size: 1.15rem;}
+  .pesos small {font-size: .74rem; color: var(--texto2);}
+  /* inicio */
+  .carteras {display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem; margin: .4rem 0 1rem 0;}
+  a.cartera {background: var(--panel); border: 1px solid var(--borde); border-radius: 16px; padding: 1.1rem; display: flex;
+      flex-direction: column; gap: .8rem; color: var(--texto) !important; text-decoration: none !important;}
+  a.cartera:hover {border-color: #C7D7FE; box-shadow: 0 1px 8px rgba(16,24,40,.06);}
+  a.cartera .cab {display: flex; justify-content: space-between; align-items: center; font-size: .78rem; font-weight: 600;
+      color: var(--texto2); text-transform: uppercase; letter-spacing: .04em;}
+  a.cartera .cab .chip {text-transform: none; letter-spacing: 0;}
+  a.cartera .valor {font-size: 1.75rem; font-weight: 700; letter-spacing: -.02em;}
+  a.cartera .valor small {font-size: .8rem; font-weight: 500; color: var(--texto2); margin-left: .4rem;}
+  a.cartera .datos {display: flex; flex-wrap: wrap; gap: 1.1rem;}
+  a.cartera .datos div {display: flex; flex-direction: column;}
+  a.cartera .datos span {font-size: .74rem; color: var(--texto2);}
+  a.cartera .datos b {font-size: .9rem; font-variant-numeric: tabular-nums;}
+  a.cartera .logos {display: flex; flex-wrap: wrap; gap: .35rem; min-height: 28px;}
+  a.cartera .pie {border-top: 1px solid var(--linea); padding-top: .7rem; font-size: .84rem; color: var(--texto3); margin-top: auto;}
+  .caja-inicio {background: var(--panel); border: 1px solid var(--borde); border-radius: 16px; padding: 1rem 1.2rem; margin-bottom: 1rem;}
+  .caja-inicio .tit {font-size: 1.05rem; font-weight: 700; margin-bottom: .4rem;}
+  .caja-inicio p {margin: .6rem 0 0 0; font-size: .78rem; color: var(--texto2);}
+  .tarea {display: flex; align-items: flex-start; gap: .9rem; padding: .75rem 0; border-top: 1px solid var(--linea);}
+  .tarea > div {flex: 1; display: flex; flex-direction: column; gap: .15rem;}
+  .tarea b {font-size: .92rem;}
+  .tarea > div span {font-size: .85rem; color: var(--texto3); line-height: 1.5;}
+  .tarea .fecha {min-width: 62px; text-align: center; padding: .35rem .5rem; border-radius: 10px; font-size: .82rem; font-weight: 700;
+      background: #F2F4F7; color: var(--texto3); font-variant-numeric: tabular-nums;}
+  .tarea .fecha.urgente {background: #FFFAEB; color: #B54708;}
+  .fila-d {display: flex; justify-content: space-between; align-items: center; gap: .6rem; padding: .6rem 0; border-top: 1px solid var(--linea); font-size: .9rem;}
+  .fila-d:first-child {border-top: 0;}
+  .tit-sec {font-size: 1.02rem; font-weight: 700; margin: .4rem 0 .5rem 0;}
+  iframe {border: 0;}
 </style>
 """, unsafe_allow_html=True)
 
@@ -1029,6 +1064,8 @@ def pagina_calidad():
             pesos["SPY*"] = E["caja"] / valor * 100
         grafico_pesos(pesos, 10, 25, "tope 25%", sector_fn=C.sector)
         st.caption("SPY\\* = liquidez estacionada hasta la próxima compra.")
+        st.subheader("Tu cartera en pesos", divider="gray")
+        tabla_cartera_pesos(list(cart["Acción"]))
         if arranco and Eb:
             st.subheader("La cartera que viene del backtest (desde 2011)", divider="gray")
             fb = [{"Acción": t, "Empresa": C.nombre(t), "Sector": C.sector(t), "Peso %": pesos_bt[t],
@@ -2028,6 +2065,8 @@ def ficha_empresa(t):
     except Exception:       # noqa: BLE001
         st.caption("No se pudieron bajar los precios en este momento.")
 
+    seccion_pesos(t, r.get("ratio_cedear"), ced)
+
     st.subheader("Qué dice cada estrategia", divider="gray")
     k1, k2, k3 = st.columns(3)
     if t in pos_cal:
@@ -2059,6 +2098,66 @@ def ficha_empresa(t):
     else:
         txt = "Sin datos del screener todavía"
     k3.markdown(f"<div class='caja'><div class='tit'>Reversión</div><p style='margin:0;font-size:.9rem'>{txt}</p></div>", unsafe_allow_html=True)
+
+
+def seccion_pesos(t, ratio_txt, cedear):
+    """Ficha: el CEDEAR en pesos (precio teórico al CCL, CCL implícito y liquidez en BYMA)."""
+    st.subheader("El CEDEAR en pesos", divider="gray")
+    if not ratio_cedear(ratio_txt):
+        st.caption("No tengo el ratio de este CEDEAR.")
+        return
+    try:
+        d = cedear_en_pesos(t, ratio_txt, cedear)
+    except Exception:       # noqa: BLE001
+        st.caption("No se pudieron bajar las cotizaciones en este momento.")
+        return
+    if d["dif"] is not None:
+        barato = d["dif"] < 0
+        txt = f"{'Más barato' if barato else 'Más caro'} que el CCL: {pct(d['dif'], 1)}"
+        st.markdown(chip(txt, "verde" if barato else ("naranja" if d["dif"] > 1 else "gris")), unsafe_allow_html=True)
+    r = d["ratio"]
+    rtxt = f"{r:.0f}" if r and r >= 1 else ratio_txt
+    celdas = [("Precio en Nueva York", "USD " + (f"{d['usd']:,.2f}".replace(",", "X").replace(".", ",").replace("X", ".") if d["usd"] else "—"),
+               f"cierre del {d['fecha_usd']}" if d["fecha_usd"] else ""),
+              ("Ratio del CEDEAR", ratio_txt, f"{rtxt} CEDEARs = 1 acción" if r and r >= 1 else ""),
+              ("Dólar CCL del día", ars(d["ccl"], 2), "dolarapi.com"),
+              ("Precio teórico del CEDEAR", ars(d["teorico"], 2), f"precio NY × CCL ÷ {rtxt}"),
+              ("Precio en BYMA", ars(d["ars"], 2), f"último operado ({d['fecha_ars']})" if d["fecha_ars"] else "sin precio en BYMA"),
+              ("CCL implícito", ars(d["implicito"], 2), f"precio BYMA × {rtxt} ÷ precio NY"),
+              ("Diferencia contra el CCL", pct(d["dif"], 1) if d["dif"] is not None else "—", "negativo = barato"),
+              ("Operado en BYMA", ars(d["operado"]) + " por día" if d["operado"] is not None else "—",
+               "liquidez baja" if d["liquidez_baja"] else ("promedio de 30 ruedas" if d["operado"] is not None else ""))]
+    st.markdown("<div class='pesos'>" + "".join(f"<div><span>{a}</span><b class='num'>{b}</b><small>{c}</small></div>" for a, b, c in celdas)
+                + "</div>", unsafe_allow_html=True)
+    aviso("<b>Cómo leerlo:</b> si el CCL implícito del CEDEAR está por debajo del CCL del día, el CEDEAR está barato respecto de "
+          "la acción en Nueva York; si está por encima, está caro. Diferencias de menos de 1% son normales (los horarios de cierre "
+          "no coinciden del todo).", "azul")
+
+
+def tabla_cartera_pesos(tickers):
+    """Cartera en pesos: precio del CEDEAR en BYMA, CCL implícito y liquidez de cada posición."""
+    uni = {r["ticker"]: r for r in (U.todas() if U else [])}
+    filas = []
+    for t in tickers:
+        r = uni.get(t, {})
+        if not ratio_cedear(r.get("ratio_cedear")):
+            continue
+        try:
+            d = cedear_en_pesos(t, r["ratio_cedear"], r.get("cedear") or t)
+        except Exception:   # noqa: BLE001
+            continue
+        filas.append({"Acción": t, "Empresa": C.nombre(t), "Ratio": r["ratio_cedear"], "CEDEAR en BYMA": ars(d["ars"], 2),
+                      "CCL implícito": ars(d["implicito"], 2), "vs CCL del día": d["dif"],
+                      "Liquidez BYMA": "baja" if d["liquidez_baja"] else ("ok" if d["liquidez_baja"] is not None else "")})
+    if not filas:
+        st.caption("Sin cotizaciones de BYMA por ahora.")
+        return
+    tabla(pd.DataFrame(filas), fmt={"vs CCL del día": "%+.1f%%"},
+          estilos={"vs CCL del día": lambda v: css_color("verde") if v < 0 else (css_color("naranja") if v > 1 else ""),
+                   "Liquidez BYMA": por_prefijo({"baja": "rojo", "ok": "verde"})})
+    ccl = dolares().get("CCL")
+    st.caption((f"CCL del día: {ars(ccl, 2)}. " if ccl else "") + "Verde = el CEDEAR está más barato que el CCL. Liquidez baja = menos de "
+               f"USD {LIQUIDEZ_MIN_USD:,.0f} operados por día en BYMA.".replace(",", "."))
 
 
 def pagina_explorador():
@@ -2158,7 +2257,281 @@ def tabla_explorador(f, extras):
             f"<tbody>{''.join(filas)}</tbody></table></div>").replace("$", "&#36;")
 
 
-pg = st.navigation([st.Page(pagina_calidad, title="Cartera de calidad", icon=":material/account_balance:", default=True),
+# ============================================================================ datos en vivo: TradingView, dólar, BYMA, balances
+import streamlit.components.v1 as _componentes   # noqa: E402
+
+
+def widget_tradingview(script, config, alto):
+    """Widget gratuito de TradingView (lleva su logo y enlace, como piden sus condiciones)."""
+    conf = json.dumps({**config, "colorTheme": "light", "isTransparent": True, "locale": "es"})
+    _componentes.html(
+        "<div class='tradingview-widget-container' style='height:100%;width:100%'>"
+        "<div class='tradingview-widget-container__widget' style='height:calc(100% - 24px);width:100%'></div>"
+        "<div class='tradingview-widget-copyright' style='font:11px Inter,sans-serif;color:#5B6474'>"
+        "<a href='https://es.tradingview.com/' rel='noopener nofollow' target='_blank' style='color:#5B6474'>Datos de TradingView</a></div>"
+        f"<script type='text/javascript' src='https://s3.tradingview.com/external-embedding/{script}' async>{conf}</script></div>",
+        height=alto)
+
+
+CINTA_TV = [{"proName": "FOREXCOM:SPXUSD", "title": "S&P 500"}, {"proName": "FOREXCOM:NSXUSD", "title": "Nasdaq 100"},
+            {"proName": "FOREXCOM:DJI", "title": "Dow Jones"}, {"proName": "BCBA:IMV", "title": "Merval"},
+            {"proName": "OANDA:XAUUSD", "title": "Oro"}, {"proName": "TVC:USOIL", "title": "Petróleo"},
+            {"proName": "BITSTAMP:BTCUSD", "title": "Bitcoin"}]
+
+
+@st.cache_data(ttl=600, show_spinner=False)
+def dolares():
+    """Cotizaciones del dólar en Argentina (dolarapi.com, gratis). {nombre: venta}."""
+    import requests
+    out = {}
+    for clave, nombre in (("contadoconliqui", "CCL"), ("bolsa", "MEP"), ("oficial", "Oficial")):
+        try:
+            r = requests.get(f"https://dolarapi.com/v1/dolares/{clave}", timeout=10)
+            if r.ok:
+                out[nombre] = float(r.json().get("venta"))
+        except Exception:       # noqa: BLE001
+            pass
+    return out
+
+
+def ratio_cedear(texto):
+    """'15:1' -> 15 CEDEARs por acción; '1:3' -> 1/3."""
+    try:
+        a, b = str(texto).split(":")
+        return float(a) / float(b)
+    except (ValueError, ZeroDivisionError):
+        return None
+
+
+@st.cache_data(ttl=1800, show_spinner=False)
+def cotizacion_cedear(ticker, cedear, cierre=None):
+    """Último precio en NY (USD), último precio del CEDEAR en BYMA (ARS) y monto operado por día en BYMA (ARS, 30 ruedas)."""
+    out = {}
+    try:
+        h = yf.Ticker(ticker).history(period="10d", auto_adjust=False)
+        if len(h):
+            out["usd"] = float(h["Close"].dropna().iloc[-1])
+            out["fecha_usd"] = h.index[-1].strftime("%d/%m")
+    except Exception:       # noqa: BLE001
+        pass
+    for sim in dict.fromkeys((f"{cedear}.BA", f"{cedear.replace('.', '-')}.BA", f"{cedear.replace('.', '')}.BA")):
+        try:
+            h = yf.Ticker(sim).history(period="3mo", auto_adjust=False)
+        except Exception:   # noqa: BLE001
+            continue
+        h = h.dropna(subset=["Close"])
+        if len(h):
+            out["ars"] = float(h["Close"].iloc[-1])
+            out["fecha_ars"] = h.index[-1].strftime("%d/%m")
+            out["operado_ars"] = float((h["Close"] * h["Volume"]).tail(30).mean())
+            break
+    return out
+
+
+LIQUIDEZ_MIN_USD = 50_000      # menos de esto por día en BYMA (al CCL) = liquidez baja
+
+
+def cedear_en_pesos(t, ratio_txt, cedear):
+    """Precio teórico, CCL implícito y liquidez en BYMA de un CEDEAR."""
+    q = cotizacion_cedear(t, cedear, ultimo_cierre())
+    ccl = dolares().get("CCL")
+    r = ratio_cedear(ratio_txt)
+    d = {"usd": q.get("usd"), "ars": q.get("ars"), "ccl": ccl, "ratio": r, "operado": q.get("operado_ars"),
+         "fecha_usd": q.get("fecha_usd"), "fecha_ars": q.get("fecha_ars")}
+    d["teorico"] = q["usd"] * ccl / r if q.get("usd") and ccl and r else None
+    d["implicito"] = q["ars"] * r / q["usd"] if q.get("usd") and q.get("ars") and r else None
+    d["dif"] = (d["implicito"] / ccl - 1) * 100 if d["implicito"] and ccl else None
+    d["liquidez_baja"] = (d["operado"] / ccl < LIQUIDEZ_MIN_USD) if d["operado"] is not None and ccl else None
+    return d
+
+
+def ars(v, dec=0):
+    return "—" if v is None else "$ " + f"{v:,.{dec}f}".replace(",", "X").replace(".", ",").replace("X", ".")
+
+
+@st.cache_data(ttl=12 * 3600, show_spinner=False)
+def proximos_balances(tickers):
+    """Fecha del próximo balance de cada empresa (Yahoo)."""
+    out = {}
+    hoy = pd.Timestamp(date.today())
+    for t in tickers:
+        try:
+            cal = yf.Ticker(t).calendar or {}
+            fechas = cal.get("Earnings Date") if isinstance(cal, dict) else None
+            fechas = [pd.Timestamp(f) for f in (fechas or []) if f is not None]
+            fut = [f for f in fechas if f >= hoy - pd.Timedelta(days=1)]
+            if fut:
+                out[t] = min(fut).strftime("%Y-%m-%d")
+        except Exception:   # noqa: BLE001
+            pass
+    return out
+
+
+# ============================================================================ página: inicio
+def _tarjeta_cartera(titulo, etiqueta, color_et, valor, filas, tickers, pie, href):
+    datos = "".join(f"<div><span>{a}</span><b{(' style=' + chr(39) + 'color:' + c + chr(39)) if c else ''}>{b}</b></div>"
+                    for a, b, c in filas)
+    logos = "".join(logo_html(t, 28) for t in tickers)
+    txt, fondo = _FONDO[color_et]
+    return (f"<a class='cartera' href='{href}' target='_self'><div class='cab'><span>{titulo}</span>"
+            f"<span class='chip' style='background:{fondo};color:{txt}'>{etiqueta}</span></div>"
+            f"<div class='valor num'>{valor}</div><div class='datos'>{datos}</div>"
+            f"<div class='logos'>{logos}</div><div class='pie'>{pie}</div></a>")
+
+
+def _color_ret(v):
+    return None if v is None or pd.isna(v) else (VERDE if v > 0.05 else ROJO if v < -0.05 else None)
+
+
+def pagina_inicio():
+    widget_tradingview("embed-widget-ticker-tape.js", {"symbols": CINTA_TV, "showSymbolLogo": True, "displayMode": "adaptive"}, 76)
+    hoy = date.today()
+    dias = ["lunes", "martes", "miércoles", "jueves", "viernes", "sábado", "domingo"]
+    encabezado(f"{dias[hoy.weekday()]} {fmt_fecha(hoy)}", "Inicio")
+
+    # --- cartera de calidad, valuada al último cierre (igual que su página)
+    E0 = leer_json("cartera_calidad.json") or C.estado_nuevo()
+    panel_c = leer_json("panel_calidad.json") or {}
+    real = not str(E0.get("origen") or "").startswith("backtest") and bool(E0.get("posiciones"))
+    pm = leer_json("panel_momentum.json") or {}
+    ps = leer_json("panel_screener.json") or {}
+    tick_cal = list(E0.get("posiciones", {})) if real else []
+    tick_mom = [x["Acción"] for x in pm.get("cartera", [])]
+    desde = min([pd.Timestamp(E0.get("inicio") or hoy), pd.Timestamp(pm.get("inicio") or hoy)]) - pd.Timedelta(days=10)
+    try:
+        with st.spinner("Actualizando precios..."):
+            px = precios_ajustados(tuple(sorted(set(tick_cal))), desde.strftime("%Y-%m-%d"), ultimo_cierre())
+    except Exception:       # noqa: BLE001
+        px = None
+    tarjetas = []
+    if real and px is not None:
+        E = C.actualizar_valores(E0, px)
+        cap = E.get("capital", 10000)
+        valor = E["caja"] + sum(p["valor"] for p in E["posiciones"].values())
+        r_c, r_s = (valor / cap - 1) * 100, (E["spy_ref"] / cap - 1) * 100
+        caja = E["caja"] / valor * 100 if valor else 0
+        filas = [(f"Desde el {pd.Timestamp(E['inicio']).strftime('%d/%m')}", pct(r_c), _color_ret(r_c)),
+                 ("S&amp;P mismo período", pct(r_s), None),
+                 ("Posiciones", f"{len(E['posiciones'])}" + (f" + {caja:.0f}% en SPY" if caja > 1 else ""), None)]
+        val_txt = usd(valor)
+    else:
+        filas, val_txt = [("Estado", "arranca en la próxima revisión", None)], "—"
+    prox_c = proxima_revision_calidad(hoy, E0.get("ultima_oficial"))
+    trim = prox_c is not None and prox_c.month in C.MESES_REVISION
+    tarjetas.append(_tarjeta_cartera("Cartera de calidad", "Largo plazo", "azul", val_txt, filas, tick_cal,
+                                     f"Próxima revisión: <b>{dias[prox_c.weekday()]} {prox_c.strftime('%d/%m')}</b>"
+                                     + (" · trimestral" if trim else "") if prox_c else "", "calidad"))
+    # --- momentum (panel semanal / mensual)
+    prox_m = proxima_operacion_momentum(hoy)
+    if pm:
+        cap_m = float(os.environ.get("MOMENTUM_CAPITAL") or 10000)
+        r_m = (pm["valor"] / cap_m - 1) * 100 if pm.get("valor") else None
+        r_sm = None
+        try:
+            spy = precios_ajustados(tuple(), pd.Timestamp(pm["inicio"]).strftime("%Y-%m-%d"), ultimo_cierre())["SPY"].dropna()
+            spy = spy[spy.index <= pd.Timestamp(pm["cierre"])]
+            r_sm = (spy.iloc[-1] / spy.iloc[0] - 1) * 100
+        except Exception:   # noqa: BLE001
+            pass
+        filas_m = [(f"Desde el {pd.Timestamp(pm['inicio']).strftime('%d/%m')}", pct(r_m), _color_ret(r_m)),
+                   ("S&amp;P mismo período", pct(r_sm), None), ("Posiciones", str(len(tick_mom)), None)]
+        val_m = usd(pm.get("valor")) + f"<small> al {pd.Timestamp(pm['cierre']).strftime('%d/%m')}</small>"
+    else:
+        filas_m, val_m = [("Estado", "sin datos todavía", None)], "—"
+    tarjetas.append(_tarjeta_cartera("Momentum", "Mensual", "violeta", val_m, filas_m, tick_mom,
+                                     f"Próxima operación: <b>{dias[prox_m.weekday()]} {prox_m.strftime('%d/%m')}</b>" if prox_m else "",
+                                     "momentum"))
+    # --- reversión (panel diario del screener)
+    senales = [t for t, v in ps.get("filas", {}).items() if v.get("pasa")]
+    abiertas = ps.get("abiertas", [])
+    if ps:
+        filas_r = [("Operaciones abiertas", str(len(abiertas)), None),
+                   ("Mercado", "a favor" if ps.get("mercado_ok") else "en contra", VERDE if ps.get("mercado_ok") else ROJO)]
+        val_r = f"{len(senales)} {'señal' if len(senales) == 1 else 'señales'} hoy"
+    else:
+        filas_r, val_r = [("Estado", "aparece después de la próxima corrida del screener", None)], "—"
+    tarjetas.append(_tarjeta_cartera("Reversión", "Diaria", "verde", val_r, filas_r, senales[:10] or [a["Ticker"] for a in abiertas][:10],
+                                     "El screener corre de lunes a viernes de madrugada", "reversion"))
+    st.markdown("<div class='carteras'>" + "".join(tarjetas) + "</div>", unsafe_allow_html=True)
+
+    # --- qué hacer
+    tareas = []
+    if prox_m:
+        ords = pm.get("ordenes", [])
+        if ords:
+            det = "; ".join(f"{o['Orden'].lower()} {o['Acción']}" for o in ords)
+            det = f"Con el ranking de hoy: {det}. El mail del día confirma las órdenes."
+        else:
+            det = "Con el ranking de hoy no habría que hacer nada."
+        tareas.append((prox_m, "Momentum: operación del mes", det, "Momentum", "violeta"))
+    if prox_c:
+        libres = 10 - len(tick_cal)
+        det = ("Revisión trimestral: puede rotar hasta 2 posiciones. " if trim else "Revisión mensual. ") + (
+            f"Hay {libres} lugares libres para completar con las mejores del ranking." if libres > 0 and real else "")
+        tareas.append((prox_c, "Calidad: " + ("revisión trimestral" if trim else "revisión del mes"), det.strip(), "Calidad", "azul"))
+    if ps:
+        vencen = [a for a in abiertas if (a.get("Ruedas restantes") or 99) <= 5]
+        det = (f"Señal de compra: {', '.join(senales)}." if senales else "Hoy no hay señales de compra.") + (
+            f" Vencen esta semana: {', '.join(a['Ticker'] for a in vencen)}." if vencen else "")
+        tareas.append((hoy, "Reversión: señales del screener", det, "Reversión", "verde"))
+    rev = [(t, x) for t, x in (panel_c.get("tesis") or {}).items() if x.get("estado") in ("REVISAR", "SIN DATOS")]
+    tareas.append((None, "Tesis para revisar",
+                   "; ".join(f"{t}: {', '.join(x['motivos'])}" for t, x in rev) if rev else
+                   "Sin alertas en la última revisión (ninguna posición cae más de 25% contra el S&amp;P).", "Tesis", "gris"))
+    filas_t = []
+    for f_, tit, det, et, col in sorted(tareas, key=lambda x: (x[0] is None, x[0] or hoy)):
+        urg = f_ is not None and (f_ - hoy).days <= 3
+        fecha = "Hoy" if f_ == hoy else (f_.strftime("%d/%m") if f_ else "—")
+        txt, fondo = _FONDO[col]
+        filas_t.append(f"<div class='tarea'><span class='fecha{' urgente' if urg else ''}'>{fecha}</span><div><b>{tit}</b>"
+                       f"<span>{det}</span></div><span class='chip' style='background:{fondo};color:{txt}'>{et}</span></div>")
+    st.markdown("<div class='caja-inicio'><div class='tit'>Qué hacer</div>" + "".join(filas_t) + "</div>", unsafe_allow_html=True)
+
+    # --- mercado
+    c1, c2 = st.columns([2, 1])
+    with c1:
+        st.markdown("<div class='tit-sec'>S&amp;P 500</div>", unsafe_allow_html=True)
+        widget_tradingview("embed-widget-symbol-overview.js", {
+            "symbols": [["S&P 500", "FOREXCOM:SPXUSD|12M"], ["Nasdaq 100", "FOREXCOM:NSXUSD|12M"]], "chartOnly": False,
+            "width": "100%", "height": "100%", "showVolume": False, "hideDateRanges": False, "scalePosition": "right",
+            "lineColor": "#2459D6", "topColor": "rgba(36,89,214,0.18)", "bottomColor": "rgba(36,89,214,0)", "chartType": "area",
+            "dateRanges": ["1d|1", "1m|30", "12m|1D", "60m|1W"]}, 330)
+    with c2:
+        st.markdown("<div class='tit-sec'>Dólar</div>", unsafe_allow_html=True)
+        d = dolares()
+        filas_d = [(n, ars(d.get(n), 2)) for n in ("CCL", "MEP", "Oficial")]
+        if d.get("CCL") and d.get("Oficial"):
+            filas_d.append(("Brecha CCL / oficial", pct((d["CCL"] / d["Oficial"] - 1) * 100, 1, False)))
+        st.markdown("<div class='caja-inicio'>" + "".join(f"<div class='fila-d'><b>{a}</b><span class='num'>{b}</span></div>"
+                                                          for a, b in filas_d)
+                    + "<p>El CCL es el dólar de los CEDEARs · dolarapi.com</p></div>", unsafe_allow_html=True)
+    c3, c4 = st.columns([2, 1])
+    with c3:
+        st.markdown("<div class='tit-sec'>Mapa del S&amp;P 500</div>", unsafe_allow_html=True)
+        widget_tradingview("embed-widget-stock-heatmap.js", {
+            "dataSource": "SPX500", "blockSize": "market_cap_basic", "blockColor": "change", "grouping": "sector",
+            "hasTopBar": False, "isZoomEnabled": True, "hasSymbolTooltip": True, "width": "100%", "height": "100%"}, 430)
+    with c4:
+        st.markdown("<div class='tit-sec'>Próximos balances</div>", unsafe_allow_html=True)
+        todos = tuple(sorted(set(tick_cal) | set(tick_mom)))
+        bal = proximos_balances(todos) if todos else {}
+        filas_b = sorted(bal.items(), key=lambda x: x[1])[:8]
+        if filas_b:
+            st.markdown("<div class='caja-inicio'>" + "".join(
+                f"<div class='fila-d'><span class='tk'>{logo_html(t, 26)}{html.escape(C.nombre(t))}</span>"
+                f"<span class='num'>{pd.Timestamp(f_).strftime('%d/%m')}</span></div>" for t, f_ in filas_b)
+                + "<p>Después de cada balance, revisar la tesis.</p></div>", unsafe_allow_html=True)
+        else:
+            st.caption("Sin fechas de balances disponibles por ahora.")
+    st.markdown("<div class='tit-sec'>Calendario económico</div>", unsafe_allow_html=True)
+    widget_tradingview("embed-widget-events.js", {"importanceFilter": "0,1", "countryFilter": "us,ar", "width": "100%",
+                                                  "height": "100%"}, 420)
+    st.caption("Datos de mercado de TradingView y dolarapi.com, con demora. Análisis con fines educativos; no es recomendación de inversión.")
+
+
+
+pg = st.navigation([st.Page(pagina_inicio, title="Inicio", icon=":material/home:", default=True),
+                    st.Page(pagina_calidad, title="Cartera de calidad", icon=":material/account_balance:", url_path="calidad"),
                     st.Page(pagina_reversion, title="Reversión (screener)", icon=":material/autorenew:", url_path="reversion"),
                     st.Page(pagina_momentum, title="Momentum residual", icon=":material/trending_up:", url_path="momentum"),
                     st.Page(pagina_explorador, title="Explorador", icon=":material/travel_explore:", url_path="explorador")])
