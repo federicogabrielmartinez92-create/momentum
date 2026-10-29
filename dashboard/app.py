@@ -325,6 +325,8 @@ SITUACION_MOM = por_prefijo({"en cartera": "azul", "fuera": "gris"})
 try:
     import universo as U          # noqa: E402
     DOMINIOS = U.dominios()
+    # webs cuyo ícono no es el logo conocido de la marca
+    DOMINIOS.update({"GOOGL": "google.com", "GOOG": "google.com"})
 except Exception:                 # noqa: BLE001
     U, DOMINIOS = None, {}
 try:
@@ -1995,6 +1997,16 @@ def precio_5_anios(t, cierre):
     return px
 
 
+def ejercicio_txt(v):
+    """'2025-12' -> 'cerró en dic-2025' (el ejercicio anual más reciente que presentó)."""
+    try:
+        f = pd.Timestamp(str(v) + "-01")
+    except (ValueError, TypeError):
+        return "—"
+    meses = ["ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic"]
+    return f"cerró en {meses[f.month - 1]}-{f.year}"
+
+
 def ficha_empresa(t):
     uni = {r["ticker"]: r for r in (U.todas() if U else [])}
     r = uni.get(t, {})
@@ -2071,7 +2083,7 @@ def ficha_empresa(t):
                     ("Deuda neta / EBITDA", "—" if de is None else "caja neta" if de <= 0 else "EBITDA negativo" if de >= 99
                      else f"{de:.1f}x".replace(".", ","))]
         met += [("Acciones en circulación (por año)", _p(e.get("dilucion"))),
-                ("Último balance", e.get("ultimo_balance") or "—")]
+                ("Último ejercicio anual", ejercicio_txt(e.get("ultimo_balance")))]
         st.markdown("<div class='metricas'>" + "".join(f"<div><span>{a}</span><b>{b}</b></div>" for a, b in met) + "</div>",
                     unsafe_allow_html=True)
     with der:
