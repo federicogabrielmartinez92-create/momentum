@@ -2,6 +2,9 @@ name: Comparar reversión (temporal)
 on:
   push:
     branches: [comparar-reversion]
+    paths-ignore: ["tmp_comparar/salida.txt"]
+permissions:
+  contents: write
 jobs:
   comparar:
     runs-on: ubuntu-latest
@@ -12,4 +15,8 @@ jobs:
         with:
           python-version: "3.12"
       - run: pip install -r requirements.txt
-      - run: python tmp_comparar/comparar_reversion.py
+      - run: python -u tmp_comparar/comparar_reversion.py > tmp_comparar/salida.txt 2>&1 || true
+      - run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
+          git add tmp_comparar/salida.txt && git commit -m "salida [skip ci]" && git push
