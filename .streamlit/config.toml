@@ -1,7 +1,16 @@
+# Modo claro y oscuro: por defecto sigue la configuración del celular o la computadora;
+# se cambia desde el menú ⋮ → Settings → tema.
 [theme]
-base = "light"
+font = "sans serif"
+
+[theme.light]
 primaryColor = "#2459D6"
 backgroundColor = "#F6F7F9"
 secondaryBackgroundColor = "#FFFFFF"
 textColor = "#101828"
-font = "sans serif"
+
+[theme.dark]
+primaryColor = "#6E9BFF"
+backgroundColor = "#0B1220"
+secondaryBackgroundColor = "#111A2E"
+textColor = "#E6EAF2"

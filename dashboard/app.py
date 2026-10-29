@@ -65,7 +65,18 @@ st.markdown("""
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
   :root {--acento: #2459D6; --acento-suave: #EEF2FF; --fondo: #F6F7F9; --panel: #FFFFFF; --borde: #E4E7EC; --linea: #F0F2F5;
-         --texto: #101828; --texto2: #5B6474; --texto3: #344054;}
+         --texto: #101828; --texto2: #5B6474; --texto3: #344054; --cabecera: #FAFBFC; --pista: #EEF0F3; --suave: #F2F4F7;
+         --verde: #067647; --verde-f: #ECFDF3; --verde-b: #ABEFC6; --rojo: #B42318; --rojo-f: #FEF3F2; --rojo-b: #FECDCA;
+         --naranja: #B93815; --naranja-f: #FFF4ED; --amarillo: #B54708; --amarillo-f: #FFFAEB; --amarillo-b: #FEDF89;
+         --azul: #2459D6; --azul-f: #EEF2FF; --azul-b: #C7D7FE; --violeta: #6941C6; --violeta-f: #F4F3FF; --violeta-b: #D9D6FE;
+         --gris: #475467; --gris-f: #F2F4F7;}
+  /* modo oscuro: lo activa la app cuando el tema de Streamlit es oscuro (menú ⋮ → Settings) */
+  body.tema-oscuro {--acento: #6E9BFF; --acento-suave: rgba(110,155,255,.14); --fondo: #0B1220; --panel: #111A2E; --borde: #23304A;
+         --linea: #1B263C; --texto: #E6EAF2; --texto2: #98A2B3; --texto3: #C5CCD8; --cabecera: #0F1729; --pista: #23304A; --suave: #1B263C;
+         --verde: #47CD89; --verde-f: rgba(18,183,106,.16); --verde-b: rgba(71,205,137,.35); --rojo: #F97066; --rojo-f: rgba(240,68,56,.16);
+         --rojo-b: rgba(249,112,102,.35); --naranja: #FD853A; --naranja-f: rgba(253,133,58,.15); --amarillo: #FDB022; --amarillo-f: rgba(253,176,34,.14);
+         --amarillo-b: rgba(253,176,34,.35); --azul: #84ADFF; --azul-f: rgba(110,155,255,.16); --azul-b: rgba(110,155,255,.35);
+         --violeta: #BDB4FE; --violeta-f: rgba(155,138,251,.16); --violeta-b: rgba(155,138,251,.35); --gris: #C5CCD8; --gris-f: #1B263C;}
   .stApp {background-color: var(--fondo);}
   html, body, .stApp, .stApp p, .stApp li, .stApp label, .stApp button, .stApp input, .stApp textarea,
   [data-testid="stMarkdownContainer"], [data-testid="stCaptionContainer"] {font-family: 'Inter', system-ui, sans-serif;}
@@ -87,11 +98,11 @@ st.markdown("""
   /* avisos */
   .aviso {padding: .75rem 1rem; border-radius: 12px; margin: .25rem 0 .8rem 0; font-size: .95rem; color: var(--texto3);
       background: var(--panel); border: 1px solid var(--borde);}
-  .aviso-azul {background: #F5F8FF; border-color: #C7D7FE;}
-  .aviso-naranja {background: #FFFAEB; border-color: #FEDF89;}
-  .aviso-rojo {background: #FEF3F2; border-color: #FECDCA;}
-  .aviso-verde {background: #ECFDF3; border-color: #ABEFC6;}
-  .aviso-violeta {background: #F4F3FF; border-color: #D9D6FE;}
+  .aviso-azul {background: var(--azul-f); border-color: var(--azul-b);}
+  .aviso-naranja {background: var(--amarillo-f); border-color: var(--amarillo-b);}
+  .aviso-rojo {background: var(--rojo-f); border-color: var(--rojo-b);}
+  .aviso-verde {background: var(--verde-f); border-color: var(--verde-b);}
+  .aviso-violeta {background: var(--violeta-f); border-color: var(--violeta-b);}
 
   /* chips */
   .leyenda {font-size: .85rem; margin: -.2rem 0 .6rem 0; line-height: 2.2;}
@@ -108,11 +119,11 @@ st.markdown("""
   .tbl-wrap {background: var(--panel); border: 1px solid var(--borde); border-radius: 14px; overflow: auto; margin: .2rem 0 .9rem 0;}
   table.tbl {width: 100%; border-collapse: separate; border-spacing: 0; font-size: .88rem; color: var(--texto); border: 0 !important; margin: 0 !important;}
   table.tbl th, table.tbl td {border-left: 0 !important; border-right: 0 !important; border-top: 0 !important;}
-  table.tbl th {position: sticky; top: 0; z-index: 1; background: #FAFBFC; text-align: left; font-size: .7rem; font-weight: 600;
+  table.tbl th {position: sticky; top: 0; z-index: 1; background: var(--cabecera); text-align: left; font-size: .7rem; font-weight: 600;
       color: var(--texto2); text-transform: uppercase; letter-spacing: .04em; padding: .6rem .7rem; border-bottom: 1px solid var(--borde);}
   table.tbl td {padding: .55rem .7rem; border-bottom: 1px solid var(--linea) !important; vertical-align: middle;}
   table.tbl tr:last-child td {border-bottom: 0;}
-  table.tbl tr:hover td {background: #FAFBFC;}
+  table.tbl tr:hover td {background: var(--cabecera);}
   table.tbl th.n, table.tbl td.n {text-align: right; white-space: nowrap;}
   table.tbl td.largo {min-width: 220px; color: var(--texto3); font-size: .84rem;}
   .tk {display: inline-flex; align-items: center; gap: .55rem; font-weight: 600; white-space: nowrap;}
@@ -128,7 +139,7 @@ st.markdown("""
   table.exp a.emp small {color: var(--texto2); font-size: .74rem;}
   table.exp td.sec {color: var(--texto3); font-size: .84rem;}
   table.exp td .chip {margin: .1rem .25rem .1rem 0;}
-  .barra > span:first-child {flex: 1; height: 6px; background: #EEF0F3; border-radius: 99px; overflow: hidden; display: block;}
+  .barra > span:first-child {flex: 1; height: 6px; background: var(--pista); border-radius: 99px; overflow: hidden; display: block;}
   .barra i {display: block; height: 100%; background: var(--acento); border-radius: 99px;}
 
   /* movimientos como tarjetas */
@@ -155,7 +166,7 @@ st.markdown("""
       flex-wrap: wrap; align-items: center; gap: 1.1rem; margin-bottom: .8rem;}
   .ficha-cab h2 {margin: 0 !important; padding: 0 !important; font-size: 1.7rem !important;}
   .etiquetas {display: flex; flex-wrap: wrap; gap: .4rem; margin-top: .35rem;}
-  .etiquetas span {padding: .15rem .65rem; border-radius: 999px; background: #F2F4F7; color: var(--texto3); font-size: .78rem;}
+  .etiquetas span {padding: .15rem .65rem; border-radius: 999px; background: var(--suave); color: var(--texto3); font-size: .78rem;}
   .caja {background: var(--panel); border: 1px solid var(--borde); border-radius: 14px; padding: 1rem 1.1rem; height: 100%;}
   .caja .tit {margin: 0 0 .5rem 0; font-size: .95rem; font-weight: 700; color: var(--texto);}
   .filtro {display: flex; align-items: center; gap: .6rem; padding: .45rem 0; border-bottom: 1px solid var(--linea); font-size: .88rem;}
@@ -163,8 +174,8 @@ st.markdown("""
   .filtro .v {margin-left: auto; font-weight: 600; font-variant-numeric: tabular-nums; white-space: nowrap;}
   .ok, .no {width: 20px; height: 20px; border-radius: 99px; display: inline-flex; align-items: center; justify-content: center;
       font-size: .72rem; font-weight: 700; flex: none;}
-  .ok {background: #ECFDF3; color: #067647;}
-  .no {background: #FEF3F2; color: #B42318;}
+  .ok {background: var(--verde-f); color: var(--verde);}
+  .no {background: var(--rojo-f); color: var(--rojo);}
   .metricas {display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: .9rem;}
   .metricas span {display: block; font-size: .74rem; color: var(--texto2);}
   .metricas b {font-size: 1.1rem; font-variant-numeric: tabular-nums;}
@@ -176,7 +187,7 @@ st.markdown("""
   [class*="st-key-caja"] div[data-testid="stVegaLiteChart"] {border: 0; padding: 0;}
 
   /* menú lateral */
-  section[data-testid="stSidebar"] {background: #FFFFFF; border-right: 1px solid var(--borde);}
+  section[data-testid="stSidebar"] {border-right: 1px solid var(--borde);}
   [data-testid="stSidebarNav"] a {border-radius: 10px; min-height: 44px;}
   [data-testid="stSidebarNav"] a[aria-current="page"] {background: var(--acento-suave);}
   .marca {display: flex; align-items: center; gap: .6rem; font-weight: 700; font-size: 1.1rem; letter-spacing: -.01em; color: var(--texto);}
@@ -189,7 +200,7 @@ st.markdown("""
   .carteras {display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem; margin: .4rem 0 1rem 0;}
   a.cartera {background: var(--panel); border: 1px solid var(--borde); border-radius: 16px; padding: 1.1rem; display: flex;
       flex-direction: column; gap: .8rem; color: var(--texto) !important; text-decoration: none !important;}
-  a.cartera:hover {border-color: #C7D7FE; box-shadow: 0 1px 8px rgba(16,24,40,.06);}
+  a.cartera:hover {border-color: var(--azul-b); box-shadow: 0 1px 8px rgba(16,24,40,.06);}
   a.cartera .cab {display: flex; justify-content: space-between; align-items: center; font-size: .78rem; font-weight: 600;
       color: var(--texto2); text-transform: uppercase; letter-spacing: .04em;}
   a.cartera .cab .chip {text-transform: none; letter-spacing: 0;}
@@ -209,8 +220,8 @@ st.markdown("""
   .tarea b {font-size: .92rem;}
   .tarea > div span {font-size: .85rem; color: var(--texto3); line-height: 1.5;}
   .tarea .fecha {min-width: 62px; text-align: center; padding: .35rem .5rem; border-radius: 10px; font-size: .82rem; font-weight: 700;
-      background: #F2F4F7; color: var(--texto3); font-variant-numeric: tabular-nums;}
-  .tarea .fecha.urgente {background: #FFFAEB; color: #B54708;}
+      background: var(--suave); color: var(--texto3); font-variant-numeric: tabular-nums;}
+  .tarea .fecha.urgente {background: var(--amarillo-f); color: var(--amarillo);}
   .fila-d {display: flex; justify-content: space-between; align-items: center; gap: .6rem; padding: .6rem 0; border-top: 1px solid var(--linea); font-size: .9rem;}
   .fila-d:first-child {border-top: 0;}
   .tit-sec {font-size: 1.02rem; font-weight: 700; margin: .4rem 0 .5rem 0;}
@@ -227,10 +238,13 @@ def encabezado(kicker, titulo):
 
 # ============================================================================ colores
 # Colores para fondo claro (verde y rojo también difieren en luminosidad, no solo en tono)
-VERDE, ROJO, AMARILLO, VIOLETA, CELESTE = "#067647", "#B42318", "#B54708", "#6941C6", "#2459D6"
-_FONDO = {"verde": (VERDE, "#ECFDF3"), "rojo": (ROJO, "#FEF3F2"), "naranja": ("#B93815", "#FFF4ED"),
-          "amarillo": (AMARILLO, "#FFFAEB"), "azul": (CELESTE, "#EEF2FF"), "violeta": (VIOLETA, "#F4F3FF"),
-          "gris": ("#475467", "#F2F4F7")}
+VERDE = "#12B76A"           # para gráficos (se lee en modo claro y oscuro)
+# para texto y etiquetas: variables CSS que cambian con el modo claro u oscuro
+T_VERDE, T_ROJO, T_AMARILLO, T_NARANJA = "var(--verde)", "var(--rojo)", "var(--amarillo)", "var(--naranja)"
+ROJO, AMARILLO, VIOLETA, CELESTE = T_ROJO, T_AMARILLO, "var(--violeta)", "var(--azul)"
+_FONDO = {"verde": (T_VERDE, "var(--verde-f)"), "rojo": (T_ROJO, "var(--rojo-f)"), "naranja": (T_NARANJA, "var(--naranja-f)"),
+          "amarillo": (T_AMARILLO, "var(--amarillo-f)"), "azul": (CELESTE, "var(--azul-f)"), "violeta": (VIOLETA, "var(--violeta-f)"),
+          "gris": ("var(--gris)", "var(--gris-f)")}
 
 
 def css_color(nombre):
@@ -282,7 +296,7 @@ def color_signo(v):
         return ""
     if np.isnan(v) or abs(v) < 0.05:
         return ""
-    return f"color: {VERDE if v > 0 else ROJO}; font-weight: 600"
+    return f"color: {T_VERDE if v > 0 else T_ROJO}; font-weight: 600"
 
 
 def _fmt_num(f):
@@ -647,7 +661,7 @@ def movimientos_tarjetas(f, clave, por_pagina=8):
             if pd.notna(o.get("Peso")):
                 datos.append(("% de la cartera", pct(o["Peso"], 1, False)))
             if pd.notna(o.get("Resultado")):
-                col = VERDE if o["Resultado"] > 0 else ROJO
+                col = T_VERDE if o["Resultado"] > 0 else T_ROJO
                 datos.append(("Resultado", f"<span style='color:{col}'>{pct(o['Resultado'], 0)}</span>"))
             partes.append(
                 "<div class='tarjeta'><div class='cab'>" + logo_html(t, 38) +
@@ -1205,7 +1219,7 @@ def pagina_calidad():
                     v = float(v)
                 except (TypeError, ValueError):
                     return ""
-                return "" if np.isnan(v) else f"color: {ROJO if v < 5 else VERDE if v >= 10 else AMARILLO}; font-weight: 600"
+                return "" if np.isnan(v) else f"color: {T_ROJO if v < 5 else T_VERDE if v >= 10 else T_AMARILLO}; font-weight: 600"
             tabla(r[["Puesto", "Acción", "Empresa", "Situación", "Sector", "Puntaje", "Rentabilidad", "Ventas", "Deuda", "Rend10", "Tendencia"]],
                   fmt={"Puesto": "%d", "Puntaje": "%.0f", "Rentabilidad": "%.0f%%", "Ventas": "%.0f%%", "Deuda": "%.1fx", "Rend10": "%.1f%%"},
                   estilos={"Rend10": color_rend, "Situación": SITUACION_CALIDAD}, height=560, config={
@@ -1221,7 +1235,7 @@ def pagina_calidad():
                 esp["Tiene que bajar %"] = (1 - esp["PrecioCompra"] / esp["Precio"]) * 100
                 tabla(esp[["Puesto", "Acción", "Empresa", "Precio", "PrecioCompra", "Tiene que bajar %", "Situación"]],
                       fmt={"Puesto": "%d", "Precio": "%.2f", "PrecioCompra": "%.2f", "Tiene que bajar %": "%.0f%%"},
-                      estilos={"Situación": SITUACION_CALIDAD, "Tiene que bajar %": lambda v: f"color: {NARANJA}; font-weight: 600"},
+                      estilos={"Situación": SITUACION_CALIDAD, "Tiene que bajar %": lambda v: f"color: {T_NARANJA}; font-weight: 600"},
                       config={"Precio": st.column_config.Column("Precio hoy (USD)"),
                               "PrecioCompra": st.column_config.Column("Precio de compra (USD)")})
 
@@ -2060,7 +2074,7 @@ def ficha_empresa(t):
         pie = ""
         if filtros:
             n_ok = sum(1 for _, ok, _ in filtros if ok)
-            pie = (f"<p style='margin:.6rem 0 0 0;font-size:.85rem;font-weight:600;color:{VERDE if n_ok == len(filtros) else ROJO}'>"
+            pie = (f"<p style='margin:.6rem 0 0 0;font-size:.85rem;font-weight:600;color:{T_VERDE if n_ok == len(filtros) else T_ROJO}'>"
                    f"{'Pasa los ' + str(len(filtros)) + ' filtros' if n_ok == len(filtros) else 'No pasa ' + str(len(filtros) - n_ok) + ' de ' + str(len(filtros))}</p>")
         st.markdown(f"<div class='caja'><div class='tit'>Filtros mínimos de calidad</div>{cuerpo or '<p>Sin datos de calidad.</p>'}{pie}</div>",
                     unsafe_allow_html=True)
@@ -2253,7 +2267,7 @@ def tabla_explorador(f, extras):
         celdas.append("<td></td>" if pd.isna(cal) else
                       f"<td><span class='barra'><span><i style='width:{max(0, min(100, cal)):.0f}%'></i></span><b class='num'>{cal:.0f}</b></span></td>")
         rend = r["Rend. 10 años"]
-        color_r = "" if pd.isna(rend) else f" style='color:{ROJO if rend < 5 else VERDE if rend >= 10 else AMARILLO};font-weight:600'"
+        color_r = "" if pd.isna(rend) else f" style='color:{T_ROJO if rend < 5 else T_VERDE if rend >= 10 else T_AMARILLO};font-weight:600'"
         celdas += [f"<td class='n'>{n(r['ROIC/ROE'], '%.0f%%')}</td>", f"<td class='n'>{n(r['Ventas/año'], '%.0f%%')}</td>",
                    f"<td class='n'{color_r}>{n(rend, '%.1f%%')}</td>", f"<td class='n'>{n(r['Puesto momentum'], '%d')}</td>"]
         if "Deuda/EBITDA" in extras:
@@ -2276,21 +2290,79 @@ import streamlit.components.v1 as _componentes   # noqa: E402
 
 def widget_tradingview(script, config, alto):
     """Widget gratuito de TradingView (lleva su logo y enlace, como piden sus condiciones). Alto fijo en píxeles: dentro
-    del cuadro de Streamlit los altos en % no funcionan y el widget quedaba chico."""
+    del cuadro de Streamlit los altos en % no funcionan. Toma el modo claro u oscuro de la app y se recarga si cambia."""
     h = alto - 26
-    cfg = {**config, "colorTheme": "light", "isTransparent": True, "locale": "es"}
-    if "height" in cfg or script != "embed-widget-ticker-tape.js":
+    cfg = {**config, "isTransparent": True, "locale": "es"}
+    if script != "embed-widget-ticker-tape.js":
         cfg.update(width="100%", height=h)
         cfg.pop("autosize", None)
-    conf = json.dumps(cfg)
     _componentes.html(
-        "<style>html,body{margin:0;padding:0;background:transparent}</style>"
-        f"<div class='tradingview-widget-container' style='height:{h}px;width:100%'>"
-        f"<div class='tradingview-widget-container__widget' style='height:{h}px;width:100%'></div>"
-        f"<script type='text/javascript' src='https://s3.tradingview.com/external-embedding/{script}' async>{conf}</script></div>"
+        "<style>html,body{margin:0;padding:0;background:transparent}a{color:#98A2B3}</style>"
+        f"<div id='tv' class='tradingview-widget-container' style='height:{h}px;width:100%'>"
+        f"<div class='tradingview-widget-container__widget' style='height:{h}px;width:100%'></div></div>"
         "<div style='font:11px Inter,sans-serif;color:#98A2B3;text-align:right;padding-top:6px'>"
-        "<a href='https://es.tradingview.com/' rel='noopener nofollow' target='_blank' style='color:#98A2B3'>Datos de TradingView</a></div>",
+        "<a href='https://es.tradingview.com/' rel='noopener nofollow' target='_blank'>Datos de TradingView</a></div>"
+        "<script>(function(){var b=window.parent.document.body,osc=b.classList.contains('tema-oscuro');"
+        f"var c={json.dumps(cfg)};c.colorTheme=osc?'dark':'light';"
+        f"var s=document.createElement('script');s.src='https://s3.tradingview.com/external-embedding/{script}';s.async=true;"
+        "s.text=JSON.stringify(c);document.getElementById('tv').appendChild(s);"
+        "new MutationObserver(function(){if(b.classList.contains('tema-oscuro')!==osc){location.reload();}})"
+        ".observe(b,{attributes:true,attributeFilter:['class']});})();</script>",
         height=alto)
+
+
+def detectar_tema():
+    """Marca el documento con la clase tema-oscuro cuando el tema de Streamlit es oscuro (la usan los estilos propios y los
+    widgets). Se instala una sola vez en la página y sigue los cambios del menú ⋮ → Settings."""
+    _componentes.html(
+        "<script>(function(){var d=window.parent.document;if(d.getElementById('detector-tema'))return;"
+        "var s=d.createElement('script');s.id='detector-tema';s.text=\"(function(){function f(){var a=document.querySelector('.stApp');"
+        "if(!a)return;var m=getComputedStyle(a).color.match(/[0-9.]+/g);if(!m)return;"
+        "var l=0.3*m[0]+0.59*m[1]+0.11*m[2];document.body.classList.toggle('tema-oscuro',l>140);}f();setInterval(f,400);})();\";"
+        "d.head.appendChild(s);})();</script>", height=0)
+
+
+TRADUCCION_EVENTOS = {
+    "Non-Farm Employment Change": "Empleo (nóminas no agrícolas)", "Unemployment Rate": "Desempleo",
+    "Average Hourly Earnings m/m": "Salarios por hora", "CPI m/m": "Inflación (CPI)", "CPI y/y": "Inflación anual (CPI)",
+    "Core CPI m/m": "Inflación núcleo (CPI)", "PPI m/m": "Inflación mayorista (PPI)", "Core PPI m/m": "Inflación mayorista núcleo",
+    "Core PCE Price Index m/m": "Inflación PCE núcleo", "Federal Funds Rate": "Tasa de la Fed", "FOMC Statement": "Comunicado de la Fed",
+    "FOMC Press Conference": "Conferencia de la Fed", "FOMC Meeting Minutes": "Minutas de la Fed", "Fed Chair Powell Speaks": "Habla el presidente de la Fed",
+    "ISM Manufacturing PMI": "ISM industrial", "ISM Services PMI": "ISM de servicios", "Retail Sales m/m": "Ventas minoristas",
+    "Core Retail Sales m/m": "Ventas minoristas núcleo", "Advance GDP q/q": "PIB (preliminar)", "Prelim GDP q/q": "PIB (segunda estimación)",
+    "Final GDP q/q": "PIB (final)", "JOLTS Job Openings": "Vacantes laborales (JOLTS)", "ADP Non-Farm Employment Change": "Empleo privado (ADP)",
+    "Unemployment Claims": "Pedidos de subsidio por desempleo", "Prelim UoM Consumer Sentiment": "Confianza del consumidor (Michigan)",
+    "CB Consumer Confidence": "Confianza del consumidor", "Empire State Manufacturing Index": "Industria de Nueva York",
+    "Philly Fed Manufacturing Index": "Industria de Filadelfia"}
+
+
+@st.cache_data(ttl=3 * 3600, show_spinner=False)
+def agenda_semana():
+    """Datos de impacto alto de EE.UU. que faltan esta semana (calendario público de ForexFactory). [] si no responde."""
+    import requests
+    try:
+        r = requests.get("https://nfs.faireconomy.media/ff_calendar_thisweek.json", timeout=10,
+                         headers={"User-Agent": "Mozilla/5.0 (Streamlimits)"})
+        datos = r.json() if r.ok else []
+    except Exception:       # noqa: BLE001
+        return []
+    ahora = pd.Timestamp.now(tz="America/Argentina/Buenos_Aires")
+    out, vistos = [], set()
+    for e in datos if isinstance(datos, list) else []:
+        if e.get("country") != "USD" or e.get("impact") != "High":
+            continue
+        try:
+            f = pd.Timestamp(e["date"]).tz_convert("America/Argentina/Buenos_Aires")
+        except Exception:   # noqa: BLE001
+            continue
+        if f < ahora - pd.Timedelta(hours=1):
+            continue
+        nombre = TRADUCCION_EVENTOS.get(e.get("title", ""), e.get("title", ""))
+        if (nombre, f.date()) in vistos:
+            continue
+        vistos.add((nombre, f.date()))
+        out.append((f, nombre))
+    return sorted(out)[:6]
 
 
 CINTA_TV = [{"proName": "FOREXCOM:SPXUSD", "title": "S&P 500"}, {"proName": "FOREXCOM:NSXUSD", "title": "Nasdaq 100"},
@@ -2419,7 +2491,7 @@ def _tarjeta_cartera(titulo, etiqueta, color_et, valor, filas, tickers, pie, hre
 
 
 def _color_ret(v):
-    return None if v is None or pd.isna(v) else (VERDE if v > 0.05 else ROJO if v < -0.05 else None)
+    return None if v is None or pd.isna(v) else (T_VERDE if v > 0.05 else T_ROJO if v < -0.05 else None)
 
 
 def pagina_inicio():
@@ -2485,7 +2557,7 @@ def pagina_inicio():
     abiertas = ps.get("abiertas", [])
     if ps:
         filas_r = [("Operaciones abiertas", str(len(abiertas)), None),
-                   ("Mercado", "a favor" if ps.get("mercado_ok") else "en contra", VERDE if ps.get("mercado_ok") else ROJO)]
+                   ("Mercado", "a favor" if ps.get("mercado_ok") else "en contra", T_VERDE if ps.get("mercado_ok") else T_ROJO)]
         val_r = f"{len(senales)} {'señal' if len(senales) == 1 else 'señales'} hoy"
     else:
         filas_r, val_r = [("Estado", "aparece después de la próxima corrida del screener", None)], "—"
@@ -2564,6 +2636,15 @@ def pagina_inicio():
         else:
             st.caption("Sin fechas de balances disponibles por ahora.")
     st.markdown("<div class='tit-sec'>Calendario económico</div>", unsafe_allow_html=True)
+    dias_c = ["lun", "mar", "mié", "jue", "vie", "sáb", "dom"]
+    ag = agenda_semana()
+    if ag:
+        st.markdown("<div class='aviso aviso-azul'><b>Lo importante que falta esta semana:</b> " + " · ".join(
+            f"{html.escape(n)} ({dias_c[f.weekday()]} {f.strftime('%d/%m')}, {f.strftime('%H:%M')})" for f, n in ag) + "</div>",
+            unsafe_allow_html=True)
+    st.caption("Agenda de los datos económicos que mueven al mercado, en hora de Argentina. Más barritas = más importante. "
+               "A la derecha: valor real (aparece cuando se publica), pronóstico y dato anterior. Si el real sale muy distinto del "
+               "pronóstico, el mercado suele moverse fuerte ese día.")
     widget_tradingview("embed-widget-events.js", {"importanceFilter": "0,1", "countryFilter": "us,ar", "width": "100%",
                                                   "height": "100%"}, 620)
     st.caption("Datos de mercado de TradingView y dolarapi.com, con demora. Análisis con fines educativos; no es recomendación de inversión.")
@@ -2576,7 +2657,10 @@ pg = st.navigation([st.Page(pagina_inicio, title="Inicio", icon=":material/home:
                     st.Page(pagina_momentum, title="Momentum residual", icon=":material/trending_up:", url_path="momentum"),
                     st.Page(pagina_explorador, title="Explorador", icon=":material/travel_explore:", url_path="explorador")])
 st.sidebar.markdown("<div class='marca'><svg width='28' height='28' viewBox='0 0 28 28' aria-hidden='true'><rect width='28' height='28' "
-                    "rx='7' fill='#101828'></rect><path d='M7 18l5-5 4 3 5-7' stroke='#FFFFFF' stroke-width='2.2' fill='none' "
+                    "rx='7' style='fill:var(--acento)'></rect><path d='M7 18l5-5 4 3 5-7' stroke='#FFFFFF' stroke-width='2.2' fill='none' "
                     "stroke-linecap='round' stroke-linejoin='round'></path></svg>Streamlimits</div>", unsafe_allow_html=True)
 st.sidebar.caption("Estrategias con CEDEARs · datos con fines educativos, no es recomendación de inversión.")
+st.sidebar.caption("Modo claro u oscuro: menú ⋮ (arriba a la derecha) → Settings.")
+with st.sidebar:
+    detectar_tema()
 pg.run()
