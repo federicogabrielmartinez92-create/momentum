@@ -325,6 +325,8 @@ SITUACION_MOM = por_prefijo({"en cartera": "azul", "fuera": "gris"})
 try:
     import universo as U          # noqa: E402
     DOMINIOS = U.dominios()
+    # webs cuyo ícono no es el logo conocido de la marca
+    DOMINIOS.update({"GOOGL": "google.com", "GOOG": "google.com"})
 except Exception:                 # noqa: BLE001
     U, DOMINIOS = None, {}
 try:
@@ -1995,6 +1997,16 @@ def precio_5_anios(t, cierre):
     return px
 
 
+def ejercicio_txt(v):
+    """'2025-12' -> 'cerró en dic-2025' (el ejercicio anual más reciente que presentó)."""
+    try:
+        f = pd.Timestamp(str(v) + "-01")
+    except (ValueError, TypeError):
+        return "—"
+    meses = ["ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic"]
+    return f"cerró en {meses[f.month - 1]}-{f.year}"
+
+
 def ficha_empresa(t):
     uni = {r["ticker"]: r for r in (U.todas() if U else [])}
     r = uni.get(t, {})
@@ -2071,7 +2083,7 @@ def ficha_empresa(t):
                     ("Deuda neta / EBITDA", "—" if de is None else "caja neta" if de <= 0 else "EBITDA negativo" if de >= 99
                      else f"{de:.1f}x".replace(".", ","))]
         met += [("Acciones en circulación (por año)", _p(e.get("dilucion"))),
-                ("Último balance", e.get("ultimo_balance") or "—")]
+                ("Último ejercicio anual", ejercicio_txt(e.get("ultimo_balance")))]
         st.markdown("<div class='metricas'>" + "".join(f"<div><span>{a}</span><b>{b}</b></div>" for a, b in met) + "</div>",
                     unsafe_allow_html=True)
     with der:
@@ -2498,6 +2510,73 @@ def proximos_balances(tickers):
     return {t: f for t, f in res.items() if f}
 
 
+@st.cache_data(ttl=300, show_spinner=False)
+def variaciones_dia(tickers, _marca=None):
+    """Precio y variación del día de cada acción (Yahoo). Se renueva cada 5 minutos."""
+    datos = yf.download(list(tickers), period="5d", interval="1d", auto_adjust=False, group_by="ticker", threads=True,
+                        progress=False)
+    out = {}
+    for t in tickers:
+        try:
+            c = datos[t]["Close"].dropna()
+        except (KeyError, TypeError):
+            continue
+        if len(c) >= 2:
+            out[t] = (float(c.iloc[-1]), (float(c.iloc[-1]) / float(c.iloc[-2]) - 1) * 100, c.index[-1].strftime("%d/%m"))
+    return out
+
+
+def mapa_cedears(en_cartera):
+    """Mapa de calor propio: las acciones con CEDEAR por sector, del tamaño de su valor de mercado y del color de su
+    variación del día (precios de Yahoo, cada 5 minutos)."""
+    import plotly.express as px
+    c1, c2 = st.columns([2, 1.4])
+    c1.markdown("<div class='tit-sec'>Mapa de los CEDEARs hoy</div>", unsafe_allow_html=True)
+    vista = c2.segmented_control("Mapa", ["Todas", "Mis carteras"], default="Todas", key="mapa_vista",
+                                 label_visibility="collapsed") or "Todas"
+    uni = [r for r in (U.todas() if U else []) if r.get("incluida") == "1"]
+    if vista == "Mis carteras":
+        uni = [r for r in uni if r["ticker"] in en_cartera]
+    if not uni:
+        st.caption("Sin acciones para mostrar.")
+        return
+    try:
+        var = variaciones_dia(tuple(sorted(r["ticker"] for r in uni)), pd.Timestamp.now().floor("5min").isoformat())
+    except Exception:       # noqa: BLE001
+        st.caption("No se pudieron bajar los precios en este momento.")
+        return
+    filas = []
+    for r in uni:
+        t = r["ticker"]
+        if t not in var:
+            continue
+        tam = pd.to_numeric(r.get("valor_mercado"), errors="coerce")
+        if pd.isna(tam) or tam <= 0:
+            tam = pd.to_numeric(r.get("volumen_usd"), errors="coerce") * 250     # sin dato: aproximado por el volumen
+        if pd.isna(tam) or tam <= 0:
+            continue
+        precio, v, fecha = var[t]
+        filas.append({"Sector": r.get("sector") or "Otros", "Ticker": t, "Empresa": C.nombre(t) if t in C.CEDEARS else r.get("nombre") or t,
+                      "Tamaño": float(tam), "Var": max(-3.0, min(3.0, v)), "VarReal": v, "Precio": precio,
+                      "Etiqueta": f"{v:+.2f}%".replace(".", ","), "PrecioTxt": f"{precio:,.2f}".replace(",", "X").replace(".", ",").replace("X", ".")})
+    if not filas:
+        st.caption("Sin precios para mostrar.")
+        return
+    df = pd.DataFrame(filas)
+    fig = px.treemap(df, path=[px.Constant("Acciones con CEDEAR"), "Sector", "Ticker"], values="Tamaño", color="Var",
+                     color_continuous_scale=[(0, "#D92D20"), (0.4, "#F97066"), (0.5, "#98A2B3"), (0.6, "#32D583"), (1, "#067647")],
+                     range_color=(-3, 3), custom_data=["Empresa", "Etiqueta", "PrecioTxt"])
+    fig.update_traces(texttemplate="<b>%{label}</b><br>%{customdata[1]}", textposition="middle center",
+                      hovertemplate="<b>%{label}</b> · %{customdata[0]}<br>%{customdata[1]} hoy · USD %{customdata[2]}<extra></extra>",
+                      marker=dict(line=dict(width=1, color="rgba(0,0,0,0.15)")), root_color="rgba(0,0,0,0)", tiling=dict(pad=2))
+    fig.update_layout(height=560, margin=dict(t=10, l=0, r=0, b=0), coloraxis_showscale=False,
+                      paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)", font=dict(family="Inter, sans-serif", color="#FFFFFF"))
+    st.plotly_chart(fig, width="stretch", config={"displayModeBar": False})
+    fechas = sorted({x[2] for x in var.values()})
+    st.caption(f"Tamaño: valor de mercado · color: variación del día (rojo baja, verde sube, hasta ±3%) · precios de Yahoo "
+               f"al {fechas[-1] if fechas else ''}, se actualizan cada 5 minutos. Tocá un sector para agrandarlo.")
+
+
 # ============================================================================ página: inicio
 def _tarjeta_cartera(titulo, etiqueta, color_et, valor, filas, tickers, pie, href):
     datos = "".join(f"<div><span>{a}</span><b{(' style=' + chr(39) + 'color:' + c + chr(39)) if c else ''}>{b}</b></div>"
@@ -2638,11 +2717,7 @@ def pagina_inicio():
                     + "<p>El CCL es el dólar de los CEDEARs · dolarapi.com</p></div>", unsafe_allow_html=True)
     c3, c4 = st.columns([2, 1])
     with c3:
-        st.markdown("<div class='tit-sec'>Mapa del S&amp;P 500</div>", unsafe_allow_html=True)
-        widget_tradingview("embed-widget-stock-heatmap.js", {
-            "dataSource": "SPX500", "blockSize": "market_cap_basic", "blockColor": "change", "grouping": "sector",
-            "hasTopBar": False, "isZoomEnabled": True, "hasSymbolTooltip": True, "isDataSetEnabled": False,
-            "isMonoSize": False, "width": "100%", "height": "100%"}, 560)
+        mapa_cedears(set(tick_cal) | set(tick_mom))
     with c4:
         st.markdown("<div class='tit-sec'>Próximos balances</div>", unsafe_allow_html=True)
         todos = tuple(sorted(set(tick_cal) | set(tick_mom)))
