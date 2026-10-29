@@ -27,7 +27,7 @@ AQUI = os.path.dirname(os.path.abspath(__file__))
 ARCHIVO = os.path.join(AQUI, "universo.csv")
 LISTADO = os.path.join(AQUI, "cedears_byma.csv")
 CAMPOS = ["ticker", "nombre", "cedear", "ratio_cedear", "incluida", "motivo", "tipo", "sector", "industria", "pais",
-          "bolsa", "volumen_usd", "formulario", "cik", "adr_ratio", "financiera", "dominio"]
+          "bolsa", "volumen_usd", "formulario", "cik", "adr_ratio", "financiera", "dominio", "valor_mercado"]
 
 # Sectores de Yahoo -> los de la app (tecnología y semiconductores van separados, como siempre)
 SECTORES = {"Technology": "Tecnología", "Communication Services": "Comunicación",
@@ -222,6 +222,7 @@ def actualizar():
         f["bolsa"] = info.get("exchange", "")
         web = (info.get("website") or "").lower()
         f["dominio"] = re.sub(r"^(https?://)?(www\.)?", "", web).split("/")[0]
+        f["valor_mercado"] = round(info["marketCap"]) if isinstance(info.get("marketCap"), (int, float)) else ""
         f["financiera"] = "1" if (info.get("sector") == "Financial Services" and
                                   any(f["industria"].startswith(x) or x in f["industria"] for x in INDUSTRIAS_FINANCIERAS)) else "0"
         if f["tipo"] in ("ETF", "MUTUALFUND", "INDEX", "CRYPTOCURRENCY") or s in ETF_CONOCIDOS or cod in ETF_CONOCIDOS:
