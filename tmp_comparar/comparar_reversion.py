@@ -1,5 +1,6 @@
 """Compara el backtest de reversión con la lista vieja (139) y con el universo ampliado. Solo imprime; no guarda nada."""
-import ast, os, sys, types
+import ast, os, sys, types, warnings
+warnings.filterwarnings("ignore")
 import numpy as np, pandas as pd, yfinance as yf
 sys.path.insert(0, os.getcwd())
 fuente = open("dashboard/app.py", encoding="utf-8").read()
@@ -11,8 +12,11 @@ for n in arbol.body:
     if isinstance(n, ast.FunctionDef) and n.name in nombres:
         n.decorator_list = []
         partes.append(ast.unparse(n))
-    elif isinstance(n, ast.Assign) and any(isinstance(t, ast.Name) and t.id in const for t in n.targets):
-        partes.append(ast.unparse(n))
+    elif isinstance(n, ast.Assign) and not any(isinstance(x, (ast.Call, ast.Attribute)) for x in ast.walk(n.value)):
+        objs = [x for t in n.targets for x in ast.walk(t) if isinstance(x, ast.Name)]
+        usa = {x.id for x in ast.walk(n.value) if isinstance(x, ast.Name)}
+        if objs and all(x.id.isupper() and not x.id.startswith("_") for x in objs) and not (usa - {"True", "False", "None"}):
+            partes.append(ast.unparse(n))
 import universo as U
 def correr(etiqueta, lista):
     import importlib, screener
