@@ -132,6 +132,14 @@ LISTA_TICKERS = sorted(set([
     "NEE", "ADP",
 ]))
 
+# Universo ampliado: todas las acciones con CEDEAR que cotizan en EE.UU. (universo.csv, ver universo.py).
+try:
+    import universo as _U
+    if _U.cedears():
+        LISTA_TICKERS = sorted(_U.cedears())
+except ImportError:
+    pass
+
 # Las 48 acciones de las primeras pruebas (solo informativo)
 LISTA_48_ORIGINAL = [
     "AAPL", "MSFT", "GOOGL", "AMZN", "META", "NVDA", "TSLA", "NFLX",
@@ -915,6 +923,32 @@ def enviar_mail(df, ruta, ruta_pdf=None, abiertas=None):
     print(f"Mail enviado a: {', '.join(destinos)}")
 
 
+def guardar_panel(df, mercado, ruta="panel_screener.json"):
+    """Resultado del día por acción, para el explorador del dashboard (no cambia ninguna señal)."""
+    import json
+
+    def num(v):
+        try:
+            v = float(v)
+        except (TypeError, ValueError):
+            return None
+        return None if np.isnan(v) else v
+    filas = {}
+    for _, r in df.iterrows():
+        filas[r["Ticker"]] = {
+            "pasa": bool(r.get("PASA")) if pd.notna(r.get("PASA")) else False,
+            "falla_en": r.get("Falla en") if isinstance(r.get("Falla en"), str) else "",
+            "error": r.get("Error") if isinstance(r.get("Error"), str) else "",
+            "caida": num(r.get("Caída desde máx. %")), "beta": num(r.get("Beta")),
+            "vs_ema200": num(r.get("Precio vs EMA200 %")), "dias_rango": num(r.get("Días en rango")),
+            "tendencia_previa": r.get("Tendencia previa") if isinstance(r.get("Tendencia previa"), str) else "",
+            "volumen_m": num(r.get("Volumen prom. USD (M)")), "aviso": r.get("Aviso") if isinstance(r.get("Aviso"), str) else ""}
+    ok, px_spy, media = mercado
+    with open(ruta, "w", encoding="utf-8") as fh:
+        json.dump({"fecha": date.today().isoformat(), "mercado_ok": bool(ok), "filas": filas}, fh, ensure_ascii=False)
+    print(f"Panel del screener guardado en {ruta}")
+
+
 def main():
     if yf is None:
         sys.exit("Falta la librería yfinance. Instalala con:\n    pip install yfinance pandas openpyxl")
@@ -933,6 +967,10 @@ def main():
 
     ruta = f"screener_{date.today().isoformat()}.xlsx"
     exportar_excel(df, ruta)
+    try:
+        guardar_panel(df, MERCADO)
+    except Exception as e:  # noqa: BLE001
+        print("No se pudo guardar el panel (no afecta al mail):", e)
 
     print("\n" + "=" * 50)
     ok, px_spy, media = MERCADO

@@ -6,6 +6,7 @@ Se publica en Streamlit Community Cloud (privado: solo entran los mails invitado
     la última revisión y el ranking (panel_calidad.json) y la historia del backtest 2011-2026 (historial_calidad.json).
   * Momentum residual: se recalcula en vivo con el mismo código del mail (momentum.py), incluyendo su backtest desde 2011.
 """
+import html
 import json
 import os
 import sys
@@ -22,7 +23,7 @@ import yfinance as yf
 RAIZ = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(RAIZ))
 
-st.set_page_config(page_title="Estrategias CEDEAR", page_icon="📈", layout="wide")
+st.set_page_config(page_title="Streamlimits", page_icon="📈", layout="wide")
 
 # Configuración del momentum (los mismos valores que las variables de GitHub), en los "Secrets" de Streamlit.
 for clave, defecto in (("MOMENTUM_INICIO", "2026-10-01"), ("MOMENTUM_CAPITAL", "10000"), ("MOMENTUM_EXCLUIR", "")):
@@ -44,65 +45,123 @@ except ImportError:
 # tomaba 2011 como inicio y mostraba el backtest como si fuera la cartera real).
 INICIO_MOM_REAL = os.environ.get("MOMENTUM_INICIO") or "2026-10-01"
 INICIO_BACKTEST_MOM = "2011-01-03"
-AZUL, GRIS, NARANJA = "#3DE0FF", "#6F819E", "#FF8A4C"       # estilo oscuro "futurista": cian, gris acero, naranja
+AZUL, GRIS, NARANJA = "#2459D6", "#98A2B3", "#E07A1F"       # estilo claro: azul, gris, naranja
 MESES = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"]
 
 st.markdown("""
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
-  :root {--cian: #3DE0FF; --panel: rgba(13,20,36,.92); --borde: #1C2A44; --texto2: #8EA0BC; --mono: 'JetBrains Mono', ui-monospace, monospace;}
-  .stApp {background-color: #060A13;
-      background-image: radial-gradient(circle at 1px 1px, rgba(61,224,255,.07) 1px, transparent 0); background-size: 28px 28px;}
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+  :root {--acento: #2459D6; --acento-suave: #EEF2FF; --fondo: #F6F7F9; --panel: #FFFFFF; --borde: #E4E7EC; --linea: #F0F2F5;
+         --texto: #101828; --texto2: #5B6474; --texto3: #344054;}
+  .stApp {background-color: var(--fondo);}
   html, body, .stApp, .stApp p, .stApp li, .stApp label, .stApp button, .stApp input, .stApp textarea,
-  [data-testid="stMarkdownContainer"], [data-testid="stCaptionContainer"] {font-family: 'Space Grotesk', system-ui, sans-serif;}
-  .stApp h1, .stApp h2, .stApp h3 {font-family: 'Space Grotesk', system-ui, sans-serif; letter-spacing: -.01em;}
-  .stApp h1 {font-weight: 700; font-size: 2.4rem;}
-  .block-container {padding-top: 3.2rem; max-width: 1400px;}
+  [data-testid="stMarkdownContainer"], [data-testid="stCaptionContainer"] {font-family: 'Inter', system-ui, sans-serif;}
+  .stApp h1, .stApp h2, .stApp h3 {font-family: 'Inter', system-ui, sans-serif; letter-spacing: -.02em; color: var(--texto);}
+  .stApp h1 {font-weight: 700; font-size: 2rem;}
+  .stApp h3 {font-size: 1.1rem; font-weight: 700;}
+  .block-container {padding-top: 2.6rem; max-width: 1280px;}
   header[data-testid="stHeader"] {background: transparent;}
   [data-testid="stCaptionContainer"] {color: var(--texto2);}
-  .kicker {font-family: var(--mono); font-size: .75rem; letter-spacing: .18em; color: var(--cian); margin: 0 0 -.4rem 0;}
+  .kicker {font-size: .75rem; font-weight: 600; letter-spacing: .08em; color: var(--acento); margin: 0 0 -.4rem 0; text-transform: uppercase;}
+  .num, .tbl td.n {font-variant-numeric: tabular-nums;}
 
   /* tarjetas de números */
-  div[data-testid="stMetric"] {position: relative; background: var(--panel); border: 1px solid var(--borde); border-radius: 16px;
-      padding: .95rem 1rem .8rem 1rem; overflow: hidden;}
-  div[data-testid="stMetric"]::before {content: ""; position: absolute; left: 0; top: 0; right: 0; height: 2px;
-      background: var(--cian); box-shadow: 0 0 12px var(--cian);}
-  div[data-testid="stMetricLabel"] p {color: var(--texto2) !important; font-size: .85rem;}
-  div[data-testid="stMetricValue"] {font-family: var(--mono); font-size: 1.3rem; font-weight: 700; color: #F2F8FF; letter-spacing: -.03em;}
-  div[data-testid="stMetricDelta"] {font-family: var(--mono);}
+  div[data-testid="stMetric"] {background: var(--panel); border: 1px solid var(--borde); border-radius: 14px; padding: .9rem 1rem .8rem 1rem;}
+  div[data-testid="stMetricLabel"] p {color: var(--texto2) !important; font-size: .82rem; font-weight: 500;}
+  div[data-testid="stMetricValue"] {font-size: 1.45rem; font-weight: 700; color: var(--texto); letter-spacing: -.02em; font-variant-numeric: tabular-nums;}
   div[data-testid="stMetricLabel"] p, div[data-testid="stMetricLabel"] div, div[data-testid="stMetricDelta"] div {white-space: normal !important; overflow: visible !important; text-overflow: clip !important;}
 
   /* avisos */
-  .aviso {padding: .75rem 1rem; border-radius: 12px; margin: .25rem 0 .8rem 0; font-size: .95rem; color: #DCE6F5;
+  .aviso {padding: .75rem 1rem; border-radius: 12px; margin: .25rem 0 .8rem 0; font-size: .95rem; color: var(--texto3);
       background: var(--panel); border: 1px solid var(--borde);}
-  .aviso-azul {background: rgba(61,224,255,.07); border-color: rgba(61,224,255,.45);}
-  .aviso-naranja {background: rgba(255,138,76,.08); border-color: rgba(255,138,76,.50);}
-  .aviso-rojo {background: rgba(255,107,139,.08); border-color: rgba(255,107,139,.50);}
-  .aviso-verde {background: rgba(61,220,151,.07); border-color: rgba(61,220,151,.45);}
-  .aviso-violeta {background: rgba(183,148,255,.08); border-color: rgba(183,148,255,.45);}
+  .aviso-azul {background: #F5F8FF; border-color: #C7D7FE;}
+  .aviso-naranja {background: #FFFAEB; border-color: #FEDF89;}
+  .aviso-rojo {background: #FEF3F2; border-color: #FECDCA;}
+  .aviso-verde {background: #ECFDF3; border-color: #ABEFC6;}
+  .aviso-violeta {background: #F4F3FF; border-color: #D9D6FE;}
 
-  /* chips de leyenda */
+  /* chips */
   .leyenda {font-size: .85rem; margin: -.2rem 0 .6rem 0; line-height: 2.2;}
-  .chip {display: inline-block; padding: .1rem .7rem; border-radius: 999px; margin-right: .4rem; font-weight: 600; font-size: .8rem;
-      font-family: var(--mono); border: 1px solid currentColor;}
+  .chip {display: inline-block; padding: .12rem .65rem; border-radius: 999px; margin-right: .35rem; font-weight: 600; font-size: .76rem;
+      line-height: 1.5; white-space: nowrap;}
 
   /* pestañas */
-  .stTabs [data-baseweb="tab-list"] {gap: .4rem; border-bottom: 1px solid var(--borde);}
-  .stTabs [data-baseweb="tab"] {font-size: .95rem; color: var(--texto2);}
-  .stTabs [aria-selected="true"] {color: #E9F6FF !important;}
-  .stTabs [data-baseweb="tab-highlight"] {background-color: var(--cian) !important; box-shadow: 0 0 10px var(--cian);}
+  .stTabs [data-baseweb="tab-list"] {gap: .2rem; border-bottom: 1px solid var(--borde);}
+  .stTabs [data-baseweb="tab"] {font-size: .92rem; font-weight: 500; color: var(--texto2); padding: .5rem .8rem;}
+  .stTabs [aria-selected="true"] {color: var(--texto) !important;}
+  .stTabs [data-baseweb="tab-highlight"] {background-color: var(--acento) !important;}
 
-  /* tablas y gráficos dentro de paneles */
+  /* tablas propias (sin cuadrícula de planilla) */
+  .tbl-wrap {background: var(--panel); border: 1px solid var(--borde); border-radius: 14px; overflow: auto; margin: .2rem 0 .9rem 0;}
+  table.tbl {width: 100%; border-collapse: separate; border-spacing: 0; font-size: .88rem; color: var(--texto); border: 0 !important; margin: 0 !important;}
+  table.tbl th, table.tbl td {border-left: 0 !important; border-right: 0 !important; border-top: 0 !important;}
+  table.tbl th {position: sticky; top: 0; z-index: 1; background: #FAFBFC; text-align: left; font-size: .7rem; font-weight: 600;
+      color: var(--texto2); text-transform: uppercase; letter-spacing: .04em; padding: .65rem .8rem; border-bottom: 1px solid var(--borde);
+      white-space: nowrap;}
+  table.tbl td {padding: .6rem .8rem; border-bottom: 1px solid var(--linea) !important; vertical-align: middle; white-space: nowrap;}
+  table.tbl tr:last-child td {border-bottom: 0;}
+  table.tbl tr:hover td {background: #FAFBFC;}
+  table.tbl th.n, table.tbl td.n {text-align: right; white-space: nowrap;}
+  table.tbl td.largo {min-width: 280px; white-space: normal; color: var(--texto3); font-size: .84rem;}
+  .tk {display: inline-flex; align-items: center; gap: .55rem; font-weight: 600; white-space: nowrap;}
+  .logo {display: inline-flex; align-items: center; justify-content: center; flex: none; border-radius: 8px; overflow: hidden;
+      background: #FFFFFF; border: 1px solid var(--borde); color: #FFFFFF; font-weight: 700;}
+  .logo {position: relative;}
+  .logo img {position: absolute; inset: 0; margin: auto; width: 78%; height: 78%; object-fit: contain; background: #FFFFFF;}
+  .logo.con-img {color: transparent;}
+  .barra {display: flex; align-items: center; gap: .5rem; min-width: 110px;}
+  .barra > span:first-child {flex: 1; height: 6px; background: #EEF0F3; border-radius: 99px; overflow: hidden; display: block;}
+  .barra i {display: block; height: 100%; background: var(--acento); border-radius: 99px;}
+
+  /* movimientos como tarjetas */
+  .dia {display: flex; flex-wrap: wrap; align-items: center; gap: .6rem; margin: 1.1rem 0 .6rem 0;}
+  .dia .punto {width: 10px; height: 10px; border-radius: 99px; background: var(--acento);}
+  .dia b {font-size: .98rem; color: var(--texto);}
+  .dia .cuenta {margin-left: auto; font-size: .82rem; color: var(--texto2);}
+  .grilla {display: grid; grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); gap: .75rem; padding-left: 1.1rem;
+      border-left: 2px solid var(--borde); margin-left: 4px;}
+  .tarjeta {background: var(--panel); border: 1px solid var(--borde); border-radius: 14px; padding: .9rem 1rem; display: flex;
+      flex-direction: column; gap: .65rem;}
+  .tarjeta .cab {display: flex; align-items: center; gap: .7rem;}
+  .tarjeta .cab .nom {flex: 1; min-width: 0; display: flex; flex-direction: column;}
+  .tarjeta .cab .nom b {color: var(--texto); font-size: .95rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;}
+  .tarjeta .cab .nom span {font-size: .76rem; color: var(--texto2);}
+  .tarjeta .datos {display: flex; flex-wrap: wrap; gap: 1.2rem;}
+  .tarjeta .datos div {display: flex; flex-direction: column;}
+  .tarjeta .datos span {font-size: .72rem; color: var(--texto2);}
+  .tarjeta .datos b {font-size: .92rem; font-variant-numeric: tabular-nums;}
+  .tarjeta p {margin: 0; font-size: .84rem; color: var(--texto3); line-height: 1.45;}
+
+  /* ficha de empresa */
+  .ficha-cab {background: var(--panel); border: 1px solid var(--borde); border-radius: 16px; padding: 1.2rem 1.3rem; display: flex;
+      flex-wrap: wrap; align-items: center; gap: 1.1rem; margin-bottom: .8rem;}
+  .ficha-cab h2 {margin: 0 !important; padding: 0 !important; font-size: 1.7rem !important;}
+  .etiquetas {display: flex; flex-wrap: wrap; gap: .4rem; margin-top: .35rem;}
+  .etiquetas span {padding: .15rem .65rem; border-radius: 999px; background: #F2F4F7; color: var(--texto3); font-size: .78rem;}
+  .caja {background: var(--panel); border: 1px solid var(--borde); border-radius: 14px; padding: 1rem 1.1rem; height: 100%;}
+  .caja .tit {margin: 0 0 .5rem 0; font-size: .95rem; font-weight: 700; color: var(--texto);}
+  .filtro {display: flex; align-items: center; gap: .6rem; padding: .45rem 0; border-bottom: 1px solid var(--linea); font-size: .88rem;}
+  .filtro:last-child {border-bottom: 0;}
+  .filtro .v {margin-left: auto; font-weight: 600; font-variant-numeric: tabular-nums; white-space: nowrap;}
+  .ok, .no {width: 20px; height: 20px; border-radius: 99px; display: inline-flex; align-items: center; justify-content: center;
+      font-size: .72rem; font-weight: 700; flex: none;}
+  .ok {background: #ECFDF3; color: #067647;}
+  .no {background: #FEF3F2; color: #B42318;}
+  .metricas {display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: .9rem;}
+  .metricas span {display: block; font-size: .74rem; color: var(--texto2);}
+  .metricas b {font-size: 1.1rem; font-variant-numeric: tabular-nums;}
+
+  /* gráficos */
+  div[data-testid="stVegaLiteChart"] {background: var(--panel); border: 1px solid var(--borde); border-radius: 14px; padding: .7rem .9rem;}
   div[data-testid="stDataFrame"] {border: 1px solid var(--borde); border-radius: 12px; overflow: hidden;}
-  div[data-testid="stVegaLiteChart"] {background: #060A13; border: 1px solid var(--borde); border-radius: 16px; padding: .7rem .9rem;}
+  [class*="st-key-caja"] {background: var(--panel); border-radius: 14px !important; border-color: var(--borde) !important;}
+  [class*="st-key-caja"] div[data-testid="stVegaLiteChart"] {border: 0; padding: 0;}
 
   /* menú lateral */
-  section[data-testid="stSidebar"] {background: #0A1120; border-right: 1px solid var(--borde);}
+  section[data-testid="stSidebar"] {background: #FFFFFF; border-right: 1px solid var(--borde);}
   [data-testid="stSidebarNav"] a {border-radius: 10px; min-height: 44px;}
-  [data-testid="stSidebarNav"] a[aria-current="page"] {background: rgba(61,224,255,.10); border: 1px solid rgba(61,224,255,.35);
-      box-shadow: 0 0 18px rgba(61,224,255,.15);}
-  .marca {display: flex; align-items: center; gap: .6rem; font-weight: 700; font-size: 1.05rem; letter-spacing: .05em; color: #E9F6FF;}
-  .marca b {color: var(--cian);}
+  [data-testid="stSidebarNav"] a[aria-current="page"] {background: var(--acento-suave);}
+  .marca {display: flex; align-items: center; gap: .6rem; font-weight: 700; font-size: 1.1rem; letter-spacing: -.01em; color: var(--texto);}
 </style>
 """, unsafe_allow_html=True)
 
@@ -114,29 +173,29 @@ def encabezado(kicker, titulo):
 
 
 # ============================================================================ colores
-# Colores claros para leerse sobre fondo oscuro (verde/rojo también difieren en luminosidad, no solo en tono)
-VERDE, ROJO, AMARILLO, VIOLETA, CELESTE = "#3DDC97", "#FF6B8B", "#FFB547", "#B794FF", "#3DE0FF"
-_FONDO = {"verde": (VERDE, "61,220,151"), "rojo": (ROJO, "255,107,139"), "naranja": (NARANJA, "255,138,76"),
-          "amarillo": (AMARILLO, "255,181,71"), "azul": (CELESTE, "61,224,255"), "violeta": (VIOLETA, "183,148,255"),
-          "gris": ("#A9B8CF", "111,129,158")}
+# Colores para fondo claro (verde y rojo también difieren en luminosidad, no solo en tono)
+VERDE, ROJO, AMARILLO, VIOLETA, CELESTE = "#067647", "#B42318", "#B54708", "#6941C6", "#2459D6"
+_FONDO = {"verde": (VERDE, "#ECFDF3"), "rojo": (ROJO, "#FEF3F2"), "naranja": ("#B93815", "#FFF4ED"),
+          "amarillo": (AMARILLO, "#FFFAEB"), "azul": (CELESTE, "#EEF2FF"), "violeta": (VIOLETA, "#F4F3FF"),
+          "gris": ("#475467", "#F2F4F7")}
 
 
 def css_color(nombre):
     """Estilo de celda: fondo suave y letra del color."""
     if nombre not in _FONDO:
         return ""
-    txt, rgb = _FONDO[nombre]
-    return f"background-color: rgba({rgb},.16); color: {txt}; font-weight: 600"
+    txt, fondo = _FONDO[nombre]
+    return f"background-color: {fondo}; color: {txt}; font-weight: 600"
 
 
 def chip(texto, nombre):
-    txt, rgb = _FONDO[nombre]
-    return f"<span class='chip' style='background: rgba({rgb},.16); color: {txt}'>{texto}</span>"
+    txt, fondo = _FONDO.get(nombre, _FONDO["gris"])
+    return f"<span class='chip' style='background: {fondo}; color: {txt}'>{texto}</span>"
 
 
 # Tipo de movimiento: (prefijo, ícono, color). Se busca por prefijo, en este orden.
-ORDENES = [("ROTAR", "🔄", "violeta"), ("VENDER", "🔴", "rojo"), ("COMPRAR", "🟢", "verde"), ("RECORTAR", "✂️", "naranja"),
-           ("SUMAR", "➕", "azul"), ("REFORZAR", "➕", "azul")]
+ORDENES = [("ROTAR", "", "violeta"), ("VENDER", "", "rojo"), ("COMPRAR", "", "verde"), ("RECORTAR", "", "naranja"),
+           ("SUMAR", "", "azul"), ("REFORZAR", "", "azul")]
 
 
 def _orden(v):
@@ -192,35 +251,121 @@ SITUACION_CALIDAD = por_prefijo({"en cartera": "azul", "comprable": "verde", "te
 SITUACION_MOM = por_prefijo({"en cartera": "azul", "fuera": "gris"})
 
 
+# ============================================================================ logos
+try:
+    import universo as U          # noqa: E402
+    DOMINIOS = U.dominios()
+except Exception:                 # noqa: BLE001
+    U, DOMINIOS = None, {}
+try:
+    LOGO_TOKEN = st.secrets.get("LOGO_DEV_TOKEN", "")
+except Exception:                 # noqa: BLE001
+    LOGO_TOKEN = ""
+TONOS = ["#1D4ED8", "#047857", "#B45309", "#7C3AED", "#BE123C", "#0E7490", "#4D7C0F", "#9D174D"]
+
+
+def logo_url(t):
+    """Logo de la empresa: logo.dev si hay clave (LOGO_DEV_TOKEN en los Secrets), si no el ícono de su web."""
+    t = str(t)
+    if LOGO_TOKEN:
+        return f"https://img.logo.dev/ticker/{t.split('-')[0]}?token={LOGO_TOKEN}&size=80&format=png&retina=true"
+    d = DOMINIOS.get(t)
+    return f"https://www.google.com/s2/favicons?domain={d}&sz=128" if d else None
+
+
+def logo_html(t, tam=26):
+    """Logo de la empresa; si no hay o no carga, un cuadrado de color con las iniciales."""
+    t = str(t)
+    url = logo_url(t)
+    tono = TONOS[sum(map(ord, t)) % len(TONOS)]
+    base = (f"width:{tam}px;height:{tam}px;font-size:{max(9, int(tam * .38))}px;")
+    if url:
+        return (f"<span class='logo' style='{base}'><img src='{html.escape(url)}' alt='' loading='lazy' "
+                f"onerror=\"this.parentNode.style.background='{tono}';this.parentNode.style.borderColor='{tono}';this.remove()\">"
+                f"{html.escape(t[:2])}</span>")
+    return f"<span class='logo' style='{base}background:{tono};border-color:{tono}'>{html.escape(t[:2])}</span>"
+
+
+def ticker_html(t, tam=24):
+    return f"<span class='tk'>{logo_html(t, tam)}{html.escape(str(t))}</span>"
+
+
+def _css_a_chip(css, texto):
+    """Estilo de celda (fondo + color) -> etiqueta redondeada; solo color -> texto coloreado."""
+    if not css:
+        return texto, ""
+    if "background-color" in css:
+        partes = {a.strip(): b for a, b in (x.split(":", 1) for x in css.split(";") if ":" in x)}
+        fondo, color = partes.get("background-color", "").strip(), partes.get("color", "").strip()
+        return f"<span class='chip' style='background:{fondo};color:{color}'>{texto}</span>", ""
+    return texto, css
+
+
 def tabla(df, fmt=None, signo=(), estilos=None, fechas=(), orden=None, config=None, height=None):
-    """Tabla con colores.
+    """Tabla limpia en HTML (sin cuadrícula de planilla).
     fmt: {columna: '%+.1f%%'} · signo: columnas en verde (positivo) o rojo (negativo) · estilos: {columna: función valor -> css}
-    fechas: columnas de fecha (dd/mm/aaaa) · orden: columna con el tipo de movimiento (ícono y color) · config: column_config."""
+    fechas: columnas de fecha (dd/mm/aaaa) · orden: columna con el tipo de movimiento · config: column_config (título, ayuda,
+    barra de progreso)."""
     df = df.reset_index(drop=True).copy()
+    config = dict(config or {})
     fm = {c: (f if callable(f) else _fmt_num(f)) for c, f in (fmt or {}).items() if c in df}
-    for c in list(fm):
-        if df[c].isna().any():          # columna con huecos: se pasa a texto ya formateado
-            f = fm.pop(c)
-            df[c] = [f(v) if pd.notna(v) else "" for v in df[c]]
     for c in fechas:
         if c in df:
             fm[c] = _fmt_fecha_corta
-    if orden and orden in df:
-        fm[orden] = lambda v: f"{_orden(v)[0]} {v}".strip()
-    sty = df.style.format(fm, na_rep="")
-    cols = [c for c in signo if c in df]
-    if cols:
-        sty = sty.map(color_signo, subset=cols)
-    for c, f in (estilos or {}).items():
-        if c in df:
-            sty = sty.map(f, subset=[c])
-    if orden and orden in df:
-        sty = sty.map(lambda v: css_color(_orden(v)[1]), subset=[orden])
-    kw = {"height": height} if height else {}
-    config = dict(config or {})
-    if orden and orden in df and orden not in config:
-        config[orden] = st.column_config.Column(width="medium")
-    st.dataframe(sty, hide_index=True, width="stretch", column_config=config, **kw)
+    cab, cuerpo = [], []
+    tipos = {}
+    for c in df.columns:
+        cfg = config.get(c) or {}
+        cfg = cfg if isinstance(cfg, dict) else {}
+        tc = cfg.get("type_config") or {}
+        barra = tc if tc.get("type") == "progress" else None
+        num = (c in fm and c not in fechas and not callable((fmt or {}).get(c))) or c in signo or barra or (
+            pd.api.types.is_numeric_dtype(df[c]) and not pd.api.types.is_bool_dtype(df[c]))
+        largo = cfg.get("width") == "large" or c in ("Motivo", "Motivos para revisar", "Falla en")
+        tipos[c] = (barra, num, largo)
+        etiqueta = cfg.get("label") or c
+        ayuda = cfg.get("help")
+        cab.append(f"<th class='{'n' if num and not barra else ''}'" + (f" title='{html.escape(ayuda)}'" if ayuda else "")
+                   + f">{html.escape(str(etiqueta))}</th>")
+    for _, fila in df.iterrows():
+        celdas = []
+        for c in df.columns:
+            v = fila[c]
+            barra, num, largo = tipos[c]
+            vacio = v is None or (not isinstance(v, (list, dict, str)) and pd.isna(v))
+            if barra and not vacio:
+                lo, hi = barra.get("min_value") or 0, barra.get("max_value") or 100
+                ancho = max(0, min(100, (float(v) - lo) / (hi - lo) * 100)) if hi > lo else 0
+                f_ = barra.get("format") or "%.0f"
+                txt = (f_ % float(v)).replace(".", ",") if "%" in f_ else str(v)
+                celdas.append(f"<td><span class='barra'><span><i style='width:{ancho:.1f}%'></i></span><b class='num'>{txt}</b></span></td>")
+                continue
+            if vacio:
+                txt = ""
+            elif c in fm:
+                txt = html.escape(str(fm[c](v)))
+            elif isinstance(v, float):
+                txt = (f"{v:,.0f}" if abs(v) >= 1000 else f"{v:.2f}" if abs(v) < 10 else f"{v:.1f}").replace(",", "X").replace(".", ",").replace("X", ".")
+            elif isinstance(v, (pd.Timestamp, date)):
+                txt = _fmt_fecha_corta(v)
+            else:
+                txt = html.escape(str(v))
+            estilo = ""
+            if c in signo and not vacio:
+                estilo = color_signo(v)
+            if estilos and c in estilos and not vacio:
+                txt, estilo2 = _css_a_chip(estilos[c](v), txt)
+                estilo = estilo2 or estilo
+            if orden and c == orden and not vacio:
+                txt = chip(html.escape(str(v).capitalize()), _orden(v)[1] or "gris")
+            if c == "Acción" and not vacio and not str(v).startswith("SPY"):
+                txt = ticker_html(v)
+            clase = "n" if num else ("largo" if largo else "")
+            celdas.append(f"<td class='{clase}'" + (f" style='{estilo}'" if estilo else "") + f">{txt}</td>")
+        cuerpo.append("<tr>" + "".join(celdas) + "</tr>")
+    alto = f"max-height:{int(height)}px;" if height else ("max-height:620px;" if len(df) > 16 else "")
+    st.markdown(f"<div class='tbl-wrap' style='{alto}'><table class='tbl'><thead><tr>{''.join(cab)}</tr></thead>"
+                f"<tbody>{''.join(cuerpo)}</tbody></table></div>".replace("$", "&#36;"), unsafe_allow_html=True)
 
 
 # ============================================================================ utilidades
@@ -254,7 +399,7 @@ def delta_pts(a, b):
 def delta_usd(g):
     if g is None or pd.isna(g) or abs(g) < 0.5:
         return None
-    return ("USD +" if g > 0 else "USD -") + f"{abs(g):,.0f}".replace(",", ".")
+    return ("+USD " if g > 0 else "-USD ") + f"{abs(g):,.0f}".replace(",", ".")
 
 
 def aviso(texto, tipo="azul"):
@@ -321,18 +466,15 @@ def grafico_evolucion(df, colores, log=False, marca=None, alto=320):
     y = alt.Y("Valor:Q", title=None, scale=alt.Scale(type="log" if log else "linear", zero=False),
               axis=alt.Axis(format="~s", gridOpacity=0.25))
     lineas = base.mark_line(strokeWidth=2.4).encode(y=y, color=alt.Color("Serie:N", scale=esc, legend=alt.Legend(orient="top", title=None)))
-    principal = list(colores)[0]
-    brillo = alt.Chart(d[d["Serie"] == principal]).mark_line(strokeWidth=6, opacity=0.13, color=colores[principal]).encode(
-        x="Fecha:T", y=y)          # halo debajo de la línea principal
     cerca = alt.selection_point(nearest=True, on="pointerover", fields=["Fecha"], empty=False)
     puntos = base.mark_point(size=55, filled=True).encode(
         y=y, color=alt.Color("Serie:N", scale=esc, legend=None), opacity=alt.condition(cerca, alt.value(1), alt.value(0)),
         tooltip=[alt.Tooltip("Fecha:T", format="%d/%m/%Y"), "Serie:N", alt.Tooltip("Valor:Q", format=",.0f", title="USD")]).add_params(cerca)
-    regla = base.mark_rule(color="#4A5A75").encode(opacity=alt.condition(cerca, alt.value(0.5), alt.value(0))).transform_filter(cerca)
-    capas = brillo + lineas + puntos + regla
+    regla = base.mark_rule(color="#98A2B3").encode(opacity=alt.condition(cerca, alt.value(0.5), alt.value(0))).transform_filter(cerca)
+    capas = lineas + puntos + regla
     if marca:
         m = pd.DataFrame({"Fecha": [pd.Timestamp(marca[0])], "txt": [marca[1]]})
-        capas += alt.Chart(m).mark_rule(strokeDash=[3, 3], color="#4A5A75").encode(x="Fecha:T", tooltip=["txt:N"])
+        capas += alt.Chart(m).mark_rule(strokeDash=[3, 3], color="#98A2B3").encode(x="Fecha:T", tooltip=["txt:N"])
     st.altair_chart(capas.properties(height=alto), width="stretch")
 
 
@@ -348,11 +490,11 @@ def grafico_anual(an, colores):
         y=alt.Y("Rend:Q", title="% en el año", axis=alt.Axis(gridOpacity=0.25)),
         color=alt.Color("Serie:N", scale=esc, legend=alt.Legend(orient="top", title=None)),
         tooltip=["Año:N", "Serie:N", alt.Tooltip("Rend:Q", format="+.1f", title="%")])
-    cero = alt.Chart(pd.DataFrame({"y": [0]})).mark_rule(color="#4A5A75").encode(y="y:Q")
+    cero = alt.Chart(pd.DataFrame({"y": [0]})).mark_rule(color="#98A2B3").encode(y="y:Q")
     st.altair_chart((ch + cero).properties(height=280), width="stretch")
 
 
-PALETA_SECTORES = ["#3DE0FF", "#3DDC97", "#FFB547", "#B794FF", "#FF8A4C", "#FF6B8B", "#5B8CFF", "#E879F9", "#A3E635", "#94A3B8"]
+PALETA_SECTORES = ["#2459D6", "#0E9384", "#DC6803", "#7A5AF8", "#E04F16", "#D92D20", "#155EEF", "#C11574", "#4CA30D", "#667085"]
 
 
 def grafico_pesos(pesos, objetivo, tope, etiqueta_tope, sector_fn=None):
@@ -361,7 +503,7 @@ def grafico_pesos(pesos, objetivo, tope, etiqueta_tope, sector_fn=None):
     d["Sector"] = [("Liquidez" if str(t).startswith("SPY") else sector_fn(t)) if sector_fn else "" for t in d["Acción"]]
     sectores = [s for s in dict.fromkeys(d["Sector"]) if s != "Liquidez"]
     dom = sectores + (["Liquidez"] if "Liquidez" in set(d["Sector"]) else [])
-    rng = [PALETA_SECTORES[i % len(PALETA_SECTORES)] for i in range(len(sectores))] + (["#4A5A75"] if "Liquidez" in dom else [])
+    rng = [PALETA_SECTORES[i % len(PALETA_SECTORES)] for i in range(len(sectores))] + (["#98A2B3"] if "Liquidez" in dom else [])
     color = (alt.Color("Sector:N", scale=alt.Scale(domain=dom, range=rng), legend=alt.Legend(orient="top", title=None))
              if sector_fn else alt.value(AZUL))
     barras = alt.Chart(d).mark_bar(cornerRadiusTopLeft=4, cornerRadiusTopRight=4, size=26).encode(
@@ -371,7 +513,7 @@ def grafico_pesos(pesos, objetivo, tope, etiqueta_tope, sector_fn=None):
         color=color,
         tooltip=["Acción:N", "Sector:N", alt.Tooltip("Peso:Q", format=".1f", title="% de la cartera")])
     reglas = alt.Chart(pd.DataFrame({"y": [objetivo, tope], "Línea": [f"objetivo {objetivo:.0f}%", etiqueta_tope]})).mark_rule(
-        strokeDash=[4, 4], color="#4A5A75").encode(y="y:Q", tooltip=["Línea:N"])
+        strokeDash=[4, 4], color="#98A2B3").encode(y="y:Q", tooltip=["Línea:N"])
     st.altair_chart((barras + reglas).properties(height=250), width="stretch")
     st.caption(f"Cada color es un sector. Líneas punteadas: objetivo {objetivo:.0f}% por posición y {etiqueta_tope} (si lo supera, se recorta).")
 
@@ -419,12 +561,55 @@ def historial_con_filtros(df, clave, nombre_fn):
     st.markdown(f"<div class='leyenda'><b>{len(f)} movimientos:</b> " + "".join(
         chip(f"{_orden(p)[0]} {p.capitalize()} {n}", _orden(p)[1] or "gris") for p, n in cuenta.items()) + "</div>",
         unsafe_allow_html=True)
+    vista = st.segmented_control("Vista", ["Tarjetas", "Tabla"], default="Tarjetas", key=f"{clave}_vista",
+                                 label_visibility="collapsed")
+    if vista != "Tabla":
+        movimientos_tarjetas(f, clave)
+        return
     tabla(f[["Fecha", "Origen", "Orden", "Acción", "Empresa", "Peso", "Resultado", "Motivo"]],
           fmt={"Peso": "%.1f%%", "Resultado": "%+.0f%%"}, signo=["Resultado"], fechas=["Fecha"], orden="Orden",
           estilos={"Origen": ORIGEN_COLOR}, height=min(36 * (len(f) + 1) + 3, 560), config={
               "Peso": st.column_config.Column("% de la cartera"),
               "Resultado": st.column_config.Column("Resultado", help="Solo en ventas: ganancia o pérdida de la posición"),
               "Motivo": st.column_config.Column(width="large")})
+
+
+def movimientos_tarjetas(f, clave, por_pagina=8):
+    """Movimientos agrupados por fecha, una tarjeta por orden (los más recientes primero)."""
+    cedear_fn = C.cedear
+    fechas = list(dict.fromkeys(f["Fecha"].dt.normalize()))
+    k_mas = f"{clave}_mostrar"
+    n = st.session_state.get(k_mas, por_pagina)
+    partes = []
+    for d in fechas[:n]:
+        g = f[f["Fecha"].dt.normalize() == d]
+        origenes = " · ".join(dict.fromkeys(str(o) for o in g["Origen"] if pd.notna(o)))
+        dia = f"{['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'][d.weekday()]} {fmt_fecha(d)}"
+        partes.append(f"<div class='dia'><span class='punto'></span><b>{dia}</b>{chip(html.escape(origenes), 'gris') if origenes else ''}"
+                      f"<span class='cuenta'>{len(g)} {'orden' if len(g) == 1 else 'órdenes'}</span></div><div class='grilla'>")
+        for _, o in g.iterrows():
+            t = str(o["Acción"])
+            ced = cedear_fn(t)
+            datos = []
+            if pd.notna(o.get("Peso")):
+                datos.append(("% de la cartera", pct(o["Peso"], 1, False)))
+            if pd.notna(o.get("Resultado")):
+                col = VERDE if o["Resultado"] > 0 else ROJO
+                datos.append(("Resultado", f"<span style='color:{col}'>{pct(o['Resultado'], 0)}</span>"))
+            partes.append(
+                "<div class='tarjeta'><div class='cab'>" + logo_html(t, 38) +
+                f"<div class='nom'><b>{html.escape(str(o.get('Empresa') or t))}</b><span>{html.escape(t)}"
+                + (f" · CEDEAR {html.escape(ced)}" if ced else "") + "</span></div>"
+                + chip(html.escape(str(o["Orden"]).upper()), _orden(o["Orden"])[1] or "gris") + "</div>"
+                + ("<div class='datos'>" + "".join(f"<div><span>{a}</span><b>{b}</b></div>" for a, b in datos) + "</div>" if datos else "")
+                + (f"<p>{html.escape(str(o['Motivo']))}</p>" if isinstance(o.get("Motivo"), str) and o["Motivo"] else "")
+                + "</div>")
+        partes.append("</div>")
+    st.markdown("".join(partes).replace("$", "&#36;"), unsafe_allow_html=True)
+    if len(fechas) > n:
+        if st.button(f"Mostrar más ({len(fechas) - n} fechas más)", key=f"{clave}_mas_btn"):
+            st.session_state[k_mas] = n + por_pagina
+            st.rerun()
 
 
 def ventas_con_stats(v, nombre_fn, nota_motivo=None):
@@ -957,8 +1142,8 @@ def pagina_calidad():
                 r[k] = pd.to_numeric(r[k], errors="coerce") * 100
             cuenta = r["Situación"].str.split(" ").str[0].value_counts()
             st.markdown("<div class='leyenda'>" + "".join(chip(f"{txt} {cuenta.get(clave, 0)}", col) for clave, txt, col in (
-                ("en", "🏛️ En cartera", "azul"), ("comprable", "🟢 Comprables", "verde"), ("precio", "💲 Precio extremo", "naranja"),
-                ("tendencia", "📉 Tendencia muy débil", "rojo")) if cuenta.get(clave, 0)) + "</div>", unsafe_allow_html=True)
+                ("en", "En cartera", "azul"), ("comprable", "Comprables", "verde"), ("precio", "Precio extremo", "naranja"),
+                ("tendencia", "Tendencia muy débil", "rojo")) if cuenta.get(clave, 0)) + "</div>", unsafe_allow_html=True)
 
             def color_rend(v):
                 try:
@@ -972,6 +1157,7 @@ def pagina_calidad():
                       "Rentabilidad": st.column_config.Column("ROIC/ROE"), "Ventas": st.column_config.Column("Ventas/año"),
                       "Deuda": st.column_config.Column("Deuda/EBITDA"),
                       "Rend10": st.column_config.Column("Rend. 10 años", help="Verde: 10% o más · amarillo: 5 a 10% · rojo: menos de 5% (precio extremo)"),
+                      "Puntaje": st.column_config.ProgressColumn("Puntaje", format="%.0f", min_value=0, max_value=100),
                       "Tendencia": st.column_config.ProgressColumn("Tendencia", format="%.0f", min_value=0, max_value=100)})
             esp = r[(r["Puesto"] <= 20) & (~r["comprable"]) & (~r["Acción"].isin(en_cart))].copy()
             if len(esp):
@@ -1164,7 +1350,7 @@ def pagina_momentum():
         rk["Situación"] = ["en cartera" if t in en else ("fuera (cartera llena)" if p <= 10 else "") for t, p in zip(rk["Acción"], rk["Puesto"])]
         st.markdown("**Ranking de hoy (top 30).** Las que están en cartera no se cambian por otras mejor rankeadas: solo se venden si salen "
                     "del top 30.")
-        st.markdown("<div class='leyenda'>" + chip("🏛️ En cartera", "azul") + chip("Top 10 que no entra (cartera llena)", "gris")
+        st.markdown("<div class='leyenda'>" + chip("En cartera", "azul") + chip("Top 10 que no entra (cartera llena)", "gris")
                     + chip("25 a 30: zona de salida", "amarillo") + "</div>", unsafe_allow_html=True)
         tabla(rk[["Puesto", "Acción", "Empresa", "Situación", "CEDEAR", "Sector", "Suba 12-1 %", "Volatilidad %", "Puntaje"]],
               fmt={"Puesto": "%d", "Suba 12-1 %": "%+.0f%%", "Volatilidad %": "%.0f%%", "Puntaje": "%.2f"}, signo=["Suba 12-1 %"],
@@ -1641,11 +1827,299 @@ def pagina_reversion():
     with tabs[4]:
         st.markdown(REGLAS_REVERSION)
 
+# ============================================================================ página: explorador de empresas
+def _f(v):
+    try:
+        v = float(v)
+    except (TypeError, ValueError):
+        return None
+    return None if np.isnan(v) else v
+
+
+def _x100(v):
+    v = _f(v)
+    return None if v is None else v * 100
+
+
+def _p(v, dec=1):
+    v = _f(v)
+    return "—" if v is None else (f"{v * 100:.{dec}f}%").replace(".", ",")
+
+
+def _marca_archivos(*nombres):
+    return tuple((RAIZ / n).stat().st_mtime if (RAIZ / n).exists() else 0 for n in nombres)
+
+
+@st.cache_data(ttl=3600, show_spinner=False)
+def datos_explorador(_marca):
+    """Une el universo, las métricas de calidad, el momentum, el screener y las carteras en una tabla por empresa."""
+    uni = [r for r in (U.todas() if U else []) if r.get("incluida") == "1"]
+    if not uni:          # todavía no se generó universo.csv: la lista fija de siempre
+        uni = [{"ticker": t, "nombre": n, "cedear": c, "sector": C.sector(t), "formulario": "10-K"} for t, (n, c) in C.CEDEARS.items()]
+    ex = (leer_json("explorador_calidad.json") or {})
+    emp = ex.get("empresas", {})
+    pm = leer_json("panel_momentum.json") or {}
+    ps = leer_json("panel_screener.json") or {}
+    cal = leer_json("cartera_calidad.json") or {}
+    en_cal = set() if str(cal.get("origen") or "").startswith("backtest") else set(cal.get("posiciones", {}))
+    en_mom = {x["Acción"] for x in pm.get("cartera", [])}
+    puesto_mom = {x["Acción"]: x["Puesto"] for x in pm.get("ranking", [])}
+    scr = ps.get("filas", {})
+    filas = []
+    for r in uni:
+        t = r["ticker"]
+        e = emp.get(t, {})
+        sc = scr.get(t, {})
+        estado = []
+        if t in en_cal:
+            estado.append("Cartera calidad")
+        if t in en_mom:
+            estado.append("Cartera momentum")
+        if sc.get("pasa"):
+            estado.append("Señal reversión")
+        if not estado:
+            estado.append("Comprable (calidad)" if e.get("comprable") else "Pasa filtros de calidad" if e.get("pasa") else "—")
+        vol = _f(r.get("volumen_usd")) or _f(e.get("volumen_usd"))
+        filas.append({
+            "Logo": logo_url(t), "Ticker": t, "Empresa": C.nombre(t) if t in C.CEDEARS else r.get("nombre") or t,
+            "CEDEAR": r.get("cedear") or t, "Sector": r.get("sector") or C.sector(t),
+            "Calidad": _f(e.get("puntaje")), "Puesto calidad": _f(e.get("puesto")),
+            "ROIC/ROE": _x100(e.get("rent_prom")),
+            "Ventas/año": _x100(e.get("ventas_cagr")),
+            "Deuda/EBITDA": _f(e.get("deuda_ebitda")) if e.get("tipo") != "financiera" else None,
+            "Rend. 10 años": _x100(e.get("rend_esperado")),
+            "Puesto momentum": _f(puesto_mom.get(t)),
+            "Caída desde máx.": _f(sc.get("caida")),
+            "Volumen (USD M)": vol / 1e6 if vol else None,
+            "Estado": " · ".join(estado),
+            "_pasa": bool(e.get("pasa")), "_en": bool({t} & (en_cal | en_mom)), "_scr": bool(sc.get("pasa"))})
+    df = pd.DataFrame(filas)
+    info = {"fecha_cal": ex.get("fecha"), "fecha_mom": pm.get("fecha"), "fecha_scr": ps.get("fecha"),
+            "n_mom": len(pm.get("ranking", [])), "n_pasan": sum(1 for e in emp.values() if e.get("pasa"))}
+    return df, info
+
+
+@st.cache_data(ttl=6 * 3600, show_spinner=False)
+def precio_5_anios(t, cierre):
+    desde = (pd.Timestamp(date.today()) - pd.DateOffset(years=5)).strftime("%Y-%m-%d")
+    px = precios_ajustados((t,), desde, cierre)
+    return px
+
+
+def ficha_empresa(t):
+    uni = {r["ticker"]: r for r in (U.todas() if U else [])}
+    r = uni.get(t, {})
+    ex = (leer_json("explorador_calidad.json") or {})
+    e = ex.get("empresas", {}).get(t, {})
+    pm = leer_json("panel_momentum.json") or {}
+    ps = leer_json("panel_screener.json") or {}
+    cal = leer_json("cartera_calidad.json") or {}
+    pos_cal = {} if str(cal.get("origen") or "").startswith("backtest") else cal.get("posiciones", {})
+    nombre = C.nombre(t) if t in C.CEDEARS else (r.get("nombre") or t)
+    ced = r.get("cedear") or C.cedear(t)
+    fin = e.get("tipo") == "financiera"
+    etiquetas = [f"{t}" + (f" · {r['bolsa']}" if r.get("bolsa") else ""),
+                 f"CEDEAR {ced}" + (f" · ratio {r['ratio_cedear']}" if r.get("ratio_cedear") else ""),
+                 r.get("sector") or C.sector(t)]
+    if r.get("pais"):
+        etiquetas.append(r["pais"])
+    if r.get("formulario"):
+        etiquetas.append(f"balances {r['formulario']}")
+    est = []
+    if t in pos_cal:
+        est.append(chip("En cartera de calidad", "azul"))
+    if any(x["Acción"] == t for x in pm.get("cartera", [])):
+        est.append(chip("En cartera de momentum", "violeta"))
+    if ps.get("filas", {}).get(t, {}).get("pasa"):
+        est.append(chip("Señal de reversión", "verde"))
+    st.markdown(
+        f"<div class='ficha-cab'>{logo_html(t, 64)}<div style='flex:1;min-width:240px'><h2>{html.escape(nombre)}</h2>"
+        f"<div class='etiquetas'>{''.join(f'<span>{html.escape(str(x))}</span>' for x in etiquetas if x)}</div>"
+        f"<div style='margin-top:.5rem'>{''.join(est)}</div></div></div>", unsafe_allow_html=True)
+
+    c1, c2, c3, c4 = st.columns(4)
+    c1.metric("Puntaje de calidad" + (f" · puesto {int(e['puesto'])}" if _f(e.get("puesto")) else ""),
+              f"{e['puntaje']:.1f}".replace(".", ",") if _f(e.get("puntaje")) is not None else "—",
+              help=None if _f(e.get("puesto")) else ("No pasa los filtros mínimos" if e else "Sin balances en la SEC"))
+    c2.metric("Rend. esperado a 10 años", _p(e.get("rend_esperado")), help="Rendimiento anual estimado comprando hoy (precio)")
+    c3.metric("Tendencia", f"{_f(e.get('mom_pct')) * 100:.0f}".replace(".", ",") if _f(e.get("mom_pct")) is not None else "—",
+              help="Percentil de momentum residual entre las empresas de calidad (100 = mejor)")
+    pm_rank = {x["Acción"]: x for x in pm.get("ranking", [])}
+    c4.metric("Puesto en momentum" + (f" · de {len(pm_rank)}" if t in pm_rank else ""),
+              str(pm_rank[t]["Puesto"]) if t in pm_rank else "—")
+
+    izq, der = st.columns([2, 1])
+    with izq, st.container(border=True, key="caja_metricas"):
+        h = e.get("hist") or {}
+        st.markdown("<div style='margin:0;font-size:.95rem;font-weight:700;color:var(--texto)'>Métricas de los últimos 5 ejercicios</div>",
+                    unsafe_allow_html=True)
+        if h.get("anios"):
+            opciones = {("ROE" if fin else "ROIC"): ("rent", True), "Ventas": ("ventas", False)}
+            if not fin:
+                opciones.update({"Margen bruto": ("margen_bruto", True), "Caja libre por acción": ("caja_accion", False)})
+            else:
+                opciones["Ganancia por acción"] = ("ganancia_accion", False)
+            elegida = st.segmented_control("Métrica", list(opciones), default=list(opciones)[0], key=f"met_{t}",
+                                           label_visibility="collapsed") or list(opciones)[0]
+            clave, es_pct = opciones[elegida]
+            d = pd.DataFrame({"Año": [str(a) for a in h["anios"]], "Valor": h.get(clave) or [None] * len(h["anios"])}).dropna()
+            if es_pct:
+                d["Valor"] = d["Valor"] * 100
+            if len(d):
+                ch = alt.Chart(d).mark_bar(cornerRadiusTopLeft=5, cornerRadiusTopRight=5, size=34, color=AZUL).encode(
+                    x=alt.X("Año:N", title=None, axis=alt.Axis(labelAngle=0)),
+                    y=alt.Y("Valor:Q", title="%" if es_pct else None, axis=alt.Axis(gridOpacity=0.25, format=".0f" if es_pct else "~s")),
+                    tooltip=["Año:N", alt.Tooltip("Valor:Q", format=".1f" if es_pct else ",.2f")])
+                st.altair_chart(ch.properties(height=230), width="stretch")
+        else:
+            st.caption("Sin balances anuales en la SEC para esta empresa: entra en momentum y en el screener, no en calidad.")
+        met = [("ROE promedio" if fin else "ROIC promedio", _p(e.get("rent_prom"))),
+               ("Último año", _p(e.get("rent_ult"))), ("Ventas (por año)", _p(e.get("ventas_cagr"))),
+               ("Caja por acción (por año)" if not fin else "Ganancia por acción (por año)", _p(e.get("crec_accion")))]
+        if not fin:
+            de = _f(e.get("deuda_ebitda"))
+            met += [("Margen bruto", _p(e.get("mb_ult"))), ("Conversión en caja", _p(e.get("conversion"), 0)),
+                    ("Deuda neta / EBITDA", "—" if de is None else "caja neta" if de <= 0 else "EBITDA negativo" if de >= 99
+                     else f"{de:.1f}x".replace(".", ","))]
+        met += [("Acciones en circulación (por año)", _p(e.get("dilucion"))),
+                ("Último balance", e.get("ultimo_balance") or "—")]
+        st.markdown("<div class='metricas'>" + "".join(f"<div><span>{a}</span><b>{b}</b></div>" for a, b in met) + "</div>",
+                    unsafe_allow_html=True)
+    with der:
+        filtros = []
+        if e:
+            rp, vc, dl, de = _f(e.get("rent_prom")), _f(e.get("ventas_cagr")), _f(e.get("dilucion")), _f(e.get("deuda_ebitda"))
+            vol = _f(e.get("volumen_usd")) or _f(r.get("volumen_usd"))
+            filtros.append((f"{'ROE' if fin else 'ROIC'} promedio ≥ 12%", rp is not None and rp >= C.KO_ROIC, _p(rp)))
+            if not fin:
+                filtros.append(("Deuda neta ≤ 3x EBITDA", de is not None and de <= C.KO_DEUDA,
+                                "caja neta" if de is not None and de <= 0 else ("—" if de is None else f"{de:.1f}x".replace(".", ","))))
+                genera = not any(str(k).startswith("no genera caja") for k in e.get("ko", []))
+                filtros.append(("Genera caja", genera, "sí" if genera else "no"))
+            filtros.append(("Ventas ≥ 5% por año", vc is not None and vc >= C.KO_VENTAS, _p(vc)))
+            filtros.append(("Dilución ≤ 3% por año", dl is None or dl <= C.KO_DILUCION, _p(dl)))
+            filtros.append(("Volumen > USD 20 M por día", vol is not None and vol >= C.VOL_MIN_USD,
+                            f"USD {vol / 1e6:,.0f} M".replace(",", ".") if vol else "—"))
+        cuerpo = "".join(f"<div class='filtro'><span class='{'ok' if ok else 'no'}'>{'✓' if ok else '✗'}</span>"
+                         f"<span>{html.escape(n)}</span><span class='v'>{html.escape(str(v))}</span></div>" for n, ok, v in filtros)
+        pie = ""
+        if filtros:
+            n_ok = sum(1 for _, ok, _ in filtros if ok)
+            pie = (f"<p style='margin:.6rem 0 0 0;font-size:.85rem;font-weight:600;color:{VERDE if n_ok == len(filtros) else ROJO}'>"
+                   f"{'Pasa los ' + str(len(filtros)) + ' filtros' if n_ok == len(filtros) else 'No pasa ' + str(len(filtros) - n_ok) + ' de ' + str(len(filtros))}</p>")
+        st.markdown(f"<div class='caja'><div class='tit'>Filtros mínimos de calidad</div>{cuerpo or '<p>Sin datos de calidad.</p>'}{pie}</div>",
+                    unsafe_allow_html=True)
+
+    st.subheader("Precio contra el S&P 500 (5 años)", divider="gray")
+    try:
+        px = precio_5_anios(t, ultimo_cierre())
+        if t in px and px[t].notna().sum() > 20:
+            p_ = px[[t, "SPY"]].dropna()
+            p_ = p_ / p_.iloc[0] * 10000
+            grafico_evolucion(p_.rename(columns={t: nombre, "SPY": "S&P 500"}), {nombre: AZUL, "S&P 500": GRIS}, alto=280)
+            st.caption("USD 10.000 invertidos hace 5 años, con dividendos.")
+        else:
+            st.caption("Sin precios para mostrar.")
+    except Exception:       # noqa: BLE001
+        st.caption("No se pudieron bajar los precios en este momento.")
+
+    st.subheader("Qué dice cada estrategia", divider="gray")
+    k1, k2, k3 = st.columns(3)
+    if t in pos_cal:
+        p_ = pos_cal[t]
+        txt = f"<b>En cartera desde el {pd.Timestamp(p_['fecha_entrada']).strftime('%d/%m/%Y')}</b>"
+    elif e.get("comprable"):
+        txt = f"<b>Comprable</b> (orden {int(e['orden'])} del ranking combinado)"
+    elif e.get("pasa"):
+        motivo = "precio extremo" if e.get("precio_extremo") else "tendencia muy débil" if e.get("castigada") else "fuera de las 20 mejores"
+        txt = f"<b>Pasa los filtros</b>, pero hoy no se compra: {motivo}"
+    elif e:
+        txt = "<b>No pasa los filtros</b>: " + html.escape("; ".join(e.get("ko", [])[:3]))
+    else:
+        txt = "<b>Fuera de la estrategia</b>: no presenta balances en la SEC"
+    k1.markdown(f"<div class='caja'><div class='tit'>Calidad</div><p style='margin:0;font-size:.9rem'>{txt}</p></div>", unsafe_allow_html=True)
+    if t in pm_rank:
+        en = next((x for x in pm.get("cartera", []) if x["Acción"] == t), None)
+        txt = (f"<b>En cartera</b> desde el {pd.Timestamp(en['Desde']).strftime('%d/%m/%Y')} · puesto {pm_rank[t]['Puesto']}" if en
+               else f"Puesto <b>{pm_rank[t]['Puesto']}</b> de {len(pm_rank)}" + (" · entre las 10 mejores" if pm_rank[t]["Puesto"] <= 10 else ""))
+    else:
+        txt = "Sin puesto: poco volumen o menos de 2 años de historia"
+    k2.markdown(f"<div class='caja'><div class='tit'>Momentum</div><p style='margin:0;font-size:.9rem'>{txt}</p></div>", unsafe_allow_html=True)
+    sc = ps.get("filas", {}).get(t)
+    if sc:
+        caida = _f(sc.get("caida"))
+        txt = ("<b>Señal de compra hoy</b>" if sc.get("pasa") else "Sin señal hoy" + (f": falla en {html.escape(sc['falla_en'].lower())}" if sc.get("falla_en") else ""))
+        if caida is not None:
+            txt += f"<br><span style='color:var(--texto2);font-size:.82rem'>Caída desde el máximo de 2 años: {caida:.0f}%".replace(".", ",") + "</span>"
+    else:
+        txt = "Sin datos del screener todavía"
+    k3.markdown(f"<div class='caja'><div class='tit'>Reversión</div><p style='margin:0;font-size:.9rem'>{txt}</p></div>", unsafe_allow_html=True)
+
+
+def pagina_explorador():
+    sel = st.query_params.get("empresa")
+    if sel:
+        if st.button("← Volver al explorador", type="tertiary"):
+            del st.query_params["empresa"]
+            st.rerun()
+        ficha_empresa(sel)
+        return
+    encabezado("TODAS LAS EMPRESAS CON CEDEAR", "Explorador")
+    df, info = datos_explorador(_marca_archivos("universo.csv", "explorador_calidad.json", "panel_momentum.json",
+                                                "panel_screener.json", "cartera_calidad.json"))
+    partes = [f"{len(df)} empresas"]
+    if info["n_pasan"]:
+        partes.append(f"{info['n_pasan']} pasan los filtros de calidad")
+    st.caption(" · ".join(partes) + (f" · calidad al {pd.Timestamp(info['fecha_cal']).strftime('%d/%m/%Y')}" if info["fecha_cal"] else
+                                      " · las métricas de calidad aparecen después de la primera corrida del explorador"))
+    c1, c2, c3 = st.columns([2.2, 2, 2.6])
+    buscar = c1.text_input("Buscar", placeholder="Empresa o ticker", label_visibility="collapsed")
+    sectores = c2.multiselect("Sector", sorted(x for x in df["Sector"].dropna().unique() if x), placeholder="Todos los sectores",
+                              label_visibility="collapsed")
+    filtro = c3.segmented_control("Filtro", ["Todas", "Pasan calidad", "En cartera", "Reversión"], default="Todas",
+                                  label_visibility="collapsed") or "Todas"
+    f = df
+    if buscar:
+        q = buscar.strip().lower()
+        f = f[f["Ticker"].str.lower().str.contains(q, regex=False) | f["Empresa"].str.lower().str.contains(q, regex=False)
+              | f["CEDEAR"].str.lower().str.contains(q, regex=False)]
+    if sectores:
+        f = f[f["Sector"].isin(sectores)]
+    f = {"Pasan calidad": f[f["_pasa"]], "En cartera": f[f["_en"]], "Reversión": f[f["_scr"]]}.get(filtro, f)
+    f = f.sort_values(["Calidad", "Volumen (USD M)"], ascending=[False, False], na_position="last")
+    ver = f.drop(columns=["_pasa", "_en", "_scr"])
+    ev = st.dataframe(
+        ver, hide_index=True, width="stretch", height=min(38 * (len(ver) + 1) + 3, 640), on_select="rerun",
+        selection_mode="single-row", key="tabla_explorador",
+        column_config={
+            "Logo": st.column_config.ImageColumn("", width="small"),
+            "Ticker": st.column_config.TextColumn(width="small"),
+            "Empresa": st.column_config.TextColumn(width="medium"),
+            "CEDEAR": st.column_config.TextColumn(width="small"),
+            "Calidad": st.column_config.ProgressColumn("Calidad", format="%.0f", min_value=0, max_value=100,
+                                                       help="Puntaje de calidad (0 a 100) entre las que pasan los filtros"),
+            "Puesto calidad": st.column_config.NumberColumn(format="%d"),
+            "ROIC/ROE": st.column_config.NumberColumn(format="%.0f%%", help="Promedio de los últimos 5 años"),
+            "Ventas/año": st.column_config.NumberColumn(format="%.0f%%", help="Crecimiento anual de las ventas, 5 años"),
+            "Deuda/EBITDA": st.column_config.NumberColumn(format="%.1fx", help="Negativo = más caja que deuda"),
+            "Rend. 10 años": st.column_config.NumberColumn(format="%.1f%%", help="Rendimiento anual esperado comprando hoy"),
+            "Puesto momentum": st.column_config.NumberColumn("Momentum", format="%d", help="Puesto en el ranking de momentum"),
+            "Caída desde máx.": st.column_config.NumberColumn(format="%.0f%%", help="Caída desde el máximo de 2 años (screener)"),
+            "Volumen (USD M)": st.column_config.NumberColumn("Volumen", format="%.0f M", help="Promedio diario en EE.UU., USD millones"),
+            "Estado": st.column_config.TextColumn(width="medium")})
+    st.caption("Tocá una fila para abrir la ficha de la empresa. Hacé clic en el título de una columna para ordenar.")
+    filas = ev.selection.rows if ev is not None and hasattr(ev, "selection") else []
+    if filas:
+        st.query_params["empresa"] = ver.iloc[filas[0]]["Ticker"]
+        st.rerun()
+
+
 pg = st.navigation([st.Page(pagina_calidad, title="Cartera de calidad", icon=":material/account_balance:", default=True),
                     st.Page(pagina_reversion, title="Reversión (screener)", icon=":material/autorenew:", url_path="reversion"),
-                    st.Page(pagina_momentum, title="Momentum residual", icon=":material/trending_up:", url_path="momentum")])
-st.sidebar.markdown("<div class='marca'><svg width='26' height='26' viewBox='0 0 28 28' fill='none' stroke='#3DE0FF' stroke-width='1.8'>"
-                    "<path d='M3 20 L10 13 L15 17 L25 6'></path><path d='M19 6 H25 V12'></path></svg>CEDEAR<b>·</b>LAB</div>",
-                    unsafe_allow_html=True)
+                    st.Page(pagina_momentum, title="Momentum residual", icon=":material/trending_up:", url_path="momentum"),
+                    st.Page(pagina_explorador, title="Explorador", icon=":material/travel_explore:", url_path="explorador")])
+st.sidebar.markdown("<div class='marca'><svg width='28' height='28' viewBox='0 0 28 28' aria-hidden='true'><rect width='28' height='28' "
+                    "rx='7' fill='#101828'></rect><path d='M7 18l5-5 4 3 5-7' stroke='#FFFFFF' stroke-width='2.2' fill='none' "
+                    "stroke-linecap='round' stroke-linejoin='round'></path></svg>Streamlimits</div>", unsafe_allow_html=True)
 st.sidebar.caption("Estrategias con CEDEARs · datos con fines educativos, no es recomendación de inversión.")
 pg.run()

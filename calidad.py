@@ -204,10 +204,22 @@ for _s, _ts in {
 # Quedan afuera siempre porque sus datos en la SEC no se pueden leer bien de forma automática:
 #  - Ford y General Motors consolidan su financiera y la deuda no se capta (parecen tener más caja que deuda).
 #  - JD, Alibaba, Baidu y NIO reportan en yuanes y cotizan como ADR (otra cantidad de acciones): la valuación sale mal.
-DATOS_DUDOSOS = {"F", "GM", "JD", "BABA", "BIDU", "NIO"}
+DATOS_DUDOSOS = {"F", "GM", "JD", "BABA", "BIDU", "NIO",
+                 # con el universo ampliado (oct-2026), por el mismo motivo que las chinas de arriba:
+                 "PDD", "NTES", "TCOM", "XPEV", "WB", "JOYY"}
 _EXCLUIR = {t.strip().upper() for t in (os.environ.get("CALIDAD_EXCLUIR") or "").split(",") if t.strip()} | DATOS_DUDOSOS
 FUENTE = (os.environ.get("CALIDAD_FUENTE") or "sec").strip().lower()   # "sec" (igual que el backtest) o "yahoo"
 TICKERS = sorted(t for t in CEDEARS if t not in _EXCLUIR)
+# Universo ampliado: todas las acciones con CEDEAR que presentan balances en la SEC (universo.csv, ver universo.py).
+# Lo cargado a mano arriba (nombres, sectores, relaciones ADR, financieras) manda. Sin el archivo, la lista fija.
+try:
+    import universo as _U
+    CEDEARS, SECTOR, ADR_RATIO, FINANCIERAS = _U.aplicar(CEDEARS, SECTOR, ADR_RATIO, FINANCIERAS)
+    _CON_BALANCES = set(_U.cedears(con_balances=True))
+    if _CON_BALANCES:
+        TICKERS = sorted(t for t in CEDEARS if t not in _EXCLUIR and t in _CON_BALANCES)
+except ImportError:
+    pass
 
 
 def nombre(t):
@@ -824,6 +836,18 @@ def calcular_metricas(t, inc, bal, cf, info):
         nd, eb = deuda.iloc[-1] - caja.iloc[-1], ebitda.iloc[-1]
         m["deuda_ebitda"] = (nd / eb) if pd.notna(eb) and eb > 0 else (0.0 if nd <= 0 else np.inf)
         m["conversion"] = fcfa.sum() / ni.sum() if ni.sum() > 0 and fcfa.notna().sum() >= 2 else np.nan
+    # historia por ejercicio para el explorador del dashboard (no interviene en ninguna decisión)
+    try:
+        lst = lambda x: [None if pd.isna(v) or np.isinf(v) else float(v) for v in pd.Series(x, index=cols).values]
+        h = {"anios": [int(c.year) for c in cols], "ventas": lst(rev), "rent": lst(m["rent_serie"]), "acciones": lst(acc),
+             "ganancia": lst(ni)}
+        if m["tipo"] == "financiera":
+            h["ganancia_accion"] = lst(ni / acc)
+        else:
+            h["margen_bruto"], h["caja_accion"], h["caja_libre"] = lst(mb), lst(fcfa / acc), lst(fcfa)
+        m["hist"] = h
+    except Exception:       # noqa: BLE001
+        m["hist"] = None
     r = m["rent_serie"].dropna()
     m["rent_prom"] = r.mean() if len(r) else np.nan
     m["rent_ult"] = r.iloc[-1] if len(r) else np.nan
@@ -930,6 +954,7 @@ def evaluar(m, precio, liq, fx, mom_pct=np.nan):
     m["ko_mantener"] = km
     m["tolerancia"] = [k for k in m["ko_fundamental"] if k not in km and not m.get("error")]
     m["liquida"] = liquida
+    m["volumen_usd"] = liq
     m["pasa"] = not ko
     # valuación
     fy = g = er = pc = np.nan
@@ -1761,6 +1786,38 @@ def guardar_panel(ctx, rk, ruta="panel_calidad.json"):
         json.dump(panel, fh, ensure_ascii=False, indent=1)
 
 
+def guardar_explorador(rk, cierre, ruta="explorador_calidad.json"):
+    """Todas las empresas del universo con sus métricas, filtros e historia anual, para el explorador del dashboard."""
+    def num(v):
+        try:
+            v = float(v)
+        except (TypeError, ValueError):
+            return None
+        if np.isnan(v):
+            return None
+        return 99.0 if np.isinf(v) and v > 0 else (-99.0 if np.isinf(v) else v)
+    empresas = {}
+    for t, r in rk.iterrows():
+        g = lambda k: r[k] if k in r.index else None
+        h = g("hist")
+        checks = g("checks")
+        empresas[t] = {
+            "pasa": bool(g("pasa")), "ko": list(g("ko") or []), "tolerancia": list(g("tolerancia") or []),
+            "puntaje": num(g("Puntaje")), "puesto": num(g("Puesto")), "orden": num(g("Orden")), "combinado": num(g("Combinado")),
+            "comprable": bool(g("comprable")), "castigada": bool(g("castigada")), "precio_extremo": bool(g("precio_extremo")),
+            "tipo": g("tipo"), "moneda": g("moneda"), "ultimo_balance": g("ultimo_balance") if isinstance(g("ultimo_balance"), str) else None,
+            **{k: num(g(k)) for k in ("rent_prom", "rent_ult", "mb_ult", "mb_prom", "ventas_cagr", "ventas_ult", "crec_accion",
+                                      "deuda_ebitda", "conversion", "dilucion", "rend_esperado", "crec_estimado", "fcf_yield",
+                                      "mom_pct", "volumen_usd", "precio", "precio_compra")},
+            "checks": [None if c is None else bool(c) for c in checks] if isinstance(checks, list) else None,
+            "hist": h if isinstance(h, dict) else None}
+    out = {"fecha": hoy_ar().isoformat(), "cierre": pd.Timestamp(cierre).strftime("%Y-%m-%d"), "checks": CHECKS,
+           "empresas": empresas}
+    with open(ruta, "w", encoding="utf-8") as fh:
+        json.dump(out, fh, ensure_ascii=False)
+    print(f"Explorador: {len(empresas)} empresas guardadas en {ruta}")
+
+
 def ranking_sec_hoy(desde, hoy):
     """Ranking de hoy con los balances de la SEC: el mismo motor y el mismo universo que el backtest."""
     global TICKERS
@@ -1846,6 +1903,10 @@ def actualizar_cartera_backtest(Eb0, rk, px, hoy, revision, oficial):
 
 def main():
     hoy = hoy_ar()
+    if "--explorador" in sys.argv:          # solo actualiza los datos del explorador: no toca la cartera ni manda mail
+        px, rk = ranking_sec_hoy(pd.Timestamp(hoy) - pd.Timedelta(days=4 * 365 + 30), hoy)
+        guardar_explorador(rk, px.index[-1])
+        return
     evento = os.environ.get("EVENTO", "")
     operar = os.environ.get("OPERAR", "0") == "1" or "--operar" in sys.argv
     E0 = cargar_estado()
@@ -1917,6 +1978,10 @@ def main():
                evolucion=evo, correccion=correccion, posiciones=E2["posiciones"], posiciones_antes=E0["posiciones"],
                cerradas=pd.DataFrame(E2["cerradas"]), tesis_manual=leer_tesis_csv(), valor_antes=valor_antes)
     guardar_panel(ctx, rk)
+    try:
+        guardar_explorador(rk, px.index[-1])
+    except Exception as e:      # noqa: BLE001
+        print("No se pudo guardar el explorador (no afecta a la cartera):", e)
     ruta_x, ruta_p = f"calidad_{hoy.isoformat()}.xlsx", f"calidad_{hoy.isoformat()}.pdf"
     exportar_excel(ruta_x, ctx)
     generar_pdf(ruta_p, ctx)

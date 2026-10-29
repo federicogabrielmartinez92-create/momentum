@@ -1,0 +1,38 @@
+name: Backtest de calidad
+
+# Se corre a mano (Actions → Backtest de calidad → Run workflow) cuando cambia el universo o las reglas.
+# Rehace historial_calidad.json (la historia desde 2011 que muestra el dashboard) y cartera_calidad_backtest.json
+# (la cartera del backtest que sigue en paralelo). NO toca la cartera real (cartera_calidad.json).
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  backtest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+      - name: Simular la cartera de calidad desde 2011
+        env:
+          CALIDAD_SEC_AGENTE: ${{ vars.CALIDAD_SEC_AGENTE }}
+          BT_ESTADO_SALIDA: cartera_calidad_backtest.json
+        run: python backtest_calidad.py
+      - name: Guardar el historial
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
+          git add historial_calidad.json cartera_calidad_backtest.json
+          git diff --staged --quiet || (git commit -m "Backtest de calidad: $(date +%F) [skip ci]" && git pull --rebase && git push)
+      - uses: actions/upload-artifact@v4
+        with:
+          name: backtest-calidad
+          path: |
+            backtest_calidad_*.xlsx
+            backtest_calidad_*.png
