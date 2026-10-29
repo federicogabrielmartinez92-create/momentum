@@ -1,0 +1,446 @@
+ticker,nombre,cedear,ratio_cedear,incluida,motivo,tipo,sector,industria,pais,bolsa,volumen_usd,formulario,cik,adr_ratio,financiera,dominio
+AABA,,AABA,3:1,0,sin cotización vigente en EE.UU. (dado de baja o mal mapeado),,,,,,,,,,,
+AAL,American Airlines,AAL,2:1,1,,EQUITY,Industria,Airlines,United States,NMS,835042670,10-K,6201,,0,aa.com
+AAP,Advance Auto Parts,AAP,14:1,1,,EQUITY,Consumo discrecional,Auto Parts,United States,NYQ,85649594,10-K,1158449,,0,shop.advanceautoparts.com
+AAPL,Apple,AAPL,20:1,1,,EQUITY,Tecnología,Consumer Electronics,United States,NMS,13245342403,10-K,320193,,0,apple.com
+ABBV,AbbVie,ABBV,10:1,1,,EQUITY,Salud,Drug Manufacturers - General,United States,NYQ,1218716596,10-K,1551152,,0,abbvie.com
+ABEV,Ambev,ABEV,1:3,1,,EQUITY,Consumo básico,Beverages - Brewers,Brazil,NYQ,82007888,20-F,1565025,1,0,ambev.com.br
+,,ABEV3,1:1,0,acción de Brasil (B3),,,,,,,,,,,
+ABNB,Airbnb,ABNB,15:1,1,,EQUITY,Consumo discrecional,Travel Services,United States,NMS,814530830,10-K,1559720,,0,airbnb.com
+ABT,Abbott Laboratories,ABT,4:1,1,,EQUITY,Salud,Medical Devices,United States,NYQ,924551840,10-K,1800,,0,abbott.com
+ACN,Accenture,ACN,75:1,1,,EQUITY,Tecnología,Information Technology Services,Ireland,NYQ,1225934768,10-K,1467373,,0,accenture.com
+ACWI,iShares MSCI ACWI ETF,ACWI,26:1,0,ETF (no es una empresa),ETF,,,,NGM,340286164,,,,0,
+ADBE,Adobe,ADBE,44:1,1,,EQUITY,Tecnología,Software - Application,United States,NMS,1207739784,10-K,796343,,0,adobe.com
+AGRO,Adecoagro,ADGO,1:1,1,,EQUITY,Consumo básico,Farm Products,Luxembourg,NYQ,8083237,20-F,1499505,1,0,adecoagro.com
+ADI,Analog Devices,ADI,15:1,1,,EQUITY,Semiconductores,Semiconductors,United States,NMS,1310979270,10-K,6281,,0,analog.com
+ADP,Automatic Data Processing,ADP,6:1,1,,EQUITY,Tecnología,Software - Application,United States,NMS,581308440,10-K,8670,,0,adp.com
+ADDYY,adidas,ADS,22:1,0,cotiza fuera de bolsa en EE.UU. (sin balances en la SEC),EQUITY,Consumo discrecional,Footwear & Accessories,Germany,OQX,7757710,,,,0,adidas-group.com
+AEG,Aegon,AEG,1:1,1,,EQUITY,Financiero,Insurance - Diversified,Netherlands,NYQ,47462372,20-F,769218,,1,aegon.com
+AEM,Agnico Eagle Mines,AEM,6:1,1,,EQUITY,Materiales y minería,Gold,Canada,NYQ,470831858,40-F,2809,1,0,agnicoeagle.com
+AI,C3.ai,AI,5:1,1,,EQUITY,Tecnología,Software - Infrastructure,United States,NYQ,54379061,10-K,1577526,,0,c3.ai
+AIG,American International,AIG,5:1,1,,EQUITY,Financiero,Insurance - Diversified,United States,NYQ,318963516,10-K,5272,,1,aig.com
+AKO-B,Embotelladora Andina,AKO.B,1:1,1,,EQUITY,Consumo básico,Beverages - Non-Alcoholic,Chile,NYQ,273642,20-F,925261,,0,koandina.com
+ALAB,Astera Labs,ALAB,44:1,1,,EQUITY,Semiconductores,Semiconductors,United States,NMS,1233005191,10-K,1736297,,0,asteralabs.com
+AMAT,Applied Materials,AMAT,5:1,1,,EQUITY,Semiconductores,Semiconductor Equipment & Materials,United States,NMS,3215487056,10-K,6951,,0,appliedmaterials.com
+AMD,Advanced Micro Devices,AMD,10:1,1,,EQUITY,Semiconductores,Semiconductors,United States,NMS,11113240515,10-K,2488,,0,amd.com
+AMGN,Amgen,AMGN,30:1,1,,EQUITY,Salud,Drug Manufacturers - General,United States,NMS,1147867487,10-K,318154,,0,amgen.com
+AMX,América Móvil,AMX,1:1,1,,EQUITY,Comunicación,Telecom Services,Mexico,NYQ,71035082,20-F,1129137,20,0,americamovil.com
+AMZN,Amazon.com,AMZN,144:1,1,,EQUITY,Consumo discrecional,Internet Retail,United States,NMS,8920604251,10-K,1018724,,0,amazon.com
+ANET,Arista Networks,ANET,29:1,1,,EQUITY,Tecnología,Computer Hardware,United States,NYQ,1131775818,10-K,1596532,,0,arista.com
+ANF,Abercrombie & Fitch,ANF,1:1,1,,EQUITY,Consumo discrecional,Apparel Retail,United States,NYQ,225497198,10-K,1018840,,0,corporate.abercrombie.com
+AOCA,,AOCA,1:1,0,sin cotización vigente en EE.UU. (dado de baja o mal mapeado),,,,,,,,,,,
+ARCO,Arcos Dorados,ARCO,1:2,1,,EQUITY,Consumo discrecional,Restaurants,Uruguay,NYQ,12732757,20-F,1508478,,0,arcosdorados.com
+ARKK,ARK Innovation ETF,ARKK,10:1,0,ETF (no es una empresa),ETF,,,,BTS,389786804,,,,0,
+ARM,Arm,ARM,27:1,1,,EQUITY,Semiconductores,Semiconductors,United Kingdom,NMS,1258164713,20-F,1973239,1,0,arm.com
+ASML,ASML,ASML,146:1,1,,EQUITY,Semiconductores,Semiconductor Equipment & Materials,Netherlands,NMS,2296437422,20-F,937966,1,0,asml.com
+ASR,"Grupo Aeroportuario del Sureste, S. A. B. de C. V.",ASR,20:1,1,,EQUITY,Industria,Airports & Air Services,Mexico,NYQ,15904138,20-F,1123452,,0,asur.com.mx
+ASTS,AST SpaceMobile,ASTS,15:1,1,,EQUITY,Tecnología,Communication Equipment,United States,NMS,722118982,10-K,1780312,,0,ast-science.com
+ATAD,,ATAD,4:1,0,sin cotización vigente en EE.UU. (dado de baja o mal mapeado),,,,,,,,,,,
+AUY,,AUY,1:1,0,sin cotización vigente en EE.UU. (dado de baja o mal mapeado),,,,,,,,,,,
+AVGO,Broadcom,AVGO,39:1,1,,EQUITY,Semiconductores,Semiconductors,United States,NMS,8262483910,10-K,1730168,,0,broadcom.com
+AVY,Avery Dennison,AVY,18:1,1,,EQUITY,Consumo discrecional,Packaging & Containers,United States,NYQ,146715443,10-K,8818,,0,averydennison.com
+AXP,American Express,AXP,15:1,1,,EQUITY,Financiero,Credit Services,United States,NYQ,918159581,10-K,4962,,0,americanexpress.com
+AZN,AstraZeneca,AZN,4:1,1,,EQUITY,Salud,Drug Manufacturers - General,United Kingdom,NYQ,512082046,20-F,901832,,0,astrazeneca.com
+B,Barrick Mining,B,2:1,1,,EQUITY,Materiales y minería,Gold,Canada,NYQ,395959861,40-F,756894,1,0,barrick.com
+BA,The Boeing,BA,24:1,1,,EQUITY,Industria,Aerospace & Defense,United States,NYQ,1479686306,10-K,12927,,0,boeing.com
+BAC,Bank of America,BA.C,41:1,1,,EQUITY,Financiero,Banks - Diversified,United States,NYQ,2059395086,10-K,70858,,1,bankofamerica.com
+BABA,Alibaba Group,BABA,9:1,1,,EQUITY,Consumo discrecional,Internet Retail,China,NYQ,1126944192,20-F,1577552,,0,alibabagroup.com
+BAK,Braskem,BAK,2:1,1,,EQUITY,Materiales y minería,Chemicals,Brazil,NYQ,4350522,20-F,1071438,,0,braskem.com.br
+BASFY,BASF,BAS,2:1,0,cotiza fuera de bolsa en EE.UU. (sin balances en la SEC),EQUITY,Materiales y minería,Chemicals,Germany,OQX,1946460,,,,0,basf.com
+BAYRY,Bayer Aktiengesellschaft,BAYN,3:1,0,cotiza fuera de bolsa en EE.UU. (sin balances en la SEC),EQUITY,Salud,Drug Manufacturers - General,Germany,OQX,8253584,,,,0,bayer.com
+BB,BlackBerry,BB,3:1,1,,EQUITY,Tecnología,Software - Infrastructure,Canada,NYQ,115598716,10-K,1070235,,0,blackberry.com
+,,BBAS3,2:1,0,acción de Brasil (B3),,,,,,,,,,,
+BBAX,JPMorgan BetaBuilders Developed Asia Pacific ex-Japan ETF,BBAX,13:1,0,ETF (no es una empresa),ETF,,,,BTS,12582244,,,,0,
+BBCA,JPMorgan BetaBuilders Canada ETF,BBCA,20:1,0,ETF (no es una empresa),ETF,,,,BTS,38285298,,,,0,
+BBD,Banco Bradesco,BBD,1:1,1,,EQUITY,Financiero,Banks - Regional,Brazil,NYQ,148970489,20-F,1160330,,1,banco.bradesco
+,,BBDC3,1:1,0,acción de Brasil (B3),,,,,,,,,,,
+BBVA,Banco Bilbao Vizcaya Argentaria,BBV,1:1,1,,EQUITY,Financiero,Banks - Diversified,Spain,NYQ,42370510,20-F,842180,1,1,bbva.com
+BCS,Barclays,BCS,1:1,1,,EQUITY,Financiero,Banks - Diversified,United Kingdom,NYQ,114363588,20-F,312069,4,1,home.barclays
+BHP,BHP,BHP,2:1,1,,EQUITY,Materiales y minería,Other Industrial Metals & Mining,Australia,NYQ,239500894,20-F,811809,2,0,bhp.com
+BIB,ProShares Ultra Nasdaq Biotechnology,BIB,13:1,0,ETF (no es una empresa),ETF,,,,NGM,1108606,,,,0,
+BIDU,Baidu,BIDU,11:1,1,,EQUITY,Comunicación,Internet Content & Information,China,NMS,239653228,20-F,1329099,,0,ir.baidu.com
+BIIB,Biogen,BIIB,,1,,EQUITY,Salud,Drug Manufacturers - General,United States,NMS,233725546,10-K,875045,,0,biogen.com
+BIOX,Bioceres Crop Solutions,BIOX,1:1,1,,EQUITY,Materiales y minería,Agricultural Inputs,Argentina,NCM,123651,20-F,1769484,1,0,investors.biocerescrops.com
+BK,,BK,2:1,0,sin cotización vigente en EE.UU. (dado de baja o mal mapeado),,,,,,,,,,,
+BKNG,Booking,BKNG,700:1,1,,EQUITY,Consumo discrecional,Travel Services,United States,NMS,1223556334,10-K,1075531,,0,bookingholdings.com
+BKR,Baker Hughes,BKR,7:1,1,,EQUITY,Energía,Oil & Gas Equipment & Services,United States,NMS,425230611,10-K,1701605,,0,bakerhughes.com
+BMNR,Bitmine Immersion Technologies,BMNR,8:1,1,,EQUITY,Financiero,Capital Markets,United States,NYQ,890790770,10-K,1829311,,1,bitminetech.io
+BMY,Bristol-Myers Squibb,BMY,3:1,1,,EQUITY,Salud,Drug Manufacturers - General,United States,NYQ,681236011,10-K,14272,,0,bms.com
+BG,Bunge Global,BNG,5:1,1,,EQUITY,Consumo básico,Farm Products,United States,NYQ,180041622,10-K,1996862,,0,bunge.com
+BP,BP p.l.c.,BP,5:1,1,,EQUITY,Energía,Oil & Gas Integrated,United Kingdom,NYQ,412370466,20-F,313807,,0,bp.com
+,,BPA11,1:1,0,acción de Brasil (B3),,,,,,,,,,,
+BRFS,,BRFS,1:3,0,sin cotización vigente en EE.UU. (dado de baja o mal mapeado),,,,,,,,,,,
+BRK-B,Berkshire Hathaway,BRKB,22:1,1,,EQUITY,Financiero,Insurance - Diversified,United States,NYQ,2256082582,10-K,1067983,,1,berkshirehathaway.com
+BSBR,Banco Santander (Brasil),BSBR,1:1,1,,EQUITY,Financiero,Banks - Regional,Brazil,NYQ,24573219,20-F,1471055,,1,santander.com.br
+BSN,,BSN,20:1,0,sin cotización vigente en EE.UU. (dado de baja o mal mapeado),,,,,,,,,,,
+BX,Blackstone,BX,30:1,1,,EQUITY,Financiero,Asset Management,United States,NYQ,570170650,10-K,1393818,,0,blackstone.com
+C,Citigroup,C,3:1,1,,EQUITY,Financiero,Banks - Diversified,United States,NYQ,1202306524,10-K,831001,,1,citigroup.com
+CAAP,Corporación América Airports,CAAP,1:4,1,,EQUITY,Industria,Airports & Air Services,Luxembourg,NYQ,6898148,20-F,1717393,1,0,caap.aero
+CAH,Cardinal Health,CAH,3:1,1,,EQUITY,Salud,Medical Distribution,United States,NYQ,416635409,10-K,721371,,0,cardinalhealth.com
+CAJPY,Canon,CAJ,2:1,0,cotiza fuera de bolsa en EE.UU. (sin balances en la SEC),EQUITY,Tecnología,Computer Hardware,Japan,PNK,1509894,,,,0,global.canon
+CAR,Avis Budget,CAR,26:1,1,,EQUITY,Industria,Rental & Leasing Services,United States,NMS,45664197,10-K,723612,,0,avisbudgetgroup.com
+CAT,Caterpillar,CAT,20:1,1,,EQUITY,Industria,Farm & Heavy Construction Machinery,United States,NYQ,2021120430,10-K,18230,,0,caterpillar.com
+CBRD,,CBRD,1:1,0,sin cotización vigente en EE.UU. (dado de baja o mal mapeado),,,,,,,,,,,
+CCJ,Cameco,CCJ,23:1,1,,EQUITY,Energía,Uranium,Canada,NYQ,271008791,40-F,1009001,1,0,cameco.com
+CCL,Carnival Corporation,CCL,3:1,1,,EQUITY,Consumo discrecional,Travel Services,United States,NYQ,530068569,10-K,815097,,0,carnivalcorp.com
+CDE,Coeur Mining,CDE,1:1,1,,EQUITY,Materiales y minería,Gold,United States,NYQ,666216092,10-K,215466,,0,coeur.com
+CEG,Constellation Energy,CEG,45:1,1,,EQUITY,Servicios públicos,Utilities - Independent Power Producers,United States,NMS,892156546,10-K,1868275,,0,constellationenergy.com
+CIBR,First Trust NASDAQ Cybersecurity ETF,CIBR,10:1,0,ETF (no es una empresa),ETF,,,,NGM,191176003,,,,0,
+CL,Colgate-Palmolive,CL,3:1,1,,EQUITY,Consumo básico,Household & Personal Products,United States,NYQ,423263509,10-K,21665,,0,colgatepalmolive.com
+CLS,Celestica,CLS,20:1,1,,EQUITY,Tecnología,Electronic Components,Canada,NYQ,833440990,10-K,1030894,,0,celestica.com
+COIN,Coinbase Global,COIN,27:1,1,,EQUITY,Financiero,Financial Data & Stock Exchanges,United States,NMS,1590917092,10-K,1679788,,0,coinbase.com
+COP,ConocoPhillips,COP,25:1,1,,EQUITY,Energía,Oil & Gas E&P,United States,NYQ,868714412,10-K,1163165,,0,conocophillips.com
+COPX,Global X Copper Miners ETF,COPX,14:1,0,ETF (no es una empresa),ETF,,,,PCX,240011215,,,,0,
+CORN,Teucrium Corn Fund,CORN,4:1,0,ETF (no es una empresa),ETF,,,,PCX,7649995,,,,0,
+COST,Costco Wholesale,COST,48:1,1,,EQUITY,Consumo básico,Discount Stores,United States,NMS,1954981155,10-K,909832,,0,costco.com
+CRM,Salesforce,CRM,18:1,1,,EQUITY,Tecnología,Software - Application,United States,NYQ,2796749943,10-K,1108524,,0,salesforce.com
+CRWD,CrowdStrike,CRWD,79:1,1,,EQUITY,Tecnología,Software - Infrastructure,United States,NMS,2293287137,10-K,1535527,,0,crowdstrike.com
+CRWV,CoreWeave,CRWV,27:1,1,,EQUITY,Tecnología,Software - Infrastructure,United States,NMS,3013433419,10-K,1769628,,0,coreweave.com
+CS,,CS,1:1,0,sin cotización vigente en EE.UU. (dado de baja o mal mapeado),,,,,,,,,,,
+CSCO,Cisco Systems,CSCO,5:1,1,,EQUITY,Tecnología,Communication Equipment,United States,NMS,1994759889,10-K,858877,,0,cisco.com
+,,CSNA3,1:1,0,acción de Brasil (B3),,,,,,,,,,,
+CVS,CVS Health,CVS,15:1,1,,EQUITY,Salud,Healthcare Plans,United States,NYQ,730824044,10-K,64803,,0,cvshealth.com
+CVX,Chevron,CVX,16:1,1,,EQUITY,Energía,Oil & Gas Integrated,United States,NYQ,1752327359,10-K,93410,,0,chevron.com
+CX,CEMEX,CX,1:1,1,,EQUITY,Materiales y minería,Building Materials,Mexico,NYQ,74890146,20-F,1076378,10,0,cemex.com
+DAL,Delta Air Lines,DAL,8:1,1,,EQUITY,Industria,Airlines,United States,NYQ,519886702,10-K,27904,,0,delta.com
+DD,DuPont de Nemours,DD,5:1,1,,EQUITY,Materiales y minería,Specialty Chemicals,United States,NYQ,142465800,10-K,1666700,,0,dupont.com
+DE,Deere &,DE,40:1,1,,EQUITY,Industria,Farm & Heavy Construction Machinery,United States,NYQ,795211436,10-K,315189,,0,deere.com
+DECK,Deckers Outdoor,DECK,25:1,1,,EQUITY,Consumo discrecional,Footwear & Accessories,United States,NYQ,264875997,10-K,910521,,0,deckers.com
+DELL,Dell Technologies,DELL,74:1,1,,EQUITY,Tecnología,Computer Hardware,United States,NYQ,3910652377,10-K,1571996,,0,dell.com
+DEO,Diageo,DEO,6:1,1,,EQUITY,Consumo básico,Beverages - Wineries & Distilleries,United Kingdom,NYQ,100315482,20-F,835403,4,0,diageo.com
+DHR,Danaher,DHR,54:1,1,,EQUITY,Salud,Diagnostics & Research,United States,NYQ,871039659,10-K,313616,,0,danaher.com
+DIA,State Street SPDR Dow Jones Industrial Average ETF Trust,DIA,20:1,0,ETF (no es una empresa),ETF,,,,PCX,1698272407,,,,0,
+DIS,The Walt Disney,DISN,12:1,1,,EQUITY,Comunicación,Entertainment,United States,NYQ,900010517,10-K,1744489,,0,thewaltdisneycompany.com
+DOCU,DocuSign,DOCU,22:1,1,,EQUITY,Tecnología,Software - Application,United States,NMS,207464950,10-K,1261333,,0,docusign.com
+DOW,Dow,DOW,6:1,1,,EQUITY,Materiales y minería,Chemicals,United States,NYQ,258546309,10-K,1751788,,0,dow.com
+DTEGY,Deutsche Telekom,DTEA,3:1,0,cotiza fuera de bolsa en EE.UU. (sin balances en la SEC),EQUITY,Comunicación,Telecom Services,Germany,OQX,24010897,,,,0,telekom.com
+E,Eni,E,4:1,1,,EQUITY,Energía,Oil & Gas Integrated,Italy,NYQ,20400317,20-F,1002242,2,0,eni.com
+EA,,EA,14:1,0,sin cotización vigente en EE.UU. (dado de baja o mal mapeado),,,,,,,,,,,
+EBAY,eBay,EBAY,2:1,1,,EQUITY,Consumo discrecional,Internet Retail,United States,NMS,493448294,10-K,1065088,,0,ebayinc.com
+EBR,,EBR,1:4,0,sin cotización vigente en EE.UU. (dado de baja o mal mapeado),,,,,,,,,,,
+ECL,Ecolab,ECL,56:1,1,,EQUITY,Materiales y minería,Specialty Chemicals,United States,NYQ,376656022,10-K,31462,,0,ecolab.com
+EEM,iShares MSCI Emerging Markets ETF,EEM,5:1,0,ETF (no es una empresa),ETF,,,,PCX,1248802278,,,,0,
+EFA,iShares MSCI EAFE ETF,EFA,18:1,0,ETF (no es una empresa),ETF,,,,PCX,1246733889,,,,0,
+EFX,Equifax,EFX,16:1,1,,EQUITY,Industria,Consulting Services,United States,NYQ,273559518,10-K,33185,,0,equifax.com
+ELP,,ELP,1:13,0,sin cotización vigente en EE.UU. (dado de baja o mal mapeado),,,,,,,,,,,
+EONGY,E.ON,EOAN,6:1,0,cotiza fuera de bolsa en EE.UU. (sin balances en la SEC),EQUITY,Servicios públicos,Utilities - Diversified,Germany,PNK,4333904,,,,0,eon.com
+EQNR,Equinor,EQNR,6:1,1,,EQUITY,Energía,Oil & Gas Integrated,Norway,NYQ,156098763,20-F,1140625,1,0,equinor.com
+ERIC,Telefonaktiebolaget LM Ericsson (publ),ERIC,2:1,1,,EQUITY,Tecnología,Communication Equipment,Sweden,NMS,97142130,20-F,717826,,0,ericsson.com
+EMBJ,Embraer,ERJ,1:1,1,,EQUITY,Industria,Aerospace & Defense,Brazil,NYQ,103027847,20-F,1355444,4,0,embraer.com
+ESGU,iShares ESG Aware MSCI USA ETF,ESGU,30:1,0,ETF (no es una empresa),ETF,,,,NGM,66927952,,,,0,
+ETHA,iShares Ethereum Trust ETF,ETHA,5:1,0,ETF (no es una empresa),ETF,,,,NGM,681807846,,,,0,
+ETSY,Etsy,ETSY,16:1,1,,EQUITY,Consumo discrecional,Internet Retail,United States,NYQ,263775329,10-K,1370637,,0,etsy.com
+EWJ,iShares MSCI Japan ETF,EWJ,14:1,0,ETF (no es una empresa),ETF,,,,PCX,352515861,,,,0,
+EWY,iShares MSCI South Korea ETF,EWY,50:1,0,ETF (no es una empresa),ETF,,,,PCX,2518187488,,,,0,
+EWZ,iShares MSCI Brazil ETF,EWZ,2:1,0,ETF (no es una empresa),ETF,,,,PCX,1577153553,,,,0,
+F,Ford Motor,F,1:1,1,,EQUITY,Consumo discrecional,Auto Manufacturers,United States,NYQ,567102475,10-K,37996,,0,ford.com
+FCX,Freeport-McMoRan,FCX,3:1,1,,EQUITY,Materiales y minería,Copper,United States,NYQ,878752618,10-K,831259,,0,fcx.com
+FDX,FedEx,FDX,10:1,1,,EQUITY,Industria,Integrated Freight & Logistics,United States,NYQ,452208407,10-K,1048911,,0,fedex.com
+FISV,Fiserv,FISV,11:1,1,,EQUITY,,,,NMS,335226934,10-K,798354,,0,
+FMCC,Federal Home Loan Mortgage,FMCC,1:1,0,cotiza fuera de bolsa en EE.UU. (sin balances en la SEC),EQUITY,Financiero,Mortgage Finance,United States,OQB,11008169,,,,0,freddiemac.com
+FMX,Fomento Económico Mexicano,FMX,6:1,1,,EQUITY,Consumo básico,Beverages - Brewers,Mexico,NYQ,60575965,20-F,1061736,,0,femsa.com
+FNMA,Federal National Mortgage Association,FNMA,1:1,0,cotiza fuera de bolsa en EE.UU. (sin balances en la SEC),EQUITY,Financiero,Mortgage Finance,United States,OQB,20342679,,,,0,fanniemae.com
+FSLR,First Solar,FSLR,18:1,1,,EQUITY,Tecnología,Solar,United States,NMS,442981185,10-K,1274494,,0,firstsolar.com
+FXI,iShares China Large-Cap ETF,FXI,5:1,0,ETF (no es una empresa),ETF,,,,PCX,593171535,,,,0,
+GDX,VanEck Gold Miners ETF,GDX,10:1,0,ETF (no es una empresa),ETF,,,,PCX,2047237007,,,,0,
+GE,GE Aerospace,GE,8:1,1,,EQUITY,Industria,Aerospace & Defense,United States,NYQ,1397286910,10-K,40545,,0,geaerospace.com
+GEV,GE Vernova,GEV,180:1,1,,EQUITY,Industria,Specialty Industrial Machinery,United States,NYQ,2199897793,10-K,1996810,,0,gevernova.com
+GFI,Gold Fields,GFI,1:1,1,,EQUITY,Materiales y minería,Gold,South Africa,NYQ,155641380,20-F,1172724,1,0,goldfields.com
+GGB,Gerdau,GGB,1:4,1,,EQUITY,Materiales y minería,Steel,Brazil,NYQ,64764617,20-F,1073404,0.3333,0,www2.gerdau.com
+GILD,Gilead Sciences,GILD,4:1,1,,EQUITY,Salud,Drug Manufacturers - General,United States,NMS,869624406,10-K,882095,,0,gilead.com
+GLD,SPDR Gold Shares,GLD,50:1,0,ETF (no es una empresa),ETF,,,,PCX,3887304435,,,,0,
+GLNG,Golar LNG,GLNG,10:1,1,,EQUITY,Energía,Oil & Gas Midstream,Bermuda,NMS,68949292,20-F,1207179,1,0,golarlng.com
+GLOB,Globant,GLOB,18:1,1,,EQUITY,Tecnología,Information Technology Services,Luxembourg,NYQ,47387642,20-F,1557860,1,0,globant.com
+GLW,Corning,GLW,41:1,1,,EQUITY,Tecnología,Electronic Components,United States,NYQ,1326093703,10-K,24741,,0,corning.com
+GM,General Motors,GM,6:1,1,,EQUITY,Consumo discrecional,Auto Manufacturers,United States,NYQ,575641487,10-K,1467858,,0,gm.com
+GOOGL,Alphabet,GOOGL,58:1,1,,EQUITY,Comunicación,Internet Content & Information,United States,NMS,8640104868,10-K,1652044,,0,abc.xyz
+GPRK,GeoPark,GPRK,1:1,1,,EQUITY,Energía,Oil & Gas E&P,Colombia,NYQ,8778050,20-F,1464591,,0,geo-park.com
+GRMN,Garmin,GRMN,3:1,1,,EQUITY,Tecnología,Scientific & Technical Instruments,Switzerland,NYQ,241572740,10-K,1121788,,0,garmin.com
+GS,The Goldman Sachs,GS,13:1,1,,EQUITY,Financiero,Capital Markets,United States,NYQ,1987534519,10-K,886982,,1,goldmansachs.com
+GSG,iShares S&P GSCI Commodity-Indexed Trust,GSG,6:1,0,ETF (no es una empresa),ETF,,,,PCX,51185854,,,,0,
+GSK,GSK,GSK,4:1,1,,EQUITY,Salud,Drug Manufacturers - General,United Kingdom,NYQ,198617536,20-F,1131399,2,0,gsk.com
+GT,The Goodyear Tire & Rubber,GT,2:1,1,,EQUITY,Consumo discrecional,Auto Parts,United States,NMS,49022630,10-K,42582,,0,goodyear.com
+HAL,Halliburton,HAL,2:1,1,,EQUITY,Energía,Oil & Gas Equipment & Services,United States,NYQ,358740262,10-K,45012,,0,halliburton.com
+,,HAPV3,1:1,0,acción de Brasil (B3),,,,,,,,,,,
+HD,The Home Depot,HD,32:1,1,,EQUITY,Consumo discrecional,Home Improvement Retail,United States,NYQ,1394725605,10-K,354950,,0,homedepot.com
+HDB,HDFC Bank,HDB,2:1,1,,EQUITY,Financiero,Banks - Regional,India,NYQ,222650650,20-F,1144967,,1,hdfc.bank.in
+HNHPF,Hon Hai Precision Industry Co.,HHPD,2:1,0,cotiza fuera de bolsa en EE.UU. (sin balances en la SEC),EQUITY,Tecnología,Electronic Components,Taiwan,PNK,482938,,,,0,foxconn.com
+HIMS,Hims & Hers Health,HIMS,4:1,1,,EQUITY,Salud,Drug Manufacturers - Specialty & Generic,United States,NYQ,315359542,10-K,1773751,,0,hims.com
+HL,Hecla Mining,HL,1:1,1,,EQUITY,Materiales y minería,Other Precious Metals & Mining,United States,NYQ,624790438,10-K,719413,,0,hecla.com
+HMC,Honda Motor Co.,HMC,1:1,1,,EQUITY,Consumo discrecional,Auto Manufacturers,Japan,NYQ,29963935,20-F,715153,,0,honda.co.jp
+HMY,Harmony Gold Mining Company,HMY,1:1,1,,EQUITY,Materiales y minería,Gold,South Africa,NYQ,69650346,20-F,1023514,1,0,harmony.co.za
+HNPIY,,HNPIY,1:1,0,sin cotización vigente en EE.UU. (dado de baja o mal mapeado),,,,,,,,,,,
+HOG,Harley-Davidson,HOG,3:1,1,,EQUITY,Consumo discrecional,Recreational Vehicles,United States,NYQ,51162427,10-K,793952,,0,harley-davidson.com
+HON,Honeywell International,HON,8:1,1,,EQUITY,Industria,Conglomerates,United States,NMS,617658440,10-K,773840,,0,honeywell.com
+HOOD,Robinhood Markets,HOOD,29:1,1,,EQUITY,Financiero,Capital Markets,United States,NMS,2199045613,10-K,1783879,,1,robinhood.com
+HPQ,HP,HPQ,1:1,1,,EQUITY,Tecnología,Computer Hardware,United States,NYQ,450846301,10-K,47217,,0,hp.com
+HSBC,HSBC,HSBC,2:1,1,,EQUITY,Financiero,Banks - Diversified,United Kingdom,NYQ,150476419,20-F,1089113,5,1,hsbc.com
+HSY,The Hershey,HSY,21:1,1,,EQUITY,Consumo básico,Confectioners,United States,NYQ,237976435,10-K,47111,,0,thehersheycompany.com
+HUT,Hut 8,HUT,5:1,1,,EQUITY,Financiero,Capital Markets,United States,NMS,444137322,10-K,1964789,,1,hut8.com
+HWM,Howmet Aerospace,HWM,1:1,1,,EQUITY,Industria,Aerospace & Defense,United States,NYQ,769215648,10-K,4281,,0,howmet.com
+IBB,iShares Biotechnology ETF,IBB,27:1,0,ETF (no es una empresa),ETF,,,,NGM,331354659,,,,0,
+IBIT,iShares Bitcoin Trust ETF,IBIT,10:1,0,ETF (no es una empresa),ETF,,,,NGM,2049087036,,,,0,
+IBKR,Interactive Brokers,IBKR,17:1,1,,EQUITY,Financiero,Capital Markets,United States,NMS,365150338,10-K,1381197,,1,interactivebrokers.com
+IBM,International Business Machines,IBM,15:1,1,,EQUITY,Tecnología,Information Technology Services,United States,NYQ,1279537922,10-K,51143,,0,ibm.com
+IBN,ICICI Bank,IBN,1:1,1,,EQUITY,Financiero,Banks - Regional,India,NYQ,144207738,20-F,1103838,,1,icici.bank.in
+ICLN,iShares Global Clean Energy ETF,ICLN,5:1,0,ETF (no es una empresa),ETF,,,,NGM,110487910,,,,0,
+IEMG,iShares Core MSCI Emerging Markets ETF,IEMG,12:1,0,ETF (no es una empresa),ETF,,,,PCX,861677586,,,,0,
+IEUR,iShares Core MSCI Europe ETF,IEUR,11:1,0,ETF (no es una empresa),ETF,,,,PCX,88648211,,,,0,
+IFF,International Flavors & Fragrances,IFF,12:1,1,,EQUITY,Materiales y minería,Specialty Chemicals,United States,NYQ,151529978,10-K,51253,,0,iff.com
+IJH,iShares Core S&P Mid-Cap ETF,IJH,12:1,0,ETF (no es una empresa),ETF,,,,PCX,497154345,,,,0,
+ILF,iShares Latin America 40 ETF,ILF,6:1,0,ETF (no es una empresa),ETF,,,,PCX,99189082,,,,0,
+INFY,Infosys,INFY,1:1,1,,EQUITY,Tecnología,Information Technology Services,India,NYQ,217690971,20-F,1067491,1,0,infosys.com
+ING,ING Groep,ING,3:1,1,,EQUITY,Financiero,Banks - Diversified,Netherlands,NYQ,75002882,20-F,1039765,1,1,ing.com
+INTC,Intel,INTC,5:1,1,,EQUITY,Semiconductores,Semiconductors,United States,NMS,10358099022,10-K,50863,,0,intel.com
+IP,International Paper,IP,4:1,1,,EQUITY,Consumo discrecional,Packaging & Containers,United States,NYQ,175674124,10-K,51434,,0,internationalpaper.com
+IREN,IREN,IREN,12:1,1,,EQUITY,Financiero,Capital Markets,Australia,NMS,1711193544,10-K,1878848,,1,iren.com
+ISRG,Intuitive Surgical,ISRG,90:1,1,,EQUITY,Salud,Medical Instruments & Supplies,United States,NMS,948037606,10-K,1035267,,0,intuitive.com
+ITA,iShares U.S. Aerospace & Defense ETF,ITA,50:1,0,ETF (no es una empresa),ETF,,,,BTS,167166835,,,,0,
+ITUB,Itaú Unibanco,ITUB,1:1,1,,EQUITY,Financiero,Banks - Regional,Brazil,NYQ,265484326,20-F,1132597,0.5,1,itau.com.br
+,,ITUB3,1:1,0,acción de Brasil (B3),,,,,,,,,,,
+IVE,iShares S&P 500 Value ETF,IVE,40:1,0,ETF (no es una empresa),ETF,,,,PCX,138949044,,,,0,
+IVW,iShares S&P 500 Growth ETF,IVW,20:1,0,ETF (no es una empresa),ETF,,,,PCX,216539916,,,,0,
+IWM,iShares Russell 2000 ETF,IWM,10:1,0,ETF (no es una empresa),ETF,,,,PCX,6163806454,,,,0,
+JCI,Johnson Controls International,JCI,2:1,1,,EQUITY,Industria,Building Products & Equipment,Ireland,NYQ,496675260,10-K,833444,,0,johnsoncontrols.com
+JD,JD.com,JD,4:1,1,,EQUITY,Consumo discrecional,Internet Retail,China,NMS,211719304,20-F,1549802,,0,jd.com
+JMIA,Jumia Technologies,JMIA,1:1,1,,EQUITY,Consumo discrecional,Internet Retail,Germany,NYQ,10866410,20-F,1756708,2,0,group.jumia.com
+JNJ,Johnson & Johnson,JNJ,15:1,1,,EQUITY,Salud,Drug Manufacturers - General,United States,NYQ,1805565832,10-K,200406,,0,jnj.com
+JOYY,JOYY,JOYY,5:1,1,,EQUITY,Comunicación,Internet Content & Information,Singapore,NMS,25712993,20-F,1530238,,0,joyy.sg
+JPM,JPMorgan Chase &,JPM,15:1,1,,EQUITY,Financiero,Banks - Diversified,United States,NYQ,2374848886,10-K,19617,,1,jpmorganchase.com
+KB,KB Financial,KB,2:1,1,,EQUITY,Financiero,Banks - Regional,South Korea,NYQ,21632157,20-F,1445930,1,1,kbfg.com
+KEEL,Keel Infrastructure,KEEL,1:5,1,,EQUITY,Tecnología,Information Technology Services,United States,NGM,106677871,10-K,1812477,,0,keelinfra.com
+KEP,Korea Electric Power,KEP,1:1,1,,EQUITY,Servicios públicos,Utilities - Regulated Electric,South Korea,NYQ,10446665,20-F,887225,0.5,0,kepco.co.kr
+KGC,Kinross Gold,KGC,1:1,1,,EQUITY,Materiales y minería,Gold,Canada,NYQ,213054705,40-F,701818,1,0,kinross.com
+KLAC,KLA,KLAC,34:1,1,,EQUITY,Semiconductores,Semiconductor Equipment & Materials,United States,NMS,1779338089,10-K,319201,,0,kla.com
+KMB,Kimberly-Clark,KMB,6:1,1,,EQUITY,Consumo básico,Household & Personal Products,United States,NMS,424330679,10-K,55785,,0,kimberly-clark.com
+KO,The Coca-Cola,KO,5:1,1,,EQUITY,Consumo básico,Beverages - Non-Alcoholic,United States,NYQ,1376653616,10-K,21344,,0,coca-colacompany.com
+KOF,Coca-Cola FEMSA,KOFM,2:1,1,,EQUITY,Consumo básico,Beverages - Non-Alcoholic,Mexico,NYQ,18847327,20-F,910631,,0,coca-colafemsa.com
+LAC,Lithium Americas,LAC,1:1,1,,EQUITY,Materiales y minería,Other Industrial Metals & Mining,Canada,NYQ,25586681,10-K,1966983,,0,lithiumamericas.com
+LAR,Lithium Argentina,LAR,1:1,1,,EQUITY,Materiales y minería,Other Industrial Metals & Mining,Switzerland,NYQ,10636216,20-F,1440972,1,0,lithium-argentina.com
+LFC,,LFC,2:1,0,sin cotización vigente en EE.UU. (dado de baja o mal mapeado),,,,,,,,,,,
+LIN,Linde,LIN,102:1,1,,EQUITY,Materiales y minería,Specialty Chemicals,United Kingdom,NMS,962597676,10-K,1707925,,0,linde.com
+LKOD,,LKOD,4:1,0,sin cotización vigente en EE.UU. (dado de baja o mal mapeado),,,,,,,,,,,
+LLY,Eli Lilly and,LLY,56:1,1,,EQUITY,Salud,Drug Manufacturers - General,United States,NYQ,2922182765,10-K,59478,,0,lilly.com
+LMT,Lockheed Martin,LMT,20:1,1,,EQUITY,Industria,Aerospace & Defense,United States,NYQ,671442085,10-K,936468,,0,lockheedmartin.com
+LND,BrasilAgro - Companhia Brasileira de Propriedades Agrícolas,LND,1:1,1,,EQUITY,Consumo básico,Farm Products,Brazil,NYQ,216457,20-F,1499849,,0,ri.brasil-agro.com
+LRCX,Lam Research,LRCX,56:1,1,,EQUITY,Semiconductores,Semiconductor Equipment & Materials,United States,NMS,2663456374,10-K,707549,,0,lamresearch.com
+,,LREN3,1:1,0,acción de Brasil (B3),,,,,,,,,,,
+LVS,Las Vegas Sands,LVS,2:1,1,,EQUITY,Consumo discrecional,Resorts & Casinos,United States,NYQ,226766503,10-K,1300514,,0,sands.com
+LYB,LyondellBasell Industries,LYO,2:1,1,,EQUITY,Materiales y minería,Specialty Chemicals,Netherlands,NYQ,225757243,10-K,1489393,,0,lyondellbasell.com
+MA,Mastercard,MA,33:1,1,,EQUITY,Financiero,Credit Services,United States,NYQ,1667172677,10-K,1141391,,0,mastercard.com
+MBGYY,Mercedes-Benz,MBG,4:1,0,cotiza fuera de bolsa en EE.UU. (sin balances en la SEC),EQUITY,Consumo discrecional,Auto Manufacturers,Germany,PNK,6901065,,,,0,group.mercedes-benz.com
+MBT,,MBT,2:1,0,sin cotización vigente en EE.UU. (dado de baja o mal mapeado),,,,,,,,,,,
+MCD,McDonald's,MCD,24:1,1,,EQUITY,Consumo discrecional,Restaurants,United States,NYQ,1307486211,10-K,63908,,0,mcdonalds.com
+MDLZ,Mondelez International,MDLZ,15:1,1,,EQUITY,Consumo básico,Confectioners,United States,NMS,459652105,10-K,1103982,,0,mondelezinternational.com
+MDT,Medtronic,MDT,4:1,1,,EQUITY,Salud,Medical Devices,Ireland,NYQ,1535418310,10-K,1613103,,0,medtronic.com
+MELI,MercadoLibre,MELI,120:1,1,,EQUITY,Consumo discrecional,Internet Retail,Uruguay,NMS,1036992933,10-K,1099590,,0,mercadolibre.com
+META,Meta Platforms,META,24:1,1,,EQUITY,Comunicación,Internet Content & Information,United States,NMS,13457285759,10-K,1326801,,0,meta.com
+MFG,Mizuho Financial,MFG,1:1,1,,EQUITY,Financiero,Banks - Regional,Japan,NYQ,34931033,20-F,1335730,0.2,1,mizuho-fg.co.jp
+,,MGLU3,1:1,0,acción de Brasil (B3),,,,,,,,,,,
+MMC,,MMC,16:1,0,sin cotización vigente en EE.UU. (dado de baja o mal mapeado),,,,,,,,,,,
+MMM,3M,MMM,10:1,1,,EQUITY,Industria,Conglomerates,United States,NYQ,516986872,10-K,66740,,0,3m.com
+MO,Altria,MO,4:1,1,,EQUITY,Consumo básico,Tobacco,United States,NYQ,570848596,10-K,764180,,0,altria.com
+MOS,The Mosaic,MOS,5:1,1,,EQUITY,Materiales y minería,Agricultural Inputs,United States,NYQ,199241306,10-K,1285785,,0,mosaicco.com
+MP,MP Materials,MP,10:1,1,,EQUITY,Materiales y minería,Other Industrial Metals & Mining,United States,NYQ,284523426,10-K,1801368,,0,mpmaterials.com
+MRK,Merck & Co.,MRK,5:1,1,,EQUITY,Salud,Drug Manufacturers - General,United States,NYQ,1489019020,10-K,310158,,0,merck.com
+MRNA,Moderna,MRNA,19:1,1,,EQUITY,Salud,Biotechnology,United States,NMS,3773962060,10-K,1682852,,0,modernatx.com
+MRVL,Marvell Technology,MRVL,14:1,1,,EQUITY,Semiconductores,Semiconductors,United States,NMS,4995319412,10-K,1835632,,0,marvell.com
+MS,Morgan Stanley,MS,41:1,1,,EQUITY,Financiero,Capital Markets,United States,NYQ,1029650996,10-K,895421,,1,morganstanley.com
+MSFT,Microsoft,MSFT,30:1,1,,EQUITY,Tecnología,Software - Infrastructure,United States,NMS,11258659129,10-K,789019,,0,microsoft.com
+MSI,Motorola Solutions,MSI,20:1,1,,EQUITY,Tecnología,Communication Equipment,United States,NYQ,428655120,10-K,68505,,0,motorolasolutions.com
+MSTR,Strategy,MSTR,20:1,1,,EQUITY,Tecnología,Software - Application,United States,NMS,3075460993,10-K,1050446,,0,strategy.com
+MU,Micron Technology,MU,5:1,1,,EQUITY,Semiconductores,Semiconductors,United States,NMS,26155195281,10-K,723125,,0,micron.com
+MUFG,Mitsubishi UFJ Financial,MUFG,1:1,1,,EQUITY,Financiero,Banks - Diversified,Japan,NYQ,62232918,20-F,67088,1,1,mufg.jp
+MUX,McEwen,MUX,2:1,1,,EQUITY,Materiales y minería,Other Precious Metals & Mining,Canada,NYQ,20930410,10-K,314203,,0,mcewenmining.com
+,,NATU3,1:1,0,acción de Brasil (B3),,,,,,,,,,,
+NBIS,Nebius,NBIS,27:1,1,,EQUITY,Comunicación,Internet Content & Information,Netherlands,NMS,4354210097,20-F,1513845,,0,nebius.com
+NECI,,NECI,1:3,0,sin cotización vigente en EE.UU. (dado de baja o mal mapeado),,,,,,,,,,,
+NEE,NextEra Energy,NEE,19:1,1,,EQUITY,Servicios públicos,Utilities - Regulated Electric,United States,NYQ,931916233,10-K,753308,,0,nexteraenergy.com
+NEM,Newmont,NEM,3:1,1,,EQUITY,Materiales y minería,Gold,United States,NYQ,846727904,10-K,1164727,,0,newmont.com
+NFLX,Netflix,NFLX,48:1,1,,EQUITY,Comunicación,Entertainment,United States,NMS,2561308973,10-K,1065280,,0,netflix.com
+NG,NovaGold Resources,NG,1:4,1,,EQUITY,Materiales y minería,Gold,Canada,ASE,37781529,10-K,1173420,,0,novagold.com
+NGG,National Grid,NGG,2:1,1,,EQUITY,Servicios públicos,Utilities - Regulated Electric,United Kingdom,NYQ,67382189,20-F,1004315,5,0,nationalgrid.com
+NIO,NIO,NIO,4:1,1,,EQUITY,Consumo discrecional,Auto Manufacturers,China,NYQ,125846947,20-F,1736541,,0,nio.com
+NKE,NIKE,NKE,12:1,1,,EQUITY,Consumo discrecional,Footwear & Accessories,United States,NYQ,1252282673,10-K,320187,,0,nike.com
+NSRGY,Nestlé,NLM,2:1,1,"sin balances en la SEC: entra en momentum y screener, no en calidad",EQUITY,Consumo básico,Packaged Foods,Switzerland,OID,36891166,,,,0,nestle.com
+NMR,Nomura,NMR,1:1,1,,EQUITY,Financiero,Capital Markets,Japan,NYQ,6824208,20-F,1163653,1,1,nomuraholdings.com
+NOK,Nokia,NOKA,1:1,1,,EQUITY,Tecnología,Communication Equipment,Finland,NYQ,777688526,20-F,924613,1,0,nokia.com
+NOW,ServiceNow,NOW,172:1,1,,EQUITY,Tecnología,Software - Application,United States,NYQ,1968200566,10-K,1373715,,0,servicenow.com
+NSANY,Nissan Motor Co.,NSAN,1:1,0,cotiza fuera de bolsa en EE.UU. (sin balances en la SEC),EQUITY,Consumo discrecional,Auto Manufacturers,Japan,PNK,927616,,,,0,nissan-global.com
+NTES,NetEase,NTES,14:1,1,,EQUITY,Comunicación,Electronic Gaming & Multimedia,China,NMS,85883907,20-F,1110646,5,0,ir.netease.com
+NTRA,Natera,NTRA,51:1,1,,EQUITY,Salud,Diagnostics & Research,United States,NMS,559889698,10-K,1604821,,0,natera.com
+NU,Nu,NU,2:1,1,,EQUITY,Financiero,Banks - Regional,Brazil,NYQ,1140513228,20-F,1691493,,1,nubank.com.br
+NUE,Nucor,NUE,16:1,1,,EQUITY,Materiales y minería,Steel,United States,NYQ,339331831,10-K,73309,,0,nucor.com
+NVDA,NVIDIA,NVDA,24:1,1,,EQUITY,Semiconductores,Semiconductors,United States,NMS,25141824695,10-K,1045810,,0,nvidia.com
+NVO,Novo Nordisk,NVO,7:1,1,,EQUITY,Salud,Drug Manufacturers - General,Denmark,NYQ,508805909,20-F,353278,,0,novonordisk.com
+NVS,Novartis,NVS,4:1,1,,EQUITY,Salud,Drug Manufacturers - General,Switzerland,NYQ,302504217,20-F,1114448,1,0,novartis.com
+NXE,NexGen Energy,NXE,1:1,1,,EQUITY,Energía,Uranium,Canada,NYQ,46351592,40-F,1698535,1,0,nexgenenergy.ca
+O,Realty Income,O,13:1,1,,EQUITY,Inmobiliario,REIT - Retail,United States,NYQ,424932811,10-K,726728,,0,realtyincome.com
+OGZD,,OGZD,2:1,0,sin cotización vigente en EE.UU. (dado de baja o mal mapeado),,,,,,,,,,,
+OKLO,Oklo,OKLO,28:1,1,,EQUITY,Servicios públicos,Utilities - Independent Power Producers,United States,NYQ,372506926,10-K,1849056,,0,oklo.com
+ONDS,Ondas,ONDS,2:1,1,,EQUITY,Tecnología,Communication Equipment,United States,NCM,482029273,10-K,1646188,,0,ondas.com
+ORAN,,ORAN,1:1,0,sin cotización vigente en EE.UU. (dado de baja o mal mapeado),,,,,,,,,,,
+ORCL,Oracle,ORCL,3:1,1,,EQUITY,Tecnología,Software - Infrastructure,United States,NYQ,4237894807,10-K,1341439,,0,oracle.com
+ORLY,O'Reilly Automotive,ORLY,222:1,1,,EQUITY,Consumo discrecional,Auto Parts,United States,NMS,474820437,10-K,898173,,0,oreillyauto.com
+OXY,Occidental Petroleum,OXY,5:1,1,,EQUITY,Energía,Oil & Gas E&P,United States,NYQ,506302152,10-K,797468,,0,oxy.com
+PAAS,Pan American Silver,PAAS,3:1,1,,EQUITY,Materiales y minería,Gold,Canada,NYQ,204085492,40-F,771992,1,0,panamericansilver.com
+PAC,Grupo Aeroportuario del Pacífico,PAC,16:1,1,,EQUITY,Industria,Airports & Air Services,Mexico,NYQ,28630814,20-F,1347557,,0,aeropuertosgap.com.mx
+PAGS,PagSeguro Digital,PAGS,3:1,1,,EQUITY,Tecnología,Software - Infrastructure,Brazil,NYQ,37829641,20-F,1712807,1,0,pagbank.com.br
+PANW,Palo Alto Networks,PANW,50:1,1,,EQUITY,Tecnología,Software - Infrastructure,United States,NMS,2181315456,10-K,1327567,,0,paloaltonetworks.com
+PATH,UiPath,PATH,2:1,1,,EQUITY,Tecnología,Software - Infrastructure,United States,NYQ,750068311,10-K,1734722,,0,uipath.com
+PBI,Pitney Bowes,PBI,1:1,1,,EQUITY,Industria,Integrated Freight & Logistics,United States,NYQ,27050822,10-K,78814,,0,pitneybowes.com
+PBR,Petróleo Brasileiro S.A. - Petrobras,PBR,1:1,1,,EQUITY,Energía,Oil & Gas Integrated,Brazil,NYQ,508533453,20-F,1119639,,0,petrobras.com.br
+PCAR,PACCAR,PCAR,3:1,1,,EQUITY,Industria,Farm & Heavy Construction Machinery,United States,NMS,376767215,10-K,75362,,0,paccar.com
+PCRFY,,PCRF,2:1,0,sin cotización vigente en EE.UU. (dado de baja o mal mapeado),,,,,,,,,,,
+PDD,PDD,PDD,25:1,1,,EQUITY,Consumo discrecional,Internet Retail,Ireland,NMS,497307569,20-F,1737806,,0,pddholdings.com
+PEP,PepsiCo,PEP,18:1,1,,EQUITY,Consumo básico,Beverages - Non-Alcoholic,United States,NMS,1143639833,10-K,77476,,0,pepsico.com
+,,PETR3,1:1,0,acción de Brasil (B3),,,,,,,,,,,
+PFE,Pfizer,PFE,4:1,1,,EQUITY,Salud,Drug Manufacturers - General,United States,NYQ,925099798,10-K,78003,,0,pfizer.com
+PG,The Procter & Gamble,PG,15:1,1,,EQUITY,Consumo básico,Household & Personal Products,United States,NYQ,1348107278,10-K,80424,,0,pginvestor.com
+PHG,Koninklijke Philips,PHG,5:1,1,,EQUITY,Salud,Medical Devices,Netherlands,NYQ,24616550,20-F,313216,1,0,philips.com
+PINS,Pinterest,PINS,7:1,1,,EQUITY,Comunicación,Internet Content & Information,United States,NYQ,262120692,10-K,1506293,,0,pinterest.com
+PKX,POSCO,PKS,3:1,1,,EQUITY,Materiales y minería,Steel,South Korea,NYQ,12358997,20-F,889132,0.25,0,posco-inc.com
+PLD,Prologis,PLD,29:1,1,,EQUITY,Inmobiliario,REIT - Industrial,United States,NYQ,507723255,10-K,1045609,,0,prologis.com
+PLTR,Palantir Technologies,PLTR,3:1,1,,EQUITY,Tecnología,Software - Infrastructure,United States,NMS,5121757368,10-K,1321655,,0,palantir.com
+PM,Philip Morris International,PM,18:1,1,,EQUITY,Consumo básico,Tobacco,United States,NYQ,861899953,10-K,1413329,,0,pmi.com
+,,PRIO3,2:1,0,acción de Brasil (B3),,,,,,,,,,,
+PSO,Pearson,PSO,1:1,1,,EQUITY,Comunicación,Publishing,United Kingdom,NYQ,11411930,20-F,938323,1,0,plc.pearson.com
+PSQ,ProShares Short QQQ,PSQ,8:1,0,ETF (no es una empresa),ETF,,,,PCX,371476538,,,,0,
+PSX,Phillips 66,PSX,6:1,1,,EQUITY,Energía,Oil & Gas Refining & Marketing,United States,NYQ,731285399,10-K,1534701,,0,phillips66.com
+PTR,,PTR,4:1,0,sin cotización vigente en EE.UU. (dado de baja o mal mapeado),,,,,,,,,,,
+PYPL,PayPal,PYPL,8:1,1,,EQUITY,Financiero,Credit Services,United States,NMS,660575767,10-K,1633917,,0,paypal.com
+QCOM,QUALCOMM,QCOM,11:1,1,,EQUITY,Semiconductores,Semiconductors,United States,NMS,2000088052,10-K,804328,,0,qualcomm.com
+QQQ,Invesco QQQ Trust,QQQ,20:1,0,ETF (no es una empresa),ETF,,,,NGM,24370186839,,,,0,
+RACE,Ferrari,RACE,83:1,1,,EQUITY,Consumo discrecional,Auto Manufacturers,Italy,NYQ,160886749,20-F,1648416,1,0,ferrari.com
+RBLX,Roblox,RBLX,2:1,1,,EQUITY,Comunicación,Electronic Gaming & Multimedia,United States,NYQ,484320576,10-K,1315098,,0,corp.roblox.com
+,,RCTB4,17:40,0,acción de Brasil (B3),,,,,,,,,,,
+,,RENT3,2:1,0,acción de Brasil (B3),,,,,,,,,,,
+RGTI,Rigetti Computing,RGTI,2:1,1,,EQUITY,Tecnología,Computer Hardware,United States,NCM,250438788,10-K,1838359,,0,rigetti.com
+RIO,Rio Tinto,RIO,8:1,1,,EQUITY,Materiales y minería,Other Industrial Metals & Mining,United Kingdom,NYQ,206850291,20-F,863064,,0,riotinto.com
+RIOT,Riot Platforms,RIOT,3:1,1,,EQUITY,Financiero,Capital Markets,United States,NCM,357923240,10-K,1167419,,1,riotplatforms.com
+RKLB,Rocket Lab,RKLB,12:1,1,,EQUITY,Industria,Aerospace & Defense,United States,NMS,1322991181,10-K,1819994,,0,rocketlabcorp.com
+ROKU,Roku,ROKU,13:1,1,,EQUITY,Comunicación,Entertainment,United States,NMS,336429749,10-K,1428439,,0,roku.com
+ROST,Ross Stores,ROST,41:1,1,,EQUITY,Consumo discrecional,Apparel Retail,United States,NMS,525639002,10-K,745732,,0,rossstores.com
+RSP,Invesco S&P 500 Equal Weight ETF,RSP,30:1,0,ETF (no es una empresa),ETF,,,,PCX,1518603903,,,,0,
+RTX,RTX,RTX,5:1,1,,EQUITY,Industria,Aerospace & Defense,United States,NYQ,885594455,10-K,101829,,0,rtx.com
+SAN,Banco Santander,SAN,1:4,1,,EQUITY,Financiero,Banks - Diversified,Spain,NYQ,173283757,20-F,891478,1,1,santander.com
+SAP,SAP,SAP,6:1,1,,EQUITY,Tecnología,Software - Application,Germany,NYQ,494142216,20-F,1000184,1,0,sap.com
+SATL,Satellogic,SATL,1:1,1,,EQUITY,Industria,Aerospace & Defense,United States,NCM,26454933,10-K,1874315,,0,satellogic.com
+SBS,Companhia de saneamento Basico,SBS,1:2,1,,EQUITY,Servicios públicos,Utilities - Regulated Water,Brazil,NYQ,59681730,20-F,1170858,0.2,0,sabesp.com.br
+,,SBSP3,1:1,0,acción de Brasil (B3),,,,,,,,,,,
+SBUX,Starbucks,SBUX,12:1,1,,EQUITY,Consumo discrecional,Restaurants,United States,NMS,731049437,10-K,829224,,0,starbucks.com
+SCCO,Southern Copper,SCCO,2:1,1,,EQUITY,Materiales y minería,Copper,United States,NYQ,221396756,10-K,1001838,,0,southerncoppercorp.com
+SCHW,The Charles Schwab,SCHW,13:1,1,,EQUITY,Financiero,Capital Markets,United States,NYQ,836083773,10-K,316709,,1,aboutschwab.com
+SDA,SunCar Technology,SDA,2:1,1,,EQUITY,Consumo discrecional,Auto & Truck Dealerships,China,NCM,354042,20-F,1936804,,0,suncartech.com
+SE,Sea,SE,32:1,1,,EQUITY,Consumo discrecional,Internet Retail,Singapore,NYQ,510244715,20-F,1703399,,0,sea.com
+SH,ProShares Short S&P500,SH,8:1,0,ETF (no es una empresa),ETF,,,,PCX,267060647,,,,0,
+SHEL,Shell,SHEL,2:1,1,,EQUITY,Energía,Oil & Gas Integrated,United Kingdom,NYQ,577501962,20-F,1306965,2,0,shell.com
+SHOP,Shopify,SHOP,107:1,1,,EQUITY,Tecnología,Software - Application,Canada,NMS,1389060803,10-K,1594805,,0,shopify.com
+SHPW,,SHPW,1:2,0,sin cotización vigente en EE.UU. (dado de baja o mal mapeado),,,,,,,,,,,
+SHW,The Sherwin-Williams,SHW,69:1,1,,EQUITY,Materiales y minería,Specialty Chemicals,United States,NYQ,553942326,10-K,89800,,0,sherwin-williams.com
+SI,Shoulder Innovations,SI,10:1,1,,EQUITY,,,,NYQ,2249568,10-K,1699350,,0,
+SID,Companhia Siderúrgica Nacional,SID,1:8,1,,EQUITY,Materiales y minería,Steel,Brazil,NYQ,8728167,20-F,1049659,1,0,csn.com.br
+SIEGY,Siemens Aktiengesellschaft,SIEGY,3:1,0,cotiza fuera de bolsa en EE.UU. (sin balances en la SEC),EQUITY,Industria,Specialty Industrial Machinery,Germany,PNK,23430334,,,,0,siemens.com
+HXSCL,,SKHY,25:1,0,sin cotización vigente en EE.UU. (dado de baja o mal mapeado),,,,,,,,,,,
+SLB,SLB,SLB,3:1,1,,EQUITY,Energía,Oil & Gas Equipment & Services,United States,NYQ,651853518,10-K,87347,,0,slb.com
+SLV,iShares Silver Trust,SLV,6:1,0,ETF (no es una empresa),ETF,,,,PCX,931257532,,,,0,
+SMH,,SMH,50:1,0,sin cotización vigente en EE.UU. (dado de baja o mal mapeado),,,,,,,,,,,
+SSNLF,Samsung Electronics Co.,SMSN,14:1,0,cotiza fuera de bolsa en EE.UU. (sin balances en la SEC),EQUITY,Tecnología,Consumer Electronics,South Korea,PNK,0,,,,0,samsung.com
+SNA,Snap-on,SNA,6:1,1,,EQUITY,Industria,Tools & Accessories,United States,NYQ,120598060,10-K,91440,,0,snapon.com
+SNAP,Snap,SNAP,1:1,1,,EQUITY,Comunicación,Internet Content & Information,United States,NYQ,210489892,10-K,1564408,,0,snap.com
+SNDK,Sandisk,SNDK,170:1,1,,EQUITY,Tecnología,Computer Hardware,United States,NMS,16376272044,10-K,2023554,,0,sandisk.com
+SNOW,Snowflake,SNOW,30:1,1,,EQUITY,Tecnología,Software - Application,United States,NYQ,1532724785,10-K,1640147,,0,snowflake.com
+SNP,,SNP,3:1,0,sin cotización vigente en EE.UU. (dado de baja o mal mapeado),,,,,,,,,,,
+SONY,Sony,SONY,8:1,1,,EQUITY,Tecnología,Consumer Electronics,Japan,NYQ,94372517,20-F,313838,0.2,0,sony.com
+SOYB,Teucrium Soybean Fund,SOYB,5:1,0,ETF (no es una empresa),ETF,,,,PCX,1798107,,,,0,
+SPCE,Virgin Galactic,SPCE,1:2,1,,EQUITY,Industria,Aerospace & Defense,United States,NYQ,18846949,10-K,1706946,,0,virgingalactic.com
+SPGI,S&P Global,SPGI,45:1,1,,EQUITY,Financiero,Financial Data & Stock Exchanges,United States,NYQ,788804170,10-K,64040,,0,spglobal.com
+SPHQ,Invesco S&P 500 Quality ETF,SPHQ,14:1,0,ETF (no es una empresa),ETF,,,,PCX,104008693,,,,0,
+SPOT,Spotify Technology,SPOT,28:1,1,,EQUITY,Comunicación,Internet Content & Information,Sweden,NYQ,864153359,20-F,1639920,1,0,spotify.com
+SPXL,Direxion Daily S&P500 Bull 3X Shares,SPXL,25:1,0,ETF (no es una empresa),ETF,,,,PCX,432013139,,,,0,
+SPY,State Street SPDR S&P 500 ETF Trust,SPY,60:1,0,ETF (no es una empresa),ETF,,,,PCX,30791131608,,,,0,
+STLA,Stellantis,STLA,5:1,1,,EQUITY,Consumo discrecional,Auto Manufacturers,Netherlands,NYQ,130503841,20-F,1605484,1,0,stellantis.com
+STNE,StoneCo,STNE,3:1,1,,EQUITY,Tecnología,Software - Infrastructure,Cayman Islands,NMS,67364722,20-F,1745431,,0,stoneco.com.br
+SUZ,Suzano,SUZ,1:1,1,,EQUITY,Materiales y minería,Paper & Paper Products,Brazil,NYQ,29152584,20-F,909327,1,0,suzano.com.br
+,,SUZB3,1:1,0,acción de Brasil (B3),,,,,,,,,,,
+SWKS,Skyworks Solutions,SWKS,21:1,1,,EQUITY,Semiconductores,Semiconductors,United States,NMS,513324964,10-K,4127,,0,skyworksinc.com
+SYY,Sysco,SYY,8:1,1,,EQUITY,Consumo básico,Food Distribution,United States,NYQ,279229845,10-K,96021,,0,sysco.com
+T,AT&T,T,3:1,1,,EQUITY,Comunicación,Telecom Services,United States,NYQ,1018803094,10-K,732717,,0,att.com
+TCOM,Trip.com,TCOM,2:1,1,,EQUITY,Consumo discrecional,Travel Services,Singapore,NMS,124223268,20-F,1269238,1,0,group.trip.com
+TEAM,Atlassian,TEAM,47:1,1,,EQUITY,Tecnología,Software - Application,Australia,NMS,660045124,10-K,1650372,,0,atlassian.com
+TEF,,TEFO,8:1,0,sin cotización vigente en EE.UU. (dado de baja o mal mapeado),,,,,,,,,,,
+TEM,Tempus AI,TEM,12:1,1,,EQUITY,Salud,Health Information Services,United States,NMS,475681526,10-K,1717115,,0,tempus.com
+TS,Tenaris,TEN,1:1,1,,EQUITY,Energía,Oil & Gas Equipment & Services,Luxembourg,NYQ,72744769,20-F,1190723,2,0,tenaris.com
+TGT,Target,TGT,24:1,1,,EQUITY,Consumo básico,Discount Stores,United States,NYQ,636663837,10-K,27419,,0,corporate.target.com
+TILAY,,TILAY,1:1,0,sin cotización vigente en EE.UU. (dado de baja o mal mapeado),,,,,,,,,,,
+TIMB,TIM,TIMB,1:1,1,,EQUITY,Comunicación,Telecom Services,Brazil,NYQ,11533823,20-F,1826168,5,0,tim.com.br
+,,TIMS3,1:1,0,acción de Brasil (B3),,,,,,,,,,,
+TJX,The TJX Companies,TJX,22:1,1,,EQUITY,Consumo discrecional,Apparel Retail,United States,NYQ,1055949824,10-K,109198,,0,tjx.com
+TLN,Talen Energy,TLN,63:1,1,,EQUITY,Servicios públicos,Utilities - Independent Power Producers,United States,NMS,315668761,10-K,1622536,,0,talenenergy.com
+TM,Toyota Motor,TM,15:1,1,,EQUITY,Consumo discrecional,Auto Manufacturers,Japan,NYQ,60835635,20-F,1094517,12,0,global.toyota
+TMO,Thermo Fisher Scientific,TMO,22:1,1,,EQUITY,Salud,Diagnostics & Research,United States,NYQ,1367213865,10-K,97745,,0,thermofisher.com
+TMUS,T-Mobile US,TMUS,33:1,1,,EQUITY,Comunicación,Telecom Services,United States,NMS,874902705,10-K,1283699,,0,t-mobile.com
+TQQQ,ProShares UltraPro QQQ,TQQQ,25:1,0,ETF (no es una empresa),ETF,,,,NGM,3789438903,,,,0,
+TRIP,Tripadvisor,TRIP,2:1,1,,EQUITY,Consumo discrecional,Travel Services,United States,NMS,35088801,10-K,1526520,,0,tripadvisor.com
+TRV,The Travelers Companies,TRVV,6:1,1,,EQUITY,Financiero,Insurance - Property & Casualty,United States,NYQ,546621612,10-K,86312,,1,travelers.com
+TSLA,Tesla,TSLA,15:1,1,,EQUITY,Consumo discrecional,Auto Manufacturers,United States,NMS,13376187142,10-K,1318605,,0,tesla.com
+TSM,Taiwan Semiconductor Manufacturing Company,TSM,9:1,1,,EQUITY,Semiconductores,Semiconductors,Taiwan,NYQ,4442358106,20-F,1046179,5,0,tsmc.com
+TTE,TotalEnergies,TTE,3:1,1,,EQUITY,Energía,Oil & Gas Integrated,France,NYQ,162371497,20-F,879764,1,0,totalenergies.com
+TTM,,TTM,1:1,0,sin cotización vigente en EE.UU. (dado de baja o mal mapeado),,,,,,,,,,,
+TV,"Grupo Televisa, S.A.B.",TV,3:1,1,,EQUITY,Comunicación,Telecom Services,Mexico,NYQ,2896920,20-F,912892,,0,televisa.com
+TWLO,Twilio,TWLO,36:1,1,,EQUITY,Tecnología,Software - Infrastructure,United States,NYQ,811751905,10-K,1447669,,0,twilio.com
+TWTR,,TWTR,2:1,0,sin cotización vigente en EE.UU. (dado de baja o mal mapeado),,,,,,,,,,,
+TXN,Texas Instruments,TXN,5:1,1,,EQUITY,Semiconductores,Semiconductors,United States,NMS,1667738119,10-K,97476,,0,ti.com
+TX,Ternium,TXR,4:1,1,,EQUITY,Materiales y minería,Steel,Luxembourg,NYQ,29169608,20-F,1342874,,0,ternium.com
+UAL,United Airlines,UAL,5:1,1,,EQUITY,Industria,Airlines,United States,NMS,439703617,10-K,100517,,0,united.com
+UBER,Uber Technologies,UBER,2:1,1,,EQUITY,Tecnología,Software - Application,United States,NYQ,1299163278,10-K,1543151,,0,uber.com
+UGP,Ultrapar Participações,UGP,1:1,1,,EQUITY,Energía,Oil & Gas Refining & Marketing,Brazil,NYQ,28824776,20-F,1094972,1,0,ultra.com.br
+UL,Unilever,UL,3:1,1,,EQUITY,Consumo básico,Household & Personal Products,United Kingdom,NYQ,217563841,20-F,217410,1,0,unilever.com
+UNH,UnitedHealth,UNH,33:1,1,,EQUITY,Salud,Healthcare Plans,United States,NYQ,1990196667,10-K,731766,,0,unitedhealthgroup.com
+UNP,Union Pacific,UNP,20:1,1,,EQUITY,Industria,Railroads,United States,NYQ,699865359,10-K,100885,,0,up.com
+UPST,Upstart,UPST,5:1,1,,EQUITY,Financiero,Credit Services,United States,NMS,113233146,10-K,1647639,,0,upstart.com
+URA,Global X Uranium ETF,URA,5:1,0,ETF (no es una empresa),ETF,,,,PCX,147700069,,,,0,
+URBN,Urban Outfitters,URBN,2:1,1,,EQUITY,Consumo discrecional,Apparel Retail,United States,NMS,88829709,10-K,912615,,0,urbn.com
+USB,U.S. Bancorp,USB,5:1,1,,EQUITY,Financiero,Banks - Regional,United States,NYQ,438741994,10-K,36104,,1,usbank.com
+USO,"United States Oil Fund, LP",USO,15:1,0,ETF (no es una empresa),ETF,,,,PCX,767300405,,,,0,
+V,Visa,V,18:1,1,,EQUITY,Financiero,Credit Services,United States,NYQ,2371996034,10-K,1403161,,0,visa.com
+VALE,Vale,VALE,2:1,1,,EQUITY,Materiales y minería,Other Industrial Metals & Mining,Brazil,NYQ,447600527,20-F,917851,,0,vale.com
+,,VALE3,1:1,0,acción de Brasil (B3),,,,,,,,,,,
+VEA,Vanguard FTSE Developed Markets Index Fund ETF Shares,VEA,10:1,0,ETF (no es una empresa),ETF,,,,PCX,674369765,,,,0,
+VIG,Vanguard Dividend Appreciation Index Fund ETF Shares,VIG,39:1,0,ETF (no es una empresa),ETF,,,,PCX,243159726,,,,0,
+VIST,Vista Energy,VIST,3:1,1,,EQUITY,Energía,Oil & Gas E&P,Mexico,NYQ,71639514,20-F,1762506,,0,vistaenergy.com
+VIV,Telefônica Brasil,VIV,1:1,1,,EQUITY,Comunicación,Telecom Services,Brazil,NYQ,18750662,20-F,1066119,2,0,telefonica.com.br
+,,VIVT3,1:1,0,acción de Brasil (B3),,,,,,,,,,,
+VOD,Vodafone Group Public Limited,VOD,1:1,1,,EQUITY,Comunicación,Telecom Services,United Kingdom,NMS,56502105,20-F,839923,12,0,vodafone.com
+VRSN,VeriSign,VRSN,6:1,1,,EQUITY,Tecnología,Software - Infrastructure,United States,NMS,239199500,10-K,1014473,,0,verisign.com
+VRTX,Vertex Pharmaceuticals,VRTX,101:1,1,,EQUITY,Salud,Biotechnology,United States,NMS,593187451,10-K,875320,,0,vrtx.com
+VST,Vistra,VST,26:1,1,,EQUITY,Servicios públicos,Utilities - Independent Power Producers,United States,NYQ,816389007,10-K,1692819,,0,vistracorp.com
+VXX,iPath Series B S&P 500 VIX Short-Term Futures ETN,VXX,5:1,0,ETF (no es una empresa),ETF,,,,BTS,169504691,,,,0,
+VZ,Verizon Communications,VZ,4:1,1,,EQUITY,Comunicación,Telecom Services,United States,NYQ,1084474879,10-K,732712,,0,verizon.com
+WBA,,WBA,3:1,0,sin cotización vigente en EE.UU. (dado de baja o mal mapeado),,,,,,,,,,,
+WB,Weibo,WBO,6:1,1,,EQUITY,Comunicación,Internet Content & Information,China,NMS,7336632,20-F,1595761,,0,weibo.com
+WDC,Western Digital,WDC,92:1,1,,EQUITY,Tecnología,Computer Hardware,United States,NMS,3488340784,10-K,106040,,0,westerndigital.com
+,,WEGE3,1:1,0,acción de Brasil (B3),,,,,,,,,,,
+WELL,Welltower,WELL,48:1,1,,EQUITY,Inmobiliario,REIT - Healthcare Facilities,United States,NYQ,636636422,10-K,766704,,0,welltower.com
+WFC,Wells Fargo &,WFC,5:1,1,,EQUITY,Financiero,Banks - Diversified,United States,NYQ,1179340814,10-K,72971,,1,wellsfargo.com
+WMT,Walmart,WMT,18:1,1,,EQUITY,Consumo básico,Discount Stores,United States,NMS,2559312584,10-K,104169,,0,stock.walmart.com
+XLB,State Street Materials Select Sector SPDR ETF,XLB,18:1,0,ETF (no es una empresa),ETF,,,,PCX,560057984,,,,0,
+XLC,State Street Communication Services Select Sector SPDR ETF,XLC,19:1,0,ETF (no es una empresa),ETF,,,,PCX,601658022,,,,0,
+XLE,State Street Energy Select Sector SPDR ETF,XLE,2:1,0,ETF (no es una empresa),ETF,,,,PCX,1957985488,,,,0,
+XLF,State Street Financial Select Sector SPDR ETF,XLF,2:1,0,ETF (no es una empresa),ETF,,,,PCX,1825538618,,,,0,
+XLI,State Street Industrial Select Sector SPDR ETF,XLI,28:1,0,ETF (no es una empresa),ETF,,,,PCX,1211131632,,,,0,
+XLK,State Street Technology Select Sector SPDR ETF,XLK,46:1,0,ETF (no es una empresa),ETF,,,,PCX,1385805648,,,,0,
+XLP,State Street Consumer Staples Select Sector SPDR ETF,XLP,16:1,0,ETF (no es una empresa),ETF,,,,PCX,943865796,,,,0,
+XLRE,State Street Real Estate Select Sector SPDR ETF,XLRE,9:1,0,ETF (no es una empresa),ETF,,,,PCX,269932329,,,,0,
+XLU,State Street Utilities Select Sector SPDR ETF,XLU,15:1,0,ETF (no es una empresa),ETF,,,,PCX,1082902665,,,,0,
+XLV,State Street Health Care Select Sector SPDR ETF,XLV,29:1,0,ETF (no es una empresa),ETF,,,,PCX,1395784052,,,,0,
+XLY,State Street Consumer Discretionary Select Sector SPDR ETF,XLY,43:1,0,ETF (no es una empresa),ETF,,,,PCX,704962149,,,,0,
+XME,State Street SPDR S&P Metals & Mining ETF,XME,30:1,0,ETF (no es una empresa),ETF,,,,PCX,195352284,,,,0,
+XOM,ExxonMobil,XOM,10:1,1,"sin balances en la SEC: entra en momentum y screener, no en calidad",EQUITY,Energía,Oil & Gas Integrated,United States,NYQ,2194065714,,2115436,,0,corporate.exxonmobil.com
+XP,XP,XP,4:1,1,,EQUITY,Financiero,Capital Markets,Cayman Islands,NMS,251826121,20-F,1787425,,1,xpinc.com
+XPEV,XPeng,XPEV,4:1,1,,EQUITY,Consumo discrecional,Auto Manufacturers,China,NYQ,74976986,20-F,1810997,,0,xpeng.com
+XRX,Xerox,XROX,1:1,1,,EQUITY,Industria,Business Equipment & Supplies,United States,NMS,7456247,10-K,1770450,,0,xerox.com
+XYZ,Block,XYZ,20:1,1,,EQUITY,Tecnología,Software - Infrastructure,United States,NYQ,348182678,10-K,1512673,,0,block.xyz
+YELP,Yelp,YELP,2:1,1,,EQUITY,Comunicación,Internet Content & Information,United States,NYQ,26518468,10-K,1345016,,0,yelp.com
+YZCA,,YZCA,2:1,0,sin cotización vigente en EE.UU. (dado de baja o mal mapeado),,,,,,,,,,,
+ZM,Zoom Communications,ZM,47:1,1,,EQUITY,Tecnología,Software - Application,United States,NMS,289200842,10-K,1585521,,0,zoom.com
