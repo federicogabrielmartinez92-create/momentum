@@ -454,7 +454,7 @@ def tabla(df, fmt=None, signo=(), estilos=None, fechas=(), orden=None, config=No
             clase = "n" if num else ("largo" if largo else "")
             celdas.append(f"<td class='{clase}'" + (f" style='{estilo}'" if estilo else "") + f">{txt}</td>")
         cuerpo.append("<tr>" + "".join(celdas) + "</tr>")
-    alto = f"max-height:{int(height)}px;" if height else ("max-height:620px;" if len(df) > 16 else "")
+    alto = f"max-height:{int(height)}px;" if height else ""
     st.markdown(f"<div class='tbl-wrap' style='{alto}'><table class='tbl'><thead><tr>{''.join(cab)}</tr></thead>"
                 f"<tbody>{''.join(cuerpo)}</tbody></table></div>".replace("$", "&#36;"), unsafe_allow_html=True)
 
@@ -1285,7 +1285,7 @@ def pagina_calidad():
                 return "" if np.isnan(v) else f"color: {T_ROJO if v < 5 else T_VERDE if v >= 10 else T_AMARILLO}; font-weight: 600"
             tabla(r[["Puesto", "Acción", "Empresa", "Situación", "Sector", "Puntaje", "Rentabilidad", "Ventas", "Deuda", "Rend10", "Tendencia"]],
                   fmt={"Puesto": "%d", "Puntaje": "%.0f", "Rentabilidad": "%.0f%%", "Ventas": "%.0f%%", "Deuda": "%.1fx", "Rend10": "%.1f%%"},
-                  estilos={"Rend10": color_rend, "Situación": SITUACION_CALIDAD}, height=560, config={
+                  estilos={"Rend10": color_rend, "Situación": SITUACION_CALIDAD}, config={
                       "Rentabilidad": st.column_config.Column("ROIC", help="ROIC promedio de 5 años (ROE en bancos)"),
                       "Ventas": st.column_config.Column("Ventas", help="Crecimiento anual de las ventas, 5 años"),
                       "Deuda": st.column_config.Column("Deuda", help="Deuda neta / EBITDA"),
@@ -1488,7 +1488,7 @@ def pagina_momentum():
                     + chip("25 a 30: zona de salida", "amarillo") + "</div>", unsafe_allow_html=True)
         tabla(rk[["Puesto", "Acción", "Empresa", "Situación", "CEDEAR", "Sector", "Suba 12-1 %", "Volatilidad %", "Puntaje"]],
               fmt={"Puesto": "%d", "Suba 12-1 %": "%+.0f%%", "Volatilidad %": "%.0f%%", "Puntaje": "%.2f"}, signo=["Suba 12-1 %"],
-              estilos={"Situación": SITUACION_MOM, "Puesto": lambda v: css_color("amarillo") if v >= 25 else ""}, height=560, config={
+              estilos={"Situación": SITUACION_MOM, "Puesto": lambda v: css_color("amarillo") if v >= 25 else ""}, config={
                   "Suba 12-1 %": st.column_config.Column("Suba 12 meses"), "Volatilidad %": st.column_config.Column("Volatilidad")})
 
     with tabs[5]:
@@ -1609,7 +1609,7 @@ def pagina_reversion():
     k1, k2, k3, k4, k5 = st.columns(5)
     k1.metric("Señales de hoy", len(senales))
     k2.metric("Operaciones abiertas", len(ab), delta=(pct(ab[f"ret_{reg}"].mean(), 1) + " promedio") if len(ab) else None)
-    k3.metric("Mercado", "A favor" if ok_m else "En contra", delta=f"{pct((px_s / media_s - 1) * 100, 1)} S&P vs su media",
+    k3.metric("Mercado", "A favor" if ok_m else "En contra", delta=f"{pct((px_s / media_s - 1) * 100, 1)} vs media",
               delta_color="normal", help="Solo se compra si el S&P 500 está arriba de su media de 200 días")
     if len(cart):
         a_c, a_s = stats_serie(cart).get("anual"), stats_serie(spy.loc[cart.index[0]:]).get("anual")
@@ -1694,7 +1694,7 @@ def pagina_reversion():
             est = {corto: sino(act_s[f]) for f, corto in FILTROS_CORTO.items()}
             est["Nivel"] = estilo_nivel
             est["Fallas"] = lambda v: css_color("verde") if v == "PASA" else css_color("amarillo") if v == "1" else ""
-            tabla(out, fmt={"Caída %": "%.0f%%"}, estilos=est, height=min(38 + 35 * len(out), 1100))
+            tabla(out, fmt={"Caída %": "%.0f%%"}, estilos=est)
             notas = ["Ordenadas por cantidad de filtros que les faltan. Verde = cumple, rojo = no cumple.",
                      "El P/E está apagado en la estrategia: se muestra solo como dato (en gris)."]
             if nv["niveles"]:
@@ -1713,19 +1713,21 @@ def pagina_reversion():
             t_ = ab.copy()
             t_.insert(1, "Empresa", [C.nombre(x) for x in t_["Ticker"]])
             t_.insert(1, "Nivel", [nivel_de(x) for x in t_["Ticker"]])
+            t_["Acción"] = t_["Ticker"]
+            t_["Sector"] = t_["Nivel"]          # el nivel va en la línea chica debajo del nombre (una columna menos)
             t_["Precio actual"] = t_[f"precio_{reg}"]
             t_["Resultado %"] = t_[f"ret_{reg}"]
             t_["vs S&P %"] = t_[f"ret_{reg}"] - t_[f"spy_{reg}"]
             if reg == "6m":
                 t_["Vender el"] = [(e + pd.offsets.BDay(SCR.CONFIG["mantener_ruedas"])) for e in t_["Entrada"]]
                 t_["Ruedas restantes"] = t_["faltan_6m"]
-                cols = ["Ticker", "Nivel", "Empresa", "Entrada", "Precio entrada", "Precio actual", "Resultado %", "vs S&P %", "Vender el", "Ruedas restantes"]
+                cols = ["Acción", "Empresa", "Sector", "Entrada", "Precio entrada", "Precio actual", "Resultado %", "vs S&P %", "Vender el", "Ruedas restantes"]
                 fechas = ["Entrada", "Vender el"]
             else:
                 t_["Vende en (USD)"] = t_["Precio entrada"] * (1 + TP_REV)
                 t_["Le falta subir %"] = (t_["Vende en (USD)"] / t_["Precio actual"] - 1) * 100
                 t_["Límite 12 meses"] = [(e + pd.offsets.BDay(MAX_TP_REV)) for e in t_["Entrada"]]
-                cols = ["Ticker", "Nivel", "Empresa", "Entrada", "Precio entrada", "Precio actual", "Resultado %", "vs S&P %", "Vende en (USD)",
+                cols = ["Acción", "Empresa", "Sector", "Entrada", "Precio entrada", "Precio actual", "Resultado %", "vs S&P %", "Vende en (USD)",
                         "Le falta subir %"]
                 cols += ["Límite 12 meses"]
                 fechas = ["Entrada", "Límite 12 meses"]
@@ -1736,7 +1738,12 @@ def pagina_reversion():
             tabla(t_[cols].sort_values("Entrada"), fmt={"Precio entrada": "%.2f", "Precio actual": "%.2f", "Resultado %": "%+.1f%%",
                                                          "vs S&P %": "%+.1f%%", "Vende en (USD)": "%.2f", "Le falta subir %": "%.1f%%",
                                                          "Ruedas restantes": "%d"},
-                  signo=["Resultado %", "vs S&P %"], fechas=fechas, estilos={"Nivel": estilo_nivel})
+                  signo=["Resultado %", "vs S&P %"], fechas=fechas, config={
+                      "Precio entrada": {"label": "Compra USD"}, "Precio actual": {"label": "Hoy USD"},
+                      "Resultado %": {"label": "Resultado"}, "vs S&P %": {"label": "vs S&P"},
+                      "Vende en (USD)": {"label": "Vende en USD", "help": "Precio al que llega a +20%"},
+                      "Le falta subir %": {"label": "Falta subir"}, "Límite 12 meses": {"label": "Límite", "help": "Si no llega a +20%, se vende igual en esta fecha (12 meses)"},
+                      "Vender el": {"label": "Se vende el"}, "Ruedas restantes": {"label": "Faltan", "help": "Ruedas hasta la venta"}})
             st.caption("Son las operaciones que abrió el sistema (todas las señales). Si en tu cartera real compraste otras o en otras "
                        "fechas, los resultados cambian.")
 
