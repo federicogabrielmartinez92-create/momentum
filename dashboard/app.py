@@ -2598,21 +2598,19 @@ def pagina_inicio():
     tarjetas.append(_tarjeta_cartera("Cartera de calidad", "Largo plazo", "azul", val_txt, filas, tick_cal,
                                      f"Próxima revisión: <b>{dias[prox_c.weekday()]} {prox_c.strftime('%d/%m')}</b>"
                                      + (" · trimestral" if trim else "") if prox_c else "", "calidad"))
-    # --- momentum (panel semanal / mensual)
+    # --- momentum: mismo cálculo que su página (precios al último cierre)
     prox_m = proxima_operacion_momentum(hoy)
-    if pm:
-        cap_m = float(os.environ.get("MOMENTUM_CAPITAL") or 10000)
-        r_m = (pm["valor"] / cap_m - 1) * 100 if pm.get("valor") else None
-        r_sm = None
-        try:
-            spy = precios_ajustados(tuple(), pd.Timestamp(pm["inicio"]).strftime("%Y-%m-%d"), ultimo_cierre())["SPY"].dropna()
-            spy = spy[spy.index <= pd.Timestamp(pm["cierre"])]
-            r_sm = (spy.iloc[-1] / spy.iloc[0] - 1) * 100
-        except Exception:   # noqa: BLE001
-            pass
-        filas_m = [(f"Desde el {pd.Timestamp(pm['inicio']).strftime('%d/%m')}", pct(r_m), _color_ret(r_m)),
+    try:
+        R = datos_momentum(INICIO_MOM_REAL, ultimo_cierre(), MARCA_UNIVERSO)["real"]
+    except Exception:       # noqa: BLE001
+        R = None
+    if R is not None and len(R["cart"]) > 0:
+        tick_mom = list(R["cart"]["Acción"])
+        r_m = (R["serie"].iloc[-1] / R["serie"].iloc[0] - 1) * 100
+        r_sm = (R["spy"].iloc[-1] / R["spy"].iloc[0] - 1) * 100
+        filas_m = [(f"Desde el {pd.Timestamp(INICIO_MOM_REAL).strftime('%d/%m')}", pct(r_m), _color_ret(r_m)),
                    ("S&amp;P mismo período", pct(r_sm), None), ("Posiciones", str(len(tick_mom)), None)]
-        val_m = usd(pm.get("valor")) + f"<small> al {pd.Timestamp(pm['cierre']).strftime('%d/%m')}</small>"
+        val_m = usd(R["valor"])
     else:
         filas_m, val_m = [("Estado", "sin datos todavía", None)], "—"
     tarjetas.append(_tarjeta_cartera("Momentum", "Mensual", "violeta", val_m, filas_m, tick_mom,
