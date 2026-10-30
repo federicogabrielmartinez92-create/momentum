@@ -1996,7 +1996,10 @@ def main():
         cuerpo = "MODELO MEJORADO: calidad, crecimiento, valuación y deterioro por separado (detalle en calidad_mejorado.xlsx).\n" + cuerpo
     print(asunto)
     print(cuerpo)
-    if os.environ.get("GMAIL_USER") and os.environ.get("GMAIL_APP_PASSWORD"):
+    # Mails apagados por defecto (la información está en la app). Para volver a recibirlos: variable de GitHub ENVIAR_MAIL = 1
+    if os.environ.get("ENVIAR_MAIL", "0") != "1":
+        print("(Mail apagado: la variable ENVIAR_MAIL no es 1.)")
+    elif os.environ.get("GMAIL_USER") and os.environ.get("GMAIL_APP_PASSWORD"):
         enviar_mail(asunto, cuerpo, adjuntos)
     else:
         print("(Sin credenciales de Gmail: no se envía el mail.)")

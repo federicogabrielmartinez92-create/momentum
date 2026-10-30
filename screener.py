@@ -1013,7 +1013,10 @@ def main():
         print("(Para generar el PDF de resumen instalá reportlab: pip install reportlab)")
 
     import os
-    if os.environ.get("GMAIL_USER") and os.environ.get("GMAIL_APP_PASSWORD"):
+    # Mails apagados por defecto (la información está en la app). Para volver a recibirlos: variable de GitHub ENVIAR_MAIL = 1
+    if os.environ.get("ENVIAR_MAIL", "0") != "1":
+        print("(Mail apagado: la variable ENVIAR_MAIL no es 1.)")
+    elif os.environ.get("GMAIL_USER") and os.environ.get("GMAIL_APP_PASSWORD"):
         enviar_mail(df, ruta, ruta_pdf, abiertas)
 
 

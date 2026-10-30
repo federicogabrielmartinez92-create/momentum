@@ -1,0 +1,22 @@
+name: Despertar la app
+
+# Visita la app cada 6 horas para que Streamlit no la duerma (si la durmió, la despierta) y deje los datos en memoria.
+on:
+  schedule:
+    - cron: "11 */6 * * *"
+  workflow_dispatch:
+
+jobs:
+  despertar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install playwright && python -m playwright install --with-deps chromium
+      - name: Visitar la app
+        env:
+          APP_URL: ${{ vars.APP_URL }}
+        run: python herramientas/despertar_app.py
