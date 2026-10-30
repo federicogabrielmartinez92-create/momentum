@@ -740,16 +740,31 @@ def ultimo_cierre():
 
 @st.cache_data(ttl=3600, show_spinner=False)
 def precios_ajustados(tickers, desde, cierre=None):
-    datos = yf.download(list(tickers) + ["SPY"], start=desde, auto_adjust=True, group_by="ticker", progress=False, threads=True)
-    out = {}
-    for t in list(tickers) + ["SPY"]:
+    """Precios ajustados de Yahoo. Si alguna acción no llega en la descarga conjunta (Yahoo a veces falla con una sola),
+    se reintenta de a una para que no quede en blanco."""
+    lista = list(tickers) + ["SPY"]
+
+    def serie(df, t):
         try:
-            s = datos[t]["Close"].dropna()
-            if s.index.tz is not None:
-                s.index = s.index.tz_localize(None)
-            out[t] = s
+            s = (df[t]["Close"] if isinstance(df.columns, pd.MultiIndex) else df["Close"]).dropna()
         except (KeyError, TypeError):
-            pass
+            return None
+        if isinstance(s, pd.DataFrame):
+            s = s.iloc[:, 0]
+        if s.index.tz is not None:
+            s.index = s.index.tz_localize(None)
+        return s if len(s) else None
+    datos = yf.download(lista, start=desde, auto_adjust=True, group_by="ticker", progress=False, threads=True)
+    out = {t: s for t in lista if (s := serie(datos, t)) is not None}
+    for t in [t for t in lista if t not in out]:
+        for _ in range(2):
+            try:
+                s = serie(yf.download(t, start=desde, auto_adjust=True, group_by="ticker", progress=False, threads=False), t)
+            except Exception:       # noqa: BLE001
+                s = None
+            if s is not None:
+                out[t] = s
+                break
     px = pd.DataFrame(out)
     return px.reindex(px["SPY"].dropna().index).ffill()
 
@@ -1096,9 +1111,12 @@ def pagina_calidad():
                           "Tesis": {"INTACTA": "✓ intacta", "REVISAR": "⚠ revisar", "ROTA": "✗ rota", "SIN DATOS": "sin datos"}.get(
                               tesis.get(t, {}).get("estado"), "—")})
         cart = pd.DataFrame(filas).sort_values("Peso %", ascending=False)
-        n_gana = int((cart["vs S&P desde la compra %"] > 0).sum())
+        vs = cart["vs S&P desde la compra %"]
+        n_gana, n_pierde = int((vs > 0).sum()), int((vs <= 0).sum())
+        sin_px = list(cart.loc[vs.isna(), "Acción"])
         st.markdown(f"<div class='leyenda'>{chip(f'▲ {n_gana} le ganan al S&P desde que entraron', 'verde')}"
-                    f"{chip(f'▼ {len(cart) - n_gana} van peor que el S&P', 'rojo') if len(cart) - n_gana else ''}</div>",
+                    f"{chip(f'▼ {n_pierde} van peor que el S&P', 'rojo') if n_pierde else ''}"
+                    f"{chip('Sin precio ahora: ' + ', '.join(sin_px), 'gris') if sin_px else ''}</div>",
                     unsafe_allow_html=True)
         tabla(cart, fmt={"Suba desde la compra %": "%+.0f%%", "vs S&P desde la compra %": "%+.0f%%"},
               signo=["Suba desde la compra %", "vs S&P desde la compra %"], fechas=["En cartera desde"], estilos={"Tesis": TESIS_COLOR},
