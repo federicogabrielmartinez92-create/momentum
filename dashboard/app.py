@@ -939,6 +939,34 @@ Alibaba, Baidu y NIO). Costos: 0,5% por operación. Análisis cuantitativo con f
 """
 
 
+def ranking_vigente(panel):
+    """Ranking de calidad para mostrar: el del explorador (se recalcula todos los domingos con el universo ampliado) si es
+    más nuevo que la última revisión; si no, el de la revisión. Solo cambia lo que se ve: las órdenes salen de la revisión."""
+    panel = panel or {}
+    ex = leer_json("explorador_calidad.json") or {}
+    if ex.get("empresas") and ex.get("fecha", "") > panel.get("fecha", ""):
+        filas = []
+        for t, e in ex["empresas"].items():
+            if not e.get("pasa") or e.get("puesto") is None:
+                continue
+            filas.append({"Acción": t, "Puesto": int(e["puesto"]), "Puntaje": e.get("puntaje"), "Orden": e.get("orden"),
+                          "Sector": C.sector(t), "tipo": e.get("tipo"), "Rentabilidad": e.get("rent_prom"),
+                          "Ventas": e.get("ventas_cagr"), "Deuda": e.get("deuda_ebitda") if e.get("tipo") != "financiera" else None,
+                          "Rend10": e.get("rend_esperado"), "Tendencia": e.get("mom_pct"), "comprable": bool(e.get("comprable")),
+                          "castigada": bool(e.get("castigada")), "precio_extremo": bool(e.get("precio_extremo")),
+                          "Precio": e.get("precio"), "PrecioCompra": e.get("precio_compra")})
+        rk = pd.DataFrame(filas)
+        if len(rk):
+            rk = rk.sort_values("Puesto").head(30).reset_index(drop=True)
+            info = {"fecha": ex["fecha"], "total": len(ex["empresas"]), "pasan": len(filas),
+                    "comprables": sum(1 for f in filas if f["comprable"]), "fuente": "semanal"}
+            return rk, info
+    rk = pd.DataFrame(panel.get("ranking", []))
+    info = {"fecha": panel.get("fecha"), "total": panel.get("total"), "pasan": panel.get("pasan"),
+            "comprables": panel.get("comprables"), "fuente": "revision"}
+    return rk, info
+
+
 def pagina_calidad():
     encabezado("ESTRATEGIA · LARGO PLAZO", "Cartera de calidad")
     st.caption("10 empresas de calidad para el largo plazo · revisión mensual el primer día hábil desde el 15 · mismo programa y datos "
@@ -971,7 +999,7 @@ def pagina_calidad():
     hoy = date.today()
     prox = proxima_revision_calidad(hoy, E0.get("ultima_oficial"))
     tesis = (panel or {}).get("tesis", {}) if not antes_real else {}
-    rank = pd.DataFrame((panel or {}).get("ranking", []))
+    rank, info_rk = ranking_vigente(panel)
     castigadas = set(rank.loc[rank["castigada"], "Acción"]) if len(rank) else set()
     arranco = bool(E["posiciones"])
     pesos_vivos = {t: p["valor"] / valor * 100 for t, p in E["posiciones"].items()} if arranco else {}
@@ -1211,8 +1239,11 @@ def pagina_calidad():
         if not len(rank):
             st.info("El ranking aparece después de la primera revisión del sistema real.")
         else:
-            st.markdown(f"De {panel['total']} empresas, **{panel['pasan']}** pasan los filtros mínimos y **{panel['comprables']}** de las 20 "
-                        f"mejores son comprables (sin precio extremo ni tendencia en el 10% más bajo). Revisión del {fmt_fecha(panel['fecha'])}.")
+            cuando = (f"Actualizado el {fmt_fecha(info_rk['fecha'])} (se recalcula todos los domingos con los precios de ese día; "
+                      f"las órdenes salen de la revisión mensual)." if info_rk["fuente"] == "semanal"
+                      else f"Revisión del {fmt_fecha(info_rk['fecha'])}.")
+            st.markdown(f"De {info_rk['total']} empresas, **{info_rk['pasan']}** pasan los filtros mínimos y **{info_rk['comprables']}** de las 20 "
+                        f"mejores son comprables (sin precio extremo ni tendencia en el 10% más bajo). {cuando}")
             en_cart = set(E["posiciones"])
 
             def situacion(x):
@@ -1253,7 +1284,8 @@ def pagina_calidad():
             esp = r[(r["Puesto"] <= 20) & (~r["comprable"]) & (~r["Acción"].isin(en_cart))].copy()
             if len(esp):
                 st.subheader("Lista de espera", divider="orange")
-                st.caption("Entre las 20 mejores en calidad, pero hoy no se pueden comprar. Precio de compra = precio al que rendiría 10% anual.")
+                st.caption("Entre las 20 mejores en calidad, pero hoy no se pueden comprar. Precio de compra = precio al que rendiría 10% anual. "
+                           + (f"Precios del {pd.Timestamp(info_rk['fecha']).strftime('%d/%m/%Y')}." if info_rk.get("fecha") else ""))
                 esp["Tiene que bajar %"] = (1 - esp["PrecioCompra"] / esp["Precio"]) * 100
                 tabla(esp[["Puesto", "Acción", "Empresa", "Precio", "PrecioCompra", "Tiene que bajar %", "Situación"]],
                       fmt={"Puesto": "%d", "Precio": "%.2f", "PrecioCompra": "%.2f", "Tiene que bajar %": "%.0f%%"},
