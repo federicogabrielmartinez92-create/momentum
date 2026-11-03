@@ -6,6 +6,7 @@ Se publica en Streamlit Community Cloud (privado: solo entran los mails invitado
     la última revisión y el ranking (panel_calidad.json) y la historia del backtest 2011-2026 (historial_calidad.json).
   * Momentum residual: se recalcula en vivo con el mismo código del mail (momentum.py), incluyendo su backtest desde 2011.
 """
+import hashlib
 import html
 import json
 import os
@@ -54,6 +55,7 @@ if getattr(C, "_marca_universo", None) != MARCA_UNIVERSO:
     import calculos as _CALC
     importlib.reload(_CALC)
     C._marca_universo = MARCA_UNIVERSO
+import frases_munger as FRASES  # noqa: E402
 import calculos as CALC      # noqa: E402  (cálculos pesados; se guardan hechos de madrugada en precalculo/)
 from calculos import (INICIO_REV, TP_REV, MAX_TP_REV, LUGARES_REV, REGLAS_REV, FILTROS_TXT, VERSION_REV,  # noqa: E402,F401
                       evaluar_rev, simular_cartera_rev)
@@ -547,42 +549,91 @@ def anual_desde(series):
 
 
 # ============================================================================ gráficos
-def grafico_evolucion(df, colores, log=False, marca=None, alto=320):
-    """df: índice fecha, columnas = series (máx. 3). marca: (fecha, texto) para una línea vertical."""
-    d = df.copy()
-    d.index.name = "Fecha"
-    d = d.reset_index().melt("Fecha", var_name="Serie", value_name="Valor").dropna()
-    esc = alt.Scale(domain=list(colores), range=list(colores.values()))
-    base = alt.Chart(d).encode(x=alt.X("Fecha:T", title=None, axis=alt.Axis(format="%Y" if log else "%b %Y", grid=False)))
-    y = alt.Y("Valor:Q", title=None, scale=alt.Scale(type="log" if log else "linear", zero=False),
-              axis=alt.Axis(format="~s", gridOpacity=0.25))
-    lineas = base.mark_line(strokeWidth=2.4).encode(y=y, color=alt.Color("Serie:N", scale=esc, legend=alt.Legend(orient="top", title=None)))
-    cerca = alt.selection_point(nearest=True, on="pointerover", fields=["Fecha"], empty=False)
-    puntos = base.mark_point(size=55, filled=True).encode(
-        y=y, color=alt.Color("Serie:N", scale=esc, legend=None), opacity=alt.condition(cerca, alt.value(1), alt.value(0)),
-        tooltip=[alt.Tooltip("Fecha:T", format="%d/%m/%Y"), "Serie:N", alt.Tooltip("Valor:Q", format=",.0f", title="USD")]).add_params(cerca)
-    regla = base.mark_rule(color="#98A2B3").encode(opacity=alt.condition(cerca, alt.value(0.5), alt.value(0))).transform_filter(cerca)
-    capas = lineas + puntos + regla
-    if marca:
-        m = pd.DataFrame({"Fecha": [pd.Timestamp(marca[0])], "txt": [marca[1]]})
-        capas += alt.Chart(m).mark_rule(strokeDash=[3, 3], color="#98A2B3").encode(x="Fecha:T", tooltip=["txt:N"])
-    st.altair_chart(capas.properties(height=alto), width="stretch")
+def _usd_corto(v):
+    return f"USD {v / 1e6:,.2f} M".replace(",", "X").replace(".", ",").replace("X", ".") if v >= 1e6 else \
+        f"USD {v:,.0f}".replace(",", ".")
+
+
+PLOTLY_CONF = {"displayModeBar": False, "scrollZoom": False, "doubleClick": False}
+
+
+def grafico_evolucion(df, colores, log=False, marca=None, alto=340):
+    """df: índice fecha, columnas = series (máx. 3). La primera es la principal. marca: (fecha, texto) para una línea vertical.
+    Plotly con un solo cartel para todas las series (más liviano que Altair con miles de puntos)."""
+    import plotly.graph_objects as go
+    d = df.dropna(how="all").copy()
+    d.index = pd.to_datetime(d.index)
+    span = (d.index[-1] - d.index[0]).days if len(d) else 0
+    periodos = {"1 año": 1, "3 años": 3, "5 años": 5, "Todo": None}
+    en_pct = False
+    if span > 2 * 365:                       # el período se elige afuera del gráfico: así el eje vertical se ajusta al tramo
+        clave = "per_" + hashlib.md5(("|".join(colores) + str(d.index[0]) + str(alto)).encode()).hexdigest()[:10]
+        per = st.segmented_control("Período", list(periodos), default="Todo", key=clave, label_visibility="collapsed") or "Todo"
+        if periodos[per]:                    # tramo corto: todas las series arrancan en 0% para comparar mejor
+            d = d[d.index >= d.index[-1] - pd.DateOffset(years=periodos[per])]
+            d = (d / d.apply(lambda c: c.dropna().iloc[0] if c.notna().any() else np.nan) - 1) * 100
+            span, en_pct, log = (d.index[-1] - d.index[0]).days, True, False
+    if span > 3 * 365:                       # semanal alcanza para ver 15 años y el cartel se mueve fluido
+        d = d.resample("W-FRI").last().dropna(how="all")
+    fig = go.Figure()
+    principal = list(colores)[0]
+    for nom, col in colores.items():
+        if nom not in d:
+            continue
+        s = d[nom].dropna()
+        es_ref = nom.startswith("S&P")
+        fig.add_trace(go.Scatter(
+            x=s.index, y=s.values, name=nom, mode="lines",
+            line=dict(color=col, width=3 if nom == principal else 2, dash="dot" if es_ref else "solid"),
+            fill="tozeroy" if (nom == principal and not log) else None,
+            fillcolor=f"rgba({int(col[1:3], 16)},{int(col[3:5], 16)},{int(col[5:7], 16)},0.08)",
+            hovertemplate=("%{y:+.1f}%" if en_pct else "USD %{y:,.0f}") + "<extra>" + nom + "</extra>"))
+        if len(s):                            # valor final y variación del período, al costado de cada línea
+            ini = s.iloc[0]
+            if en_pct:
+                txt = f"<b>{s.iloc[-1]:+.1f}%</b>".replace(".", ",")
+            else:
+                txt = f"<b>{_usd_corto(s.iloc[-1])}</b><br>" + (f"{(s.iloc[-1] / ini - 1) * 100:+.0f}%".replace(".", ",") if ini else "")
+            fig.add_annotation(xref="paper", x=1, y=np.log10(s.iloc[-1]) if log else s.iloc[-1], text=txt, showarrow=False,
+                               xanchor="left", xshift=8, align="left", font=dict(color=col, size=12))
+    if marca and (not len(d) or pd.Timestamp(marca[0]) >= d.index[0]):
+        fig.add_vline(x=pd.Timestamp(marca[0]).timestamp() * 1000, line_dash="dash", line_color="#98A2B3", line_width=1,
+                      annotation_text=marca[1], annotation_position="top left", annotation_font_size=11,
+                      annotation_font_color="#98A2B3")
+    lo = float(d.min().min()) if len(d) else 0
+    fig.update_layout(
+        height=alto, margin=dict(l=0, r=110, t=10, b=0), hovermode="x unified", dragmode=False, showlegend=True,
+        legend=dict(orientation="h", yanchor="bottom", y=1.0, xanchor="left", x=0, title=None),
+        hoverlabel=dict(namelength=-1), separators=",.")
+    fig.update_xaxes(showgrid=False, fixedrange=True, hoverformat="%d/%m/%Y", tickformat="%b %Y" if span < 4 * 365 else "%Y",
+                     range=[d.index[0], d.index[-1]] if len(d) else None,
+                     showspikes=True, spikemode="across", spikethickness=1, spikedash="solid", spikecolor="#98A2B3")
+    hi = float(d.max().max()) if len(d) else 1
+    if en_pct:
+        pad = max(2.0, (hi - lo) * 0.08)
+        fig.update_yaxes(fixedrange=True, ticksuffix="%", zeroline=True, zerolinecolor="#98A2B3", zerolinewidth=1,
+                         gridcolor="rgba(152,162,179,.18)", range=[lo - pad, hi + pad])
+    else:
+        fig.update_yaxes(type="log" if log else "linear", fixedrange=True, tickformat="~s", gridcolor="rgba(152,162,179,.18)",
+                         range=None if log else [lo * 0.9, hi * 1.04])
+    st.plotly_chart(fig, width="stretch", config=PLOTLY_CONF, theme="streamlit")
 
 
 def grafico_anual(an, colores):
     """an: DataFrame año x serie (%)."""
-    d = an.copy()
-    d.index.name = "Año"
-    d = d.reset_index().melt("Año", var_name="Serie", value_name="Rend").dropna()
-    d["Año"] = d["Año"].astype(str)
-    esc = alt.Scale(domain=list(colores), range=list(colores.values()))
-    ch = alt.Chart(d).mark_bar(cornerRadiusEnd=3, size=9).encode(
-        x=alt.X("Año:N", title=None, axis=alt.Axis(labelAngle=0)), xOffset="Serie:N",
-        y=alt.Y("Rend:Q", title="% en el año", axis=alt.Axis(gridOpacity=0.25)),
-        color=alt.Color("Serie:N", scale=esc, legend=alt.Legend(orient="top", title=None)),
-        tooltip=["Año:N", "Serie:N", alt.Tooltip("Rend:Q", format="+.1f", title="%")])
-    cero = alt.Chart(pd.DataFrame({"y": [0]})).mark_rule(color="#98A2B3").encode(y="y:Q")
-    st.altair_chart((ch + cero).properties(height=280), width="stretch")
+    import plotly.graph_objects as go
+    fig = go.Figure()
+    for nom, col in colores.items():
+        if nom in an:
+            s = an[nom]
+            fig.add_trace(go.Bar(x=[str(i) for i in s.index], y=s.values, name=nom, marker_color=col, marker_cornerradius=3,
+                                 hovertemplate="%{y:+.1f}%<extra>" + nom + "</extra>"))
+    fig.add_hline(y=0, line_color="#98A2B3", line_width=1)
+    fig.update_layout(height=290, barmode="group", bargap=0.25, margin=dict(l=0, r=0, t=10, b=0), hovermode="x unified",
+                      dragmode=False, legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1), separators=",.")
+    fig.update_xaxes(fixedrange=True, type="category")
+    fig.update_yaxes(fixedrange=True, ticksuffix="%", gridcolor="rgba(152,162,179,.18)", title=None)
+    st.plotly_chart(fig, width="stretch", config=PLOTLY_CONF, theme="streamlit")
 
 
 PALETA_SECTORES = ["#2459D6", "#0E9384", "#DC6803", "#7A5AF8", "#E04F16", "#D92D20", "#155EEF", "#C11574", "#4CA30D", "#667085"]
@@ -2565,6 +2616,13 @@ def pagina_inicio():
     hoy = date.today()
     dias = ["lunes", "martes", "miércoles", "jueves", "viernes", "sábado", "domingo"]
     encabezado(f"{dias[hoy.weekday()]} {fmt_fecha(hoy)}", "Inicio")
+    frase, fuente = FRASES.frase_de_la_semana(hoy)
+    st.markdown(
+        '<div style="border-left:3px solid var(--acento);padding:6px 0 6px 18px;margin:2px 0 18px;max-width:860px">'
+        f'<div style="font-family:Georgia,\'Times New Roman\',serif;font-style:italic;font-size:19px;line-height:1.5;'
+        f'color:var(--texto)">«{html.escape(frase)}»</div>'
+        f'<div style="font-size:13px;color:var(--texto2);margin-top:6px">— Charlie Munger · {html.escape(fuente)} · '
+        'frase de la semana</div></div>', unsafe_allow_html=True)
 
     # --- cartera de calidad, valuada al último cierre (igual que su página)
     E0 = leer_json("cartera_calidad.json") or C.estado_nuevo()
