@@ -124,8 +124,11 @@ def _salidas(cv, cb, i0):
 
 def simular_cartera_rev(ops, reg, px, spy, liquidez_spy, niveles=None):
     """Cartera de 10 lugares: cada señal entra con 1/10 del valor total si hay lugar libre; sale según la regla.
-    Si el mismo día hay más señales que lugares, entran primero las Premium, después las Sólidas y al final las Especulativas."""
+    Solo cuentan las señales de acciones Premium y Sólidas (las Especulativas se muestran aparte, sin impacto).
+    Si el mismo día hay más señales que lugares, entran primero las Premium y después las Sólidas."""
     niveles = niveles or {}
+    if len(ops):
+        ops = ops[[cuenta_rev(t, niveles) for t in ops["Ticker"]]]
     if not len(ops):
         return pd.Series(dtype=float)
     idx = spy.index[spy.index >= ops["Entrada"].min()]
@@ -165,8 +168,14 @@ def simular_cartera_rev(ops, reg, px, spy, liquidez_spy, niveles=None):
     return pd.Series(vals, index=idx)
 
 
-VERSION_REV = "6"     # subir cuando cambie el cálculo, para no usar datos guardados de una versión anterior
+VERSION_REV = "7"     # subir cuando cambie el cálculo, para no usar datos guardados de una versión anterior
 PRIORIDAD_NIVEL = {"Premium": 0, "Sólida": 1, "Especulativa": 2}
+NIVELES_REV = ("Premium", "Sólida")      # niveles cuyas señales cuentan para la estrategia de reversión
+
+
+def cuenta_rev(ticker, niveles):
+    """True si la señal de esta acción cuenta para la estrategia. Sin datos de nivel (Yahoo falló), cuentan todas."""
+    return not niveles or niveles.get(ticker) in NIVELES_REV
 
 
 def niveles_calidad():
