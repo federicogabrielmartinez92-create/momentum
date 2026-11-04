@@ -1614,6 +1614,8 @@ caída ya se frenó, y venderlas en el rebote. Es el mismo programa del mail dia
 - **Consolidación:** si venía subiendo, entre 30 y 120 días desde el último máximo; si venía bajando, más de 100 días lateralizando.
 - **Beta ≥ 1,3:** se mueve más que el mercado (2 años de datos semanales).
 - **Mercado:** el S&P 500 está arriba de su media de 200 días.
+- **Nivel de calidad:** solo cuentan las acciones **Premium** (20 mejores por tamaño, ROE y margen) y **Sólidas** (las 50
+  siguientes). Las señales de acciones Especulativas se muestran aparte como dato, pero no se compran ni entran en los resultados.
 - No se vuelve a comprar la misma acción mientras la anterior sigue en cartera.
 
 **Dos formas de salir** (se pueden comparar con el selector de arriba):
@@ -1622,7 +1624,7 @@ caída ya se frenó, y venderlas en el rebote. Es el mismo programa del mail dia
   terminan con ganancia, pero se cortan las subas grandes.
 
 **Cartera de 10 lugares:** cada señal entra con el 10% del valor de la cartera si hay lugar libre. Si el mismo día hay más
-señales que lugares, entran primero las Premium, después las Sólidas y al final las Especulativas. La plata que no está en
+señales que lugares, entran primero las Premium y después las Sólidas. La plata que no está en
 ninguna operación queda invertida en el S&P 500 (SPY) hasta la próxima compra, así la comparación con el índice es pareja.
 Costos: 0,5% por operación. Entrada y salida al cierre del día de la señal.
 
@@ -1646,15 +1648,22 @@ def pagina_reversion():
         if len(d["ops"]) and any(f"abierta_{r}" not in d["ops"] for r in REGLAS_REV):   # memoria de una versión anterior
             datos_reversion.clear()
             d = datos_reversion(VERSION_REV, tuple(REGLAS_REV), ultimo_cierre(), MARCA_UNIVERSO, niv_t)
-    ops, hoy = d["ops"], d["hoy"]
+    ops_todas, hoy = d["ops"], d["hoy"]
     nivel_de = lambda t: nv["niveles"].get(t, "")
+    cuenta = lambda t: CALC.cuenta_rev(t, nv["niveles"])
+    vale = (lambda df, col: df[[cuenta(x) for x in df[col]]] if len(df) else df)
+    especul = (lambda df, col: df[[not cuenta(x) for x in df[col]]] if len(df) else df)
+    ops, ops_e = vale(ops_todas, "Ticker"), especul(ops_todas, "Ticker")   # solo Premium y Sólidas cuentan
     estilo_nivel = lambda v: css_color(NIVEL_COLOR.get(v, ""))
     reg = st.radio("Regla de salida", list(REGLAS_REV), format_func=REGLAS_REV.get, horizontal=True, key="rev_regla")
     nom = REGLAS_REV[reg]
     ok_m, px_s, media_s = d["mercado"]
-    senales = hoy[hoy["Fallan"] == 0] if len(hoy) else hoy
+    senales_todas = hoy[hoy["Fallan"] == 0] if len(hoy) else hoy
+    senales, senales_e = vale(senales_todas, "Acción"), especul(senales_todas, "Acción")
     ab = ops[ops[f"abierta_{reg}"]].copy() if len(ops) else ops
     cer = ops[~ops[f"abierta_{reg}"]].copy() if len(ops) else ops
+    ab_e = ops_e[ops_e[f"abierta_{reg}"]].copy() if len(ops_e) else ops_e
+    cer_e = ops_e[~ops_e[f"abierta_{reg}"]].copy() if len(ops_e) else ops_e
     cart = d["carteras"][reg]
     spy = d["spy"]
     k1, k2, k3, k4, k5 = st.columns(5)
@@ -1671,7 +1680,10 @@ def pagina_reversion():
     if len(fila):
         k5.metric("Operaciones con ganancia", pct(float(fila["% con ganancia"].iloc[0]), 0, False),
                   delta=f"{int(fila['Operaciones cerradas'].iloc[0])} cerradas", delta_color="off")
-    st.caption(f"Precios al cierre del {pd.Timestamp(d['cierre']).strftime('%d/%m/%Y')}.")
+    st.caption(f"Precios al cierre del {pd.Timestamp(d['cierre']).strftime('%d/%m/%Y')}. Solo cuentan las señales de acciones "
+               "Premium y Sólidas; las Especulativas se muestran aparte, como dato.")
+    if not nv["niveles"]:
+        aviso("Hoy no se pudo obtener el nivel de calidad de las acciones: se muestran todas las señales sin separar.", "naranja")
 
     tabs = st.tabs(["Hoy", "Operaciones abiertas", "Historial", "Resultados", "Cómo funciona"])
     with tabs[0]:
@@ -1682,22 +1694,30 @@ def pagina_reversion():
             aviso(f"<b>Mercado en contra:</b> el S&amp;P ({px_s:,.0f}) está debajo de su media de 200 días ({media_s:,.0f}). "
                   "No se compra hasta que vuelva a estar arriba.".replace(",", "."), "rojo")
         st.subheader("1. Comprar", divider="green")
-        if len(senales):
-            t_ = senales.copy()
+
+        def tabla_senales(sen, especulativas=False):
+            t_ = sen.copy()
             t_.insert(1, "Empresa", [C.nombre(x) for x in t_["Acción"]])
             t_.insert(2, "CEDEAR", [C.cedear(x) for x in t_["Acción"]])
             t_.insert(1, "Nivel", [nivel_de(x) for x in t_["Acción"]])
             en_cartera = set(ab["Ticker"]) if len(ab) else set()
             t_["_p"] = [CALC.PRIORIDAD_NIVEL.get(n, 3) for n in t_["Nivel"]]
             t_ = t_.sort_values(["_p", "Acción"])
-            t_["Situación"] = ["ya en cartera: no repetir" if x in en_cartera else "🟢 comprar" for x in t_["Acción"]]
+            t_["Situación"] = (["solo informativa" for _ in t_["Acción"]] if especulativas else
+                               ["ya en cartera: no repetir" if x in en_cartera else "🟢 comprar" for x in t_["Acción"]])
             tabla(t_[["Acción", "Nivel", "Empresa", "CEDEAR", "Precio", "Caída desde máx. %", "Beta", "Tendencia previa", "Situación"]],
                   fmt={"Precio": "%.2f", "Caída desde máx. %": "%.1f%%", "Beta": "%.2f"},
-                  estilos={"Situación": por_prefijo({"🟢": "verde", "ya": "gris"}), "Nivel": estilo_nivel})
+                  estilos={"Situación": por_prefijo({"🟢": "verde", "ya": "gris", "solo": "gris"}), "Nivel": estilo_nivel})
+
+        if len(senales):
+            tabla_senales(senales)
             st.caption("Cada compra, 10% de la cartera destinada a esta estrategia. Si hay más señales que lugares libres, primero las "
-                       "Premium, después las Sólidas y al final las Especulativas (en ese orden aparecen en la tabla).")
+                       "Premium y después las Sólidas (en ese orden aparecen en la tabla).")
         else:
-            aviso("Hoy no hay señales de compra.", "azul")
+            aviso("Hoy no hay señales de compra de acciones Premium o Sólidas.", "azul")
+        if len(senales_e):
+            st.markdown("**Señales de acciones Especulativas** · solo informativas, no se compran ni cuentan en los resultados")
+            tabla_senales(senales_e, especulativas=True)
         st.subheader("2. Vender", divider="red")
         if len(ab):
             if reg == "6m":
@@ -1749,18 +1769,16 @@ def pagina_reversion():
             notas = ["Ordenadas por cantidad de filtros que les faltan. Verde = cumple, rojo = no cumple.",
                      "El P/E está apagado en la estrategia: se muestra solo como dato (en gris)."]
             if nv["niveles"]:
-                notas.append("Nivel de calidad (solo informativo): Premium = 20 mejores por tamaño, ROE y margen; "
-                             "Sólida = siguientes 50; Especulativa = resto.")
+                notas.append("Nivel de calidad: Premium = 20 mejores por tamaño, ROE y margen; Sólida = siguientes 50; "
+                             "Especulativa = resto (sus señales no cuentan).")
             else:
                 notas.append("Hoy Yahoo no devolvió los datos para el nivel de calidad; se vuelve a intentar en la próxima visita.")
             st.caption(" ".join(notas))
         else:
             st.markdown("Sin datos para armar el tablero.")
 
-    with tabs[1]:
-        if not len(ab):
-            st.info("No hay operaciones abiertas con esta regla.")
-        else:
+    def tabla_abiertas(ab):
+        if True:
             t_ = ab.copy()
             t_.insert(1, "Empresa", [C.nombre(x) for x in t_["Ticker"]])
             t_.insert(1, "Nivel", [nivel_de(x) for x in t_["Ticker"]])
@@ -1795,8 +1813,18 @@ def pagina_reversion():
                       "Vende en (USD)": {"label": "Vende en USD", "help": "Precio al que llega a +20%"},
                       "Le falta subir %": {"label": "Falta subir"}, "Límite 12 meses": {"label": "Límite", "help": "Si no llega a +20%, se vende igual en esta fecha (12 meses)"},
                       "Vender el": {"label": "Se vende el"}, "Ruedas restantes": {"label": "Faltan", "help": "Ruedas hasta la venta"}})
-            st.caption("Son las operaciones que abrió el sistema (todas las señales). Si en tu cartera real compraste otras o en otras "
-                       "fechas, los resultados cambian.")
+
+    with tabs[1]:
+        if not len(ab):
+            st.info("No hay operaciones abiertas de acciones Premium o Sólidas con esta regla.")
+        else:
+            tabla_abiertas(ab)
+            st.caption("Son las operaciones que abrió el sistema con las señales de acciones Premium y Sólidas. Si en tu cartera real "
+                       "compraste otras o en otras fechas, los resultados cambian.")
+        if len(ab_e):
+            st.subheader("Especulativas: solo informativas", divider="gray")
+            tabla_abiertas(ab_e)
+            st.caption("Cómo les va a las señales de acciones Especulativas. No se compran ni cuentan en los resultados de la estrategia.")
 
     with tabs[2]:
         if not len(cer):
@@ -1805,7 +1833,13 @@ def pagina_reversion():
             v = pd.DataFrame({"Acción": cer["Ticker"], "Compra": cer["Entrada"], "Venta": cer[f"salida_{reg}"],
                               "Resultado": cer[f"ret_{reg}"] / 100, "Motivo": cer[f"motivo_{reg}"]})
             ventas_con_stats(v, C.nombre, nota_motivo="Por qué se vendió")
-            st.caption(f"Todas las señales desde {INICIO_REV[:4]} con la regla «{nom}». El motivo muestra si llegó a +20% o se vendió por plazo.")
+            st.caption(f"Todas las señales de acciones Premium y Sólidas desde {INICIO_REV[:4]} con la regla «{nom}». El motivo muestra "
+                       "si llegó a +20% o se vendió por plazo.")
+        if len(cer_e):
+            with st.expander(f"Especulativas: {len(cer_e)} operaciones cerradas (solo informativas, no cuentan)"):
+                v_e = pd.DataFrame({"Acción": cer_e["Ticker"], "Compra": cer_e["Entrada"], "Venta": cer_e[f"salida_{reg}"],
+                                    "Resultado": cer_e[f"ret_{reg}"] / 100, "Motivo": cer_e[f"motivo_{reg}"]})
+                ventas_con_stats(v_e, C.nombre, nota_motivo="Por qué se vendió")
 
     with tabs[3]:
         st.subheader("Las dos reglas, operación por operación", divider="blue")
@@ -1818,7 +1852,15 @@ def pagina_reversion():
                   signo=["Resultado promedio %", "Ganancia por mes invertido %", "Peor %", "Mejor %"],
                   estilos={"": lambda v: css_color("verde") if v else ""})
             st.caption("Ganancia por mes invertido = suma de resultados dividida por los meses que la plata estuvo adentro: permite comparar "
-                       "reglas que mantienen la acción distinto tiempo. S&P por mes = lo mismo con el S&P en esos mismos períodos.")
+                       "reglas que mantienen la acción distinto tiempo. S&P por mes = lo mismo con el S&P en esos mismos períodos. "
+                       "Solo señales de acciones Premium y Sólidas.")
+        so_e = stats_reglas(ops_e)
+        if len(so_e):
+            with st.expander("Comparar con las señales de acciones Especulativas (no cuentan)"):
+                tabla(so_e, fmt={"Operaciones cerradas": "%d", "% con ganancia": "%.0f%%", "Resultado promedio %": "%+.1f%%",
+                                 "Meses promedio": "%.1f", "Ganancia por mes invertido %": "%+.2f%%", "S&P por mes %": "%+.2f%%",
+                                 "% le ganan al S&P": "%.0f%%", "Peor %": "%+.0f%%", "Mejor %": "%+.0f%%"},
+                      signo=["Resultado promedio %", "Ganancia por mes invertido %", "Peor %", "Mejor %"])
         if len(ops):
             tp_ok = ops[(~ops["abierta_tp"]) & (ops["motivo_tp"] == "Llegó a +20%")]
             if len(tp_ok):
@@ -1843,8 +1885,8 @@ def pagina_reversion():
             ss = stats_serie(s_)
             cols_m[-1].metric("S&P 500", pct(ss.get("anual"), 1, False) + " anual", delta=f"{pct(ss.get('caida'), 1)} peor caída")
             st.caption(f"Con la regla elegida, USD 10.000 se convirtieron en {usd(cart.iloc[-1])}.")
-            st.caption("Cada señal entra con el 10% de la cartera si hay lugar; si el mismo día hay más señales que lugares, primero "
-                       "las Premium, después las Sólidas y al final las Especulativas; con 10 operaciones abiertas, las señales nuevas se "
+            st.caption("Solo entran señales de acciones Premium y Sólidas. Cada una entra con el 10% de la cartera si hay lugar; si el "
+                       "mismo día hay más señales que lugares, primero las Premium; con 10 operaciones abiertas, las señales nuevas se "
                        "saltean. El nivel es el de hoy (en el pasado pudo ser otro). La plata que no está en ninguna operación queda en el S&P 500 (SPY) hasta la próxima compra. "
                        "Costos de 0,5% por operación. La lista de acciones es la de hoy (sesgo de supervivencia).")
             st.subheader("Año por año", divider="gray")
@@ -2675,8 +2717,9 @@ def pagina_inicio():
                                      f"Próxima operación: <b>{dias[prox_m.weekday()]} {prox_m.strftime('%d/%m')}</b>" if prox_m else "",
                                      "momentum"))
     # --- reversión (panel diario del screener)
-    senales = [t for t, v in ps.get("filas", {}).items() if v.get("pasa")]
-    abiertas = ps.get("abiertas", [])
+    niv_inicio = niveles_seguro()["niveles"]          # solo cuentan Premium y Sólidas
+    senales = [t for t, v in ps.get("filas", {}).items() if v.get("pasa") and CALC.cuenta_rev(t, niv_inicio)]
+    abiertas = [a for a in ps.get("abiertas", []) if CALC.cuenta_rev(a.get("Ticker"), niv_inicio)]
     if ps:
         filas_r = [("Operaciones abiertas", str(len(abiertas)), None),
                    ("Mercado", "a favor" if ps.get("mercado_ok") else "en contra", T_VERDE if ps.get("mercado_ok") else T_ROJO)]
