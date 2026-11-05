@@ -794,7 +794,7 @@ def ultimo_cierre():
     return d.isoformat()
 
 
-@st.cache_data(ttl=3600, show_spinner=False)
+@st.cache_data(ttl=900, show_spinner=False)
 def precios_ajustados(tickers, desde, cierre=None):
     """Precios ajustados de Yahoo. Si alguna acción no llega en la descarga conjunta (Yahoo a veces falla con una sola),
     se reintenta de a una para que no quede en blanco."""
@@ -823,6 +823,88 @@ def precios_ajustados(tickers, desde, cierre=None):
                 break
     px = pd.DataFrame(out)
     return px.reindex(px["SPY"].dropna().index).ffill()
+
+
+# ============================================================================ precios en vivo de las posiciones
+def _bloque15():
+    """Marca que cambia cada 15 minutos: los precios en vivo se vuelven a pedir como mucho cada 15 minutos."""
+    from zoneinfo import ZoneInfo
+    return pd.Timestamp.now(tz=ZoneInfo("America/New_York")).floor("15min").isoformat()
+
+
+@st.cache_data(ttl=900, show_spinner=False)
+def precios_vivo(tickers, bloque):
+    """Últimos precios (incluye el de hoy mientras el mercado está abierto, con unos 15 minutos de demora)."""
+    try:
+        return precios_ajustados(tuple(tickers), (pd.Timestamp.today() - pd.Timedelta(days=14)).strftime("%Y-%m-%d"), bloque)
+    except Exception:       # noqa: BLE001
+        return pd.DataFrame()
+
+
+def texto_precios(fecha):
+    """Texto de la fecha de los precios: «en curso» si son de hoy y el mercado todavía no cerró."""
+    from datetime import datetime
+    from zoneinfo import ZoneInfo
+    ny = datetime.now(ZoneInfo("America/New_York"))
+    f = pd.Timestamp(fecha)
+    if f.date() == ny.date() and ny.weekday() < 5 and (ny.hour, ny.minute) < (16, 45):
+        hora = datetime.now(ZoneInfo("America/Argentina/Buenos_Aires")).strftime("%H:%M")
+        return (f"Precios de hoy en curso (a las {hora}, con unos 15 minutos de demora; se actualizan cada 15 minutos). "
+                "Las reglas se aplican con el precio de cierre")
+    return f"Precios al cierre del {f.strftime('%d/%m/%Y')}"
+
+
+def _ratios_vivo(tickers, base):
+    """Para cada acción: (último precio, último precio / cierre del día 'base'). Vacío si no hay nada más nuevo que 'base'."""
+    px = precios_vivo(tuple(sorted(set(tickers))), _bloque15())
+    if px is None or not len(px) or "SPY" not in px or px.index[-1] <= pd.Timestamp(base):
+        return None, {}
+    out = {}
+    for t in px.columns:
+        s_ = px[t].dropna()
+        b_ = s_[s_.index <= pd.Timestamp(base)]
+        if len(s_) and len(b_) and b_.iloc[-1] > 0:
+            out[t] = (float(s_.iloc[-1]), float(s_.iloc[-1] / b_.iloc[-1]))
+    return px.index[-1], out
+
+
+def momentum_vivo(d):
+    """Valúa la cartera de momentum (precalculada al último cierre) con los precios de ahora. No cambia ninguna regla."""
+    R = d["real"]
+    if not len(R["cart"]):
+        return d
+    fecha, rat = _ratios_vivo(list(R["hold"]), d["cierre"])
+    if fecha is None:
+        return d
+    R2, cart = dict(R), R["cart"].copy()
+    valores = {t: R["valor"] * w / 100 for t, w in zip(cart["Acción"], cart["Peso %"])}
+    caja = R["valor"] - sum(valores.values())
+    nuevos = {t: v * rat.get(t, (None, 1.0))[1] for t, v in valores.items()}
+    valor = caja + sum(nuevos.values())
+    cart["Peso %"] = [nuevos[t] / valor * 100 for t in cart["Acción"]]
+    cart["Resultado %"] = [((1 + r / 100) * rat.get(t, (None, 1.0))[1] - 1) * 100 for t, r in zip(cart["Acción"], cart["Resultado %"])]
+    R2["cart"], R2["valor"] = cart, valor
+    R2["serie"] = pd.concat([R["serie"][R["serie"].index < fecha], pd.Series([valor], index=[fecha])])
+    sp = rat.get("SPY", (None, 1.0))[1]
+    R2["spy"] = pd.concat([R["spy"][R["spy"].index < fecha], pd.Series([float(R["spy"].iloc[-1]) * sp], index=[fecha])])
+    d2 = dict(d)
+    d2["real"], d2["cierre"] = R2, fecha
+    return d2
+
+
+def reversion_vivo(ab, reg, base):
+    """Operaciones abiertas de reversión valuadas con los precios de ahora. Devuelve (tabla, fecha de los precios)."""
+    if not len(ab):
+        return ab, None
+    fecha, rat = _ratios_vivo(list(ab["Ticker"]), base)
+    if fecha is None:
+        return ab, None
+    ab = ab.copy()
+    sp = rat.get("SPY", (None, 1.0))[1]
+    ab[f"precio_{reg}"] = [rat[t][0] if t in rat else p for t, p in zip(ab["Ticker"], ab[f"precio_{reg}"])]
+    ab[f"ret_{reg}"] = [((1 + r / 100) * rat.get(t, (None, 1.0))[1] - 1) * 100 for t, r in zip(ab["Ticker"], ab[f"ret_{reg}"])]
+    ab[f"spy_{reg}"] = [((1 + r / 100) * sp - 1) * 100 for r in ab[f"spy_{reg}"]]
+    return ab, fecha
 
 
 def _cierre_anterior(cierre):
@@ -1100,7 +1182,7 @@ def pagina_calidad():
         c4.metric("Anual desde 2011 (backtest)", pct(a_c, 1, False), delta=delta_pts(a_c, a_s),
                   help="Cartera que arrancó en el backtest de 2011 y sigue con las mismas reglas. Abajo: puntos por año contra el S&P")
     c5.metric("Próxima revisión", prox.strftime("%d/%m/%Y") if prox else "—", help="Primer día hábil desde el 15, a la noche")
-    st.caption(f"Precios al cierre del {ult.strftime('%d/%m/%Y')}. "
+    st.caption(f"{texto_precios(ult)}. "
                + (f"La cartera real arrancó de cero el {fmt_fecha(E['inicio'])}; la del backtest de 2011 sigue aparte con las mismas reglas."
                   if arranco else f"La cartera real arranca de cero el {fmt_fecha(prox) if prox else fmt_fecha(INICIO_REAL_CAL)} con la "
                   "compra inicial (10 empresas, 10% cada una). Mientras tanto se muestra la del backtest."))
@@ -1405,6 +1487,8 @@ def pagina_momentum():
                "si sale del top 30")
     with st.spinner("Calculando con los precios de hoy (la primera vez tarda hasta un minuto)..."):
         d = datos_momentum(INICIO_MOM_REAL, ultimo_cierre(), MARCA_UNIVERSO)
+    with st.spinner("Actualizando precios..."):
+        d = momentum_vivo(d)
     R, B = d["real"], d["bt"]
     inicio = pd.Timestamp(INICIO_MOM_REAL)
     arranco = len(R["cart"]) > 0
@@ -1423,7 +1507,7 @@ def pagina_momentum():
     c4.metric("Anual desde 2011 (backtest)", pct(a_m, 1, False), delta=delta_pts(a_m, a_s),
               help="Abajo: cuántos puntos por año le gana al S&P")
     c5.metric("Próxima operación", prox.strftime("%d/%m/%Y") if prox else "—", help="Primer día hábil del mes, al cierre")
-    st.caption(f"Precios al cierre del {pd.Timestamp(d['cierre']).strftime('%d/%m/%Y')}.")
+    st.caption(f"{texto_precios(d['cierre'])}.")
     if not arranco:
         aviso(f"El sistema real arranca el <b>{fmt_fecha(inicio)}</b>. Mientras tanto se muestra la compra inicial que haría hoy y la "
               "historia del backtest desde 2011 con las mismas reglas.")
@@ -1663,6 +1747,9 @@ def pagina_reversion():
     ab = ops[ops[f"abierta_{reg}"]].copy() if len(ops) else ops
     cer = ops[~ops[f"abierta_{reg}"]].copy() if len(ops) else ops
     ab_e = ops_e[ops_e[f"abierta_{reg}"]].copy() if len(ops_e) else ops_e
+    with st.spinner("Actualizando precios..."):
+        ab, f_vivo = reversion_vivo(ab, reg, d["cierre"])
+        ab_e, _f = reversion_vivo(ab_e, reg, d["cierre"])
     cer_e = ops_e[~ops_e[f"abierta_{reg}"]].copy() if len(ops_e) else ops_e
     cart = d["carteras"][reg]
     spy = d["spy"]
@@ -1680,7 +1767,8 @@ def pagina_reversion():
     if len(fila):
         k5.metric("Operaciones con ganancia", pct(float(fila["% con ganancia"].iloc[0]), 0, False),
                   delta=f"{int(fila['Operaciones cerradas'].iloc[0])} cerradas", delta_color="off")
-    st.caption(f"Precios al cierre del {pd.Timestamp(d['cierre']).strftime('%d/%m/%Y')}. Solo cuentan las señales de acciones "
+    st.caption(f"Operaciones abiertas: {texto_precios(f_vivo or d['cierre']).lower()}. Señales y resultados históricos: al cierre "
+               f"del {pd.Timestamp(d['cierre']).strftime('%d/%m/%Y')}. Solo cuentan las señales de acciones "
                "Premium y Sólidas; las Especulativas se muestran aparte, como dato.")
     if not nv["niveles"]:
         aviso("Hoy no se pudo obtener el nivel de calidad de las acciones: se muestran todas las señales sin separar.", "naranja")
@@ -2701,7 +2789,7 @@ def pagina_inicio():
     # --- momentum: mismo cálculo que su página (precios al último cierre)
     prox_m = proxima_operacion_momentum(hoy)
     try:
-        R = datos_momentum(INICIO_MOM_REAL, ultimo_cierre(), MARCA_UNIVERSO)["real"]
+        R = momentum_vivo(datos_momentum(INICIO_MOM_REAL, ultimo_cierre(), MARCA_UNIVERSO))["real"]
     except Exception:       # noqa: BLE001
         R = None
     if R is not None and len(R["cart"]) > 0:
