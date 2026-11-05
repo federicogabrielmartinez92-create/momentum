@@ -5,6 +5,9 @@ on:
   push:
     branches: ["prueba-*"]
 
+permissions:
+  contents: write
+
 jobs:
   prueba:
     runs-on: ubuntu-latest
@@ -16,7 +19,9 @@ jobs:
           python-version: "3.12"
       - run: pip install -r requirements.txt
       - run: python herramientas/prueba_donchian.py
-      - uses: actions/upload-artifact@v4
-        with:
-          name: resultado
-          path: resultado_donchian.json
+      - name: Guardar el resultado en la rama de prueba
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
+          git add resultado_donchian.json
+          git commit -m "Resultado de la prueba [skip ci]" && git push
