@@ -907,6 +907,112 @@ def reversion_vivo(ab, reg, base):
     return ab, fecha
 
 
+# ============================================================================ calculadora de CEDEARs para aportes
+@st.cache_data(ttl=900, show_spinner=False)
+def precios_cedears(codigos, bloque):
+    """Último precio operado en BYMA (ARS) de cada CEDEAR. {código: precio}."""
+    out = {}
+    simbolos = {c: f"{c}.BA" for c in codigos}
+    try:
+        raw = yf.download(list(simbolos.values()), period="7d", auto_adjust=False, group_by="ticker", progress=False, threads=True)
+        for c, sim in simbolos.items():
+            try:
+                s_ = (raw[sim]["Close"] if isinstance(raw.columns, pd.MultiIndex) else raw["Close"]).dropna()
+                if len(s_):
+                    out[c] = float(s_.iloc[-1])
+            except (KeyError, TypeError):
+                pass
+    except Exception:       # noqa: BLE001
+        pass
+    for c in [c for c in codigos if c not in out]:        # variantes del símbolo (BRK.B, etc.)
+        for sim in dict.fromkeys((f"{c.replace('.', '-')}.BA", f"{c.replace('.', '')}.BA")):
+            try:
+                h = yf.Ticker(sim).history(period="7d", auto_adjust=False)["Close"].dropna()
+            except Exception:   # noqa: BLE001
+                continue
+            if len(h):
+                out[c] = float(h.iloc[-1])
+                break
+    return out
+
+
+def calculadora_cedears(clave, pesos, elegibles, nombre_fn, cedear_fn, resto_spy):
+    """Cuántos CEDEARs comprar con un aporte, siguiendo la regla de aportes de la estrategia.
+    pesos: {acción: % de la cartera del sistema} (para calidad incluye "SPY" con la liquidez). elegibles: acciones que se completan
+    hasta el 10%. resto_spy: True = lo que sobra va a SPY (calidad con menos de 10 empresas); False = partes iguales."""
+    with st.form(f"calc_{clave}", border=True):
+        st.markdown("**Calculadora de CEDEARs**")
+        c1, c2, c3 = st.columns(3)
+        mon = c1.selectbox("Moneda", ["Pesos", "Dólares (al CCL)"], key=f"calc_mon_{clave}")
+        actual = c2.number_input("Cuánto tenés hoy en esta cartera", min_value=0.0, step=1000.0, format="%.0f", key=f"calc_act_{clave}",
+                                 help="Valor total de lo que tenés en esta estrategia, en la moneda elegida. 0 si arrancás de cero.")
+        aporte = c3.number_input("Cuánto vas a poner", min_value=0.0, step=1000.0, format="%.0f", key=f"calc_apo_{clave}")
+        listo = st.form_submit_button("Calcular", type="primary")
+    if not listo:
+        st.caption("Supone que tu cartera tiene los mismos pesos que la del sistema. Precios: último operado en BYMA.")
+        return
+    if aporte <= 0:
+        aviso("Cargá cuánto vas a poner.", "naranja")
+        return
+    ccl = dolares().get("CCL")
+    if mon != "Pesos" and not ccl:
+        aviso("No se pudo obtener el dólar CCL: probá en pesos.", "naranja")
+        return
+    k = 1.0 if mon == "Pesos" else ccl
+    V, A = actual * k, aporte * k
+    T = V + A
+    asign = {t: 0.0 for t in pesos}
+    acciones = [t for t in pesos if t != "SPY"]
+    if V <= 0:                                  # arranque: en los pesos de la cartera del sistema
+        tot_w = sum(pesos.values()) or 1
+        asign = {t: A * w / tot_w for t, w in pesos.items()}
+    else:
+        resto = A
+        for t in sorted([t for t in elegibles if t in pesos], key=lambda t: pesos[t]):
+            m = min(max(0.0, 0.10 * T - V * pesos[t] / 100), resto)
+            asign[t] += m
+            resto -= m
+        if resto > 0.5:
+            if resto_spy and "SPY" in pesos:
+                asign["SPY"] += resto
+            elif resto_spy:
+                asign["SPY"] = asign.get("SPY", 0.0) + resto
+            else:
+                for t in acciones:
+                    asign[t] += resto / len(acciones)
+    asign = {t: m for t, m in asign.items() if m > 0.5}
+    codigos = {t: ("SPY" if t == "SPY" else (cedear_fn(t) or t)) for t in asign}
+    with st.spinner("Buscando precios en BYMA..."):
+        px = precios_cedears(tuple(sorted(set(codigos.values()))), _bloque15())
+    cant = {t: int(m // px[codigos[t]]) for t, m in asign.items() if px.get(codigos[t])}
+    sobra = A - sum(cant[t] * px[codigos[t]] for t in cant)
+    while True:                                 # con lo que sobra, una más a la que más le falta y alcance
+        cand = [t for t in cant if px[codigos[t]] <= sobra]
+        if not cand:
+            break
+        t = max(cand, key=lambda t: asign[t] - cant[t] * px[codigos[t]])
+        if asign[t] - cant[t] * px[codigos[t]] <= 0:
+            break
+        cant[t] += 1
+        sobra -= px[codigos[t]]
+    filas = []
+    for t, m in sorted(asign.items(), key=lambda x: -x[1]):
+        p_ = px.get(codigos[t])
+        filas.append({"Acción": t, "Empresa": "S&P 500 (liquidez)" if t == "SPY" else nombre_fn(t), "CEDEAR": codigos[t],
+                      "Precio CEDEAR": ars(p_, 2) if p_ else "sin precio", "Comprar": cant.get(t, 0),
+                      "Monto": ars(cant.get(t, 0) * p_, 0) if p_ else "—",
+                      "En USD": usd(cant.get(t, 0) * p_ / ccl) if p_ and ccl else "—"})
+    tabla(pd.DataFrame(filas), fmt={"Comprar": "%d"}, estilos={"Comprar": lambda v: css_color("verde") if v else ""})
+    sin = [t for t in asign if not px.get(codigos[t])]
+    st.caption(f"Total a comprar: {ars(A - sobra, 0)}" + (f" (USD {(A - sobra) / ccl:,.0f})".replace(",", ".") if ccl else "")
+               + f" · sobran {ars(sobra, 0)}. "
+               + ("Arrancás de cero: se compra en los pesos de la cartera del sistema. " if V <= 0 else
+                  "Primero se completan las posiciones por debajo del 10%; " + ("lo que sobra va a SPY hasta la próxima compra. "
+                                                                                 if resto_spy else "lo que sobra, en partes iguales. "))
+               + "El precio al momento de comprar puede ser algo distinto."
+               + (f" Sin precio en BYMA: {', '.join(sin)}." if sin else ""))
+
+
 def _cierre_anterior(cierre):
     """Día hábil anterior a 'cierre' (lo precalculado de anoche sigue sirviendo hasta que GitHub corra de nuevo)."""
     d = pd.Timestamp(cierre) - pd.offsets.BDay(1)
@@ -1238,6 +1344,12 @@ def pagina_calidad():
             st.markdown("**Aportes:** todas están cerca del 10%: repartir en partes iguales.")
         st.markdown("**Clientes nuevos:** entrar en 3 tramos (un tercio ahora, otro en un mes y el último al mes siguiente, o antes si el "
                     "mercado cae 10%), comprando la cartera en los pesos de la pestaña Cartera.")
+        if pesos_vivos:
+            p_cal = dict(pesos_vivos)
+            liq = max(0.0, 100 - sum(p_cal.values()))
+            if liq > 0.5:
+                p_cal["SPY"] = liq
+            calculadora_cedears("calidad", p_cal, [t for _w, t in faltan], C.nombre, C.cedear, resto_spy=len(pesos_vivos) < 10)
         st.subheader("4. Alertas", divider="red")
         alertas = []
         for t, w in pesos_vivos.items():
@@ -1537,6 +1649,8 @@ def pagina_momentum():
             st.markdown(("En este orden hasta que se termine: " + " · ".join(
                 f":green-badge[➕ {r['Acción']}] hasta {pct(10 - r['Peso %'], 1, False)} de la cartera" for _, r in faltan.iterrows()) + ".")
                 if len(faltan) else "Todas están cerca del 10%: repartilo en partes iguales entre las 10.")
+            calculadora_cedears("momentum", dict(zip(R["cart"]["Acción"], R["cart"]["Peso %"])), list(R["cart"]["Acción"]),
+                                M.nombre, M.cedear, resto_spy=False)
         else:
             st.markdown("Cuando arranque el sistema, acá aparece dónde poner los aportes.")
         st.subheader("3. Alertas", divider="red")
