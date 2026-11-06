@@ -76,7 +76,8 @@ st.markdown("""
          --verde: #067647; --verde-f: #ECFDF3; --verde-b: #ABEFC6; --rojo: #B42318; --rojo-f: #FEF3F2; --rojo-b: #FECDCA;
          --naranja: #B93815; --naranja-f: #FFF4ED; --amarillo: #B54708; --amarillo-f: #FFFAEB; --amarillo-b: #FEDF89;
          --azul: #2459D6; --azul-f: #EEF2FF; --azul-b: #C7D7FE; --violeta: #6941C6; --violeta-f: #F4F3FF; --violeta-b: #D9D6FE;
-         --gris: #475467; --gris-f: #F2F4F7;}
+         --gris: #475467; --gris-f: #F2F4F7;
+         --ease-out: cubic-bezier(0.23, 1, 0.32, 1); --r-card: 14px; --r-sm: 10px;}
   /* modo oscuro: lo activa la app cuando el tema de Streamlit es oscuro (menú ⋮ → Settings) */
   body.tema-oscuro {--acento: #6E9BFF; --acento-suave: rgba(110,155,255,.14); --fondo: #0B1220; --panel: #111A2E; --borde: #23304A;
          --linea: #1B263C; --texto: #E6EAF2; --texto2: #98A2B3; --texto3: #C5CCD8; --cabecera: #0F1729; --pista: #23304A; --suave: #1B263C;
@@ -87,6 +88,9 @@ st.markdown("""
   .stApp {background-color: var(--fondo);}
   html, body, .stApp, .stApp p, .stApp li, .stApp label, .stApp button, .stApp input, .stApp textarea,
   [data-testid="stMarkdownContainer"], [data-testid="stCaptionContainer"] {font-family: 'Inter', system-ui, sans-serif;}
+  .stApp {-webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility;
+      font-feature-settings: "cv11", "ss01";}
+  .stApp p, .stApp li {line-height: 1.6;}
   .stApp h1, .stApp h2, .stApp h3 {font-family: 'Inter', system-ui, sans-serif; letter-spacing: -.02em; color: var(--texto);}
   .stApp h1 {font-weight: 700; font-size: 2rem;}
   .stApp h3 {font-size: 1.1rem; font-weight: 700;}
@@ -98,8 +102,9 @@ st.markdown("""
 
   /* tarjetas de números */
   div[data-testid="stMetric"] {background: var(--panel); border: 1px solid var(--borde); border-radius: 14px; padding: .9rem 1rem .8rem 1rem;
-      min-height: 8.4rem; box-sizing: border-box;}
+      min-height: 7.4rem; box-sizing: border-box;}
   div[data-testid="stMetricLabel"] p {color: var(--texto2) !important; font-size: .82rem; font-weight: 500;}
+  div[data-testid="stMetricDelta"] {font-variant-numeric: tabular-nums;}
   div[data-testid="stMetricValue"] {font-size: 1.45rem; font-weight: 700; color: var(--texto); letter-spacing: -.02em; font-variant-numeric: tabular-nums;}
   div[data-testid="stMetricLabel"] p, div[data-testid="stMetricLabel"] div, div[data-testid="stMetricDelta"] div {white-space: normal !important; overflow: visible !important; text-overflow: clip !important;}
 
@@ -172,7 +177,7 @@ st.markdown("""
   .tarjeta p {margin: 0; font-size: .84rem; color: var(--texto3); line-height: 1.45;}
 
   /* ficha de empresa */
-  .ficha-cab {background: var(--panel); border: 1px solid var(--borde); border-radius: 16px; padding: 1.2rem 1.3rem; display: flex;
+  .ficha-cab {background: var(--panel); border: 1px solid var(--borde); border-radius: var(--r-card); padding: 1.2rem 1.3rem; display: flex;
       flex-wrap: wrap; align-items: center; gap: 1.1rem; margin-bottom: .8rem;}
   .ficha-cab h2 {margin: 0 !important; padding: 0 !important; font-size: 1.7rem !important;}
   .etiquetas {display: flex; flex-wrap: wrap; gap: .4rem; margin-top: .35rem;}
@@ -191,10 +196,11 @@ st.markdown("""
   .metricas b {font-size: 1.1rem; font-variant-numeric: tabular-nums;}
 
   /* gráficos */
-  div[data-testid="stVegaLiteChart"] {background: var(--panel); border: 1px solid var(--borde); border-radius: 14px; padding: .7rem .9rem;}
+  div[data-testid="stVegaLiteChart"] {background: var(--panel); border: 1px solid var(--borde); border-radius: var(--r-card); padding: .7rem .9rem;}
+  div[data-testid="stPlotlyChart"] {background: var(--panel); border: 1px solid var(--borde); border-radius: var(--r-card); overflow: hidden;}
   div[data-testid="stDataFrame"] {border: 1px solid var(--borde); border-radius: 12px; overflow: hidden;}
   [class*="st-key-caja"] {background: var(--panel); border-radius: 14px !important; border-color: var(--borde) !important;}
-  [class*="st-key-caja"] div[data-testid="stVegaLiteChart"] {border: 0; padding: 0;}
+  [class*="st-key-caja"] div[data-testid="stVegaLiteChart"], [class*="st-key-caja"] div[data-testid="stPlotlyChart"] {border: 0; padding: 0;}
 
   /* menú lateral */
   section[data-testid="stSidebar"] {border-right: 1px solid var(--borde);}
@@ -208,7 +214,7 @@ st.markdown("""
   .pesos small {font-size: .74rem; color: var(--texto2);}
   /* inicio */
   .carteras {display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem; margin: .4rem 0 1rem 0;}
-  a.cartera {background: var(--panel); border: 1px solid var(--borde); border-radius: 16px; padding: 1.1rem; display: flex;
+  a.cartera {background: var(--panel); border: 1px solid var(--borde); border-radius: var(--r-card); padding: 1.1rem; display: flex;
       flex-direction: column; gap: .8rem; color: var(--texto) !important; text-decoration: none !important;}
   a.cartera:hover {border-color: var(--azul-b); box-shadow: 0 1px 8px rgba(16,24,40,.06);}
   a.cartera .cab {display: flex; justify-content: space-between; align-items: center; font-size: .78rem; font-weight: 600;
@@ -222,7 +228,7 @@ st.markdown("""
   a.cartera .datos b {font-size: .9rem; font-variant-numeric: tabular-nums;}
   a.cartera .logos {display: flex; flex-wrap: wrap; gap: .35rem; min-height: 28px;}
   a.cartera .pie {border-top: 1px solid var(--linea); padding-top: .7rem; font-size: .84rem; color: var(--texto3); margin-top: auto;}
-  .caja-inicio {background: var(--panel); border: 1px solid var(--borde); border-radius: 16px; padding: 1rem 1.2rem; margin-bottom: 1rem;}
+  .caja-inicio {background: var(--panel); border: 1px solid var(--borde); border-radius: var(--r-card); padding: 1rem 1.2rem; margin-bottom: 1rem;}
   .caja-inicio .tit {font-size: 1.05rem; font-weight: 700; margin-bottom: .4rem;}
   .caja-inicio p {margin: .6rem 0 0 0; font-size: .78rem; color: var(--texto2);}
   .tarea {display: flex; align-items: flex-start; gap: .9rem; padding: .75rem 0; border-top: 1px solid var(--linea);}
@@ -236,6 +242,24 @@ st.markdown("""
   .fila-d:first-child {border-top: 0;}
   .tit-sec {font-size: 1.02rem; font-weight: 700; margin: .4rem 0 .5rem 0;}
   iframe {border: 0;}
+
+  /* respuesta al mouse: rápida y sobria (solo color, borde, sombra y transform; nunca "all") */
+  table.tbl td {transition: background-color 120ms ease;}
+  a.cartera {transition: border-color 200ms ease, box-shadow 200ms ease, transform 200ms var(--ease-out);}
+  .stTabs [data-baseweb="tab"] {transition: color 150ms ease;}
+  .stTabs [data-baseweb="tab"]:hover {color: var(--texto);}
+  [data-testid="stSidebarNav"] a {transition: background-color 150ms ease;}
+  table.exp a.emp b {transition: color 150ms ease;}
+  .stApp button {transition: transform 160ms var(--ease-out), background-color 150ms ease, border-color 150ms ease, color 150ms ease;}
+  .stApp button:active {transform: scale(0.97);}
+  @media (hover: hover) and (pointer: fine) {
+    a.cartera:hover {transform: translateY(-2px); box-shadow: 0 6px 18px rgba(16,24,40,.08);}
+  }
+  .stApp a:focus-visible, .stApp button:focus-visible {outline: 2px solid var(--acento); outline-offset: 2px;}
+  @media (prefers-reduced-motion: reduce) {
+    .stApp *, .stApp *::before, .stApp *::after {transition-duration: 0ms !important; animation-duration: 0ms !important;}
+    a.cartera:hover, .stApp button:active {transform: none;}
+  }
 </style>
 """, unsafe_allow_html=True)
 
@@ -554,6 +578,7 @@ def _usd_corto(v):
         f"USD {v:,.0f}".replace(",", ".")
 
 
+FUENTE_GRAF = "Inter, system-ui, sans-serif"
 PLOTLY_CONF = {"displayModeBar": False, "scrollZoom": False, "doubleClick": False}
 
 
@@ -602,9 +627,10 @@ def grafico_evolucion(df, colores, log=False, marca=None, alto=340):
                       annotation_font_color="#98A2B3")
     lo = float(d.min().min()) if len(d) else 0
     fig.update_layout(
-        height=alto, margin=dict(l=0, r=110, t=10, b=0), hovermode="x unified", dragmode=False, showlegend=True,
+        height=alto, margin=dict(l=14, r=120, t=14, b=10), hovermode="x unified", dragmode=False, showlegend=True,
+        paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)",
         legend=dict(orientation="h", yanchor="bottom", y=1.0, xanchor="left", x=0, title=None),
-        hoverlabel=dict(namelength=-1), separators=",.")
+        hoverlabel=dict(namelength=-1, font=dict(family=FUENTE_GRAF)), separators=",.", font=dict(family=FUENTE_GRAF, size=12))
     fig.update_xaxes(showgrid=False, fixedrange=True, hoverformat="%d/%m/%Y", tickformat="%b %Y" if span < 4 * 365 else "%Y",
                      range=[d.index[0], d.index[-1]] if len(d) else None,
                      showspikes=True, spikemode="across", spikethickness=1, spikedash="solid", spikecolor="#98A2B3")
@@ -629,8 +655,10 @@ def grafico_anual(an, colores):
             fig.add_trace(go.Bar(x=[str(i) for i in s.index], y=s.values, name=nom, marker_color=col, marker_cornerradius=3,
                                  hovertemplate="%{y:+.1f}%<extra>" + nom + "</extra>"))
     fig.add_hline(y=0, line_color="#98A2B3", line_width=1)
-    fig.update_layout(height=290, barmode="group", bargap=0.25, margin=dict(l=0, r=0, t=10, b=0), hovermode="x unified",
-                      dragmode=False, legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1), separators=",.")
+    fig.update_layout(height=290, barmode="group", bargap=0.25, margin=dict(l=14, r=16, t=14, b=10), hovermode="x unified",
+                      paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)",
+                      dragmode=False, legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1), separators=",.",
+                      font=dict(family=FUENTE_GRAF, size=12), hoverlabel=dict(font=dict(family=FUENTE_GRAF)))
     fig.update_xaxes(fixedrange=True, type="category")
     fig.update_yaxes(fixedrange=True, ticksuffix="%", gridcolor="rgba(152,162,179,.18)", title=None)
     st.plotly_chart(fig, width="stretch", config=PLOTLY_CONF, theme="streamlit")
@@ -1922,7 +1950,7 @@ def pagina_reversion():
     so = stats_reglas(ops)
     fila = so[so["Regla de salida"] == nom] if len(so) else so
     if len(fila):
-        k5.metric("Operaciones con ganancia", pct(float(fila["% con ganancia"].iloc[0]), 0, False),
+        k5.metric("Ganadoras", pct(float(fila["% con ganancia"].iloc[0]), 0, False),
                   delta=f"{int(fila['Operaciones cerradas'].iloc[0])} cerradas", delta_color="off")
     st.caption(f"Operaciones abiertas: {texto_precios(f_vivo or d['cierre']).lower()}. Señales y resultados históricos: al cierre "
                f"del {pd.Timestamp(d['cierre']).strftime('%d/%m/%Y')}. Solo cuentan las señales de acciones "
