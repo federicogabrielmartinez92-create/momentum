@@ -936,6 +936,34 @@ def precios_cedears(codigos, bloque):
     return out
 
 
+def repartir_enteros(objetivo, precio, presupuesto):
+    """CEDEARs enteros lo más cerca posible del monto objetivo de cada acción, sin pasarse del presupuesto.
+    Suma de a una unidad donde más reduce la diferencia; nunca compra una unidad que deja la posición más lejos de lo que estaba
+    (por ejemplo, un CEDEAR muy caro para lo que le falta). Si sobra plata, la reparte entre las que todavía se pueden comprar."""
+    obj = {t: m for t, m in objetivo.items() if t in precio}
+    cant = {t: 0 for t in obj}
+    sobra = presupuesto
+    for _ronda in range(4):
+        while True:
+            mejor, ganancia = None, 0.0
+            for t, p_ in precio.items():
+                if t not in obj or p_ > sobra:
+                    continue
+                g = 2 * p_ * (obj[t] - cant[t] * p_) - p_ * p_      # cuánto baja la diferencia al cuadrado
+                if g > ganancia:
+                    mejor, ganancia = t, g
+            if mejor is None:
+                break
+            cant[mejor] += 1
+            sobra -= precio[mejor]
+        posibles = [t for t in obj if precio[t] <= sobra]
+        if not posibles or sobra < 1:
+            break
+        for t in posibles:                                         # lo que sobró, en partes iguales entre las que se pueden comprar
+            obj[t] += sobra / len(posibles)
+    return cant, sobra, obj
+
+
 def calculadora_cedears(clave, pesos, elegibles, nombre_fn, cedear_fn, resto_spy):
     """Cuántos CEDEARs comprar con un aporte, siguiendo la regla de aportes de la estrategia.
     pesos: {acción: % de la cartera del sistema} (para calidad incluye "SPY" con la liquidez). elegibles: acciones que se completan
@@ -984,17 +1012,8 @@ def calculadora_cedears(clave, pesos, elegibles, nombre_fn, cedear_fn, resto_spy
     codigos = {t: ("SPY" if t == "SPY" else (cedear_fn(t) or t)) for t in asign}
     with st.spinner("Buscando precios en BYMA..."):
         px = precios_cedears(tuple(sorted(set(codigos.values()))), _bloque15())
-    cant = {t: int(m // px[codigos[t]]) for t, m in asign.items() if px.get(codigos[t])}
-    sobra = A - sum(cant[t] * px[codigos[t]] for t in cant)
-    while True:                                 # con lo que sobra, una más a la que más le falta y alcance
-        cand = [t for t in cant if px[codigos[t]] <= sobra]
-        if not cand:
-            break
-        t = max(cand, key=lambda t: asign[t] - cant[t] * px[codigos[t]])
-        if asign[t] - cant[t] * px[codigos[t]] <= 0:
-            break
-        cant[t] += 1
-        sobra -= px[codigos[t]]
+    cant, sobra, obj = repartir_enteros(asign, {t: px[codigos[t]] for t in asign if px.get(codigos[t])}, A)
+    caras = [t for t in cant if cant[t] == 0 and px[codigos[t]] > 2 * asign[t]]
     filas = []
     for t, m in sorted(asign.items(), key=lambda x: -x[1]):
         p_ = px.get(codigos[t])
@@ -1004,8 +1023,12 @@ def calculadora_cedears(clave, pesos, elegibles, nombre_fn, cedear_fn, resto_spy
                       "En USD": usd(cant.get(t, 0) * p_ / ccl) if p_ and ccl else "—"})
     tabla(pd.DataFrame(filas), fmt={"Comprar": "%d"}, estilos={"Comprar": lambda v: css_color("verde") if v else ""})
     sin = [t for t in asign if not px.get(codigos[t])]
-    st.caption(f"Total a comprar: {ars(A - sobra, 0)}" + (f" (USD {(A - sobra) / ccl:,.0f})".replace(",", ".") if ccl else "")
-               + f" · sobran {ars(sobra, 0)}. "
+    for t in caras:
+        aviso(f"<b>{t}</b>: un CEDEAR cuesta {ars(px[codigos[t]], 0)} y le faltan {ars(asign[t], 0)} para llegar a su peso. Comprar "
+              "uno la dejaría muy por encima, así que con este aporte no se compra y su parte se reparte entre las demás. Se completa "
+              "en un próximo aporte.", "azul")
+    st.caption((f"Total a comprar: {ars(A - sobra, 0)}" + (f" (USD {(A - sobra) / ccl:,.0f})".replace(",", ".") if ccl else "")
+               + f" · sobran {ars(sobra, 0)}. ").replace("$", "\\$")
                + ("Arrancás de cero: se compra en los pesos de la cartera del sistema. " if V <= 0 else
                   "Primero se completan las posiciones por debajo del 10%; " + ("lo que sobra va a SPY hasta la próxima compra. "
                                                                                  if resto_spy else "lo que sobra, en partes iguales. "))
