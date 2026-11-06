@@ -868,14 +868,10 @@ def _ratios_vivo(tickers, base):
     return px.index[-1], out
 
 
-def momentum_vivo(d):
-    """Valúa la cartera de momentum (precalculada al último cierre) con los precios de ahora. No cambia ninguna regla."""
-    R = d["real"]
+def _revaluar(R, rat, fecha):
+    """Copia de una cartera de momentum (real o backtest) valuada con los precios de ahora."""
     if not len(R["cart"]):
-        return d
-    fecha, rat = _ratios_vivo(list(R["hold"]), d["cierre"])
-    if fecha is None:
-        return d
+        return R
     R2, cart = dict(R), R["cart"].copy()
     valores = {t: R["valor"] * w / 100 for t, w in zip(cart["Acción"], cart["Peso %"])}
     caja = R["valor"] - sum(valores.values())
@@ -887,8 +883,23 @@ def momentum_vivo(d):
     R2["serie"] = pd.concat([R["serie"][R["serie"].index < fecha], pd.Series([valor], index=[fecha])])
     sp = rat.get("SPY", (None, 1.0))[1]
     R2["spy"] = pd.concat([R["spy"][R["spy"].index < fecha], pd.Series([float(R["spy"].iloc[-1]) * sp], index=[fecha])])
+    return R2
+
+
+def momentum_vivo(d):
+    """Valúa la cartera de momentum (real y backtest, precalculadas al último cierre) con los precios de ahora.
+    No cambia ninguna regla."""
+    R, B = d["real"], d.get("bt")
+    tick = list(R["hold"]) + (list(B["hold"]) if B else [])
+    if not tick:
+        return d
+    fecha, rat = _ratios_vivo(tick, d["cierre"])
+    if fecha is None:
+        return d
     d2 = dict(d)
-    d2["real"], d2["cierre"] = R2, fecha
+    d2["real"], d2["cierre"] = _revaluar(R, rat, fecha), fecha
+    if B:
+        d2["bt"] = _revaluar(B, rat, fecha)
     return d2
 
 
@@ -1629,19 +1640,28 @@ def pagina_momentum():
     arranco = len(R["cart"]) > 0
     hoy = date.today()
     prox = proxima_operacion_momentum(hoy)
-    c1, c2, c3, c4, c5 = st.columns(5)
+    c1, c2, c4, c5, c6 = st.columns(5)
     r_m = (R["serie"].iloc[-1] / R["serie"].iloc[0] - 1) * 100 if arranco else None
     r_s = (R["spy"].iloc[-1] / R["spy"].iloc[0] - 1) * 100 if arranco else None
     gan = R["valor"] - M.CAPITAL_REF if arranco else None
     c1.metric("Cartera del sistema", usd(R["valor"]), delta=delta_usd(gan),
               help=f"Cartera de referencia de {usd(M.CAPITAL_REF)} desde el {fmt_fecha(inicio)}")
     c2.metric("Desde el inicio real", pct(r_m) if arranco else "—",
-              delta=delta_pts(r_m, r_s))
-    c3.metric("S&P 500 mismo período", pct(r_s) if arranco else "—")
+              delta=delta_pts(r_m, r_s), help=f"S&P 500 en el mismo período: {pct(r_s)}" if arranco else None)
     a_m, a_s = stats_serie(B["serie"]).get("anual"), stats_serie(B["spy"]).get("anual")
     c4.metric("Anual desde 2011 (backtest)", pct(a_m, 1, False), delta=delta_pts(a_m, a_s),
-              help="Abajo: cuántos puntos por año le gana al S&P")
-    c5.metric("Próxima operación", prox.strftime("%d/%m/%Y") if prox else "—", help="Primer día hábil del mes, al cierre")
+              help="Backtest desde 2011 con las mismas reglas. Abajo: cuántos puntos por año le gana al S&P")
+    serie_e = B["serie"].dropna()
+    if len(serie_e):
+        f_max = serie_e.idxmax()
+        caida = (serie_e.iloc[-1] / serie_e.max() - 1) * 100
+        c5.metric("Caída desde el máximo", "en máximo" if caida > -0.05 else pct(caida, 1),
+                  delta=f"máximo el {f_max.strftime('%d/%m/%Y')}", delta_color="off", delta_arrow="off",
+                  help="Cuánto está la estrategia (backtest desde 2011, mismas reglas) por debajo de su valor más alto. Caídas más "
+                       "grandes desde 2011: −36% (2020), −32% (2025), −28% (2025).")
+    else:
+        c5.metric("Caída desde el máximo", "—")
+    c6.metric("Próxima operación", prox.strftime("%d/%m/%Y") if prox else "—", help="Primer día hábil del mes, al cierre")
     st.caption(f"{texto_precios(d['cierre'])}.")
     if not arranco:
         aviso(f"El sistema real arranca el <b>{fmt_fecha(inicio)}</b>. Mientras tanto se muestra la compra inicial que haría hoy y la "
