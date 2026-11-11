@@ -1333,22 +1333,39 @@ def pagina_calidad():
         comb = pd.DataFrame({"Cartera de calidad": pd.concat([hb["cartera"], cont["cartera"] * f_c]),
                              "S&P 500": pd.concat([hb["spy"], cont["spy"] * f_s]), "Promedio de la lista": hb["lista"]})
 
-    c1, c2, c3, c4, c5 = st.columns(5)
+    # serie diaria para medir la caída desde el máximo: backtest diario + su continuación (fin de mes y hoy)
+    serie_dd = None
+    if H and H.get("diario") and comb is not None:
+        dd0 = pd.Series(H["diario"]["cartera"], index=pd.to_datetime(H["diario"]["fecha"]))
+        cola = comb["Cartera de calidad"].dropna()
+        serie_dd = pd.concat([dd0, cola[cola.index > dd0.index[-1]]])
+    elif comb is not None:
+        serie_dd = comb["Cartera de calidad"].dropna()
+
+    c1, c2, c4, c6, c5 = st.columns(5)
     if arranco:
         r_real, r_spy = (valor / cap - 1) * 100, (E["spy_ref"] / cap - 1) * 100
         c1.metric("Cartera real", usd(valor), delta=delta_usd(valor - cap),
                   help=f"Cartera de referencia que arrancó de cero con {usd(cap)} el {fmt_fecha(E['inicio'])}")
         c2.metric("Desde el inicio real", pct(r_real), delta=delta_pts(r_real, r_spy),
-                  help=f"Desde el {fmt_fecha(E['inicio'])}. Abajo: diferencia contra el S&P (verde = le gana)")
-        c3.metric("S&P 500 mismo período", pct(r_spy))
+                  help=f"Desde el {fmt_fecha(E['inicio'])}. S&P 500 en el mismo período: {pct(r_spy)}. "
+                       "Abajo: diferencia contra el S&P (verde = le gana)")
     else:
         c1.metric("Cartera real", usd(cap), help="Arranca de cero en la próxima revisión, con la compra inicial")
         c2.metric("Desde el inicio real", "—")
-        c3.metric("S&P 500 mismo período", "—")
     if comb is not None:
         a_c, a_s = stats_serie(comb["Cartera de calidad"]).get("anual"), stats_serie(comb["S&P 500"]).get("anual")
         c4.metric("Anual desde 2011 (backtest)", pct(a_c, 1, False), delta=delta_pts(a_c, a_s),
                   help="Cartera que arrancó en el backtest de 2011 y sigue con las mismas reglas. Abajo: puntos por año contra el S&P")
+    if serie_dd is not None and len(serie_dd):
+        f_max = serie_dd.idxmax()
+        caida = (serie_dd.iloc[-1] / serie_dd.max() - 1) * 100
+        c6.metric("Caída desde el máximo", "en máximo" if caida > -0.05 else pct(caida, 1),
+                  delta=f"máximo el {f_max.strftime('%d/%m/%Y')}", delta_color="off", delta_arrow="off",
+                  help="Cuánto está la estrategia (backtest desde 2011 con las mismas reglas) por debajo de su valor más alto. "
+                       "Caídas más grandes desde 2011: −34% (2020), −32% (2022), −28% (2018).")
+    else:
+        c6.metric("Caída desde el máximo", "—")
     c5.metric("Próxima revisión", prox.strftime("%d/%m/%Y") if prox else "—", help="Primer día hábil desde el 15, a la noche")
     st.caption(f"{texto_precios(ult)}. "
                + (f"La cartera real arrancó de cero el {fmt_fecha(E['inicio'])}; la del backtest de 2011 sigue aparte con las mismas reglas."
