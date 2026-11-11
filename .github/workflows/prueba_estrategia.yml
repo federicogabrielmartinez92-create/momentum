@@ -11,17 +11,21 @@ permissions:
 jobs:
   prueba:
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    timeout-minutes: 180
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
       - run: pip install -r requirements.txt
-      - run: python herramientas/liquidez_cedears.py
+      - name: Backtest de calidad con serie diaria (no toca el historial)
+        env:
+          CALIDAD_SEC_AGENTE: ${{ vars.CALIDAD_SEC_AGENTE }}
+          BT_ESTADO_SALIDA: /tmp/estado_prueba.json
+        run: python backtest_calidad.py
       - name: Guardar el resultado en la rama de prueba
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
-          git add resultado_liquidez.json
+          git add resultado_calidad_diario.json
           git commit -m "Resultado de la prueba [skip ci]" && git push

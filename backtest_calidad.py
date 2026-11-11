@@ -231,6 +231,7 @@ def main():
                         "Motivo": c_["Motivo"], "Origen": "Backtest"} for c_ in cerradas]}
     with open("historial_calidad.json", "w", encoding="utf-8") as fh:
         json.dump(hist, fh, ensure_ascii=False, indent=1)
+    pd.DataFrame(series).to_json("resultado_calidad_diario.json", orient="split", date_format="iso")
     print(f"\nCartera final guardada en {ESTADO_SALIDA}:")
     for t, p in sorted(Ef["posiciones"].items(), key=lambda x: -x[1]["valor"]):
         print(f"  {t:6} {p['valor'] / CAPITAL * 100:5.1f}%  (en cartera desde {p['fecha_entrada']})")
