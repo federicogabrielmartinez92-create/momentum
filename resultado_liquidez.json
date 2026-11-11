@@ -1,0 +1,2866 @@
+{
+ "ccl_aprox": 1669.4972523231072,
+ "cartera": [
+  "MRNA",
+  "BIIB",
+  "NUE",
+  "SLB",
+  "COP",
+  "PSX",
+  "TGT",
+  "INTC",
+  "BHP",
+  "MU"
+ ],
+ "top30": [
+  "TGT",
+  "MRNA",
+  "COP",
+  "PSX",
+  "EQNR",
+  "MU",
+  "TXN",
+  "NUE",
+  "DELL",
+  "DOW",
+  "SLB",
+  "OXY",
+  "XOM",
+  "LYB",
+  "BHP",
+  "E",
+  "ETSY",
+  "TX",
+  "PBR",
+  "MRVL",
+  "HAL",
+  "PANW",
+  "BIIB",
+  "INTC",
+  "ADI",
+  "SWKS",
+  "FMX",
+  "AMD",
+  "CVX",
+  "TTE"
+ ],
+ "datos": {
+  "AAL": {
+   "cedear": "AAL",
+   "mediana_ars": 10950.0,
+   "promedio_ars": 10950.0,
+   "p25_ars": 10950.0,
+   "dias_sin_operar": 0,
+   "dias": 1,
+   "precio": 10950.0
+  },
+  "AAP": {
+   "cedear": "AAP",
+   "mediana_ars": 31206792.5,
+   "promedio_ars": 57181989.32539683,
+   "p25_ars": 17832820.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 5420.0
+  },
+  "AAPL": {
+   "cedear": "AAPL",
+   "mediana_ars": 2218720320.0,
+   "promedio_ars": 2409523833.174603,
+   "p25_ars": 1421615635.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 28600.0
+  },
+  "ABBV": {
+   "cedear": "ABBV",
+   "mediana_ars": 47398540.0,
+   "promedio_ars": 66028975.55555555,
+   "p25_ars": 36985910.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 48700.0
+  },
+  "ABEV": {
+   "cedear": "ABEV",
+   "mediana_ars": 35297120.0,
+   "promedio_ars": 49829280.31746032,
+   "p25_ars": 20426740.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 14030.0
+  },
+  "ABNB": {
+   "cedear": "ABNB",
+   "mediana_ars": 38845940.0,
+   "promedio_ars": 61869684.603174604,
+   "p25_ars": 26507215.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 21060.0
+  },
+  "ABT": {
+   "cedear": "ABT",
+   "mediana_ars": 53703720.0,
+   "promedio_ars": 83781622.85714285,
+   "p25_ars": 33009900.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 45900.0
+  },
+  "ACN": {
+   "cedear": "ACN",
+   "mediana_ars": 133377272.5,
+   "promedio_ars": 203903332.73809522,
+   "p25_ars": 80383788.75,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 5785.0
+  },
+  "ADBE": {
+   "cedear": "ADBE",
+   "mediana_ars": 415668000.0,
+   "promedio_ars": 553531635.7936507,
+   "p25_ars": 266720900.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 9085.0
+  },
+  "AGRO": {
+   "cedear": "ADGO",
+   "mediana_ars": 260916960.0,
+   "promedio_ars": 331704013.8095238,
+   "p25_ars": 151900890.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 15060.0
+  },
+  "ADI": {
+   "cedear": "ADI",
+   "mediana_ars": 28579680.0,
+   "promedio_ars": 62862787.3015873,
+   "p25_ars": 15693090.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 40440.0
+  },
+  "ADP": {
+   "cedear": "ADP",
+   "mediana_ars": 18845150.0,
+   "promedio_ars": 28246420.634920634,
+   "p25_ars": 11396587.5,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 85000.0
+  },
+  "AEG": {
+   "cedear": "AEG",
+   "mediana_ars": 898530.0,
+   "promedio_ars": 3619244.603174603,
+   "p25_ars": 369375.0,
+   "dias_sin_operar": 1,
+   "dias": 63,
+   "precio": 13900.0
+  },
+  "AEM": {
+   "cedear": "AEM",
+   "mediana_ars": 51788000.0,
+   "promedio_ars": 78664285.95238096,
+   "p25_ars": 26070655.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 53525.0
+  },
+  "AI": {
+   "cedear": "AI",
+   "mediana_ars": 45393427.5,
+   "promedio_ars": 88788692.85714285,
+   "p25_ars": 18646516.25,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 3862.5
+  },
+  "AIG": {
+   "cedear": "AIG",
+   "mediana_ars": 4598480.0,
+   "promedio_ars": 14724886.031746032,
+   "p25_ars": 1829950.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 26140.0
+  },
+  "ALAB": {
+   "cedear": "ALAB",
+   "mediana_ars": 278908110.0,
+   "promedio_ars": 397225572.93650794,
+   "p25_ars": 170451630.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 7145.0
+  },
+  "AMAT": {
+   "cedear": "AMAT",
+   "mediana_ars": 498035450.0,
+   "promedio_ars": 690058778.968254,
+   "p25_ars": 263452987.5,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 111025.0
+  },
+  "AMD": {
+   "cedear": "AMD",
+   "mediana_ars": 1959530400.0,
+   "promedio_ars": 2768879585.714286,
+   "p25_ars": 1288956325.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 74450.0
+  },
+  "AMGN": {
+   "cedear": "AMGN",
+   "mediana_ars": 30094530.0,
+   "promedio_ars": 73289446.50793651,
+   "p25_ars": 20765855.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 25600.0
+  },
+  "AMX": {
+   "cedear": "AMX",
+   "mediana_ars": 8779980.0,
+   "promedio_ars": 20451552.063492063,
+   "p25_ars": 3526040.0,
+   "dias_sin_operar": 1,
+   "dias": 63,
+   "precio": 42220.0
+  },
+  "AMZN": {
+   "cedear": "AMZN",
+   "mediana_ars": 3170601000.0,
+   "promedio_ars": 3605357622.1825395,
+   "p25_ars": 2115862462.5,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 3007.5
+  },
+  "ANET": {
+   "cedear": "ANET",
+   "mediana_ars": 100889730.0,
+   "promedio_ars": 131164961.98412699,
+   "p25_ars": 73970190.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 9800.0
+  },
+  "ANF": {
+   "cedear": "ANF",
+   "mediana_ars": 281398000.0,
+   "promedio_ars": 478519144.84126985,
+   "p25_ars": 182670212.5,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 249350.0
+  },
+  "ARCO": {
+   "cedear": "ARCO",
+   "mediana_ars": 77039340.0,
+   "promedio_ars": 143468720.95238096,
+   "p25_ars": 47247120.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 23350.0
+  },
+  "ARM": {
+   "cedear": "ARM",
+   "mediana_ars": 10210.0,
+   "promedio_ars": 10210.0,
+   "p25_ars": 10210.0,
+   "dias_sin_operar": 0,
+   "dias": 1,
+   "precio": 10210.0
+  },
+  "ASML": {
+   "cedear": "ASML",
+   "mediana_ars": 609756420.0,
+   "promedio_ars": 746511440.4761904,
+   "p25_ars": 377540010.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 16250.0
+  },
+  "ASR": {
+   "cedear": "ASR",
+   "mediana_ars": 6804680.0,
+   "promedio_ars": 37187332.06349207,
+   "p25_ars": 3881505.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 21920.0
+  },
+  "ASTS": {
+   "cedear": "ASTS",
+   "mediana_ars": 1069946540.0,
+   "promedio_ars": 1823697541.547619,
+   "p25_ars": 621423757.5,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 3577.5
+  },
+  "AVGO": {
+   "cedear": "AVGO",
+   "mediana_ars": 12570.0,
+   "promedio_ars": 12570.0,
+   "p25_ars": 12570.0,
+   "dias_sin_operar": 0,
+   "dias": 1,
+   "precio": 12570.0
+  },
+  "AVY": {
+   "cedear": "AVY",
+   "mediana_ars": 2035920.0,
+   "promedio_ars": 8302985.079365079,
+   "p25_ars": 827400.0,
+   "dias_sin_operar": 1,
+   "dias": 63,
+   "precio": 17300.0
+  },
+  "AXP": {
+   "cedear": "AXP",
+   "mediana_ars": 263541120.0,
+   "promedio_ars": 425431481.5873016,
+   "p25_ars": 176626240.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 35660.0
+  },
+  "AZN": {
+   "cedear": "AZN",
+   "mediana_ars": 48210250.0,
+   "promedio_ars": 86478186.50793651,
+   "p25_ars": 21398300.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 77725.0
+  },
+  "BA": {
+   "cedear": "BA",
+   "mediana_ars": 105069130.0,
+   "promedio_ars": 176222521.42857143,
+   "p25_ars": 47345970.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 12050.0
+  },
+  "BABA": {
+   "cedear": "BABA",
+   "mediana_ars": 488816460.0,
+   "promedio_ars": 676228183.6507937,
+   "p25_ars": 356621680.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 20290.0
+  },
+  "BAK": {
+   "cedear": "BAK",
+   "mediana_ars": 870.0,
+   "promedio_ars": 870.0,
+   "p25_ars": 870.0,
+   "dias_sin_operar": 0,
+   "dias": 1,
+   "precio": 870.0
+  },
+  "BB": {
+   "cedear": "BB",
+   "mediana_ars": 89308420.0,
+   "promedio_ars": 140181351.1111111,
+   "p25_ars": 27561952.5,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 4892.5
+  },
+  "BBD": {
+   "cedear": "BBD",
+   "mediana_ars": 585236080.0,
+   "promedio_ars": 1340899874.2460318,
+   "p25_ars": 276614477.5,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 4275.0
+  },
+  "BBVA": {
+   "cedear": "BBV",
+   "mediana_ars": 7309920.0,
+   "promedio_ars": 80654129.84126984,
+   "p25_ars": 3854070.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 42020.0
+  },
+  "BCS": {
+   "cedear": "BCS",
+   "mediana_ars": 2852520.0,
+   "promedio_ars": 11550236.19047619,
+   "p25_ars": 866200.0,
+   "dias_sin_operar": 1,
+   "dias": 63,
+   "precio": 37420.0
+  },
+  "BHP": {
+   "cedear": "BHP",
+   "mediana_ars": 38403750.0,
+   "promedio_ars": 49007253.96825397,
+   "p25_ars": 20199775.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 66850.0
+  },
+  "BIDU": {
+   "cedear": "BIDU",
+   "mediana_ars": 104759900.0,
+   "promedio_ars": 165216723.80952382,
+   "p25_ars": 69085765.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 12410.0
+  },
+  "BIIB": {
+   "cedear": "BIIB",
+   "mediana_ars": 13621100.0,
+   "promedio_ars": 22926316.507936507,
+   "p25_ars": 4832170.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 31980.0
+  },
+  "BIOX": {
+   "cedear": "BIOX",
+   "mediana_ars": 413.0,
+   "promedio_ars": 413.0,
+   "p25_ars": 413.0,
+   "dias_sin_operar": 0,
+   "dias": 1,
+   "precio": 413.0
+  },
+  "BKNG": {
+   "cedear": "BKNG",
+   "mediana_ars": 55198090.0,
+   "promedio_ars": 100309131.38095239,
+   "p25_ars": 28695263.25,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 381.25
+  },
+  "BKR": {
+   "cedear": "BKR",
+   "mediana_ars": 12000.0,
+   "promedio_ars": 12000.0,
+   "p25_ars": 12000.0,
+   "dias_sin_operar": 0,
+   "dias": 1,
+   "precio": 12000.0
+  },
+  "BMNR": {
+   "cedear": "BMNR",
+   "mediana_ars": 94971175.0,
+   "promedio_ars": 134562011.19047618,
+   "p25_ars": 34831972.5,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 3912.5
+  },
+  "BMY": {
+   "cedear": "BMY",
+   "mediana_ars": 15872700.0,
+   "promedio_ars": 40390637.46031746,
+   "p25_ars": 10528800.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 34540.0
+  },
+  "BG": {
+   "cedear": "BNG",
+   "mediana_ars": 35056060.0,
+   "promedio_ars": 96898893.65079366,
+   "p25_ars": 15800480.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 33220.0
+  },
+  "BP": {
+   "cedear": "BP",
+   "mediana_ars": 12303900.0,
+   "promedio_ars": 38816946.82539683,
+   "p25_ars": 7754395.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 14900.0
+  },
+  "BRK-B": {
+   "cedear": "BRKB",
+   "mediana_ars": 1601902800.0,
+   "promedio_ars": 1842281741.2698412,
+   "p25_ars": 1358004430.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 43240.0
+  },
+  "BSBR": {
+   "cedear": "BSBR",
+   "mediana_ars": 9928000.0,
+   "promedio_ars": 17903699.285714287,
+   "p25_ars": 3596585.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 7765.0
+  },
+  "BX": {
+   "cedear": "BX",
+   "mediana_ars": 11643420.0,
+   "promedio_ars": 16707289.193548387,
+   "p25_ars": 4465562.5,
+   "dias_sin_operar": 0,
+   "dias": 62,
+   "precio": 6645.0
+  },
+  "C": {
+   "cedear": "C",
+   "mediana_ars": 278975100.0,
+   "promedio_ars": 391855866.26984125,
+   "p25_ars": 211676100.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 65700.0
+  },
+  "CAAP": {
+   "cedear": "CAAP",
+   "mediana_ars": 163550.0,
+   "promedio_ars": 163550.0,
+   "p25_ars": 163550.0,
+   "dias_sin_operar": 0,
+   "dias": 1,
+   "precio": 163550.0
+  },
+  "CAH": {
+   "cedear": "CAH",
+   "mediana_ars": 6521625.0,
+   "promedio_ars": 31988671.825396825,
+   "p25_ars": 3165962.5,
+   "dias_sin_operar": 1,
+   "dias": 63,
+   "precio": 151325.0
+  },
+  "CAR": {
+   "cedear": "CAR",
+   "mediana_ars": 21964800.0,
+   "promedio_ars": 41740014.20634921,
+   "p25_ars": 16105502.5,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 7655.0
+  },
+  "CAT": {
+   "cedear": "CAT",
+   "mediana_ars": 659904350.0,
+   "promedio_ars": 886037095.6349206,
+   "p25_ars": 491005975.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 46860.0
+  },
+  "CCJ": {
+   "cedear": "CCJ",
+   "mediana_ars": 33423040.0,
+   "promedio_ars": 58628424.12698413,
+   "p25_ars": 21034122.5,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 5190.0
+  },
+  "CCL": {
+   "cedear": "CCL",
+   "mediana_ars": 23672675.0,
+   "promedio_ars": 77014946.29032259,
+   "p25_ars": 11585325.0,
+   "dias_sin_operar": 0,
+   "dias": 62,
+   "precio": 16170.0
+  },
+  "CDE": {
+   "cedear": "CDE",
+   "mediana_ars": 51279480.0,
+   "promedio_ars": 95605572.22222222,
+   "p25_ars": 21598560.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 25920.0
+  },
+  "CEG": {
+   "cedear": "CEG",
+   "mediana_ars": 234223300.0,
+   "promedio_ars": 337295212.85714287,
+   "p25_ars": 172408325.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 9225.0
+  },
+  "CL": {
+   "cedear": "CL",
+   "mediana_ars": 13572650.0,
+   "promedio_ars": 24888248.73015873,
+   "p25_ars": 6846680.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 54050.0
+  },
+  "CLS": {
+   "cedear": "CLS",
+   "mediana_ars": 84357630.0,
+   "promedio_ars": 158743347.3015873,
+   "p25_ars": 46278145.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 17290.0
+  },
+  "COIN": {
+   "cedear": "COIN",
+   "mediana_ars": 8295.0,
+   "promedio_ars": 8295.0,
+   "p25_ars": 8295.0,
+   "dias_sin_operar": 0,
+   "dias": 1,
+   "precio": 8295.0
+  },
+  "COP": {
+   "cedear": "COP",
+   "mediana_ars": 30412245.0,
+   "promedio_ars": 58168616.9047619,
+   "p25_ars": 5619585.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 9125.0
+  },
+  "COST": {
+   "cedear": "COST",
+   "mediana_ars": 57101200.0,
+   "promedio_ars": 81950685.07936507,
+   "p25_ars": 44429560.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 36780.0
+  },
+  "CRM": {
+   "cedear": "CRM",
+   "mediana_ars": 272584800.0,
+   "promedio_ars": 467996814.28571427,
+   "p25_ars": 163364275.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 19900.0
+  },
+  "CRWD": {
+   "cedear": "CRWD",
+   "mediana_ars": 113999940.0,
+   "promedio_ars": 166769967.1031746,
+   "p25_ars": 81969152.5,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 4565.0
+  },
+  "CRWV": {
+   "cedear": "CRWV",
+   "mediana_ars": 422047645.0,
+   "promedio_ars": 802381459.1666666,
+   "p25_ars": 256009360.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 2867.5
+  },
+  "CSCO": {
+   "cedear": "CSCO",
+   "mediana_ars": 166392140.0,
+   "promedio_ars": 255984149.84126985,
+   "p25_ars": 111283890.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 31300.0
+  },
+  "CVS": {
+   "cedear": "CVS",
+   "mediana_ars": 48058010.0,
+   "promedio_ars": 81983717.06349206,
+   "p25_ars": 26984355.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 9315.0
+  },
+  "CVX": {
+   "cedear": "CVX",
+   "mediana_ars": 248369940.0,
+   "promedio_ars": 304142716.6666667,
+   "p25_ars": 174377110.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 22200.0
+  },
+  "CX": {
+   "cedear": "CX",
+   "mediana_ars": 4087360.0,
+   "promedio_ars": 15369921.26984127,
+   "p25_ars": 1799375.0,
+   "dias_sin_operar": 1,
+   "dias": 63,
+   "precio": 17960.0
+  },
+  "DAL": {
+   "cedear": "DAL",
+   "mediana_ars": 34790400.0,
+   "promedio_ars": 79820185.87301587,
+   "p25_ars": 10006350.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 18820.0
+  },
+  "DD": {
+   "cedear": "DD",
+   "mediana_ars": 2092080.0,
+   "promedio_ars": 25441746.42857143,
+   "p25_ars": 676480.0,
+   "dias_sin_operar": 2,
+   "dias": 63,
+   "precio": 49200.0
+  },
+  "DE": {
+   "cedear": "DE",
+   "mediana_ars": 40360160.0,
+   "promedio_ars": 63335656.190476194,
+   "p25_ars": 25337785.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 27980.0
+  },
+  "DECK": {
+   "cedear": "DECK",
+   "mediana_ars": 45843655.0,
+   "promedio_ars": 79666740.15873016,
+   "p25_ars": 24725880.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 5765.0
+  },
+  "DELL": {
+   "cedear": "DELL",
+   "mediana_ars": 197618400.0,
+   "promedio_ars": 265166622.9787234,
+   "p25_ars": 122571995.0,
+   "dias_sin_operar": 0,
+   "dias": 47,
+   "precio": 7495.0
+  },
+  "DEO": {
+   "cedear": "DEO",
+   "mediana_ars": 12189580.0,
+   "promedio_ars": 37462830.0,
+   "p25_ars": 6539200.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 27660.0
+  },
+  "DHR": {
+   "cedear": "DHR",
+   "mediana_ars": 7105.0,
+   "promedio_ars": 7105.0,
+   "p25_ars": 7105.0,
+   "dias_sin_operar": 0,
+   "dias": 1,
+   "precio": 7105.0
+  },
+  "DIS": {
+   "cedear": "DISN",
+   "mediana_ars": 0.0,
+   "promedio_ars": 0.0,
+   "p25_ars": 0.0,
+   "dias_sin_operar": 63,
+   "dias": 63,
+   "precio": 10416.0
+  },
+  "DOCU": {
+   "cedear": "DOCU",
+   "mediana_ars": 5850.0,
+   "promedio_ars": 5850.0,
+   "p25_ars": 5850.0,
+   "dias_sin_operar": 0,
+   "dias": 1,
+   "precio": 5850.0
+  },
+  "DOW": {
+   "cedear": "DOW",
+   "mediana_ars": 8695.0,
+   "promedio_ars": 8695.0,
+   "p25_ars": 8695.0,
+   "dias_sin_operar": 0,
+   "dias": 1,
+   "precio": 8695.0
+  },
+  "E": {
+   "cedear": "E",
+   "mediana_ars": 1621340.0,
+   "promedio_ars": 11519615.555555556,
+   "p25_ars": 514755.0,
+   "dias_sin_operar": 2,
+   "dias": 63,
+   "precio": 23300.0
+  },
+  "EBAY": {
+   "cedear": "EBAY",
+   "mediana_ars": 119604100.0,
+   "promedio_ars": 197066011.9047619,
+   "p25_ars": 60157237.5,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 102050.0
+  },
+  "ECL": {
+   "cedear": "ECL",
+   "mediana_ars": 2299500.0,
+   "promedio_ars": 3332220.873015873,
+   "p25_ars": 1292530.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 8960.0
+  },
+  "EFX": {
+   "cedear": "EFX",
+   "mediana_ars": 19250.0,
+   "promedio_ars": 19250.0,
+   "p25_ars": 19250.0,
+   "dias_sin_operar": 0,
+   "dias": 1,
+   "precio": 19250.0
+  },
+  "EQNR": {
+   "cedear": "EQNR",
+   "mediana_ars": 11460.0,
+   "promedio_ars": 11460.0,
+   "p25_ars": 11460.0,
+   "dias_sin_operar": 0,
+   "dias": 1,
+   "precio": 11460.0
+  },
+  "ERIC": {
+   "cedear": "ERIC",
+   "mediana_ars": 2046720.0,
+   "promedio_ars": 16992600.634920634,
+   "p25_ars": 683887.5,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 8575.0
+  },
+  "ETSY": {
+   "cedear": "ETSY",
+   "mediana_ars": 9350.0,
+   "promedio_ars": 9350.0,
+   "p25_ars": 9350.0,
+   "dias_sin_operar": 0,
+   "dias": 1,
+   "precio": 9350.0
+  },
+  "F": {
+   "cedear": "F",
+   "mediana_ars": 39697840.0,
+   "promedio_ars": 53936276.03174603,
+   "p25_ars": 20341495.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 20570.0
+  },
+  "FCX": {
+   "cedear": "FCX",
+   "mediana_ars": 95060160.0,
+   "promedio_ars": 122470769.20634921,
+   "p25_ars": 56856360.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 32920.0
+  },
+  "FDX": {
+   "cedear": "FDX",
+   "mediana_ars": 20268600.0,
+   "promedio_ars": 37021110.07936508,
+   "p25_ars": 12867150.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 51300.0
+  },
+  "FISV": {
+   "cedear": "FISV",
+   "mediana_ars": 16917600.0,
+   "promedio_ars": 34206696.03174603,
+   "p25_ars": 10224825.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 9625.0
+  },
+  "FMX": {
+   "cedear": "FMX",
+   "mediana_ars": 2009600.0,
+   "promedio_ars": 11756471.42857143,
+   "p25_ars": 823940.0,
+   "dias_sin_operar": 1,
+   "dias": 63,
+   "precio": 36100.0
+  },
+  "FSLR": {
+   "cedear": "FSLR",
+   "mediana_ars": 186084230.0,
+   "promedio_ars": 274260270.47619045,
+   "p25_ars": 118518995.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 18650.0
+  },
+  "GE": {
+   "cedear": "GE",
+   "mediana_ars": 174478750.0,
+   "promedio_ars": 265772432.53968254,
+   "p25_ars": 103137500.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 67625.0
+  },
+  "GEV": {
+   "cedear": "GEV",
+   "mediana_ars": 214864600.0,
+   "promedio_ars": 284851365.7446808,
+   "p25_ars": 141122662.5,
+   "dias_sin_operar": 0,
+   "dias": 47,
+   "precio": 7180.0
+  },
+  "GFI": {
+   "cedear": "GFI",
+   "mediana_ars": 41421425.0,
+   "promedio_ars": 94766975.79365079,
+   "p25_ars": 16963800.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 65500.0
+  },
+  "GGB": {
+   "cedear": "GGB",
+   "mediana_ars": 14290200.0,
+   "promedio_ars": 42350762.85714286,
+   "p25_ars": 7210800.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 29440.0
+  },
+  "GILD": {
+   "cedear": "GILD",
+   "mediana_ars": 31602600.0,
+   "promedio_ars": 49357069.44444445,
+   "p25_ars": 13611825.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 67225.0
+  },
+  "GLNG": {
+   "cedear": "GLNG",
+   "mediana_ars": 7802730.0,
+   "promedio_ars": 26788314.444444444,
+   "p25_ars": 3792145.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 7190.0
+  },
+  "GLOB": {
+   "cedear": "GLOB",
+   "mediana_ars": 893403810.0,
+   "promedio_ars": 1206344542.8174603,
+   "p25_ars": 582911677.5,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 4352.5
+  },
+  "GLW": {
+   "cedear": "GLW",
+   "mediana_ars": 141352050.0,
+   "promedio_ars": 208914590.31746033,
+   "p25_ars": 78160950.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 44420.0
+  },
+  "GM": {
+   "cedear": "GM",
+   "mediana_ars": 24120.0,
+   "promedio_ars": 24120.0,
+   "p25_ars": 24120.0,
+   "dias_sin_operar": 0,
+   "dias": 1,
+   "precio": 24120.0
+  },
+  "GOOGL": {
+   "cedear": "GOOGL",
+   "mediana_ars": 8957509850.0,
+   "promedio_ars": 10232831021.031746,
+   "p25_ars": 5914782282.5,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 8240.0
+  },
+  "GPRK": {
+   "cedear": "GPRK",
+   "mediana_ars": 15700.0,
+   "promedio_ars": 15700.0,
+   "p25_ars": 15700.0,
+   "dias_sin_operar": 0,
+   "dias": 1,
+   "precio": 15700.0
+  },
+  "GRMN": {
+   "cedear": "GRMN",
+   "mediana_ars": 5274250.0,
+   "promedio_ars": 19715169.444444444,
+   "p25_ars": 2512862.5,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 160150.0
+  },
+  "GS": {
+   "cedear": "GS",
+   "mediana_ars": 167272600.0,
+   "promedio_ars": 309985544.04761904,
+   "p25_ars": 83707725.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 111125.0
+  },
+  "GSK": {
+   "cedear": "GSK",
+   "mediana_ars": 8321550.0,
+   "promedio_ars": 21740107.936507937,
+   "p25_ars": 3716695.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 20990.0
+  },
+  "GT": {
+   "cedear": "GT",
+   "mediana_ars": 3620.0,
+   "promedio_ars": 3620.0,
+   "p25_ars": 3620.0,
+   "dias_sin_operar": 0,
+   "dias": 1,
+   "precio": 3620.0
+  },
+  "HAL": {
+   "cedear": "HAL",
+   "mediana_ars": 26980.0,
+   "promedio_ars": 26980.0,
+   "p25_ars": 26980.0,
+   "dias_sin_operar": 0,
+   "dias": 1,
+   "precio": 26980.0
+  },
+  "HD": {
+   "cedear": "HD",
+   "mediana_ars": 53638520.0,
+   "promedio_ars": 143077274.76190478,
+   "p25_ars": 30437980.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 17820.0
+  },
+  "HDB": {
+   "cedear": "HDB",
+   "mediana_ars": 4296040.0,
+   "promedio_ars": 19183018.888888888,
+   "p25_ars": 2586790.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 20960.0
+  },
+  "HIMS": {
+   "cedear": "HIMS",
+   "mediana_ars": 481609800.0,
+   "promedio_ars": 566358605.1587301,
+   "p25_ars": 275878320.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 10830.0
+  },
+  "HL": {
+   "cedear": "HL",
+   "mediana_ars": 110905080.0,
+   "promedio_ars": 156583926.34920636,
+   "p25_ars": 61019740.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 24500.0
+  },
+  "HMC": {
+   "cedear": "HMC",
+   "mediana_ars": 4556800.0,
+   "promedio_ars": 8639947.857142856,
+   "p25_ars": 1759200.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 60000.0
+  },
+  "HMY": {
+   "cedear": "HMY",
+   "mediana_ars": 212017800.0,
+   "promedio_ars": 272675641.9047619,
+   "p25_ars": 132121700.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 28720.0
+  },
+  "HOG": {
+   "cedear": "HOG",
+   "mediana_ars": 4609550.0,
+   "promedio_ars": 9595387.142857144,
+   "p25_ars": 1521870.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 18240.0
+  },
+  "HON": {
+   "cedear": "HON",
+   "mediana_ars": 30587700.0,
+   "promedio_ars": 47415966.984126985,
+   "p25_ars": 14066980.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 45560.0
+  },
+  "HOOD": {
+   "cedear": "HOOD",
+   "mediana_ars": 134810700.0,
+   "promedio_ars": 163405962.65873015,
+   "p25_ars": 75187662.5,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 4627.5
+  },
+  "HPQ": {
+   "cedear": "HPQ",
+   "mediana_ars": 83862600.0,
+   "promedio_ars": 155147264.92063493,
+   "p25_ars": 35834887.5,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 47440.0
+  },
+  "HSBC": {
+   "cedear": "HSBC",
+   "mediana_ars": 8420250.0,
+   "promedio_ars": 25838993.65079365,
+   "p25_ars": 3763675.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 72775.0
+  },
+  "HSY": {
+   "cedear": "HSY",
+   "mediana_ars": 449400.0,
+   "promedio_ars": 1175605.238095238,
+   "p25_ars": 158490.0,
+   "dias_sin_operar": 7,
+   "dias": 63,
+   "precio": 13920.0
+  },
+  "HUT": {
+   "cedear": "HUT",
+   "mediana_ars": 2020875840.0,
+   "promedio_ars": 2262515977.301587,
+   "p25_ars": 1361780400.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 17660.0
+  },
+  "HWM": {
+   "cedear": "HWM",
+   "mediana_ars": 48334000.0,
+   "promedio_ars": 87842385.96639384,
+   "p25_ars": 32013062.161132812,
+   "dias_sin_operar": 2,
+   "dias": 63,
+   "precio": 6590.0
+  },
+  "IBKR": {
+   "cedear": "IBKR",
+   "mediana_ars": 4546405.0,
+   "promedio_ars": 18278514.891304348,
+   "p25_ars": 2377385.0,
+   "dias_sin_operar": 0,
+   "dias": 46,
+   "precio": 7455.0
+  },
+  "IBM": {
+   "cedear": "IBM",
+   "mediana_ars": 982129840.0,
+   "promedio_ars": 1389278153.015873,
+   "p25_ars": 712372790.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 27080.0
+  },
+  "IBN": {
+   "cedear": "IBN",
+   "mediana_ars": 1661800.0,
+   "promedio_ars": 5603450.396825396,
+   "p25_ars": 523370.0,
+   "dias_sin_operar": 3,
+   "dias": 63,
+   "precio": 56500.0
+  },
+  "IFF": {
+   "cedear": "IFF",
+   "mediana_ars": 335070.0,
+   "promedio_ars": 1637310.7936507936,
+   "p25_ars": 70230.0,
+   "dias_sin_operar": 10,
+   "dias": 63,
+   "precio": 11550.0
+  },
+  "INFY": {
+   "cedear": "INFY",
+   "mediana_ars": 8760960.0,
+   "promedio_ars": 31903644.76190476,
+   "p25_ars": 4176740.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 20810.0
+  },
+  "ING": {
+   "cedear": "ING",
+   "mediana_ars": 660960.0,
+   "promedio_ars": 1481385.238095238,
+   "p25_ars": 94575.0,
+   "dias_sin_operar": 4,
+   "dias": 63,
+   "precio": 18180.0
+  },
+  "INTC": {
+   "cedear": "INTC",
+   "mediana_ars": 1517377600.0,
+   "promedio_ars": 2148587162.5396824,
+   "p25_ars": 1129176830.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 18820.0
+  },
+  "IP": {
+   "cedear": "IP",
+   "mediana_ars": 2006290.0,
+   "promedio_ars": 16287030.952380951,
+   "p25_ars": 760370.0,
+   "dias_sin_operar": 2,
+   "dias": 63,
+   "precio": 14330.0
+  },
+  "IREN": {
+   "cedear": "IREN",
+   "mediana_ars": 1586180960.0,
+   "promedio_ars": 1993827217.0238094,
+   "p25_ars": 1070696871.25,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 2980.0
+  },
+  "ISRG": {
+   "cedear": "ISRG",
+   "mediana_ars": 8395.0,
+   "promedio_ars": 8395.0,
+   "p25_ars": 8395.0,
+   "dias_sin_operar": 0,
+   "dias": 1,
+   "precio": 8395.0
+  },
+  "ITUB": {
+   "cedear": "ITUB",
+   "mediana_ars": 164648800.0,
+   "promedio_ars": 313115568.73015875,
+   "p25_ars": 77780825.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 12320.0
+  },
+  "JCI": {
+   "cedear": "JCI",
+   "mediana_ars": 0.0,
+   "promedio_ars": 50576.19047619047,
+   "p25_ars": 0.0,
+   "dias_sin_operar": 57,
+   "dias": 63,
+   "precio": 120000.0
+  },
+  "JD": {
+   "cedear": "JD",
+   "mediana_ars": 151807650.0,
+   "promedio_ars": 225306414.76190478,
+   "p25_ars": 91226310.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 12120.0
+  },
+  "JMIA": {
+   "cedear": "JMIA",
+   "mediana_ars": 242684380.0,
+   "promedio_ars": 307476728.6507937,
+   "p25_ars": 121369980.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 9165.0
+  },
+  "JNJ": {
+   "cedear": "JNJ",
+   "mediana_ars": 261195600.0,
+   "promedio_ars": 353600249.84126985,
+   "p25_ars": 203991020.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 30620.0
+  },
+  "JOYY": {
+   "cedear": "JOYY",
+   "mediana_ars": 27360.0,
+   "promedio_ars": 27360.0,
+   "p25_ars": 27360.0,
+   "dias_sin_operar": 0,
+   "dias": 1,
+   "precio": 27360.0
+  },
+  "JPM": {
+   "cedear": "JPM",
+   "mediana_ars": 799702400.0,
+   "promedio_ars": 1205540752.3809524,
+   "p25_ars": 616619880.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 37360.0
+  },
+  "KB": {
+   "cedear": "KB",
+   "mediana_ars": 374100.0,
+   "promedio_ars": 2516340.0793650793,
+   "p25_ars": 0.0,
+   "dias_sin_operar": 25,
+   "dias": 63,
+   "precio": 93450.0
+  },
+  "KEEL": {
+   "cedear": "KEEL",
+   "mediana_ars": 774981120.0,
+   "promedio_ars": 969634604.9206349,
+   "p25_ars": 450489615.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 15640.0
+  },
+  "KEP": {
+   "cedear": "KEP",
+   "mediana_ars": 5243460.0,
+   "promedio_ars": 16363227.936507937,
+   "p25_ars": 2381640.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 18630.0
+  },
+  "KGC": {
+   "cedear": "KGC",
+   "mediana_ars": 12253500.0,
+   "promedio_ars": 40776973.65079365,
+   "p25_ars": 4341960.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 37140.0
+  },
+  "KLAC": {
+   "cedear": "KLAC",
+   "mediana_ars": 110837265.0,
+   "promedio_ars": 158578447.65957448,
+   "p25_ars": 57171390.0,
+   "dias_sin_operar": 0,
+   "dias": 47,
+   "precio": 6735.0
+  },
+  "KMB": {
+   "cedear": "KMB",
+   "mediana_ars": 24870140.0,
+   "promedio_ars": 37852500.31746032,
+   "p25_ars": 16763700.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 30040.0
+  },
+  "KO": {
+   "cedear": "KO",
+   "mediana_ars": 1391527500.0,
+   "promedio_ars": 1511162082.857143,
+   "p25_ars": 1087329780.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 32040.0
+  },
+  "KOF": {
+   "cedear": "KOFM",
+   "mediana_ars": 8044500.0,
+   "promedio_ars": 14284056.349206349,
+   "p25_ars": 3619162.5,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 95200.0
+  },
+  "LAC": {
+   "cedear": "LAC",
+   "mediana_ars": 266865217.5,
+   "promedio_ars": 313504556.23015875,
+   "p25_ars": 152027225.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 3217.5
+  },
+  "LAR": {
+   "cedear": "LAR",
+   "mediana_ars": 7085.0,
+   "promedio_ars": 7085.0,
+   "p25_ars": 7085.0,
+   "dias_sin_operar": 0,
+   "dias": 1,
+   "precio": 7085.0
+  },
+  "LIN": {
+   "cedear": "LIN",
+   "mediana_ars": 8513745.0,
+   "promedio_ars": 10913842.391304348,
+   "p25_ars": 4690001.25,
+   "dias_sin_operar": 0,
+   "dias": 46,
+   "precio": 8420.0
+  },
+  "LLY": {
+   "cedear": "LLY",
+   "mediana_ars": 457668360.0,
+   "promedio_ars": 667034311.4285715,
+   "p25_ars": 381001800.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 40760.0
+  },
+  "LMT": {
+   "cedear": "LMT",
+   "mediana_ars": 152211520.0,
+   "promedio_ars": 191929250.47619048,
+   "p25_ars": 112300407.5,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 47300.0
+  },
+  "LND": {
+   "cedear": "LND",
+   "mediana_ars": 3009040.0,
+   "promedio_ars": 13558618.75,
+   "p25_ars": 1046197.5,
+   "dias_sin_operar": 0,
+   "dias": 52,
+   "precio": 5540.0
+  },
+  "LRCX": {
+   "cedear": "LRCX",
+   "mediana_ars": 5950.0,
+   "promedio_ars": 5950.0,
+   "p25_ars": 5950.0,
+   "dias_sin_operar": 0,
+   "dias": 1,
+   "precio": 5950.0
+  },
+  "LVS": {
+   "cedear": "LVS",
+   "mediana_ars": 9770760.0,
+   "promedio_ars": 32132326.34920635,
+   "p25_ars": 3410550.0,
+   "dias_sin_operar": 1,
+   "dias": 63,
+   "precio": 33940.0
+  },
+  "MA": {
+   "cedear": "MA",
+   "mediana_ars": 32920.0,
+   "promedio_ars": 32920.0,
+   "p25_ars": 32920.0,
+   "dias_sin_operar": 0,
+   "dias": 1,
+   "precio": 32920.0
+  },
+  "MCD": {
+   "cedear": "MCD",
+   "mediana_ars": 1831985130.0,
+   "promedio_ars": 2184936610.7936506,
+   "p25_ars": 1441145085.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 19250.0
+  },
+  "MDLZ": {
+   "cedear": "MDLZ",
+   "mediana_ars": 14011860.0,
+   "promedio_ars": 25340793.73015873,
+   "p25_ars": 6166205.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 7345.0
+  },
+  "MDT": {
+   "cedear": "MDT",
+   "mediana_ars": 21672000.0,
+   "promedio_ars": 32646599.365079366,
+   "p25_ars": 9088910.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 42320.0
+  },
+  "MELI": {
+   "cedear": "MELI",
+   "mediana_ars": 5455279890.0,
+   "promedio_ars": 7497804065.714286,
+   "p25_ars": 4191834340.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 21020.0
+  },
+  "META": {
+   "cedear": "META",
+   "mediana_ars": 42540.0,
+   "promedio_ars": 42540.0,
+   "p25_ars": 42540.0,
+   "dias_sin_operar": 0,
+   "dias": 1,
+   "precio": 42540.0
+  },
+  "MFG": {
+   "cedear": "MFG",
+   "mediana_ars": 1294560.0,
+   "promedio_ars": 4183074.9206349207,
+   "p25_ars": 315360.0,
+   "dias_sin_operar": 5,
+   "dias": 63,
+   "precio": 15600.0
+  },
+  "MMM": {
+   "cedear": "MMM",
+   "mediana_ars": 45778920.0,
+   "promedio_ars": 81323443.8095238,
+   "p25_ars": 27941270.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 30840.0
+  },
+  "MO": {
+   "cedear": "MO",
+   "mediana_ars": 213375600.0,
+   "promedio_ars": 299744889.84126985,
+   "p25_ars": 139324340.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 31800.0
+  },
+  "MOS": {
+   "cedear": "MOS",
+   "mediana_ars": 26063450.0,
+   "promedio_ars": 103688802.6984127,
+   "p25_ars": 12668725.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 7480.0
+  },
+  "MP": {
+   "cedear": "MP",
+   "mediana_ars": 270747000.0,
+   "promedio_ars": 342744169.36507934,
+   "p25_ars": 162566710.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 5910.0
+  },
+  "MRK": {
+   "cedear": "MRK",
+   "mediana_ars": 62143200.0,
+   "promedio_ars": 118879008.17460318,
+   "p25_ars": 39390940.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 48760.0
+  },
+  "MRNA": {
+   "cedear": "MRNA",
+   "mediana_ars": 2780081430.0,
+   "promedio_ars": 5339899272.380953,
+   "p25_ars": 1723517980.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 22530.0
+  },
+  "MRVL": {
+   "cedear": "MRVL",
+   "mediana_ars": 907264800.0,
+   "promedio_ars": 1128123356.6666667,
+   "p25_ars": 506971720.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 16770.0
+  },
+  "MS": {
+   "cedear": "MS",
+   "mediana_ars": 16944915.0,
+   "promedio_ars": 38695633.404255316,
+   "p25_ars": 9564787.5,
+   "dias_sin_operar": 0,
+   "dias": 47,
+   "precio": 7380.0
+  },
+  "MSFT": {
+   "cedear": "MSFT",
+   "mediana_ars": 4933289200.0,
+   "promedio_ars": 5832981328.253968,
+   "p25_ars": 3768838900.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 29540.0
+  },
+  "MSI": {
+   "cedear": "MSI",
+   "mediana_ars": 7146960.0,
+   "promedio_ars": 16899507.61904762,
+   "p25_ars": 3537340.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 43020.0
+  },
+  "MSTR": {
+   "cedear": "MSTR",
+   "mediana_ars": 4289244300.0,
+   "promedio_ars": 5510397015.793651,
+   "p25_ars": 2979967125.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 10800.0
+  },
+  "MU": {
+   "cedear": "MU",
+   "mediana_ars": 26448669225.0,
+   "promedio_ars": 35838176659.92063,
+   "p25_ars": 17295256500.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 229900.0
+  },
+  "MUFG": {
+   "cedear": "MUFG",
+   "mediana_ars": 3225520.0,
+   "promedio_ars": 7463465.396825396,
+   "p25_ars": 950560.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 35140.0
+  },
+  "MUX": {
+   "cedear": "MUX",
+   "mediana_ars": 36273000.0,
+   "promedio_ars": 46187883.333333336,
+   "p25_ars": 21704210.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 12930.0
+  },
+  "NBIS": {
+   "cedear": "NBIS",
+   "mediana_ars": 2553717390.0,
+   "promedio_ars": 3565578342.6190476,
+   "p25_ars": 1708279522.5,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 7990.0
+  },
+  "NEE": {
+   "cedear": "NEE",
+   "mediana_ars": 56057065.0,
+   "promedio_ars": 92524894.6031746,
+   "p25_ars": 36753900.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 7640.0
+  },
+  "NEM": {
+   "cedear": "NEM",
+   "mediana_ars": 46125075.0,
+   "promedio_ars": 99265412.6984127,
+   "p25_ars": 31435050.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 67600.0
+  },
+  "NFLX": {
+   "cedear": "NFLX",
+   "mediana_ars": 804479625.0,
+   "promedio_ars": 1074380454.015873,
+   "p25_ars": 629806665.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 2204.0
+  },
+  "NG": {
+   "cedear": "NG",
+   "mediana_ars": 23573220.0,
+   "promedio_ars": 75935628.8095238,
+   "p25_ars": 8582560.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 42640.0
+  },
+  "NGG": {
+   "cedear": "NGG",
+   "mediana_ars": 1181500.0,
+   "promedio_ars": 9574906.349206349,
+   "p25_ars": 357000.0,
+   "dias_sin_operar": 6,
+   "dias": 63,
+   "precio": 72050.0
+  },
+  "NIO": {
+   "cedear": "NIO",
+   "mediana_ars": 1404.0,
+   "promedio_ars": 1404.0,
+   "p25_ars": 1404.0,
+   "dias_sin_operar": 0,
+   "dias": 1,
+   "precio": 1404.0
+  },
+  "NKE": {
+   "cedear": "NKE",
+   "mediana_ars": 547277870.0,
+   "promedio_ars": 824569541.9841269,
+   "p25_ars": 333367347.5,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 5360.0
+  },
+  "NMR": {
+   "cedear": "NMR",
+   "mediana_ars": 324800.0,
+   "promedio_ars": 12946113.968253968,
+   "p25_ars": 32035.0,
+   "dias_sin_operar": 14,
+   "dias": 63,
+   "precio": 15730.0
+  },
+  "NOK": {
+   "cedear": "NOKA",
+   "mediana_ars": 59421740.0,
+   "promedio_ars": 107027366.03174603,
+   "p25_ars": 22490880.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 12830.0
+  },
+  "NOW": {
+   "cedear": "NOW",
+   "mediana_ars": 523221424.0,
+   "promedio_ars": 860387038.6904762,
+   "p25_ars": 322488301.5,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 984.5
+  },
+  "NTES": {
+   "cedear": "NTES",
+   "mediana_ars": 15380.0,
+   "promedio_ars": 15380.0,
+   "p25_ars": 15380.0,
+   "dias_sin_operar": 0,
+   "dias": 1,
+   "precio": 15380.0
+  },
+  "NTRA": {
+   "cedear": "NTRA",
+   "mediana_ars": 14798640.0,
+   "promedio_ars": 44199273.19148936,
+   "p25_ars": 10227280.0,
+   "dias_sin_operar": 1,
+   "dias": 47,
+   "precio": 10320.0
+  },
+  "NU": {
+   "cedear": "NU",
+   "mediana_ars": 6601483800.0,
+   "promedio_ars": 14580631596.269842,
+   "p25_ars": 3890255760.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 10030.0
+  },
+  "NUE": {
+   "cedear": "NUE",
+   "mediana_ars": 7085920.0,
+   "promedio_ars": 14255834.92063492,
+   "p25_ars": 4559550.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 25740.0
+  },
+  "NVDA": {
+   "cedear": "NVDA",
+   "mediana_ars": 7535726400.0,
+   "promedio_ars": 9695640618.88889,
+   "p25_ars": 5316336430.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 13040.0
+  },
+  "NVO": {
+   "cedear": "NVO",
+   "mediana_ars": 80057180.0,
+   "promedio_ars": 158751837.3809524,
+   "p25_ars": 44030662.5,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 9615.0
+  },
+  "NVS": {
+   "cedear": "NVS",
+   "mediana_ars": 19578900.0,
+   "promedio_ars": 37807314.28571428,
+   "p25_ars": 7105275.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 67675.0
+  },
+  "NXE": {
+   "cedear": "NXE",
+   "mediana_ars": 13990.0,
+   "promedio_ars": 13990.0,
+   "p25_ars": 13990.0,
+   "dias_sin_operar": 0,
+   "dias": 1,
+   "precio": 13990.0
+  },
+  "O": {
+   "cedear": "O",
+   "mediana_ars": 158955750.0,
+   "promedio_ars": 170441820.7142857,
+   "p25_ars": 105181825.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 7605.0
+  },
+  "OKLO": {
+   "cedear": "OKLO",
+   "mediana_ars": 221099744.0,
+   "promedio_ars": 290235360.11904764,
+   "p25_ars": 130127760.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 1418.0
+  },
+  "ONDS": {
+   "cedear": "ONDS",
+   "mediana_ars": 125503630.0,
+   "promedio_ars": 193330949.48412699,
+   "p25_ars": 76214992.5,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 4470.0
+  },
+  "ORCL": {
+   "cedear": "ORCL",
+   "mediana_ars": 3359892300.0,
+   "promedio_ars": 4301559112.698413,
+   "p25_ars": 2081611262.5,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 64525.0
+  },
+  "ORLY": {
+   "cedear": "ORLY",
+   "mediana_ars": 657.5,
+   "promedio_ars": 657.5,
+   "p25_ars": 657.5,
+   "dias_sin_operar": 0,
+   "dias": 1,
+   "precio": 657.5
+  },
+  "OXY": {
+   "cedear": "OXY",
+   "mediana_ars": 55699800.0,
+   "promedio_ars": 136185586.98412699,
+   "p25_ars": 35610725.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 18900.0
+  },
+  "PAAS": {
+   "cedear": "PAAS",
+   "mediana_ars": 147454800.0,
+   "promedio_ars": 194748826.19047618,
+   "p25_ars": 84199665.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 22890.0
+  },
+  "PAC": {
+   "cedear": "PAC",
+   "mediana_ars": 2503790.0,
+   "promedio_ars": 25761897.61904762,
+   "p25_ars": 972195.0,
+   "dias_sin_operar": 3,
+   "dias": 63,
+   "precio": 24620.0
+  },
+  "PAGS": {
+   "cedear": "PAGS",
+   "mediana_ars": 4100.0,
+   "promedio_ars": 4100.0,
+   "p25_ars": 4100.0,
+   "dias_sin_operar": 0,
+   "dias": 1,
+   "precio": 4100.0
+  },
+  "PANW": {
+   "cedear": "PANW",
+   "mediana_ars": 157953600.0,
+   "promedio_ars": 189809409.2063492,
+   "p25_ars": 94583550.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 10440.0
+  },
+  "PATH": {
+   "cedear": "PATH",
+   "mediana_ars": 128213800.0,
+   "promedio_ars": 251439032.06349206,
+   "p25_ars": 54673640.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 10820.0
+  },
+  "PBI": {
+   "cedear": "PBI",
+   "mediana_ars": 1352660.0,
+   "promedio_ars": 44760412.6984127,
+   "p25_ars": 302260.0,
+   "dias_sin_operar": 2,
+   "dias": 63,
+   "precio": 25960.0
+  },
+  "PBR": {
+   "cedear": "PBR",
+   "mediana_ars": 31020.0,
+   "promedio_ars": 31020.0,
+   "p25_ars": 31020.0,
+   "dias_sin_operar": 0,
+   "dias": 1,
+   "precio": 31020.0
+  },
+  "PCAR": {
+   "cedear": "PCAR",
+   "mediana_ars": 40260350.0,
+   "promedio_ars": 63938315.87301587,
+   "p25_ars": 8041037.5,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 56550.0
+  },
+  "PDD": {
+   "cedear": "PDD",
+   "mediana_ars": 23792417.5,
+   "promedio_ars": 59790348.015873015,
+   "p25_ars": 14059095.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 5535.0
+  },
+  "PEP": {
+   "cedear": "PEP",
+   "mediana_ars": 698385460.0,
+   "promedio_ars": 845632575.8730159,
+   "p25_ars": 465438845.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 13080.0
+  },
+  "PFE": {
+   "cedear": "PFE",
+   "mediana_ars": 235188450.0,
+   "promedio_ars": 423920450.0,
+   "p25_ars": 173031185.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 12260.0
+  },
+  "PG": {
+   "cedear": "PG",
+   "mediana_ars": 280771740.0,
+   "promedio_ars": 437479096.1904762,
+   "p25_ars": 226465930.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 18420.0
+  },
+  "PHG": {
+   "cedear": "PHG",
+   "mediana_ars": 1562880.0,
+   "promedio_ars": 8035843.253968254,
+   "p25_ars": 424725.0,
+   "dias_sin_operar": 2,
+   "dias": 63,
+   "precio": 10110.0
+  },
+  "PINS": {
+   "cedear": "PINS",
+   "mediana_ars": 7341600.0,
+   "promedio_ars": 24224432.65873016,
+   "p25_ars": 3819327.5,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 4500.0
+  },
+  "PKX": {
+   "cedear": "PKS",
+   "mediana_ars": 0.0,
+   "promedio_ars": 152409.52380952382,
+   "p25_ars": 0.0,
+   "dias_sin_operar": 41,
+   "dias": 63,
+   "precio": 29240.0
+  },
+  "PLD": {
+   "cedear": "PLD",
+   "mediana_ars": 2234540.0,
+   "promedio_ars": 9085946.276595745,
+   "p25_ars": 1090935.0,
+   "dias_sin_operar": 1,
+   "dias": 47,
+   "precio": 7275.0
+  },
+  "PLTR": {
+   "cedear": "PLTR",
+   "mediana_ars": 1267926400.0,
+   "promedio_ars": 1865832983.3333333,
+   "p25_ars": 614865725.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 89450.0
+  },
+  "PM": {
+   "cedear": "PM",
+   "mediana_ars": 9565360.0,
+   "promedio_ars": 19252824.603174604,
+   "p25_ars": 6576640.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 18400.0
+  },
+  "PSX": {
+   "cedear": "PSX",
+   "mediana_ars": 67975.0,
+   "promedio_ars": 67975.0,
+   "p25_ars": 67975.0,
+   "dias_sin_operar": 0,
+   "dias": 1,
+   "precio": 67975.0
+  },
+  "PYPL": {
+   "cedear": "PYPL",
+   "mediana_ars": 166424670.0,
+   "promedio_ars": 351456286.03174603,
+   "p25_ars": 102894200.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 12320.0
+  },
+  "QCOM": {
+   "cedear": "QCOM",
+   "mediana_ars": 560970700.0,
+   "promedio_ars": 700503909.8412699,
+   "p25_ars": 259047280.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 24910.0
+  },
+  "RACE": {
+   "cedear": "RACE",
+   "mediana_ars": 45398220.0,
+   "promedio_ars": 73094638.09523809,
+   "p25_ars": 18237130.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 8355.0
+  },
+  "RBLX": {
+   "cedear": "RBLX",
+   "mediana_ars": 413331840.0,
+   "promedio_ars": 614713259.3650794,
+   "p25_ars": 302858300.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 41160.0
+  },
+  "RGTI": {
+   "cedear": "RGTI",
+   "mediana_ars": 551950480.0,
+   "promedio_ars": 707225609.8412699,
+   "p25_ars": 305026537.5,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 9815.0
+  },
+  "RIO": {
+   "cedear": "RIO",
+   "mediana_ars": 95005120.0,
+   "promedio_ars": 116291315.71428572,
+   "p25_ars": 67634790.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 17500.0
+  },
+  "RIOT": {
+   "cedear": "RIOT",
+   "mediana_ars": 628588800.0,
+   "promedio_ars": 774908457.7777778,
+   "p25_ars": 456440515.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 9270.0
+  },
+  "RKLB": {
+   "cedear": "RKLB",
+   "mediana_ars": 574668930.0,
+   "promedio_ars": 1051602017.2222222,
+   "p25_ars": 341932400.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 7370.0
+  },
+  "ROKU": {
+   "cedear": "ROKU",
+   "mediana_ars": 1543135.0,
+   "promedio_ars": 2464195.3225806453,
+   "p25_ars": 887472.5,
+   "dias_sin_operar": 0,
+   "dias": 62,
+   "precio": 21500.0
+  },
+  "ROST": {
+   "cedear": "ROST",
+   "mediana_ars": 17669150.0,
+   "promedio_ars": 47609710.71428572,
+   "p25_ars": 6697400.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 96150.0
+  },
+  "RTX": {
+   "cedear": "RTX",
+   "mediana_ars": 89144100.0,
+   "promedio_ars": 151386513.8888889,
+   "p25_ars": 47084562.5,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 63225.0
+  },
+  "SAN": {
+   "cedear": "SAN",
+   "mediana_ars": 10305400.0,
+   "promedio_ars": 42057715.07936508,
+   "p25_ars": 6235825.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 78650.0
+  },
+  "SAP": {
+   "cedear": "SAP",
+   "mediana_ars": 156878400.0,
+   "promedio_ars": 186716632.93650794,
+   "p25_ars": 101103212.5,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 64875.0
+  },
+  "SATL": {
+   "cedear": "SATL",
+   "mediana_ars": 1866160125.0,
+   "promedio_ars": 2112271971.5079365,
+   "p25_ars": 1201143122.5,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 5755.0
+  },
+  "SBS": {
+   "cedear": "SBS",
+   "mediana_ars": 1567740.0,
+   "promedio_ars": 15005580.476190476,
+   "p25_ars": 749105.0,
+   "dias_sin_operar": 3,
+   "dias": 63,
+   "precio": 16100.0
+  },
+  "SBUX": {
+   "cedear": "SBUX",
+   "mediana_ars": 28394880.0,
+   "promedio_ars": 47855163.015873015,
+   "p25_ars": 17299850.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 14630.0
+  },
+  "SCCO": {
+   "cedear": "SCCO",
+   "mediana_ars": 59362558.921875,
+   "promedio_ars": 82453890.95907739,
+   "p25_ars": 33332128.671875,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 139675.0
+  },
+  "SDA": {
+   "cedear": "SDA",
+   "mediana_ars": 295.0,
+   "promedio_ars": 295.0,
+   "p25_ars": 295.0,
+   "dias_sin_operar": 0,
+   "dias": 1,
+   "precio": 295.0
+  },
+  "SE": {
+   "cedear": "SE",
+   "mediana_ars": 3917.5,
+   "promedio_ars": 3917.5,
+   "p25_ars": 3917.5,
+   "dias_sin_operar": 0,
+   "dias": 1,
+   "precio": 3917.5
+  },
+  "SHEL": {
+   "cedear": "SHEL",
+   "mediana_ars": 28254100.0,
+   "promedio_ars": 68837902.77777778,
+   "p25_ars": 18837162.5,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 82625.0
+  },
+  "SHOP": {
+   "cedear": "SHOP",
+   "mediana_ars": 2335.0,
+   "promedio_ars": 2335.0,
+   "p25_ars": 2335.0,
+   "dias_sin_operar": 0,
+   "dias": 1,
+   "precio": 2335.0
+  },
+  "SHW": {
+   "cedear": "SHW",
+   "mediana_ars": 2639395.0,
+   "promedio_ars": 5490772.391304348,
+   "p25_ars": 1458520.0,
+   "dias_sin_operar": 1,
+   "dias": 46,
+   "precio": 8360.0
+  },
+  "SID": {
+   "cedear": "SID",
+   "mediana_ars": 187873500.0,
+   "promedio_ars": 296088580.63492066,
+   "p25_ars": 82290015.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 11440.0
+  },
+  "SLB": {
+   "cedear": "SLB",
+   "mediana_ars": 19626800.0,
+   "promedio_ars": 48452446.984126985,
+   "p25_ars": 12236330.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 28100.0
+  },
+  "SNA": {
+   "cedear": "SNA",
+   "mediana_ars": 6177600.0,
+   "promedio_ars": 12086866.26984127,
+   "p25_ars": 3555975.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 102500.0
+  },
+  "SNAP": {
+   "cedear": "SNAP",
+   "mediana_ars": 29037400.0,
+   "promedio_ars": 65192373.41269841,
+   "p25_ars": 10684647.5,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 8300.0
+  },
+  "SNDK": {
+   "cedear": "SNDK",
+   "mediana_ars": 13422761660.0,
+   "promedio_ars": 20201260451.190475,
+   "p25_ars": 7480833735.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 8200.0
+  },
+  "SNOW": {
+   "cedear": "SNOW",
+   "mediana_ars": 15400.0,
+   "promedio_ars": 15400.0,
+   "p25_ars": 15400.0,
+   "dias_sin_operar": 0,
+   "dias": 1,
+   "precio": 15400.0
+  },
+  "SONY": {
+   "cedear": "SONY",
+   "mediana_ars": 30288375.0,
+   "promedio_ars": 39156077.3015873,
+   "p25_ars": 22078555.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 5615.0
+  },
+  "SPCE": {
+   "cedear": "SPCE",
+   "mediana_ars": 112800855.0,
+   "promedio_ars": 168107303.80952382,
+   "p25_ars": 45337565.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 9115.0
+  },
+  "SPGI": {
+   "cedear": "SPGI",
+   "mediana_ars": 58644540.0,
+   "promedio_ars": 84420934.92063493,
+   "p25_ars": 45099620.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 17390.0
+  },
+  "SPOT": {
+   "cedear": "SPOT",
+   "mediana_ars": 514622640.0,
+   "promedio_ars": 719322384.7619047,
+   "p25_ars": 348524090.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 35820.0
+  },
+  "STLA": {
+   "cedear": "STLA",
+   "mediana_ars": 59265258.0,
+   "promedio_ars": 80659579.26984127,
+   "p25_ars": 24048615.5,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 1450.0
+  },
+  "STNE": {
+   "cedear": "STNE",
+   "mediana_ars": 303768995.0,
+   "promedio_ars": 615516451.9047619,
+   "p25_ars": 189278967.5,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 4185.0
+  },
+  "SUZ": {
+   "cedear": "SUZ",
+   "mediana_ars": 3648180.0,
+   "promedio_ars": 15691745.555555556,
+   "p25_ars": 1144740.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 16020.0
+  },
+  "SWKS": {
+   "cedear": "SWKS",
+   "mediana_ars": 2590810.0,
+   "promedio_ars": 4160336.9444444445,
+   "p25_ars": 847035.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 6770.0
+  },
+  "SYY": {
+   "cedear": "SYY",
+   "mediana_ars": 3486120.0,
+   "promedio_ars": 15223131.904761905,
+   "p25_ars": 1572310.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 16060.0
+  },
+  "T": {
+   "cedear": "T",
+   "mediana_ars": 63882440.0,
+   "promedio_ars": 155313692.6984127,
+   "p25_ars": 43659000.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 12000.0
+  },
+  "TCOM": {
+   "cedear": "TCOM",
+   "mediana_ars": 36880.0,
+   "promedio_ars": 36880.0,
+   "p25_ars": 36880.0,
+   "dias_sin_operar": 0,
+   "dias": 1,
+   "precio": 36880.0
+  },
+  "TEAM": {
+   "cedear": "TEAM",
+   "mediana_ars": 39514580.0,
+   "promedio_ars": 69556273.01587301,
+   "p25_ars": 27095710.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 5485.0
+  },
+  "TEM": {
+   "cedear": "TEM",
+   "mediana_ars": 82656240.0,
+   "promedio_ars": 143404491.98412699,
+   "p25_ars": 37354010.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 10500.0
+  },
+  "TS": {
+   "cedear": "TEN",
+   "mediana_ars": 98425.0,
+   "promedio_ars": 98425.0,
+   "p25_ars": 98425.0,
+   "dias_sin_operar": 0,
+   "dias": 1,
+   "precio": 98425.0
+  },
+  "TGT": {
+   "cedear": "TGT",
+   "mediana_ars": 45557760.0,
+   "promedio_ars": 61084913.809523806,
+   "p25_ars": 25838400.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 10930.0
+  },
+  "TIMB": {
+   "cedear": "TIMB",
+   "mediana_ars": 36004700.0,
+   "promedio_ars": 105237646.66666667,
+   "p25_ars": 19447950.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 30560.0
+  },
+  "TJX": {
+   "cedear": "TJX",
+   "mediana_ars": 10350.0,
+   "promedio_ars": 10350.0,
+   "p25_ars": 10350.0,
+   "dias_sin_operar": 0,
+   "dias": 1,
+   "precio": 10350.0
+  },
+  "TLN": {
+   "cedear": "TLN",
+   "mediana_ars": 26410180.0,
+   "promedio_ars": 55085238.93617021,
+   "p25_ars": 14343615.0,
+   "dias_sin_operar": 0,
+   "dias": 47,
+   "precio": 8945.0
+  },
+  "TM": {
+   "cedear": "TM",
+   "mediana_ars": 44074800.0,
+   "promedio_ars": 74985171.58730158,
+   "p25_ars": 32313780.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 23920.0
+  },
+  "TMO": {
+   "cedear": "TMO",
+   "mediana_ars": 9866880.0,
+   "promedio_ars": 22192290.396825396,
+   "p25_ars": 6600415.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 52600.0
+  },
+  "TMUS": {
+   "cedear": "TMUS",
+   "mediana_ars": 30447000.0,
+   "promedio_ars": 69944314.76190476,
+   "p25_ars": 14585955.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 8235.0
+  },
+  "TRIP": {
+   "cedear": "TRIP",
+   "mediana_ars": 32414475.0,
+   "promedio_ars": 60299238.96825397,
+   "p25_ars": 15706855.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 5860.0
+  },
+  "TRV": {
+   "cedear": "TRVV",
+   "mediana_ars": 0.0,
+   "promedio_ars": 118582.14285714286,
+   "p25_ars": 0.0,
+   "dias_sin_operar": 49,
+   "dias": 63,
+   "precio": 122000.0
+  },
+  "TSLA": {
+   "cedear": "TSLA",
+   "mediana_ars": 2491265000.0,
+   "promedio_ars": 3799323671.428571,
+   "p25_ars": 1812755730.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 39940.0
+  },
+  "TSM": {
+   "cedear": "TSM",
+   "mediana_ars": 1223778700.0,
+   "promedio_ars": 2492175320.2380953,
+   "p25_ars": 955676325.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 69575.0
+  },
+  "TTE": {
+   "cedear": "TTE",
+   "mediana_ars": 8918000.0,
+   "promedio_ars": 15207670.317460317,
+   "p25_ars": 3823210.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 48980.0
+  },
+  "TV": {
+   "cedear": "TV",
+   "mediana_ars": 995280.0,
+   "promedio_ars": 7290245.904761905,
+   "p25_ars": 456128.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 1319.0
+  },
+  "TWLO": {
+   "cedear": "TWLO",
+   "mediana_ars": 9310.0,
+   "promedio_ars": 9310.0,
+   "p25_ars": 9310.0,
+   "dias_sin_operar": 0,
+   "dias": 1,
+   "precio": 9310.0
+  },
+  "TXN": {
+   "cedear": "TXN",
+   "mediana_ars": 77117750.0,
+   "promedio_ars": 126015104.36507936,
+   "p25_ars": 26943150.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 92175.0
+  },
+  "TX": {
+   "cedear": "TXR",
+   "mediana_ars": 73567700.0,
+   "promedio_ars": 112644248.8888889,
+   "p25_ars": 44714250.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 20500.0
+  },
+  "UAL": {
+   "cedear": "UAL",
+   "mediana_ars": 49805280.0,
+   "promedio_ars": 132810995.23809524,
+   "p25_ars": 20000080.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 37740.0
+  },
+  "UBER": {
+   "cedear": "UBER",
+   "mediana_ars": 1350983800.0,
+   "promedio_ars": 1676965719.8412697,
+   "p25_ars": 1034321650.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 57375.0
+  },
+  "UGP": {
+   "cedear": "UGP",
+   "mediana_ars": 8553840.0,
+   "promedio_ars": 26486439.84126984,
+   "p25_ars": 4067715.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 9080.0
+  },
+  "UL": {
+   "cedear": "UL",
+   "mediana_ars": 0.0,
+   "promedio_ars": 0.0,
+   "p25_ars": 0.0,
+   "dias_sin_operar": 63,
+   "dias": 63,
+   "precio": 3467.25
+  },
+  "UNH": {
+   "cedear": "UNH",
+   "mediana_ars": 19840.0,
+   "promedio_ars": 19840.0,
+   "p25_ars": 19840.0,
+   "dias_sin_operar": 0,
+   "dias": 1,
+   "precio": 19840.0
+  },
+  "UNP": {
+   "cedear": "UNP",
+   "mediana_ars": 24170.0,
+   "promedio_ars": 24170.0,
+   "p25_ars": 24170.0,
+   "dias_sin_operar": 0,
+   "dias": 1,
+   "precio": 24170.0
+  },
+  "UPST": {
+   "cedear": "UPST",
+   "mediana_ars": 172223880.0,
+   "promedio_ars": 247744746.9047619,
+   "p25_ars": 105992552.5,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 7320.0
+  },
+  "URBN": {
+   "cedear": "URBN",
+   "mediana_ars": 2697175.0,
+   "promedio_ars": 40457774.20634921,
+   "p25_ars": 600500.0,
+   "dias_sin_operar": 4,
+   "dias": 63,
+   "precio": 76800.0
+  },
+  "USB": {
+   "cedear": "USB",
+   "mediana_ars": 2977550.0,
+   "promedio_ars": 15230233.650793651,
+   "p25_ars": 1032460.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 19810.0
+  },
+  "V": {
+   "cedear": "V",
+   "mediana_ars": 704925920.0,
+   "promedio_ars": 850253605.0793651,
+   "p25_ars": 505755910.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 39260.0
+  },
+  "VALE": {
+   "cedear": "VALE",
+   "mediana_ars": 605357240.0,
+   "promedio_ars": 949115919.1269841,
+   "p25_ars": 433694975.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 9670.0
+  },
+  "VIST": {
+   "cedear": "VIST",
+   "mediana_ars": 32040.0,
+   "promedio_ars": 32040.0,
+   "p25_ars": 32040.0,
+   "dias_sin_operar": 0,
+   "dias": 1,
+   "precio": 32040.0
+  },
+  "VIV": {
+   "cedear": "VIV",
+   "mediana_ars": 7249920.0,
+   "promedio_ars": 27222856.825396825,
+   "p25_ars": 3148300.0,
+   "dias_sin_operar": 1,
+   "dias": 63,
+   "precio": 19120.0
+  },
+  "VOD": {
+   "cedear": "VOD",
+   "mediana_ars": 3132000.0,
+   "promedio_ars": 20587313.65079365,
+   "p25_ars": 1525980.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 26060.0
+  },
+  "VRSN": {
+   "cedear": "VRSN",
+   "mediana_ars": 3920000.0,
+   "promedio_ars": 25719765.07936508,
+   "p25_ars": 1071625.0,
+   "dias_sin_operar": 3,
+   "dias": 63,
+   "precio": 86950.0
+  },
+  "VRTX": {
+   "cedear": "VRTX",
+   "mediana_ars": 18539900.0,
+   "promedio_ars": 29717203.80952381,
+   "p25_ars": 12075890.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 9020.0
+  },
+  "VST": {
+   "cedear": "VST",
+   "mediana_ars": 1083047090.0,
+   "promedio_ars": 1764295655.8730159,
+   "p25_ars": 713988205.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 8010.0
+  },
+  "VZ": {
+   "cedear": "VZ",
+   "mediana_ars": 91851480.0,
+   "promedio_ars": 121780752.06349206,
+   "p25_ars": 61332315.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 19130.0
+  },
+  "WB": {
+   "cedear": "WBO",
+   "mediana_ars": 0.0,
+   "promedio_ars": 0.0,
+   "p25_ars": 0.0,
+   "dias_sin_operar": 63,
+   "dias": 63,
+   "precio": 1813.0
+  },
+  "WDC": {
+   "cedear": "WDC",
+   "mediana_ars": 259990947.5,
+   "promedio_ars": 413702180.2173913,
+   "p25_ars": 127185082.5,
+   "dias_sin_operar": 0,
+   "dias": 46,
+   "precio": 4802.5
+  },
+  "WELL": {
+   "cedear": "WELL",
+   "mediana_ars": 3499087.5,
+   "promedio_ars": 17047560.652173914,
+   "p25_ars": 1812382.5,
+   "dias_sin_operar": 0,
+   "dias": 46,
+   "precio": 8540.0
+  },
+  "WFC": {
+   "cedear": "WFC",
+   "mediana_ars": 40547880.0,
+   "promedio_ars": 86451940.31746031,
+   "p25_ars": 24442540.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 27960.0
+  },
+  "WMT": {
+   "cedear": "WMT",
+   "mediana_ars": 594930240.0,
+   "promedio_ars": 758012555.4761904,
+   "p25_ars": 417691245.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 11630.0
+  },
+  "XOM": {
+   "cedear": "XOM",
+   "mediana_ars": 258424320.0,
+   "promedio_ars": 291433102.2222222,
+   "p25_ars": 159647470.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 27600.0
+  },
+  "XP": {
+   "cedear": "XP",
+   "mediana_ars": 6300.0,
+   "promedio_ars": 6300.0,
+   "p25_ars": 6300.0,
+   "dias_sin_operar": 0,
+   "dias": 1,
+   "precio": 6300.0
+  },
+  "XPEV": {
+   "cedear": "XPEV",
+   "mediana_ars": 21110775.0,
+   "promedio_ars": 69630314.72222222,
+   "p25_ars": 9802251.25,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 4287.5
+  },
+  "XRX": {
+   "cedear": "XROX",
+   "mediana_ars": 135675.0,
+   "promedio_ars": 710926.4365079365,
+   "p25_ars": 4896.25,
+   "dias_sin_operar": 13,
+   "dias": 63,
+   "precio": 1875.0
+  },
+  "XYZ": {
+   "cedear": "XYZ",
+   "mediana_ars": 7090.0,
+   "promedio_ars": 7090.0,
+   "p25_ars": 7090.0,
+   "dias_sin_operar": 0,
+   "dias": 1,
+   "precio": 7090.0
+  },
+  "YELP": {
+   "cedear": "YELP",
+   "mediana_ars": 6771150.0,
+   "promedio_ars": 37775468.0952381,
+   "p25_ars": 2291175.0,
+   "dias_sin_operar": 0,
+   "dias": 63,
+   "precio": 16060.0
+  },
+  "ZM": {
+   "cedear": "ZM",
+   "mediana_ars": 3167.5,
+   "promedio_ars": 3167.5,
+   "p25_ars": 3167.5,
+   "dias_sin_operar": 0,
+   "dias": 1,
+   "precio": 3167.5
+  }
+ }
+}
