@@ -237,7 +237,7 @@ def main():
     pd.DataFrame(series).to_json("resultado_calidad_diario.json", orient="split", date_format="iso")
     print(f"\nCartera final guardada en {ESTADO_SALIDA}:")
     for t, p in sorted(Ef["posiciones"].items(), key=lambda x: -x[1]["valor"]):
-        print(f"  {t:6} {p['valor'] / CAPITAL * 100:5.1f}%  (en cartera desde {p['fecha_entrada']})")
+        print(f"  {t:6} {p['valor'] / CAPITAL * 100:5.1f}%  (en cartera desde {p['fecha_entrada']})  resultado {(p['valor'] / p['costo'] - 1) * 100:+.1f}%  valor {p['valor'] / CAPITAL * tot:.0f}")
     if Ef["caja"] > 1:
         print(f"  SPY    {Ef['caja'] / CAPITAL * 100:5.1f}%  (liquidez)")
     # salidas
