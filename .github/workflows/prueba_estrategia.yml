@@ -22,10 +22,12 @@ jobs:
         env:
           CALIDAD_SEC_AGENTE: ${{ vars.CALIDAD_SEC_AGENTE }}
           BT_ESTADO_SALIDA: /tmp/estado_prueba.json
+          BT_INICIO: "2026-01-01"
         run: python backtest_calidad.py
       - name: Guardar el resultado en la rama de prueba
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
-          git add resultado_calidad_diario.json
+          cp historial_calidad.json resultado_calidad_2026.json
+          git add resultado_calidad_diario.json resultado_calidad_2026.json
           git commit -m "Resultado de la prueba [skip ci]" && git push

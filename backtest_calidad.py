@@ -40,7 +40,7 @@ SEC_USER_AGENT = os.environ.get("CALIDAD_SEC_AGENTE") or "Nombre Apellido tu_mai
 ESTADO_SALIDA = os.environ.get("BT_ESTADO_SALIDA") or "cartera_calidad.json"
 CAPITAL = 10_000
 CACHE = "edgar_cache"
-INICIO_MIN = "2011-01-01"
+INICIO_MIN = os.environ.get("BT_INICIO") or "2011-01-01"
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)) if "__file__" in globals() else ".")
 import importlib  # noqa: E402
