@@ -13,56 +13,56 @@
   {
    "Cartera": "Cartera de calidad",
    "Período": "Todo",
-   "Anual %": 17.449626394951135,
-   "Volatilidad %": 22.229952430926094,
-   "Sharpe": 0.6196992370870898,
-   "Peor caída %": -10.460801362892113,
-   "USD 10.000 →": 11412.295541874892
+   "Anual %": 17.449625383282363,
+   "Volatilidad %": 22.229949512473627,
+   "Sharpe": 0.6196992729348544,
+   "Peor caída %": -10.460801295325906,
+   "USD 10.000 →": 11412.295461134518
   },
   {
    "Cartera": "Cartera de calidad",
    "Período": "2023-hoy",
-   "Anual %": 17.449626394951135,
-   "Volatilidad %": 22.229952430926094,
-   "Sharpe": 0.6196992370870898,
-   "Peor caída %": -10.460801362892113,
-   "USD 10.000 →": 11412.295541874892
+   "Anual %": 17.449625383282363,
+   "Volatilidad %": 22.229949512473627,
+   "Sharpe": 0.6196992729348544,
+   "Peor caída %": -10.460801295325906,
+   "USD 10.000 →": 11412.295461134518
   },
   {
    "Cartera": "S&P 500 (SPY)",
    "Período": "Todo",
    "Anual %": 13.073200099139083,
-   "Volatilidad %": 14.310740184174408,
-   "Sharpe": 0.6568114678309634,
-   "Peor caída %": -8.884972983911343,
+   "Volatilidad %": 14.310735475222389,
+   "Sharpe": 0.656811683954984,
+   "Peor caída %": -8.884964925337824,
    "USD 10.000 →": 11061.837016087333
   },
   {
    "Cartera": "S&P 500 (SPY)",
    "Período": "2023-hoy",
    "Anual %": 13.073200099139083,
-   "Volatilidad %": 14.310740184174408,
-   "Sharpe": 0.6568114678309634,
-   "Peor caída %": -8.884972983911343,
+   "Volatilidad %": 14.310735475222389,
+   "Sharpe": 0.656811683954984,
+   "Peor caída %": -8.884964925337824,
    "USD 10.000 →": 11061.837016087333
   },
   {
    "Cartera": "Promedio de la lista (igual peso)",
    "Período": "Todo",
-   "Anual %": 17.385124410579287,
-   "Volatilidad %": 17.252049413892586,
-   "Sharpe": 0.794768334393592,
-   "Peor caída %": -8.291797772980136,
-   "USD 10.000 →": 11407.147444125609
+   "Anual %": 17.385125225224172,
+   "Volatilidad %": 17.25204918696722,
+   "Sharpe": 0.7947683920677829,
+   "Peor caída %": -8.291797580119942,
+   "USD 10.000 →": 11407.147509148064
   },
   {
    "Cartera": "Promedio de la lista (igual peso)",
    "Período": "2023-hoy",
-   "Anual %": 17.385124410579287,
-   "Volatilidad %": 17.252049413892586,
-   "Sharpe": 0.794768334393592,
-   "Peor caída %": -8.291797772980136,
-   "USD 10.000 →": 11407.147444125609
+   "Anual %": 17.385125225224172,
+   "Volatilidad %": 17.25204918696722,
+   "Sharpe": 0.7947683920677829,
+   "Peor caída %": -8.291797580119942,
+   "USD 10.000 →": 11407.147509148064
   }
  ],
  "anual": [
@@ -82,69 +82,69 @@
   },
   {
    "fecha": "2026-01-31",
-   "cartera": 10034.845034715228,
+   "cartera": 10034.844916212616,
    "spy": 9996.099081898043,
-   "lista": 9905.408359257324
+   "lista": 9905.4084195995
   },
   {
    "fecha": "2026-02-28",
-   "cartera": 9998.407988634604,
+   "cartera": 9998.40796784204,
    "spy": 9909.71285066388,
-   "lista": 10116.591810682843
+   "lista": 10116.591876735032
   },
   {
    "fecha": "2026-03-31",
-   "cartera": 9747.623514371942,
-   "spy": 9420.375996966703,
-   "lista": 9633.38558680246
+   "cartera": 9747.623515860207,
+   "spy": 9420.37510837488,
+   "lista": 9633.385649954731
   },
   {
    "fecha": "2026-04-30",
-   "cartera": 10275.998419906915,
+   "cartera": 10275.998339556647,
    "spy": 10410.01137308674,
-   "lista": 10486.49334865918
+   "lista": 10486.493416628466
   },
   {
    "fecha": "2026-05-31",
-   "cartera": 10314.810815545425,
+   "cartera": 10314.810726529468,
    "spy": 10957.846003660465,
-   "lista": 11163.440717576526
+   "lista": 11163.440797179166
   },
   {
    "fecha": "2026-06-30",
-   "cartera": 10815.04347224203,
+   "cartera": 10815.04338742495,
    "spy": 10845.061486555473,
-   "lista": 11035.458894320958
+   "lista": 11035.458958228195
   },
   {
    "fecha": "2026-07-31",
-   "cartera": 10831.634500919457,
+   "cartera": 10831.634418272035,
    "spy": 10848.838001802242,
-   "lista": 11101.328874681221
+   "lista": 11101.32893784111
   },
   {
    "fecha": "2026-08-31",
-   "cartera": 11813.61300223529,
+   "cartera": 11813.612904367837,
    "spy": 11139.579914661419,
-   "lista": 11727.78683471745
+   "lista": 11727.786904654526
   },
   {
    "fecha": "2026-09-30",
-   "cartera": 11349.393475816609,
+   "cartera": 11349.393384671794,
    "spy": 11102.892624074742,
-   "lista": 11355.979568198634
+   "lista": 11355.979632929424
   },
   {
    "fecha": "2026-10-31",
-   "cartera": 11115.540614233108,
+   "cartera": 11115.540526120823,
    "spy": 11002.29158945174,
-   "lista": 11207.406267883274
+   "lista": 11207.406331767175
   },
   {
    "fecha": "2026-11-11",
-   "cartera": 11412.295541874892,
+   "cartera": 11412.295461134518,
    "spy": 11061.837016087333,
-   "lista": 11407.147444125609
+   "lista": 11407.147509148064
   }
  ],
  "diario": {
@@ -369,7 +369,7 @@
    10187.52,
    10157.84,
    10186.03,
-   10034.85,
+   10034.84,
    10113.43,
    9936.16,
    9843.89,
@@ -605,7 +605,7 @@
    9842.11,
    9713.1,
    9798.19,
-   9782.44,
+   9782.45,
    9770.17,
    9621.81,
    9567.35,
@@ -626,7 +626,7 @@
    9544.8,
    9549.0,
    9792.21,
-   9848.71,
+   9848.7,
    9842.19,
    9938.37,
    10059.47,
@@ -654,7 +654,7 @@
    10837.47,
    10707.11,
    10699.57,
-   10628.3,
+   10628.31,
    10737.23,
    10758.53,
    10800.83,
@@ -662,7 +662,7 @@
    10870.64,
    10930.61,
    10957.85,
-   10987.68,
+   10987.69,
    11002.61,
    10925.4,
    10966.68,
@@ -865,7 +865,7 @@
    "Fecha": "2026-02-17",
    "Orden": "ROTAR (vender)",
    "Acción": "AXP",
-   "Peso": 0.09761226999270521,
+   "Peso": 0.09761226798582788,
    "Resultado": -0.04554571161047405,
    "Motivo": "Rotación: cayó al puesto 32 de calidad (fuera del top 20); entra HMY",
    "Origen": "Backtest"
@@ -874,7 +874,7 @@
    "Fecha": "2026-02-17",
    "Orden": "ROTAR (comprar)",
    "Acción": "HMY",
-   "Peso": 0.09995119386500365,
+   "Peso": 0.09995119386600708,
    "Resultado": null,
    "Motivo": "Reemplaza a AXP: orden 10 del ranking combinado (puesto 18 de calidad, rendimiento esperado 22,5%)",
    "Origen": "Backtest"
@@ -883,7 +883,7 @@
    "Fecha": "2026-02-17",
    "Orden": "SUMAR",
    "Acción": "BKNG",
-   "Peso": 0.01917991000206244,
+   "Peso": 0.01917991166266987,
    "Resultado": null,
    "Motivo": "Posición chica: se completa hacia el 10%",
    "Origen": "Backtest"
@@ -892,7 +892,7 @@
    "Fecha": "2026-03-16",
    "Orden": "COMPRAR",
    "Acción": "ASR",
-   "Peso": 0.07880915792330519,
+   "Peso": 0.07880915337514957,
    "Resultado": null,
    "Motivo": "Lugar libre: orden 3 del ranking combinado (puesto 9 de calidad, rendimiento esperado 37,8%)",
    "Origen": "Backtest"
@@ -901,7 +901,7 @@
    "Fecha": "2026-05-15",
    "Orden": "ROTAR (vender)",
    "Acción": "EQNR",
-   "Peso": 0.16786766710162174,
+   "Peso": 0.16786766694733632,
    "Resultado": 0.6199566703742774,
    "Motivo": "Rotación: está en la zona de tolerancia (ventas 4,0% anual (mínimo 5%)); entra TS",
    "Origen": "Backtest"
@@ -910,7 +910,7 @@
    "Fecha": "2026-05-15",
    "Orden": "ROTAR (comprar)",
    "Acción": "TS",
-   "Peso": 0.09991606616644917,
+   "Peso": 0.09991606616652633,
    "Resultado": null,
    "Motivo": "Reemplaza a EQNR: orden 9 del ranking combinado (puesto 17 de calidad, rendimiento esperado 29,2%)",
    "Origen": "Backtest"
@@ -919,7 +919,7 @@
    "Fecha": "2026-05-15",
    "Orden": "SUMAR",
    "Acción": "ASR",
-   "Peso": 0.029478500868342025,
+   "Peso": 0.029478504625224448,
    "Resultado": null,
    "Motivo": "Posición chica: se completa hacia el 10%",
    "Origen": "Backtest"
@@ -928,7 +928,7 @@
    "Fecha": "2026-06-15",
    "Orden": "RECORTAR",
    "Acción": "ASML",
-   "Peso": 0.03140119571920737,
+   "Peso": 0.031401196770229005,
    "Resultado": null,
    "Motivo": "Precio extremo (rendimiento esperado a 10 años de 1,9%) y pesa 13%: baja a 10%",
    "Origen": "Backtest"
@@ -937,7 +937,7 @@
    "Fecha": "2026-06-15",
    "Orden": "SUMAR",
    "Acción": "ANF",
-   "Peso": 0.022000240025986828,
+   "Peso": 0.02200023940170035,
    "Resultado": null,
    "Motivo": "Posición chica: se completa hacia el 10%",
    "Origen": "Backtest"
@@ -946,7 +946,7 @@
    "Fecha": "2026-06-15",
    "Orden": "SUMAR",
    "Acción": "HMY",
-   "Peso": 0.018333586703350287,
+   "Peso": 0.01833359261679483,
    "Resultado": null,
    "Motivo": "Posición chica: se completa hacia el 10%",
    "Origen": "Backtest"
@@ -955,7 +955,7 @@
    "Fecha": "2026-08-17",
    "Orden": "SUMAR",
    "Acción": "MELI",
-   "Peso": 0.024583514133347664,
+   "Peso": 0.024583506851686653,
    "Resultado": null,
    "Motivo": "Posición chica: se completa hacia el 10%",
    "Origen": "Backtest"
