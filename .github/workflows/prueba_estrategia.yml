@@ -1,0 +1,27 @@
+name: Prueba de estrategia
+
+# Backtests de prueba, aparte de la app. Corre solo al subir cambios a una rama que empiece con "prueba-".
+on:
+  push:
+    branches: ["prueba-*"]
+
+permissions:
+  contents: write
+
+jobs:
+  prueba:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+      - run: python herramientas/prueba_capitulacion.py
+      - name: Guardar el resultado en la rama de prueba
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
+          git add resultado_capitulacion.json
+          git commit -m "Resultado de la prueba [skip ci]" && git push
