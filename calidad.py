@@ -263,6 +263,14 @@ def es_dia_revision(d):
         all(date(d.year, d.month, k).weekday() >= 5 for k in range(DIA_REVISION, d.day))
 
 
+def dia_revision_del_mes(d):
+    """Fecha de la revisión del mes de d: primer día hábil desde el 15."""
+    k = date(d.year, d.month, DIA_REVISION)
+    while k.weekday() >= 5:
+        k += timedelta(days=1)
+    return k
+
+
 # ============================================================================ datos
 def descargar_precios(desde):
     lista = TICKERS + ["SPY"]
@@ -1918,11 +1926,17 @@ def main():
     elif os.path.exists(ESTADO_BT):
         with open(ESTADO_BT, encoding="utf-8") as fh:
             Eb0 = json.load(fh)
+    ya = E0.get("ultima_oficial") and E0["ultima_oficial"][:7] == hoy.isoformat()[:7]
     dia = es_dia_revision(hoy)
+    # Revisión atrasada: GitHub a veces corre la tarea varias horas tarde y ya es el día siguiente en Argentina.
+    # Si el día de revisión del mes ya pasó y no se hizo, se hace ahora con el cierre de ese día.
+    d_rev = dia_revision_del_mes(hoy)
+    if not dia and not ya and d_rev < hoy <= d_rev + timedelta(days=5) and evento in ("schedule", "workflow_dispatch"):
+        print(f"{hoy}: la revisión del {d_rev} quedó sin hacer; se hace ahora con el cierre de ese día.")
+        hoy, dia = d_rev, True
     if evento == "schedule" and not dia:
         print(f"{hoy}: no es el día de revisión (primer día hábil desde el {DIA_REVISION}). No se hace nada.")
         return
-    ya = E0.get("ultima_oficial") and E0["ultima_oficial"][:7] == hoy.isoformat()[:7]
     oficial = operar or (evento == "schedule" and dia and not ya)
     modo = "OFICIAL" if oficial else "CONSULTA"
     revision = hoy.month in MESES_REVISION
