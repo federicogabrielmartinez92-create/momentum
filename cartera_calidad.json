@@ -2,13 +2,13 @@
  "version": 1,
  "capital": 10000.0,
  "inicio": "2026-10-15",
- "ultima_fecha": "2026-10-14",
- "ultima_oficial": "2026-10-15",
- "caja": 4000.0,
- "spy_ref": 10000.0,
+ "ultima_fecha": "2026-11-16",
+ "ultima_oficial": "2026-11-16",
+ "caja": 88.69282975896613,
+ "spy_ref": 9614.73539085897,
  "posiciones": {
   "ABNB": {
-   "valor": 995.0,
+   "valor": 1108.9372389355053,
    "costo": 1000.0,
    "fecha_entrada": "2026-10-15",
    "tesis": {
@@ -27,7 +27,7 @@
    }
   },
   "NVDA": {
-   "valor": 995.0,
+   "valor": 702.0302632185895,
    "costo": 1000.0,
    "fecha_entrada": "2026-10-15",
    "tesis": {
@@ -46,7 +46,7 @@
    }
   },
   "MU": {
-   "valor": 995.0,
+   "valor": 782.6292930022662,
    "costo": 1000.0,
    "fecha_entrada": "2026-10-15",
    "tesis": {
@@ -65,7 +65,7 @@
    }
   },
   "ADBE": {
-   "valor": 995.0,
+   "valor": 1016.9935493131262,
    "costo": 1000.0,
    "fecha_entrada": "2026-10-15",
    "tesis": {
@@ -84,7 +84,7 @@
    }
   },
   "MA": {
-   "valor": 995.0,
+   "valor": 1091.442017308876,
    "costo": 1000.0,
    "fecha_entrada": "2026-10-15",
    "tesis": {
@@ -103,7 +103,7 @@
    }
   },
   "META": {
-   "valor": 995.0,
+   "valor": 845.0767983396026,
    "costo": 1000.0,
    "fecha_entrada": "2026-10-15",
    "tesis": {
@@ -118,6 +118,82 @@
     "Puntaje": 61.8,
     "Puesto": 10.0,
     "fecha": "2026-10-15",
+    "tipo": "empresa"
+   }
+  },
+  "DECK": {
+   "valor": 934.6038299879247,
+   "costo": 939.3003316461554,
+   "fecha_entrada": "2026-11-16",
+   "tesis": {
+    "rent_prom": 0.8677675528112563,
+    "rent_ult": 1.0,
+    "mb_ult": 0.5770385958654284,
+    "ventas_cagr": 0.14802956561119096,
+    "crec_accion": 0.5973293674595015,
+    "deuda_ebitda": -1.4247278654431692,
+    "dilucion": -0.03297642461846795,
+    "rend_esperado": 0.2988501652938781,
+    "Puntaje": 81.9,
+    "Puesto": 2.0,
+    "fecha": "2026-11-16",
+    "tipo": "empresa"
+   }
+  },
+  "MELI": {
+   "valor": 934.6038299879247,
+   "costo": 939.3003316461554,
+   "fecha_entrada": "2026-11-16",
+   "tesis": {
+    "rent_prom": 0.5634105062588559,
+    "rent_ult": 0.3573657496265,
+    "mb_ult": 0.44502128543245767,
+    "ventas_cagr": 0.42186598229448236,
+    "crec_accion": 0.8415072376046187,
+    "deuda_ebitda": 0.7200796217964668,
+    "dilucion": 0.004459405339451994,
+    "rend_esperado": 0.38197066537572255,
+    "Puntaje": 75.9,
+    "Puesto": 6.0,
+    "fecha": "2026-11-16",
+    "tipo": "empresa"
+   }
+  },
+  "YELP": {
+   "valor": 934.6038299879247,
+   "costo": 939.3003316461554,
+   "fecha_entrada": "2026-11-16",
+   "tesis": {
+    "rent_prom": 0.22253575855672275,
+    "rent_ult": 0.32212471003862503,
+    "mb_ult": 0.9026618565075377,
+    "ventas_cagr": 0.09157375790446198,
+    "crec_accion": 1.0682830134352028,
+    "deuda_ebitda": -1.3611862940246278,
+    "dilucion": -0.04610442946059756,
+    "rend_esperado": 0.2941365832432453,
+    "Puntaje": 63.2,
+    "Puesto": 10.0,
+    "fecha": "2026-11-16",
+    "tipo": "empresa"
+   }
+  },
+  "TS": {
+   "valor": 934.6038299879247,
+   "costo": 939.3003316461554,
+   "fecha_entrada": "2026-11-16",
+   "tesis": {
+    "rent_prom": 0.14443897370037942,
+    "rent_ult": 0.11142953741934097,
+    "mb_ult": 0.3439077711776918,
+    "ventas_cagr": 0.16424047432799793,
+    "crec_accion": 0.6620179697109134,
+    "deuda_ebitda": -0.09206259532190608,
+    "dilucion": -0.0275018617450008,
+    "rend_esperado": 0.2977776439157701,
+    "Puntaje": 57.0,
+    "Puesto": 18.0,
+    "fecha": "2026-11-16",
     "tipo": "empresa"
    }
   }
@@ -176,6 +252,42 @@
    "Monto": 1000.0,
    "Resultado": null,
    "Motivo": "Compra inicial: orden 9 del ranking combinado (puesto 10 de calidad, rendimiento esperado 11,6%)"
+  },
+  {
+   "Fecha": "2026-11-16",
+   "Peso": 0.1,
+   "Orden": "COMPRAR",
+   "Acción": "DECK",
+   "Monto": 939.3003316461554,
+   "Resultado": null,
+   "Motivo": "Lugar libre: orden 1 del ranking combinado (puesto 2 de calidad, rendimiento esperado 29,9%)"
+  },
+  {
+   "Fecha": "2026-11-16",
+   "Peso": 0.1,
+   "Orden": "COMPRAR",
+   "Acción": "MELI",
+   "Monto": 939.3003316461554,
+   "Resultado": null,
+   "Motivo": "Lugar libre: orden 3 del ranking combinado (puesto 6 de calidad, rendimiento esperado 38,2%)"
+  },
+  {
+   "Fecha": "2026-11-16",
+   "Peso": 0.1,
+   "Orden": "COMPRAR",
+   "Acción": "YELP",
+   "Monto": 939.3003316461554,
+   "Resultado": null,
+   "Motivo": "Lugar libre: orden 8 del ranking combinado (puesto 10 de calidad, rendimiento esperado 29,4%)"
+  },
+  {
+   "Fecha": "2026-11-16",
+   "Peso": 0.1,
+   "Orden": "COMPRAR",
+   "Acción": "TS",
+   "Monto": 939.3003316461554,
+   "Resultado": null,
+   "Motivo": "Lugar libre: orden 11 del ranking combinado (puesto 18 de calidad, rendimiento esperado 29,8%)"
   }
  ],
  "cerradas": [],
@@ -184,6 +296,11 @@
    "fecha": "2026-10-15",
    "cartera": 9970.0,
    "spy": 10000.0
+  },
+  {
+   "fecha": "2026-11-16",
+   "cartera": 9374.21730982863,
+   "spy": 9614.73539085897
   }
  ]
 }
